@@ -1,9 +1,9 @@
 .introduction	{
 	font-size: 1.5em;
-	line-height: 20px;
+	line-height: 25px;
 }
 
-.right.column h3 {}
+.right.column h3 {padding-left: 30px;}
 
 .community	{
 	background: url(../graphics/icons.png) no-repeat;

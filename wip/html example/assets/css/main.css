@@ -52,12 +52,13 @@ ul li {
 	padding: 3px 0;
 }
 
-/* LAYOUTS */
-.content {
+/* Layouts */
+.container {
 	margin: 0 auto;	
 	width: 960px;
 }
 .header	{
+	margin: 0 auto;
 	height: 100px;
 }
 .column	{
@@ -74,4 +75,31 @@ ul li {
 	background: red;
 }
 
+.clear {clear: both;}
 
+/* Header */
+#header {
+	border-bottom: 1px solid #cfcfcf;
+	border-top: 6px solid #1b3549;
+}
+#logo { 
+	float: left; 
+}
+#logo a {
+	display: block;
+	background: url(../graphics/logo.png) no-repeat;
+	width:165px;
+	height:50px;
+	margin-top: 25px;
+}
+#logo span {
+	display: none;
+}
+
+/* Content */
+#content {
+	background: #f7f9fa url(../graphics/content-bg.png) repeat-x;
+}
+#content .left, #content .right {
+	padding: 35px 2px;
+}
