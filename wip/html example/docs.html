@@ -1,0 +1,556 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title></title>
+	<link href="css/main.css" rel="stylesheet" type="text/css" />
+	<link href="css/docs.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="docs">
+
+	<div class="header">
+		<div class="content">
+			<p>MooTools</p>
+			<p>The compact JavaScript framework</p>
+		</div>
+	</div>
+
+	<div class="content">
+		<div class="left column">
+
+			
+			<h4>Core</h4>
+			<ul>
+				<li><a href="/docs/core/Core/Core">Core</a></li>
+				<li><a href="/docs/core/Core/Browser">Browser</a></li>			
+			</ul>
+			<h4>Native</h4>
+			<ul>
+				<li><a href="/docs/core/Native/Array">Array</a></li>
+				<li><a href="/docs/core/Native/Function">Function</a></li>
+				<li><a href="/docs/core/Native/Number">Number</a></li>
+				<li><a href="/docs/core/Native/String">String</a></li>
+				<li><a href="/docs/core/Native/Hash">Hash</a></li>
+				<li><a href="/docs/core/Native/Event">Event</a></li>
+			</ul>
+			<h4>Class</h4>
+			<ul>
+				<li><a href="/docs/core/Class/Class">Class</a></li>
+				<li><a href="/docs/core/Class/Class.Extras">Class.Extras</a></li>
+			</ul>
+			<h4>Element</h4>
+			<ul>
+				<li><a href="/docs/core/Element/Element">Element</a></li>
+				<li><a href="/docs/core/Element/Element.Event">Element.Event</a></li>
+				<li><a href="/docs/core/Element/Element.Style">Element.Style</a></li>
+				<li><a href="/docs/core/Element/Element.Dimensions">Element.Dimensions</a></li>
+			</ul>
+			<h4>Utilities</h4>
+			<ul>
+				<li><a href="/docs/core/Utilities/Selectors">Selectors</a></li>
+				<li><a href="/docs/core/Utilities/DomReady">DomReady</a></li>
+				<li><a href="/docs/core/Utilities/JSON">JSON</a></li>
+				<li><a href="/docs/core/Utilities/Cookie">Cookie</a></li>
+				<li><a href="/docs/core/Utilities/Swiff">Swiff</a></li>
+			</ul>
+			<h4>Fx</h4>
+			<ul>
+				<li><a href="/docs/core/Fx/Fx">Fx</a></li>
+				<li><a href="/docs/core/Fx/Fx.CSS">Fx.CSS</a></li>
+				<li><a href="/docs/core/Fx/Fx.Tween">Fx.Tween</a></li>
+				<li><a href="/docs/core/Fx/Fx.Morph">Fx.Morph</a></li>
+				<li><a href="/docs/core/Fx/Fx.Transitions">Fx.Transitions</a></li>
+			</ul>
+			<h4>Request</h4>
+			<ul>
+				<li><a href="/docs/core/Request/Request">Request</a></li>
+				<li><a href="/docs/core/Request/Request.HTML">Request.HTML</a></li>
+				<li><a href="/docs/core/Request/Request.JSON">Request.JSON</a></li>
+			</ul>
+		</div>
+		
+		<div class="right column">
+			
+
+			
+			<h4 class="menu-item"><a href="#Core">Core</a></h4>
+			<ul>
+				<li><a href="#chk">chk</a></li>
+				<li><a href="#clear">clear</a></li>
+				<li><a href="#defined">defined</a></li>
+				<li><a href="#arguments">arguments</a></li>
+				<li><a href="#empty">empty</a></li>
+				<li><a href="#lambda">lambda</a></li>
+				<li><a href="#extend">extend</a></li>
+				<li><a href="#merge">merge</a></li>
+				<li><a href="#each">each</a></li>
+				<li><a href="#pick">pick</a></li>
+				<li><a href="#random">random</a></li>
+				<li><a href="#splat">splat</a></li>
+				<li><a href="#time">time</a></li>
+				<li><a href="#try">try</a></li>
+				<li><a href="#type">type</a></li>
+			</ul>
+						
+		</div>	
+
+		<div class="center column">
+		
+<div class="l-border r-border span-15" id="main">
+			
+				<h1 id="Core"><a href="#Core">Core</a></h1>
+
+<p class="description">Core contains an handful of common sense functions used in <a href="http://mootools.net">MooTools</a>.
+It also contains some basic <a href="/docs/core/Native/Hash">Hash</a> and <a href="/docs/core/Native/Array">Array</a> methods.</p>
+
+<h2 id="chk"><a href="#chk">Function: $chk</a></h2>
+
+<p class="description">Checks to see if a value exists or is 0. Useful for allowing 0.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript">$chk<span class="br0">(</span><span class="kw1">item</span><span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>item - (<em>mixed</em>) The item to inspect.</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>boolean</em>) If the object passed in exists or is 0, returns true. Otherwise, returns false.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw2">function</span> myFunction<span class="br0">(</span>arg<span class="br0">)</span><span class="br0">{</span>
+    <span class="kw1">if</span><span class="br0">(</span>$chk<span class="br0">(</span>arg<span class="br0">)</span><span class="br0">)</span> <span class="kw3">alert</span><span class="br0">(</span><span class="st0">'The object exists or is 0.'</span><span class="br0">)</span>;
+    <span class="kw1">else</span> <span class="kw3">alert</span><span class="br0">(</span><span class="st0">'The object is either null, undefined, false, or ""'</span><span class="br0">)</span>;
+<span class="br0">}</span>
+</pre>
+
+<h2 id="clear"><a href="#clear">Function: $clear</a></h2>
+
+<p class="description">Clears a Timeout or an Interval. Useful when working with <a href="/docs/core/Native/Function/#Function:delay">Function:delay</a> and <a href="/docs/core/Native/Function/#Function:periodical">Function:periodical</a>.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript">$clear<span class="br0">(</span>timer<span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>timer - (<em>number</em>) The identifier of the setInterval (periodical) or setTimeout (delay) to clear.</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>null</em>) returns null.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> myTimer = myFunction.<span class="me1">delay</span><span class="br0">(</span><span class="nu0">5000</span><span class="br0">)</span>; <span class="co1">//Waits 5 seconds then executes myFunction.</span>
+myTimer = $clear<span class="br0">(</span>myTimer<span class="br0">)</span>; <span class="co1">//Cancels myFunction.</span>
+</pre>
+
+<h3>See also:</h3>
+
+<ul>
+<li><a href="/docs/core/Native/Function/#Function:delay">Function:delay</a></li>
+<li><a href="/docs/core/Native/Function/#Function:periodical">Function:periodical</a></li>
+</ul>
+<h2 id="defined"><a href="#defined">Function: $defined</a></h2>
+
+<p class="description">Checks to see if a value is defined.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript">$defined<span class="br0">(</span>obj<span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>obj - (<em>mixed</em>) The object to inspect.</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>boolean</em>) If the object passed is not null or undefined, returns true. Otherwise, returns false.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw2">function</span> myFunction<span class="br0">(</span>arg<span class="br0">)</span><span class="br0">{</span>
+    <span class="kw1">if</span><span class="br0">(</span>$defined<span class="br0">(</span>arg<span class="br0">)</span><span class="br0">)</span> <span class="kw3">alert</span><span class="br0">(</span><span class="st0">'The object is defined.'</span><span class="br0">)</span>;
+    <span class="kw1">else</span> <span class="kw3">alert</span><span class="br0">(</span><span class="st0">'The object is null or undefined.'</span><span class="br0">)</span>;
+<span class="br0">}</span>
+</pre>
+
+<h2 id="arguments"><a href="#arguments">Function: $arguments</a></h2>
+
+<p class="description">Creates a function which returns the passed argument according to the index (i) passed.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> argument = $arguments<span class="br0">(</span>i<span class="br0">)</span>;
+</pre>
+
+<h3>Arguments</h3>
+
+<ol>
+<li>i - (<em>number</em>) The index of the argument to return.</li>
+</ol>
+<h3>Returns</h3>
+
+<ul>
+<li>(<em>function</em>) The function that returns a certain argument from the function's arguments.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> secondArgument = $arguments<span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span>;
+<span class="kw3">alert</span><span class="br0">(</span>secondArgument<span class="br0">(</span><span class="st0">'a'</span>,<span class="st0">'b'</span>,<span class="st0">'c'</span><span class="br0">)</span><span class="br0">)</span>; <span class="co1">//Alerts "b".</span>
+</pre>
+
+<h2 id="empty"><a href="#empty">Function: $empty</a></h2>
+
+<p class="description">An empty function, that's it. Typically used for as a placeholder inside event methods of classes.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> emptyFn = $empty;
+</pre>
+
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> myFunc = $empty;
+</pre>
+
+<h2 id="lambda"><a href="#lambda">Function: $lambda</a></h2>
+
+<p class="description">Creates an empty function which does nothing but return the value passed.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> returnTrue = $lambda<span class="br0">(</span><span class="kw2">true</span><span class="br0">)</span>;
+</pre>
+
+<h3>Arguments</h3>
+
+<ol>
+<li>value - (<em>mixed</em>) The value for the created function to return.</li>
+</ol>
+<h3>Returns</h3>
+
+<ul>
+<li>(<em>function</em>) A function which returns the desired value.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript">myLink.<span class="me1">addEvent</span><span class="br0">(</span><span class="st0">'click'</span>, $lambda<span class="br0">(</span><span class="kw2">false</span><span class="br0">)</span><span class="br0">)</span>; <span class="co1">//Prevents a link Element from being clickable.</span>
+</pre>
+
+<h2 id="extend"><a href="#extend">Function: $extend</a></h2>
+
+<p class="description">Copies all the properties from the second object passed in to the first object passed in.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript">$extend<span class="br0">(</span>original, extension<span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>original  - (<em>object</em>) The object to be extended.</li>
+<li>extension - (<em>object</em>) The object whose properties will be copied to original.</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>object</em>) The first object passed in, extended.</li>
+</ul>
+<h3>Examples:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> firstObj = <span class="br0">{</span>
+    <span class="st0">'name'</span>: <span class="st0">'John'</span>,
+    <span class="st0">'lastName'</span>: <span class="st0">'Doe'</span>
+<span class="br0">}</span>;
+<span class="kw2">var</span> secondObj = <span class="br0">{</span>
+    <span class="st0">'age'</span>: <span class="st0">'20'</span>,
+    <span class="st0">'sex'</span>: <span class="st0">'male'</span>,
+    <span class="st0">'lastName'</span>: <span class="st0">'Dorian'</span>
+<span class="br0">}</span>;
+$extend<span class="br0">(</span>firstObj, secondObj<span class="br0">)</span>;
+<span class="co1">//firstObj is now: {'name': 'John', 'lastName': 'Dorian', 'age': '20', 'sex': 'male'};</span>
+</pre>
+
+<h2 id="merge"><a href="#merge">Function: $merge</a></h2>
+
+<p class="description">Merges any number of objects recursively without referencing them or their sub-objects.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> merged = $merge<span class="br0">(</span>obj1, obj2<span class="br0">[</span>, obj3<span class="br0">[</span>, ...<span class="br0">]</span><span class="br0">]</span><span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>(objects) Any number of objects.</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>object</em>) The object that is created as a result of merging all the objects passed in.</li>
+</ul>
+<h3>Examples:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> obj1 = <span class="br0">{</span>a: <span class="nu0">0</span>, b: <span class="nu0">1</span><span class="br0">}</span>;
+<span class="kw2">var</span> obj2 = <span class="br0">{</span>c: <span class="nu0">2</span>, d: <span class="nu0">3</span><span class="br0">}</span>;
+<span class="kw2">var</span> obj3 = <span class="br0">{</span>a: <span class="nu0">4</span>, d: <span class="nu0">5</span><span class="br0">}</span>;
+<span class="kw2">var</span> merged = $merge<span class="br0">(</span>obj1, obj2, obj3<span class="br0">)</span>; <span class="co1">//returns {a: 4, b: 1, c: 2, d: 5}, (obj1, obj2, and obj3 are unaltered)</span>
+&nbsp;
+<span class="kw2">var</span> nestedObj1 = <span class="br0">{</span>a: <span class="br0">{</span>b: <span class="nu0">1</span>, c: <span class="nu0">1</span><span class="br0">}</span><span class="br0">}</span>;
+<span class="kw2">var</span> nestedObj2 = <span class="br0">{</span>a: <span class="br0">{</span>b: <span class="nu0">2</span><span class="br0">}</span><span class="br0">}</span>;
+<span class="kw2">var</span> nested = $merge<span class="br0">(</span>nestedObj1, nestedObj2<span class="br0">)</span>; <span class="co1">//returns: {a: {b: 2, c: 1}}</span>
+</pre>
+
+<h2 id="each"><a href="#each">Function: $each</a></h2>
+
+<p class="description">Used to iterate through iterables that are not regular arrays, such as built in getElementsByTagName calls, arguments of a function, or an object.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript">$each<span class="br0">(</span>iterable, fn<span class="br0">[</span>, bind<span class="br0">]</span><span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>iterable - (<em>object</em> or <em>array</em>) The object or array to iterate through.</li>
+<li>fn       - (<em>function</em>) The function to test for each element.</li>
+<li>bind     - (<em>object</em>, optional) The object to use as 'this' within the function. For more information see <a href="/docs/core/Native/Function/#Function:bind">Function:bind</a>.</li>
+</ol>
+<h4>Argument: fn</h4>
+
+<h5>Syntax:</h5>
+
+<pre class="javascript">fn<span class="br0">(</span><span class="kw1">item</span>, index, object<span class="br0">)</span>
+</pre>
+
+<h5>Arguments:</h5>
+
+<ol>
+<li>item   - (<em>mixed</em>) The current item in the array.</li>
+<li>index  - (<em>number</em>) The current item's index in the array. In the case of an object, it is passed the key of that item rather than the index.</li>
+<li>object - (<em>mixed</em>) The actual array/object.</li>
+</ol>
+<h3>Examples:</h3>
+
+<h4>Array Example:</h4>
+
+<pre class="javascript">$each<span class="br0">(</span><span class="br0">[</span><span class="st0">'Sun'</span>,<span class="st0">'Mon'</span>,<span class="st0">'Tue'</span><span class="br0">]</span>, <span class="kw2">function</span><span class="br0">(</span>day, index<span class="br0">)</span><span class="br0">{</span>
+    <span class="kw3">alert</span><span class="br0">(</span><span class="st0">'name:'</span> + day + <span class="st0">', index: '</span> + index<span class="br0">)</span>;
+<span class="br0">}</span><span class="br0">)</span>; <span class="co1">//Alerts "name: Sun, index: 0", "name: Mon, index: 1", etc.</span>
+</pre>
+
+<h4>Object Example:</h4>
+
+<pre class="javascript"><span class="co1">//Alerts "The first day of the week is Sunday", "The second day of the week is Monday", etc:</span>
+$each<span class="br0">(</span><span class="br0">{</span>first: <span class="st0">"Sunday"</span>, second: <span class="st0">"Monday"</span>, third: <span class="st0">"Tuesday"</span><span class="br0">}</span>, <span class="kw2">function</span><span class="br0">(</span>value, key<span class="br0">)</span><span class="br0">{</span>
+    <span class="kw3">alert</span><span class="br0">(</span><span class="st0">"The "</span> + key + <span class="st0">" day of the week is "</span> + value<span class="br0">)</span>;
+<span class="br0">}</span><span class="br0">)</span>;
+</pre>
+
+<h2 id="pick"><a href="#pick">Function: $pick</a></h2>
+
+<p class="description">Returns the first defined argument passed in, or null.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> picked = $pick<span class="br0">(</span>var1<span class="br0">[</span>, var2<span class="br0">[</span>, var3<span class="br0">[</span>, ...<span class="br0">]</span><span class="br0">]</span><span class="br0">]</span><span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ul>
+<li>(<em>mixed</em>) Any number of variables.</li>
+</ul>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>mixed</em>) The first variable that is defined.</li>
+<li>(<em>null</em>) If all variables passed in are <code>null</code> or <code>undefined</code>, returns <code>null</code>.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw2">function</span> say<span class="br0">(</span>infoMessage, errorMessage<span class="br0">)</span><span class="br0">{</span>
+    <span class="kw3">alert</span><span class="br0">(</span>$pick<span class="br0">(</span>errorMessage, infoMessage, <span class="st0">'There was no message supplied.'</span><span class="br0">)</span><span class="br0">)</span>;
+<span class="br0">}</span>
+say<span class="br0">(</span><span class="br0">)</span>; <span class="co1">//Alerts "There was no message supplied."</span>
+say<span class="br0">(</span><span class="st0">"This is an info message."</span><span class="br0">)</span>; <span class="co1">//Alerts "This is an info message."</span>
+say<span class="br0">(</span><span class="st0">"This message will be ignored."</span>, <span class="st0">"This is the error message."</span><span class="br0">)</span>; <span class="co1">//Alerts "This is the error message."</span>
+</pre>
+
+<h2 id="random"><a href="#random">Function: $random</a></h2>
+
+<p class="description">Returns a random integer between the two passed in values.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> random = $random<span class="br0">(</span>min, max<span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>min - (<em>number</em>) The minimum value (inclusive).</li>
+<li>max - (<em>number</em>) The maximum value (inclusive).</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>number</em>) A random number between min and max.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw3">alert</span><span class="br0">(</span>$random<span class="br0">(</span><span class="nu0">5</span>, <span class="nu0">20</span><span class="br0">)</span><span class="br0">)</span>; <span class="co1">//Alerts a random number between 5 and 20.</span>
+</pre>
+
+<h2 id="splat"><a href="#splat">Function: $splat</a></h2>
+
+<p class="description">Converts the argument passed in to an array if it is defined and not already an array.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> splatted = $splat<span class="br0">(</span>obj<span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>obj - (<em>mixed</em>) Any type of variable.</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>array</em>) If the variable passed in is an array, returns the array. Otherwise, returns an array with the only element being the variable passed in.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript">$splat<span class="br0">(</span><span class="st0">'hello'</span><span class="br0">)</span>; <span class="co1">//Returns ['hello'].</span>
+$splat<span class="br0">(</span><span class="br0">[</span><span class="st0">'a'</span>, <span class="st0">'b'</span>, <span class="st0">'c'</span><span class="br0">]</span><span class="br0">)</span>; <span class="co1">//Returns ['a', 'b', 'c'].</span>
+</pre>
+
+<h2 id="time"><a href="#time">Function: $time</a></h2>
+
+<p class="description">Returns the current time as a timestamp.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> time = $time<span class="br0">(</span><span class="br0">)</span>;
+</pre>
+
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>number</em>) - The current timestamp.</li>
+</ul>
+<h2 id="try"><a href="#try">Function: $try</a></h2>
+
+<p class="description">Tries to execute a number of functions. Returns immediately the return value of the first non-failed function without executing successive functions, or null.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript">$try<span class="br0">(</span>fn<span class="br0">[</span>, fn, fn, fn, ...<span class="br0">]</span><span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ul>
+<li>fn   - (<em>function</em>) The function to execute.</li>
+</ul>
+<h3>Returns:</h3>
+
+<ul>
+<li>(<em>mixed</em>) Standard return of the called function.</li>
+<li>(<em>null</em>) <code>null</code> if all the passed functions fail.</li>
+</ul>
+<h3>Examples:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> result = $try<span class="br0">(</span><span class="kw2">function</span><span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+    <span class="kw1">return</span> some.<span class="me1">made</span>.<span class="me1">up</span>.<span class="me1">object</span>;
+<span class="br0">}</span>, <span class="kw2">function</span><span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+    <span class="kw1">return</span> jibberish.<span class="me1">that</span>.<span class="me1">doesnt</span>.<span class="me1">exists</span>;
+<span class="br0">}</span>, <span class="kw2">function</span><span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+    <span class="kw1">return</span> <span class="kw2">false</span>;
+<span class="br0">}</span><span class="br0">)</span>;
+&nbsp;
+<span class="co1">//result is false</span>
+&nbsp;
+<span class="kw2">var</span> failure, success;
+&nbsp;
+$try<span class="br0">(</span><span class="kw2">function</span><span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+    some.<span class="me1">made</span>.<span class="me1">up</span>.<span class="me1">object</span> = <span class="st0">'something'</span>;
+    success = <span class="kw2">true</span>;
+<span class="br0">}</span>, <span class="kw2">function</span><span class="br0">(</span><span class="br0">)</span><span class="br0">{</span>
+    failure = <span class="kw2">true</span>;
+<span class="br0">}</span><span class="br0">)</span>;
+&nbsp;
+<span class="kw1">if</span> <span class="br0">(</span>success<span class="br0">)</span> <span class="kw3">alert</span><span class="br0">(</span><span class="st0">'yey!'</span><span class="br0">)</span>;
+</pre>
+
+<h2 id="type"><a href="#type">Function: $type</a></h2>
+
+<p class="description">Returns the type of object that matches the element passed in.</p>
+
+<h3>Syntax:</h3>
+
+<pre class="javascript">$type<span class="br0">(</span>obj<span class="br0">)</span>;
+</pre>
+
+<h3>Arguments:</h3>
+
+<ol>
+<li>obj - (<em>object</em>) The object to inspect.</li>
+</ol>
+<h3>Returns:</h3>
+
+<ul>
+<li>'element'    - (<em>string</em>) If object is a DOM element node.</li>
+<li>'textnode'   - (<em>string</em>) If object is a DOM text node.</li>
+<li>'whitespace' - (<em>string</em>) If object is a DOM whitespace node.</li>
+<li>'arguments'  - (<em>string</em>) If object is an arguments object.</li>
+<li>'array'      - (<em>string</em>) If object is an array.</li>
+<li>'object'     - (<em>string</em>) If object is an object.</li>
+<li>'string'     - (<em>string</em>) If object is a string.</li>
+<li>'number'     - (<em>string</em>) If object is a number.</li>
+<li>'date'       - (<em>string</em>) If object is a date.</li>
+<li>'boolean'    - (<em>string</em>) If object is a boolean.</li>
+<li>'function'   - (<em>string</em>) If object is a function.</li>
+<li>'regexp'     - (<em>string</em>) If object is a regular expression.</li>
+<li>'class'      - (<em>string</em>) If object is a Class (created with new Class, or the extend of another class).</li>
+<li>'collection' - (<em>string</em>) If object is a native htmlelements collection, such as childNodes, getElementsByTagName, etc.</li>
+<li>'window'     - (<em>string</em>) If object is the window object.</li>
+<li>'document'   - (<em>string</em>) If object is the document object.</li>
+<li>'event'      - (<em>string</em>) If object is an event.</li>
+<li>false        - (<em>boolean</em>) If object is undefined, null, NaN or none of the above.</li>
+</ul>
+<h3>Example:</h3>
+
+<pre class="javascript"><span class="kw2">var</span> myString = <span class="st0">'hello'</span>;
+$type<span class="br0">(</span>myString<span class="br0">)</span>; <span class="co1">//Returns "string".</span>
+</pre>
+
+			
+			</div>		
+		</div>
+		
+	</div>
+	
+	<div class="footer">FOOTER</div>
+
+</body>
+</html>
