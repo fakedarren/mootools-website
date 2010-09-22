@@ -1,0 +1,105 @@
+html {
+	font-size: 100%;
+}
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+body	{
+	color: #333;
+	font: 62.5% Helvetica, Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, img, form, fieldset, ul, ol, li, dl, dt, dd	{
+	border: none;
+	list-style:  none;
+	margin: 0;
+	padding: 0;
+}
+
+h1 {}
+h2 {}
+h3 {
+	color: #385F9E;
+	font-size: 1.6em;
+	font-weight: normal;
+	height: 24px;
+	line-height: 24px;
+	margin: 0 0 10px;
+}
+p {
+	font-size: 1.3em;
+}
+em {
+	color: #385F9E;
+	font-style: normal;
+}
+	
+a {
+	color: #385F9E;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}	
+ul {
+	padding: 0 0 30px;
+}
+ul li {
+	font-size: 1.3em;
+	line-height: 18px;
+	padding: 3px 0;
+}
+
+/* Layouts */
+.container {
+	margin: 0 auto;	
+	width: 960px;
+}
+.header	{
+	margin: 0 auto;
+	height: 100px;
+}
+.column	{
+	float: left;
+}
+.left.column {
+	width: 640px;
+}
+.right.column {
+	width: 300px;
+}
+.footer	{
+	clear: both;
+	background: red;
+}
+
+.clear {clear: both;}
+
+/* Header */
+#header {
+	border-bottom: 1px solid #cfcfcf;
+	border-top: 6px solid #1b3549;
+}
+#logo { 
+	float: left; 
+}
+#logo a {
+	display: block;
+	background: url(../graphics/logo.png) no-repeat;
+	width:165px;
+	height:50px;
+	margin-top: 25px;
+}
+#logo span {
+	display: none;
+}
+
+/* Content */
+#content {
+	background: #f7f9fa url(../graphics/content-bg.png) repeat-x;
+}
+#content .left, #content .right {
+	padding: 35px 2px;
+}
