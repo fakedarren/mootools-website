@@ -1,0 +1,15 @@
+.main-menu {
+	float: left;
+	width: 200px;
+}
+
+ARTICLE {
+	float: left;
+	width: 500px;
+}
+
+.sub-menu {
+	float: left;
+	width: 200px;
+	background: green;
+}
