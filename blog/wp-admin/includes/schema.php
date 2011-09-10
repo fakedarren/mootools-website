@@ -217,7 +217,7 @@ function populate_options() {
 	'default_comment_status' => 'open',
 	'default_ping_status' => 'open',
 	'default_pingback_flag' => 1,
-	'default_post_edit_rows' => 10,
+	'default_post_edit_rows' => 20,
 	'posts_per_page' => 10,
 	/* translators: default date format, see http://php.net/date */
 	'date_format' => __('F j, Y'),
@@ -318,6 +318,9 @@ function populate_options() {
 	// 3.0
 	'page_for_posts' => 0,
 	'page_on_front' => 0,
+
+	// 3.1
+	'default_post_format' => 0,
 	);
 
 	// 3.0 multisite
@@ -357,9 +360,8 @@ function populate_options() {
 	if ( !__get_option('home') ) update_option('home', $guessurl);
 
 	// Delete unused options
-	$unusedoptions = array ('blodotgsping_url', 'bodyterminator', 'emailtestonly', 'phoneemail_separator', 'smilies_directory', 'subjectprefix', 'use_bbcode', 'use_blodotgsping', 'use_phoneemail', 'use_quicktags', 'use_weblogsping', 'weblogs_cache_file', 'use_preview', 'use_htmltrans', 'smilies_directory', 'fileupload_allowedusers', 'use_phoneemail', 'default_post_status', 'default_post_category', 'archive_mode', 'time_difference', 'links_minadminlevel', 'links_use_adminlevels', 'links_rating_type', 'links_rating_char', 'links_rating_ignore_zero', 'links_rating_single_image', 'links_rating_image0', 'links_rating_image1', 'links_rating_image2', 'links_rating_image3', 'links_rating_image4', 'links_rating_image5', 'links_rating_image6', 'links_rating_image7', 'links_rating_image8', 'links_rating_image9', 'weblogs_cacheminutes', 'comment_allowed_tags', 'search_engine_friendly_urls', 'default_geourl_lat', 'default_geourl_lon', 'use_default_geourl', 'weblogs_xml_url', 'new_users_can_blog', '_wpnonce', '_wp_http_referer', 'Update', 'action', 'rich_editing', 'autosave_interval', 'deactivated_plugins', 'can_compress_scripts',
-		'page_uris', 'update_core', 'update_plugins', 'update_themes', 'doing_cron', 'random_seed', 'rss_excerpt_length', 'secret', 'use_linksupdate', 'default_comment_status_page' );
-	foreach ($unusedoptions as $option)
+	$unusedoptions = array ('blodotgsping_url', 'bodyterminator', 'emailtestonly', 'phoneemail_separator', 'smilies_directory', 'subjectprefix', 'use_bbcode', 'use_blodotgsping', 'use_phoneemail', 'use_quicktags', 'use_weblogsping', 'weblogs_cache_file', 'use_preview', 'use_htmltrans', 'smilies_directory', 'fileupload_allowedusers', 'use_phoneemail', 'default_post_status', 'default_post_category', 'archive_mode', 'time_difference', 'links_minadminlevel', 'links_use_adminlevels', 'links_rating_type', 'links_rating_char', 'links_rating_ignore_zero', 'links_rating_single_image', 'links_rating_image0', 'links_rating_image1', 'links_rating_image2', 'links_rating_image3', 'links_rating_image4', 'links_rating_image5', 'links_rating_image6', 'links_rating_image7', 'links_rating_image8', 'links_rating_image9', 'weblogs_cacheminutes', 'comment_allowed_tags', 'search_engine_friendly_urls', 'default_geourl_lat', 'default_geourl_lon', 'use_default_geourl', 'weblogs_xml_url', 'new_users_can_blog', '_wpnonce', '_wp_http_referer', 'Update', 'action', 'rich_editing', 'autosave_interval', 'deactivated_plugins', 'can_compress_scripts', 'page_uris', 'update_core', 'update_plugins', 'update_themes', 'doing_cron', 'random_seed', 'rss_excerpt_length', 'secret', 'use_linksupdate', 'default_comment_status_page', 'wporg_popular_tags', 'what_to_show');
+	foreach ( $unusedoptions as $option )
 		delete_option($option);
 
 	// delete obsolete magpie stuff
@@ -668,7 +670,7 @@ function populate_network( $network_id = 1, $domain = '', $email = '', $site_nam
 
 	if ( !is_multisite() ) {
 		$site_admins = array( $site_user->user_login );
-		$users = get_users_of_blog();
+		$users = get_users( array( 'fields' => array( 'ID', 'user_login' ) ) );
 		if ( $users ) {
 			foreach ( $users as $user ) {
 				if ( is_super_admin( $user->ID ) && !in_array( $user->user_login, $site_admins ) )
@@ -687,7 +689,7 @@ BLOG_URL
 You can log in to the administrator account with the following information:
 Username: USERNAME
 Password: PASSWORD
-Login Here: BLOG_URLwp-login.php
+Log in Here: BLOG_URLwp-login.php
 
 We hope you enjoy your new site.
 Thanks!
@@ -715,7 +717,7 @@ Thanks!
 		'subdomain_install' => intval( $subdomain_install ),
 		'global_terms_enabled' => global_terms_enabled() ? '1' : '0'
 	);
-	if ( !intval( $subdomain_install ) )
+	if ( ! $subdomain_install )
 		$sitemeta['illegal_names'][] = 'blog';
 
 	$insert = '';
@@ -760,7 +762,7 @@ Thanks!
 		$page = wp_remote_get( 'http://' . $hostname, array( 'timeout' => 5, 'httpversion' => '1.1' ) );
 		if ( is_wp_error( $page ) )
 			$errstr = $page->get_error_message();
-		elseif ( 200 == $page['response']['code'] )
+		elseif ( 200 == wp_remote_retrieve_response_code( $page ) )
 				$vhost_ok = true;
 
 		if ( ! $vhost_ok ) {

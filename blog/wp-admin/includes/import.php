@@ -56,7 +56,7 @@ function wp_import_cleanup( $id ) {
  *
  * @since 2.0.0
  *
- * @return array
+ * @return array Uploaded file's details on success, error message on failure
  */
 function wp_import_handle_upload() {
 	if ( !isset($_FILES['import']) ) {
@@ -73,18 +73,23 @@ function wp_import_handle_upload() {
 
 	$url = $file['url'];
 	$type = $file['type'];
-	$file = addslashes( $file['file'] );
+	$file = $file['file'];
 	$filename = basename( $file );
 
 	// Construct the object array
 	$object = array( 'post_title' => $filename,
 		'post_content' => $url,
 		'post_mime_type' => $type,
-		'guid' => $url
+		'guid' => $url,
+		'context' => 'import',
+		'post_status' => 'private'
 	);
 
 	// Save the data
 	$id = wp_insert_attachment( $object, $file );
+
+	// schedule a cleanup for one day from now in case of failed import or missing wp_import_cleanup() call
+	wp_schedule_single_event( time() + 86400, 'importer_scheduled_cleanup', array( $id ) );
 
 	return array( 'file' => $file, 'id' => $id );
 }

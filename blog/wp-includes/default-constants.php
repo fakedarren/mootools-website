@@ -24,6 +24,10 @@ function wp_initial_constants( ) {
 		}
 	}
 
+	if ( ! defined( 'WP_MAX_MEMORY_LIMIT' ) ) {
+		define( 'WP_MAX_MEMORY_LIMIT', '256M' );
+	}
+
 	/**
 	 * The $blog_id global, which you can change in the config allows you to create a simple
 	 * multiple blog installation using just one WordPress and changing $blog_id around.
@@ -272,13 +276,13 @@ function wp_functionality_constants( ) {
  */
 function wp_templating_constants( ) {
 	/**
-	 * Web Path to the current active template directory
+	 * Filesystem path to the current active template directory
 	 * @since 1.5.0
 	 */
 	define('TEMPLATEPATH', get_template_directory());
 
 	/**
-	 * Web Path to the current active template stylesheet directory
+	 * Filesystem path to the current active template stylesheet directory
 	 * @since 2.1.0
 	 */
 	define('STYLESHEETPATH', get_stylesheet_directory());
@@ -290,7 +294,7 @@ function wp_templating_constants( ) {
 	 * @since 3.0.0
 	 */
 	if ( !defined('WP_DEFAULT_THEME') )
-		define( 'WP_DEFAULT_THEME', 'twentyten' );
+		define( 'WP_DEFAULT_THEME', 'twentyeleven' );
 
 }
 

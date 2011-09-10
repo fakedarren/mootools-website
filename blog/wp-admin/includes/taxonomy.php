@@ -13,7 +13,7 @@
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
+ * @since 2.0.0
  *
  * @param unknown_type $cat_name
  * @return unknown
@@ -28,7 +28,7 @@ function category_exists($cat_name, $parent = 0) {
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
+ * @since 2.0.0
  *
  * @param unknown_type $id
  * @return unknown
@@ -41,7 +41,7 @@ function get_category_to_edit( $id ) {
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
+ * @since 2.0.0
  *
  * @param unknown_type $cat_name
  * @param unknown_type $parent
@@ -57,7 +57,7 @@ function wp_create_category( $cat_name, $parent = 0 ) {
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
+ * @since 2.0.0
  *
  * @param unknown_type $categories
  * @param unknown_type $post_id
@@ -77,25 +77,6 @@ function wp_create_categories($categories, $post_id = '') {
 		wp_set_post_categories($post_id, $cat_ids);
 
 	return $cat_ids;
-}
-
-/**
- * Deletes one existing category.
- *
- * @since 2.0.0
- *
- * @param int $cat_ID
- * @return mixed Returns true if completes delete action; false if term doesnt exist; Zero on attempted deletion of default Category; WP_Error object is also a possibility.
- */
-function wp_delete_category($cat_ID) {
-	$cat_ID = (int) $cat_ID;
-	$default = get_option('default_category');
-
-	// Don't delete the default cat
-	if ( $cat_ID == $default )
-		return 0;
-
-	return wp_delete_term($cat_ID, 'category', array('default' => $default));
 }
 
 /**
@@ -192,7 +173,31 @@ function wp_update_category($catarr) {
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
+ * @since 2.3.0
+ *
+ * @param unknown_type $tag_name
+ * @return unknown
+ */
+function tag_exists($tag_name) {
+	return term_exists($tag_name, 'post_tag');
+}
+
+/**
+ * {@internal Missing Short Description}}
+ *
+ * @since 2.3.0
+ *
+ * @param unknown_type $tag_name
+ * @return unknown
+ */
+function wp_create_tag($tag_name) {
+	return wp_create_term( $tag_name, 'post_tag');
+}
+
+/**
+ * {@internal Missing Short Description}}
+ *
+ * @since 2.3.0
  *
  * @param unknown_type $post_id
  * @return unknown
@@ -204,7 +209,7 @@ function get_tags_to_edit( $post_id, $taxonomy = 'post_tag' ) {
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
+ * @since 2.8.0
  *
  * @param unknown_type $post_id
  * @return unknown
@@ -234,31 +239,7 @@ function get_terms_to_edit( $post_id, $taxonomy = 'post_tag' ) {
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
- *
- * @param unknown_type $tag_name
- * @return unknown
- */
-function tag_exists($tag_name) {
-	return term_exists($tag_name, 'post_tag');
-}
-
-/**
- * {@internal Missing Short Description}}
- *
- * @since unknown
- *
- * @param unknown_type $tag_name
- * @return unknown
- */
-function wp_create_tag($tag_name) {
-	return wp_create_term( $tag_name, 'post_tag');
-}
-
-/**
- * {@internal Missing Short Description}}
- *
- * @since unknown
+ * @since 2.8.0
  *
  * @param unknown_type $tag_name
  * @return unknown

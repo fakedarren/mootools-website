@@ -1,4 +1,10 @@
-.postbox p, .postbox ul, .postbox ol, .postbox blockquote, #wp-version-message { font-size: 11px; }
+.postbox p,
+.postbox ul,
+.postbox ol,
+.postbox blockquote,
+#wp-version-message {
+	font-size: 12px;
+}
 
 .edit-box {
 	display: none;
@@ -9,6 +15,7 @@ h3:hover .edit-box {
 }
 
 form .input-text-wrap {
+	background: #fff;
 	border-style: solid;
 	border-width: 1px;
 	padding: 2px 3px;
@@ -25,6 +32,7 @@ form .input-text-wrap {
 }
 
 form .textarea-wrap {
+	background: #fff;
 	border-style: solid;
 	border-width: 1px;
 	padding: 2px;
@@ -57,7 +65,7 @@ form .textarea-wrap {
 }
 
 div.postbox div.inside {
-	margin: 10px;
+	margin: 10px 0;
 	position: relative;
 }
 
@@ -73,10 +81,12 @@ div.postbox div.inside {
 	position: absolute;
 	right: 30px;
 	padding: 0;
+	top: 8px;
 }
 
 #dashboard-widgets h4 {
 	font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
+	font-weight: normal;
 	font-size: 13px;
 	margin: 0 0 .2em;
 	padding: 0;
@@ -95,19 +105,17 @@ div.postbox div.inside {
 }
 
 #dashboard_right_now p.sub {
-	font-style: italic;
-	font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
-	padding: 5px 10px 15px;
-	color: #777;
-	font-size: 13px;
+	padding: 5px 0 15px;
+	color: #8f8f8f;
+	font-size: 14px;
 	position: absolute;
 	top: -17px;
 	left: 15px;
 }
 
 #dashboard_right_now .table {
-	margin: 0 -9px;
-	padding: 0 10px;
+	margin: 0;
+	padding: 0;
 	position: relative;
 }
 
@@ -173,7 +181,7 @@ div.postbox div.inside {
 
 #dashboard_right_now .versions {
 	padding: 6px 10px 12px;
-	clear: left;
+	clear: both;
 }
 
 #dashboard_right_now .versions .b {
@@ -199,8 +207,12 @@ div.postbox div.inside {
 
 #dashboard_recent_comments .comment-meta .approve {
 	font-style: italic;
-	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+	font-family: sans-serif;
 	font-size: 10px;
+}
+
+#dashboard_recent_comments .subsubsub {
+	float: none;
 }
 
 #the-comment-list {
@@ -231,10 +243,9 @@ div.postbox div.inside {
 }
 
 #the-comment-list .comment-item h4 {
-	line-height: 1.4;
-	margin-top: -.2em;
-	font-weight: normal;
-	color: #999;
+	line-height: 1.7em;
+	margin-top: -0.4em;
+	color: #777;
 }
 
 #the-comment-list .comment-item h4 cite {
@@ -257,13 +268,13 @@ div.postbox div.inside {
 #the-comment-list .comment-item p.row-actions {
 	margin: 3px 0 0;
 	padding: 0;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 /* QuickPress */
 
 #dashboard_quick_press h4 {
-	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+	font-family: sans-serif;
 	float: left;
 	width: 5.5em;
 	clear: both;
@@ -285,7 +296,9 @@ div.postbox div.inside {
 #dashboard_quick_press #media-buttons {
 	margin: 0 0 .5em 5em;
 	padding: 0 0 0 10px;
-	font-size: 11px;
+	font-size: 12px;
+	line-height: 17px;
+	color: #777;
 }
 
 #dashboard_quick_press #media-buttons a {
@@ -322,16 +335,17 @@ div.postbox div.inside {
 }
 
 #dashboard_recent_drafts ul li {
-	margin-bottom: 0.6em;
+	margin-bottom: 1em;
 }
 
 #dashboard_recent_drafts h4 {
-	font-weight: normal;
+	line-height: 1.7em;
 }
 
 #dashboard_recent_drafts h4 abbr {
-	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
-	font-size: 11px;
+	font-weight: normal;
+	font-family: sans-serif;
+	font-size: 12px;
 	color: #999;
 	margin-left: 3px;
 }
@@ -361,6 +375,8 @@ a.rsswidget {
 }
 
 .rss-widget span.rss-date {
+	color: #999;
+	font-size: 12px;
 	margin-left: 3px;
 }
 
@@ -376,30 +392,95 @@ a.rsswidget {
 }
 
 /* Plugins */
-
 #dashboard_plugins h4 {
-	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+	line-height: 1.7em;
 }
-
 #dashboard_plugins h5 {
 	font-family: Georgia, "Times New Roman", "Bitstream Charter", Times, serif;
-	font-size: 13px !important;
+	font-weight: normal;
+	font-size: 13px;
 	margin: 0;
 	display: inline;
 	line-height: 1.4em;
 }
 
 #dashboard_plugins h5 a {
-	font-weight: normal;
-	line-height: 1.7em;
+	line-height: 1.4em;
+}
+
+#dashboard_plugins .inside span {
+	font-size: 12px;
+	padding-left: 5px;
 }
 
 #dashboard_plugins p {
-	margin: 0 0 1.4em;
+	margin: 0.3em 0 1.4em;
 	line-height: 1.4em;
 }
 
 .dashboard-comment-wrap {
 	overflow: hidden;
 	word-wrap: break-word;
+}
+
+/* Browser Nag */
+#dashboard_browser_nag a.update-browser-link {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+#dashboard_browser_nag a {
+	text-decoration: underline;
+}
+
+#dashboard_browser_nag p.browser-update-nag.has-browser-icon {
+	padding-right: 125px;
+}
+
+#dashboard_browser_nag .browser-icon {
+	margin-top: -35px;
+}
+
+#dashboard_browser_nag.postbox.browser-insecure {
+	background-color: #ac1b1b;
+	border-color: #ac1b1b;
+}
+
+#dashboard_browser_nag.postbox {
+	background-color: #e29808;
+	background-image: none;
+	border-color: #edc048;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: #fff;
+}
+
+#dashboard_browser_nag.postbox.browser-insecure h3 {
+	border-bottom-color: #cd5a5a;
+	color: #fff;
+}
+
+#dashboard_browser_nag.postbox h3 {
+	border-bottom-color: #f6e2ac;
+	text-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	background: transparent none;
+	color: #fff;
+}
+
+#dashboard_browser_nag a {
+	color: #fff;
+}
+
+#dashboard_browser_nag.browser-insecure a.browse-happy-link,
+#dashboard_browser_nag.browser-insecure a.update-browser-link {
+	text-shadow: #871b15 0 1px 0;
+}
+
+#dashboard_browser_nag a.browse-happy-link,
+#dashboard_browser_nag a.update-browser-link {
+	text-shadow: #d29a04 0 1px 0;
 }

@@ -39,6 +39,8 @@ add_action( 'delete_post', 'wpmu_update_blogs_date' );
 add_action( 'private_to_published', 'wpmu_update_blogs_date' );
 add_action( 'publish_phone', 'wpmu_update_blogs_date' );
 add_action( 'publish_post', 'wpmu_update_blogs_date' );
+add_action( 'admin_init', 'wp_schedule_update_network_counts');
+add_action( 'update_network_counts', 'wp_update_network_counts');
 
 // Files
 add_filter( 'wp_upload_bits', 'upload_is_file_too_big' );
@@ -47,7 +49,6 @@ add_filter( 'upload_mimes', 'check_upload_mimes' );
 add_filter( 'upload_size_limit', 'upload_size_limit_filter' );
 
 // Mail
-add_filter( 'wp_mail_from', 'wordpressmu_wp_mail_from' );
 add_action( 'phpmailer_init', 'fix_phpmailer_messageid' );
 
 // Disable somethings by default for multisite
@@ -56,6 +57,7 @@ if ( ! defined('POST_BY_EMAIL') || ! POST_BY_EMAIL ) // back compat constant.
 	add_filter( 'enable_post_by_email_configuration', '__return_false' );
 if ( ! defined('EDIT_ANY_USER') || ! EDIT_ANY_USER ) // back compat constant.
 	add_filter( 'enable_edit_any_user_configuration', '__return_false' );
+add_filter( 'force_filtered_html_on_import', '__return_true' );
 
 // WP_HOME and WP_SITEURL should not have any effect in MS
 remove_filter( 'option_siteurl', '_config_wp_siteurl' );

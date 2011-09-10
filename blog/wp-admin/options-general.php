@@ -21,7 +21,7 @@ $timezone_format = _x('Y-m-d G:i:s', 'timezone date format');
  * Display JavaScript on the page.
  *
  * @package WordPress
- * @subpackage General_Settings_Panel
+ * @subpackage General_Settings_Screen
  */
 function add_js() {
 ?>
@@ -30,7 +30,7 @@ function add_js() {
 	jQuery(document).ready(function($){
 		$("input[name='date_format']").click(function(){
 			if ( "date_format_custom_radio" != $(this).attr("id") )
-				$("input[name='date_format_custom']").val( $(this).val() );
+				$("input[name='date_format_custom']").val( $(this).val() ).siblings('.example').text( $(this).siblings('span').text() );
 		});
 		$("input[name='date_format_custom']").focus(function(){
 			$("#date_format_custom_radio").attr("checked", "checked");
@@ -38,17 +38,25 @@ function add_js() {
 
 		$("input[name='time_format']").click(function(){
 			if ( "time_format_custom_radio" != $(this).attr("id") )
-				$("input[name='time_format_custom']").val( $(this).val() );
+				$("input[name='time_format_custom']").val( $(this).val() ).siblings('.example').text( $(this).siblings('span').text() );
 		});
 		$("input[name='time_format_custom']").focus(function(){
 			$("#time_format_custom_radio").attr("checked", "checked");
+		});
+		$("input[name='date_format_custom'], input[name='time_format_custom']").change( function() {
+			var format = $(this);
+			format.siblings('img').css('visibility','visible');
+			$.post(ajaxurl, {
+					action: 'date_format_custom' == format.attr('name') ? 'date_format' : 'time_format',
+					date : format.val()
+				}, function(d) { format.siblings('img').css('visibility','hidden'); format.siblings('.example').text(d); } );
 		});
 	});
 //]]>
 </script>
 <?php
 }
-add_filter('admin_head', 'add_js');
+add_action('admin_head', 'add_js');
 
 add_contextual_help($current_screen,
 	'<p>' . __('The fields on this screen determine some of the basics of your site setup.') . '</p>' .
@@ -58,7 +66,7 @@ add_contextual_help($current_screen,
 	'<p>' . __('UTC means Coordinated Universal Time.') . '</p>' .
 	'<p>' . __('Remember to click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>' .
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Settings_General_SubPanel" target="_blank">Documentation on General Settings</a>') . '</p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Settings_General_Screen" target="_blank">Documentation on General Settings</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -114,12 +122,12 @@ include('./admin-header.php');
 <tr valign="top">
 <th scope="row"><label for="new_admin_email"><?php _e('E-mail address') ?> </label></th>
 <td><input name="new_admin_email" type="text" id="new_admin_email" value="<?php form_option('admin_email'); ?>" class="regular-text code" />
-<span class="setting-description"><?php _e('This address is used for admin purposes. If you change this we will send you an e-mail at your new address to confirm it. <strong>The new address will not become active until confirmed.</strong>') ?></span>
+<span class="description"><?php _e('This address is used for admin purposes. If you change this we will send you an e-mail at your new address to confirm it. <strong>The new address will not become active until confirmed.</strong>') ?></span>
 <?php
 $new_admin_email = get_option( 'new_admin_email' );
 if ( $new_admin_email && $new_admin_email != get_option('admin_email') ) : ?>
 <div class="updated inline">
-<p><?php printf( __('There is a pending change of the admin e-mail to <code>%1$s</code>. <a href="%2$s">Cancel</a>'), $new_admin_email, esc_url( admin_url( 'options.php?dismiss=new_admin_email' ) ) ); ?></p>
+<p><?php printf( __('There is a pending change of the admin e-mail to <code>%1$s</code>. <a href="%2$s">Cancel</a>'), esc_html( $new_admin_email ), esc_url( admin_url( 'options.php?dismiss=new_admin_email' ) ) ); ?></p>
 </div>
 <?php endif; ?>
 </td>
@@ -127,44 +135,6 @@ if ( $new_admin_email && $new_admin_email != get_option('admin_email') ) : ?>
 <?php } ?>
 <tr>
 <?php
-if ( !wp_timezone_supported() ) : // no magic timezone support here
-?>
-<th scope="row"><label for="gmt_offset"><?php _e('Timezone') ?> </label></th>
-<td>
-<select name="gmt_offset" id="gmt_offset">
-<?php
-$current_offset = get_option('gmt_offset');
-$offset_range = array (-12, -11.5, -11, -10.5, -10, -9.5, -9, -8.5, -8, -7.5, -7, -6.5, -6, -5.5, -5, -4.5, -4, -3.5, -3, -2.5, -2, -1.5, -1, -0.5,
-	0, 0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 5.75, 6, 6.5, 7, 7.5, 8, 8.5, 8.75, 9, 9.5, 10, 10.5, 11, 11.5, 12, 12.75, 13, 13.75, 14);
-foreach ( $offset_range as $offset ) {
-	if ( 0 < $offset )
-		$offset_name = '+' . $offset;
-	elseif ( 0 == $offset )
-		$offset_name = '';
-	else
-		$offset_name = (string) $offset;
-
-	$offset_name = str_replace(array('.25','.5','.75'), array(':15',':30',':45'), $offset_name);
-
-	$selected = '';
-	if ( $current_offset == $offset ) {
-		$selected = " selected='selected'";
-		$current_offset_name = $offset_name;
-	}
-	echo "<option value=\"" . esc_attr($offset) . "\"$selected>" . sprintf(__('UTC %s'), $offset_name) . '</option>';
-}
-?>
-</select>
-<?php _e('hours'); ?>
-<span id="utc-time"><?php printf(__('<abbr title="Coordinated Universal Time">UTC</abbr> time is <code>%s</code>'), date_i18n( $time_format, false, 'gmt')); ?></span>
-<?php if ($current_offset) : ?>
-	<span id="local-time"><?php printf(__('UTC %1$s is <code>%2$s</code>'), $current_offset_name, date_i18n($time_format)); ?></span>
-<?php endif; ?>
-<br />
-<span class="description"><?php _e('Unfortunately, you have to manually update this for daylight saving time. The PHP Date/Time library is not supported by your web host.'); ?></span>
-</td>
-<?php
-else: // looks like we can do nice timezone selection!
 $current_offset = get_option('gmt_offset');
 $tzstring = get_option('timezone_string');
 
@@ -192,7 +162,7 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 <?php echo wp_timezone_choice($tzstring); ?>
 </select>
 
-    <span id="utc-time"><?php printf(__('<abbr title="Coordinated Universal Time">UTC</abbr> time is <code>%s</code>'), date_i18n($timezone_format, false, 'gmt')); ?></span>
+	<span id="utc-time"><?php printf(__('<abbr title="Coordinated Universal Time">UTC</abbr> time is <code>%s</code>'), date_i18n($timezone_format, false, 'gmt')); ?></span>
 <?php if ( get_option('timezone_string') || !empty($current_offset) ) : ?>
 	<span id="local-time"><?php printf(__('Local time is <code>%1$s</code>'), date_i18n($timezone_format)); ?></span>
 <?php endif; ?>
@@ -212,7 +182,9 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 	?>
 	<br />
 	<?php
-	if ( function_exists('timezone_transitions_get') ) {
+	$allowed_zones = timezone_identifiers_list();
+
+	if ( in_array( $tzstring, $allowed_zones) ) {
 		$found = false;
 		$date_time_zone_selected = new DateTimeZone($tzstring);
 		$tz_offset = timezone_offset_get($date_time_zone_selected, date_create());
@@ -242,7 +214,6 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 <?php endif; ?>
 </td>
 
-<?php endif; ?>
 </tr>
 <tr>
 <th scope="row"><?php _e('Date Format') ?></th>
@@ -265,14 +236,14 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 			echo " checked='checked'";
 			$custom = false;
 		}
-		echo ' /> ' . date_i18n( $format ) . "</label><br />\n";
+		echo ' /> <span>' . date_i18n( $format ) . "</span></label><br />\n";
 	}
 
 	echo '	<label><input type="radio" name="date_format" id="date_format_custom_radio" value="\c\u\s\t\o\m"';
 	checked( $custom );
-	echo '/> ' . __('Custom:') . ' </label><input type="text" name="date_format_custom" value="' . esc_attr( get_option('date_format') ) . '" class="small-text" /> ' . date_i18n( get_option('date_format') ) . "\n";
+	echo '/> ' . __('Custom:') . ' </label><input type="text" name="date_format_custom" value="' . esc_attr( get_option('date_format') ) . '" class="small-text" /> <span class="example"> ' . date_i18n( get_option('date_format') ) . "</span> <img class='ajax-loading' src='" . esc_url( admin_url( 'images/wpspin_light.gif' ) ) . "' />\n";
 
-	echo "\t<p>" . __('<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Documentation on date formatting</a>. Click &#8220;Save Changes&#8221; to update sample output.') . "</p>\n";
+	echo "\t<p>" . __('<a href="http://codex.wordpress.org/Formatting_Date_and_Time">Documentation on date and time formatting</a>.') . "</p>\n";
 ?>
 	</fieldset>
 </td>
@@ -297,12 +268,13 @@ if ( empty($tzstring) ) { // Create a UTC+- zone if no timezone string exists
 			echo " checked='checked'";
 			$custom = false;
 		}
-		echo ' /> ' . date_i18n( $format ) . "</label><br />\n";
+		echo ' /> <span>' . date_i18n( $format ) . "</span></label><br />\n";
 	}
 
 	echo '	<label><input type="radio" name="time_format" id="time_format_custom_radio" value="\c\u\s\t\o\m"';
 	checked( $custom );
-	echo '/> ' . __('Custom:') . ' </label><input type="text" name="time_format_custom" value="' . esc_attr( get_option('time_format') ) . '" class="small-text" /> ' . date_i18n( get_option('time_format') ) . "\n";
+	echo '/> ' . __('Custom:') . ' </label><input type="text" name="time_format_custom" value="' . esc_attr( get_option('time_format') ) . '" class="small-text" /> <span class="example"> ' . date_i18n( get_option('time_format') ) . "</span> <img class='ajax-loading' src='" . esc_url( admin_url( 'images/wpspin_light.gif' ) ) . "' />\n";
+	;
 ?>
 	</fieldset>
 </td>
@@ -338,9 +310,7 @@ endfor;
 
 <?php do_settings_sections('general'); ?>
 
-<p class="submit">
-<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
-</p>
+<?php submit_button(); ?>
 </form>
 
 </div>

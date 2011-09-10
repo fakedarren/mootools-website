@@ -19,7 +19,7 @@ add_contextual_help($current_screen,
 	'<p>' . __('You can submit content in several different ways; this screen holds the settings for all of them. The top section controls the editor within these administration screens, while the rest control external publishing methods. For more information on any of these methods, use the documentation links below.') . '</p>' .
 	'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>' .
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Writing_SubPanel" target="_blank">Writing Settings Documentation</a>') . '</p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Writing_Screen" target="_blank">Documentation on Writing Settings</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -56,6 +56,23 @@ wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'default_category', 'o
 ?>
 </td>
 </tr>
+<?php
+if ( current_theme_supports( 'post-formats' ) ) :
+	$post_formats = get_theme_support( 'post-formats' );
+	if ( is_array( $post_formats[0] ) ) :
+?>
+<tr valign="top">
+<th scope="row"><label for="default_post_format"><?php _e('Default Post Format') ?></label></th>
+<td>
+	<select name="default_post_format" id="default_post_format">
+		<option value="0"><?php _e('Standard'); ?></option>
+<?php foreach ( $post_formats[0] as $format ): ?>
+		<option<?php selected( get_option('default_post_format'), $format ); ?> value="<?php echo esc_attr( $format ); ?>"><?php echo esc_html( get_post_format_string( $format ) ); ?></option>
+<?php endforeach; ?>
+	</select>
+</td>
+</tr>
+<?php endif; endif; ?>
 <tr valign="top">
 <th scope="row"><label for="default_link_category"><?php _e('Default Link Category') ?></label></th>
 <td>
@@ -72,7 +89,11 @@ wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'default_link_category
 <p><?php _e('Press This is a bookmarklet: a little app that runs in your browser and lets you grab bits of the web.');?></p>
 <p><?php _e('Use Press This to clip text, images and videos from any web page. Then edit and add more straight from Press This before you save or publish it in a post on your site.'); ?></p>
 <p><?php _e('Drag-and-drop the following link to your bookmarks bar or right click it and add it to your favorites for a posting shortcut.') ?></p>
-<p class="pressthis"><a href="<?php echo htmlspecialchars( get_shortcut_link() ); ?>" title="<?php echo esc_attr(__('Press This')) ?>"><?php _e('Press This') ?></a></p>
+<p class="pressthis"><a onclick="return false;" oncontextmenu="if(window.navigator.userAgent.indexOf('WebKit')!=-1)jQuery('.pressthis-code').show().find('textarea').focus().select();return false;" href="<?php echo htmlspecialchars( get_shortcut_link() ); ?>"><span><?php _e('Press This') ?></span></a></p>
+<div class="pressthis-code" style="display:none;">
+	<p class="description"><?php _e('If your bookmarks toolbar is hidden: copy the code below, open your Bookmarks manager, create new bookmark, type Press This into the name field and paste the code into the URL field.') ?></p>
+	<p><textarea rows="5" cols="120" readonly="readonly"><?php echo htmlspecialchars( get_shortcut_link() ); ?></textarea></p>
+</div>
 
 <?php if ( apply_filters( 'enable_post_by_email_configuration', true ) ) { ?>
 <h3><?php _e('Post via e-mail') ?></h3>
@@ -137,7 +158,7 @@ wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'default_email_categor
 
 <p><label for="ping_sites"><?php _e('When you publish a new post, WordPress automatically notifies the following site update services. For more about this, see <a href="http://codex.wordpress.org/Update_Services">Update Services</a> on the Codex. Separate multiple service <abbr title="Universal Resource Locator">URL</abbr>s with line breaks.') ?></label></p>
 
-<textarea name="ping_sites" id="ping_sites" class="large-text code" rows="3"><?php form_option('ping_sites'); ?></textarea>
+<textarea name="ping_sites" id="ping_sites" class="large-text code" rows="3"><?php echo esc_textarea( get_option('ping_sites') ); ?></textarea>
 
 <?php else : ?>
 
@@ -148,9 +169,7 @@ wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'default_email_categor
 
 <?php do_settings_sections('writing'); ?>
 
-<p class="submit">
-	<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
-</p>
+<?php submit_button(); ?>
 </form>
 </div>
 

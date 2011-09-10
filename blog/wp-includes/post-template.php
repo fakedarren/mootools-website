@@ -12,24 +12,22 @@
  * Display the ID of the current item in the WordPress Loop.
  *
  * @since 0.71
- * @uses $id
  */
 function the_ID() {
-	global $id;
-	echo $id;
+	echo get_the_ID();
 }
 
 /**
  * Retrieve the ID of the current item in the WordPress Loop.
  *
  * @since 2.1.0
- * @uses $id
+ * @uses $post
  *
- * @return unknown
+ * @return int
  */
 function get_the_ID() {
-	global $id;
-	return $id;
+	global $post;
+	return $post->ID;
 }
 
 /**
@@ -181,7 +179,7 @@ function the_content($more_link_text = null, $stripteaser = 0) {
  * @return string
  */
 function get_the_content($more_link_text = null, $stripteaser = 0) {
-	global $id, $post, $more, $page, $pages, $multipage, $preview;
+	global $post, $more, $page, $pages, $multipage, $preview;
 
 	if ( null === $more_link_text )
 		$more_link_text = __( '(more...)' );
@@ -216,18 +214,30 @@ function get_the_content($more_link_text = null, $stripteaser = 0) {
 	$output .= $teaser;
 	if ( count($content) > 1 ) {
 		if ( $more ) {
-			$output .= '<span id="more-' . $id . '"></span>' . $content[1];
+			$output .= '<span id="more-' . $post->ID . '"></span>' . $content[1];
 		} else {
 			if ( ! empty($more_link_text) )
-				$output .= apply_filters( 'the_content_more_link', ' <a href="' . get_permalink() . "#more-$id\" class=\"more-link\">$more_link_text</a>", $more_link_text );
+				$output .= apply_filters( 'the_content_more_link', ' <a href="' . get_permalink() . "#more-{$post->ID}\" class=\"more-link\">$more_link_text</a>", $more_link_text );
 			$output = force_balance_tags($output);
 		}
 
 	}
 	if ( $preview ) // preview fix for javascript bug with foreign languages
-		$output =	preg_replace_callback('/\%u([0-9A-F]{4})/', create_function('$match', 'return "&#" . base_convert($match[1], 16, 10) . ";";'), $output);
+		$output =	preg_replace_callback('/\%u([0-9A-F]{4})/', '_convert_urlencoded_to_entities', $output);
 
 	return $output;
+}
+
+/**
+ * Preview fix for javascript bug with foreign languages
+ *
+ * @since 3.1.0
+ * @access private
+ * @param array $match Match array from preg_replace_callback
+ * @returns string
+ */
+function _convert_urlencoded_to_entities( $match ) {
+	return '&#' . base_convert( $match[1], 16, 10 ) . ';';
 }
 
 /**
@@ -316,26 +326,45 @@ function get_post_class( $class = '', $post_id = null ) {
 	$classes[] = 'post-' . $post->ID;
 	$classes[] = $post->post_type;
 	$classes[] = 'type-' . $post->post_type;
+	$classes[] = 'status-' . $post->post_status;
+
+	// Post Format
+	$post_format = get_post_format( $post->ID );
+
+	if ( post_type_supports( $post->post_type, 'post-formats' ) ) {
+		if ( $post_format && !is_wp_error($post_format) )
+			$classes[] = 'format-' . sanitize_html_class( $post_format );
+		else
+			$classes[] = 'format-standard';
+	}
+
+	// post requires password
+	if ( post_password_required($post->ID) )
+		$classes[] = 'post-password-required';
 
 	// sticky for Sticky Posts
 	if ( is_sticky($post->ID) && is_home() && !is_paged() )
 		$classes[] = 'sticky';
 
-	// hentry for hAtom compliace
+	// hentry for hAtom compliance
 	$classes[] = 'hentry';
 
 	// Categories
-	foreach ( (array) get_the_category($post->ID) as $cat ) {
-		if ( empty($cat->slug ) )
-			continue;
-		$classes[] = 'category-' . sanitize_html_class($cat->slug, $cat->cat_ID);
+	if ( is_object_in_taxonomy( $post->post_type, 'category' ) ) {
+		foreach ( (array) get_the_category($post->ID) as $cat ) {
+			if ( empty($cat->slug ) )
+				continue;
+			$classes[] = 'category-' . sanitize_html_class($cat->slug, $cat->term_id);
+		}
 	}
 
 	// Tags
-	foreach ( (array) get_the_tags($post->ID) as $tag ) {
-		if ( empty($tag->slug ) )
-			continue;
-		$classes[] = 'tag-' . sanitize_html_class($tag->slug, $tag->term_id);
+	if ( is_object_in_taxonomy( $post->post_type, 'post_tag' ) ) {
+		foreach ( (array) get_the_tags($post->ID) as $tag ) {
+			if ( empty($tag->slug ) )
+				continue;
+			$classes[] = 'tag-' . sanitize_html_class($tag->slug, $tag->term_id);
+		}
 	}
 
 	if ( !empty($class) ) {
@@ -402,6 +431,14 @@ function get_body_class( $class = '' ) {
 		$classes[] = 'single-' . sanitize_html_class($post->post_type, $post_id);
 		$classes[] = 'postid-' . $post_id;
 
+		// Post Format
+		$post_format = get_post_format( $post->ID );
+
+		if ( $post_format && !is_wp_error($post_format) )
+			$classes[] = 'single-format-' . sanitize_html_class( $post_format );
+		else
+			$classes[] = 'single-format-standard';
+
 		if ( is_attachment() ) {
 			$mime_type = get_post_mime_type($post_id);
 			$mime_prefix = array( 'application/', 'image/', 'text/', 'audio/', 'video/', 'music/' );
@@ -409,18 +446,29 @@ function get_body_class( $class = '' ) {
 			$classes[] = 'attachment-' . str_replace( $mime_prefix, '', $mime_type );
 		}
 	} elseif ( is_archive() ) {
-		if ( is_author() ) {
+		if ( is_post_type_archive() ) {
+			$classes[] = 'post-type-archive';
+			$classes[] = 'post-type-archive-' . sanitize_html_class( get_query_var( 'post_type' ) );
+		} else if ( is_author() ) {
 			$author = $wp_query->get_queried_object();
 			$classes[] = 'author';
 			$classes[] = 'author-' . sanitize_html_class( $author->user_nicename , $author->ID );
+			$classes[] = 'author-' . $author->ID;
 		} elseif ( is_category() ) {
 			$cat = $wp_query->get_queried_object();
 			$classes[] = 'category';
-			$classes[] = 'category-' . sanitize_html_class( $cat->slug, $cat->cat_ID );
+			$classes[] = 'category-' . sanitize_html_class( $cat->slug, $cat->term_id );
+			$classes[] = 'category-' . $cat->term_id;
 		} elseif ( is_tag() ) {
 			$tags = $wp_query->get_queried_object();
 			$classes[] = 'tag';
 			$classes[] = 'tag-' . sanitize_html_class( $tags->slug, $tags->term_id );
+			$classes[] = 'tag-' . $tags->term_id;
+		} elseif ( is_tax() ) {
+			$term = $wp_query->get_queried_object();
+			$classes[] = 'tax-' . sanitize_html_class( $term->taxonomy );
+			$classes[] = 'term-' . sanitize_html_class( $term->slug, $term->term_id );
+			$classes[] = 'term-' . $term->term_id;
 		}
 	} elseif ( is_page() ) {
 		$classes[] = 'page';
@@ -441,6 +489,8 @@ function get_body_class( $class = '' ) {
 		if ( is_page_template() ) {
 			$classes[] = 'page-template';
 			$classes[] = 'page-template-' . sanitize_html_class( str_replace( '.', '-', get_post_meta( $page_id, '_wp_page_template', true ) ), '' );
+		} else {
+			$classes[] = 'page-template-default';
 		}
 	} elseif ( is_search() ) {
 		if ( !empty( $wp_query->posts ) )
@@ -451,6 +501,9 @@ function get_body_class( $class = '' ) {
 
 	if ( is_user_logged_in() )
 		$classes[] = 'logged-in';
+
+	if ( is_admin_bar_showing() )
+		$classes[] = 'admin-bar';
 
 	$page = $wp_query->get( 'page' );
 
@@ -474,12 +527,17 @@ function get_body_class( $class = '' ) {
 			$classes[] = 'author-paged-' . $page;
 		elseif ( is_search() )
 			$classes[] = 'search-paged-' . $page;
+		elseif ( is_post_type_archive() )
+			$classes[] = 'post-type-paged-' . $page;
 	}
 
-	if ( !empty( $class ) ) {
+	if ( ! empty( $class ) ) {
 		if ( !is_array( $class ) )
 			$class = preg_split( '#\s+#', $class );
 		$classes = array_merge( $classes, $class );
+	} else {
+		// Ensure that we always coerce class to being an array.
+		$class = array();
 	}
 
 	$classes = array_map( 'esc_attr', $classes );
@@ -577,7 +635,7 @@ function wp_link_pages($args = '') {
 	$r = apply_filters( 'wp_link_pages_args', $r );
 	extract( $r, EXTR_SKIP );
 
-	global $post, $page, $numpages, $multipage, $more, $pagenow;
+	global $page, $numpages, $multipage, $more, $pagenow;
 
 	$output = '';
 	if ( $multipage ) {
@@ -587,21 +645,9 @@ function wp_link_pages($args = '') {
 				$j = str_replace('%',$i,$pagelink);
 				$output .= ' ';
 				if ( ($i != $page) || ((!$more) && ($page==1)) ) {
-					if ( 1 == $i ) {
-						$output .= '<a href="' . get_permalink() . '">';
-					} else {
-						if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
-							$output .= '<a href="' . add_query_arg('page', $i, get_permalink()) . '">';
-						elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
-							$output .= '<a href="' . trailingslashit(get_permalink()) . user_trailingslashit('page/' . $i, 'single_paged'). '">';
-						else
-							$output .= '<a href="' . trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged') . '">';
-					}
-
+					$output .= _wp_link_page($i);
 				}
-				$output .= $link_before;
-				$output .= $j;
-				$output .= $link_after;
+				$output .= $link_before . $j . $link_after;
 				if ( ($i != $page) || ((!$more) && ($page==1)) )
 					$output .= '</a>';
 			}
@@ -611,30 +657,12 @@ function wp_link_pages($args = '') {
 				$output .= $before;
 				$i = $page - 1;
 				if ( $i && $more ) {
-					if ( 1 == $i ) {
-						$output .= '<a href="' . get_permalink() . '">';
-					} else {
-						if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
-							$output .= '<a href="' . add_query_arg('page', $i, get_permalink()) . '">';
-						elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
-							$output .= '<a href="' . trailingslashit(get_permalink()) . user_trailingslashit('page/' . $i, 'single_paged'). '">';
-						else
-							$output .= '<a href="' . trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged') . '">';
-					}
+					$output .= _wp_link_page($i);
 					$output .= $link_before. $previouspagelink . $link_after . '</a>';
 				}
 				$i = $page + 1;
 				if ( $i <= $numpages && $more ) {
-					if ( 1 == $i ) {
-						$output .= '<a href="' . get_permalink() . '">';
-					} else {
-						if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
-							$output .= '<a href="' . add_query_arg('page', $i, get_permalink()) . '">';
-						elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
-							$output .= '<a href="' . trailingslashit(get_permalink()) . user_trailingslashit('page/' . $i, 'single_paged'). '">';
-						else
-							$output .= '<a href="' . trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged') . '">';
-					}
+					$output .= _wp_link_page($i);
 					$output .= $link_before. $nextpagelink . $link_after . '</a>';
 				}
 				$output .= $after;
@@ -648,6 +676,31 @@ function wp_link_pages($args = '') {
 	return $output;
 }
 
+/**
+ * Helper function for wp_link_pages().
+ *
+ * @since 3.1.0
+ * @access private
+ *
+ * @param int $i Page number.
+ * @return string Link.
+ */
+function _wp_link_page( $i ) {
+	global $post, $wp_rewrite;
+
+	if ( 1 == $i ) {
+		$url = get_permalink();
+	} else {
+		if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
+			$url = add_query_arg( 'page', $i, get_permalink() );
+		elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
+			$url = trailingslashit(get_permalink()) . user_trailingslashit("$wp_rewrite->pagination_base/" . $i, 'single_paged');
+		else
+			$url = trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged');
+	}
+
+	return '<a href="' . esc_url( $url ) . '">';
+}
 
 //
 // Post-meta: Custom per-post fields.
@@ -684,7 +737,7 @@ function the_meta() {
 		echo "<ul class='post-meta'>\n";
 		foreach ( (array) $keys as $key ) {
 			$keyt = trim($key);
-			if ( '_' == $keyt{0} )
+			if ( '_' == $keyt[0] )
 				continue;
 			$values = array_map('trim', get_post_custom_values($key));
 			$value = implode($values,', ');
@@ -907,6 +960,157 @@ function walk_page_dropdown_tree() {
 	return call_user_func_array(array(&$walker, 'walk'), $args);
 }
 
+/**
+ * Create HTML list of pages.
+ *
+ * @package WordPress
+ * @since 2.1.0
+ * @uses Walker
+ */
+class Walker_Page extends Walker {
+	/**
+	 * @see Walker::$tree_type
+	 * @since 2.1.0
+	 * @var string
+	 */
+	var $tree_type = 'page';
+
+	/**
+	 * @see Walker::$db_fields
+	 * @since 2.1.0
+	 * @todo Decouple this.
+	 * @var array
+	 */
+	var $db_fields = array ('parent' => 'post_parent', 'id' => 'ID');
+
+	/**
+	 * @see Walker::start_lvl()
+	 * @since 2.1.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param int $depth Depth of page. Used for padding.
+	 */
+	function start_lvl(&$output, $depth) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "\n$indent<ul class='children'>\n";
+	}
+
+	/**
+	 * @see Walker::end_lvl()
+	 * @since 2.1.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param int $depth Depth of page. Used for padding.
+	 */
+	function end_lvl(&$output, $depth) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "$indent</ul>\n";
+	}
+
+	/**
+	 * @see Walker::start_el()
+	 * @since 2.1.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Page data object.
+	 * @param int $depth Depth of page. Used for padding.
+	 * @param int $current_page Page ID.
+	 * @param array $args
+	 */
+	function start_el(&$output, $page, $depth, $args, $current_page) {
+		if ( $depth )
+			$indent = str_repeat("\t", $depth);
+		else
+			$indent = '';
+
+		extract($args, EXTR_SKIP);
+		$css_class = array('page_item', 'page-item-'.$page->ID);
+		if ( !empty($current_page) ) {
+			$_current_page = get_page( $current_page );
+			_get_post_ancestors($_current_page);
+			if ( isset($_current_page->ancestors) && in_array($page->ID, (array) $_current_page->ancestors) )
+				$css_class[] = 'current_page_ancestor';
+			if ( $page->ID == $current_page )
+				$css_class[] = 'current_page_item';
+			elseif ( $_current_page && $page->ID == $_current_page->post_parent )
+				$css_class[] = 'current_page_parent';
+		} elseif ( $page->ID == get_option('page_for_posts') ) {
+			$css_class[] = 'current_page_parent';
+		}
+
+		$css_class = implode(' ', apply_filters('page_css_class', $css_class, $page));
+
+		$output .= $indent . '<li class="' . $css_class . '"><a href="' . get_permalink($page->ID) . '" title="' . esc_attr( wp_strip_all_tags( apply_filters( 'the_title', $page->post_title, $page->ID ) ) ) . '">' . $link_before . apply_filters( 'the_title', $page->post_title, $page->ID ) . $link_after . '</a>';
+
+		if ( !empty($show_date) ) {
+			if ( 'modified' == $show_date )
+				$time = $page->post_modified;
+			else
+				$time = $page->post_date;
+
+			$output .= " " . mysql2date($date_format, $time);
+		}
+	}
+
+	/**
+	 * @see Walker::end_el()
+	 * @since 2.1.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Page data object. Not used.
+	 * @param int $depth Depth of page. Not Used.
+	 */
+	function end_el(&$output, $page, $depth) {
+		$output .= "</li>\n";
+	}
+
+}
+
+/**
+ * Create HTML dropdown list of pages.
+ *
+ * @package WordPress
+ * @since 2.1.0
+ * @uses Walker
+ */
+class Walker_PageDropdown extends Walker {
+	/**
+	 * @see Walker::$tree_type
+	 * @since 2.1.0
+	 * @var string
+	 */
+	var $tree_type = 'page';
+
+	/**
+	 * @see Walker::$db_fields
+	 * @since 2.1.0
+	 * @todo Decouple this
+	 * @var array
+	 */
+	var $db_fields = array ('parent' => 'post_parent', 'id' => 'ID');
+
+	/**
+	 * @see Walker::start_el()
+	 * @since 2.1.0
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param object $page Page data object.
+	 * @param int $depth Depth of page in reference to parent pages. Used for padding.
+	 * @param array $args Uses 'selected' argument for selected page to set selected HTML attribute for option element.
+	 */
+	function start_el(&$output, $page, $depth, $args) {
+		$pad = str_repeat('&nbsp;', $depth * 3);
+
+		$output .= "\t<option class=\"level-$depth\" value=\"$page->ID\"";
+		if ( $page->ID == $args['selected'] )
+			$output .= ' selected="selected"';
+		$output .= '>';
+		$title = apply_filters( 'list_pages', $page->post_title );
+		$output .= $pad . esc_html( $title );
+		$output .= "</option>\n";
+	}
+}
+
 //
 // Attachments
 //
@@ -1043,7 +1247,7 @@ function is_page_template($template = '') {
 
 	// We have no argument passed so just see if a page_template has been specified
 	if ( empty( $template ) ) {
-		if (!empty( $page_template ) ) {
+		if ( !empty( $page_template ) and ( 'default' != $page_template ) ) {
 			return true;
 		}
 	} elseif ( $template == $page_template) {
@@ -1149,7 +1353,7 @@ function wp_list_post_revisions( $post_id = 0, $args = null ) {
 	if ( $parent )
 		array_unshift( $revisions, $post );
 
-	$rows = '';
+	$rows = $right_checked = '';
 	$class = false;
 	$can_edit_post = current_user_can( 'edit_post', $post->ID );
 	foreach ( $revisions as $revision ) {

@@ -16,10 +16,14 @@ if ( empty($tag_ID) ) { ?>
 	return;
 }
 
+// Back compat hooks
 if ( 'category' == $taxonomy )
 	do_action('edit_category_form_pre', $tag );
+elseif ( 'link_category' == $taxonomy )
+	do_action('edit_link_category_form_pre', $tag );
 else
 	do_action('edit_tag_form_pre', $tag);
+
 do_action($taxonomy . '_pre_edit_form', $tag, $taxonomy);  ?>
 
 <div class="wrap">
@@ -48,7 +52,7 @@ do_action($taxonomy . '_pre_edit_form', $tag, $taxonomy);  ?>
 		<tr class="form-field">
 			<th scope="row" valign="top"><label for="parent"><?php _ex('Parent', 'Taxonomy Parent'); ?></label></th>
 			<td>
-				<?php wp_dropdown_categories(array('hide_empty' => 0, 'hide_if_empty' => false, 'name' => 'parent', 'orderby' => 'name', 'taxonomy' => $taxonomy, 'selected' => $tag->parent, 'exclude' => $tag->term_id, 'hierarchical' => true, 'show_option_none' => __('None'))); ?><br />
+				<?php wp_dropdown_categories(array('hide_empty' => 0, 'hide_if_empty' => false, 'name' => 'parent', 'orderby' => 'name', 'taxonomy' => $taxonomy, 'selected' => $tag->parent, 'exclude_tree' => $tag->term_id, 'hierarchical' => true, 'show_option_none' => __('None'))); ?><br />
 				<?php if ( 'category' == $taxonomy ) : ?>
 				<span class="description"><?php _e('Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have children categories for Bebop and Big Band. Totally optional.'); ?></span>
 				<?php endif; ?>
@@ -57,24 +61,33 @@ do_action($taxonomy . '_pre_edit_form', $tag, $taxonomy);  ?>
 <?php endif; // is_taxonomy_hierarchical() ?>
 		<tr class="form-field">
 			<th scope="row" valign="top"><label for="description"><?php _ex('Description', 'Taxonomy Description'); ?></label></th>
-			<td><textarea name="description" id="description" rows="5" cols="50" style="width: 97%;"><?php echo esc_html($tag->description); ?></textarea><br />
+			<td><textarea name="description" id="description" rows="5" cols="50" style="width: 97%;"><?php echo $tag->description; // textarea_escaped ?></textarea><br />
 			<span class="description"><?php _e('The description is not prominent by default, however some themes may show it.'); ?></span></td>
 		</tr>
 		<?php
+		// Back compat hooks
 		if ( 'category' == $taxonomy )
 			do_action('edit_category_form_fields', $tag);
+		elseif ( 'link_category' == $taxonomy )
+			do_action('edit_link_category_form_fields', $tag);
 		else
 			do_action('edit_tag_form_fields', $tag);
+
 		do_action($taxonomy . '_edit_form_fields', $tag, $taxonomy);
 		?>
 	</table>
 <?php
+// Back compat hooks
 if ( 'category' == $taxonomy )
 	do_action('edit_category_form', $tag);
+elseif ( 'link_category' == $taxonomy )
+	do_action('edit_link_category_form', $tag);
 else
 	do_action('edit_tag_form', $tag);
+
 do_action($taxonomy . '_edit_form', $tag, $taxonomy);
+
+submit_button( __('Update') );
 ?>
-<p class="submit"><input type="submit" class="button-primary" name="submit" value="<?php echo esc_attr( __( 'Update' ) ); ?>" /></p>
 </form>
 </div>

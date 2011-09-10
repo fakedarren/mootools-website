@@ -10,7 +10,7 @@
  */
 
 /** Load WordPress Administration Bootstrap */
-require_once( 'admin.php' );
+require_once( './admin.php' );
 
 // Load all the nav menu interface functions
 require_once( ABSPATH . 'wp-admin/includes/nav-menu.php' );
@@ -70,7 +70,7 @@ switch ( $action ) {
 				$ordered_menu_items = wp_get_nav_menu_items( $menu_id );
 				$menu_item_data = (array) wp_setup_nav_menu_item( get_post( $menu_item_id ) );
 
-				// setup the data we need in one pass through the array of menu items
+				// set up the data we need in one pass through the array of menu items
 				$dbids_to_orders = array();
 				$orders_to_dbids = array();
 				foreach( (array) $ordered_menu_items as $ordered_menu_item_object ) {
@@ -144,7 +144,7 @@ switch ( $action ) {
 				$ordered_menu_items = wp_get_nav_menu_items( $menu_id );
 				$menu_item_data = (array) wp_setup_nav_menu_item( get_post( $menu_item_id ) );
 
-				// setup the data we need in one pass through the array of menu items
+				// set up the data we need in one pass through the array of menu items
 				$dbids_to_orders = array();
 				$orders_to_dbids = array();
 				foreach( (array) $ordered_menu_items as $ordered_menu_item_object ) {
@@ -449,17 +449,17 @@ wp_initial_nav_menu_meta_boxes();
 if ( ! current_theme_supports( 'menus' ) && ! wp_get_nav_menus() )
 	$messages[] = '<div id="message" class="updated"><p>' . __('The current theme does not natively support menus, but you can use the &#8220;Custom Menu&#8221; widget to add any menus you create here to the theme&#8217;s sidebar.') . '</p></div>';
 
-$help =  '<p>' . __('This feature is new in version 3.0; to use a custom menu in place of your theme&#8217;s default menus, support for this feature must be registered in the theme&#8217;s functions.php file. If your theme does not support the custom menus feature yet (the new default theme, Twenty Ten, does), you can learn about adding support yourself by following the below link.') . '</p>';
+$help =  '<p>' . __('This feature allows you to use a custom menu in place of your theme&#8217;s default menus. If your theme does not support the custom menus feature yet (the new and old default themes, Twenty Eleven and Twenty Ten, do), you can learn about adding this support by following the Documentation link in this tab. You can still use the &#8220;Custom Menu&#8221; widget to add menus to a sidebar.') . '</p>';
 $help .= '<p>' . __('You can create custom menus for your site. These menus may contain links to pages, categories, custom links or other content types (use the Screen Options tab to decide which ones to show on the screen). You can specify a different navigation label for a menu item as well as other attributes. You can create multiple menus. If your theme includes more than one menu, you can choose which custom menu to associate with each. You can also use custom menus in conjunction with the Custom Menus widget.') . '</p>';
-$help .= '<p>' . __('To create a new custom menu, click on the + tab, give the menu a name, and click Create Menu. Next, add menu items from the appropriate boxes. You&#8217;ll be able to edit the information for each menu item, and can drag and drop to put them in order. You can also drag a menu item a little to the right to make it a submenu, to create menus with hierarchy. You&#8217;ll see when the position of the drop target shifts over to create the nested placement. Don&#8217;t forget to click Save when you&#8217;re finished.') . '</p>';
+$help .= '<p>' . __('To create a new custom menu, click on the + tab, give the menu a name, and click Create Menu. Next, add menu items from the appropriate boxes. You&#8217;ll be able to edit the information for each menu item, and can drag and drop to put them in order. You can also drag a menu item a little to the right to make it a submenu, to create menus with hierarchy. Drop the item into its new nested placement when the dotted rectangle target shifts over, also a little to the right. Don&#8217;t forget to click Save when you&#8217;re finished.') . '</p>';
 $help .= '<p><strong>' . __('For more information:') . '</strong></p>';
-$help .= '<p>' . __('<a href="http://codex.wordpress.org/Appearance_Menus_SubPanel" target="_blank">Menus Documentation</a>') . '</p>';
+$help .= '<p>' . __('<a href="http://codex.wordpress.org/Appearance_Menus_Screen" target="_blank">Documentation on Menus</a>') . '</p>';
 $help .= '<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>';
 
 add_contextual_help($current_screen, $help);
 
 // Get the admin header
-require_once( 'admin-header.php' );
+require_once( './admin-header.php' );
 ?>
 <div class="wrap">
 	<?php screen_icon(); ?>
@@ -494,7 +494,7 @@ require_once( 'admin-header.php' );
 						<option value="0"><?php esc_html_e('Add New Menu'); ?></option>
 					</select>
 					<input type="hidden" name="action" value="edit" />
-					<input class="button-secondary" name="select_menu" type="submit" value="<?php esc_attr_e('Select'); ?>" />
+					<?php submit_button( __( 'Select' ), 'secondary', 'select_menu', false ); ?>
 				</form>
 			</div>
 			<div class="nav-tabs-wrapper">
@@ -556,7 +556,7 @@ require_once( 'admin-header.php' );
 								<?php endif; ?>
 								<br class="clear" />
 								<div class="publishing-action">
-									<input class="button-primary menu-save" name="save_menu" type="submit" value="<?php empty($nav_menu_selected_id) ? esc_attr_e('Create Menu') : esc_attr_e('Save Menu'); ?>" />
+									<?php submit_button( empty( $nav_menu_selected_id ) ? __( 'Create Menu' ) : __( 'Save Menu' ), 'button-primary menu-save', 'save_menu', false, array( 'id' => 'save_menu_header' ) ); ?>
 								</div><!-- END .publishing-action -->
 
 								<?php if ( ! empty( $nav_menu_selected_id ) ) : ?>
@@ -590,6 +590,16 @@ require_once( 'admin-header.php' );
 							?>
 						</div><!-- /#post-body-content -->
 					</div><!-- /#post-body -->
+					<div id="nav-menu-footer">
+						<div class="major-publishing-actions">
+						<div class="publishing-action">
+							<?php
+							if ( ! empty( $nav_menu_selected_id ) )
+								submit_button( __( 'Save Menu' ), 'button-primary menu-save', 'save_menu', false, array( 'id' => 'save_menu_footer' ) );
+							?>
+						</div>
+						</div>
+					</div><!-- /#nav-menu-footer -->
 				</form><!-- /#update-nav-menu -->
 			</div><!-- /.menu-edit -->
 		</div><!-- /#menu-management -->
@@ -598,4 +608,4 @@ require_once( 'admin-header.php' );
 </div><!-- /.wrap-->
 
 
-<?php include( 'admin-footer.php' ); ?>
+<?php include( './admin-footer.php' ); ?>

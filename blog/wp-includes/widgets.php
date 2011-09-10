@@ -74,7 +74,7 @@ class WP_Widget {
 	 * PHP4 constructor
 	 */
 	function WP_Widget( $id_base = false, $name, $widget_options = array(), $control_options = array() ) {
-		$this->__construct( $id_base, $name, $widget_options, $control_options );
+		WP_Widget::__construct( $id_base, $name, $widget_options, $control_options );
 	}
 
 	/**
@@ -596,7 +596,7 @@ function unregister_sidebar( $name ) {
  * @param int|string $id Widget ID.
  * @param string $name Widget display title.
  * @param callback $output_callback Run when widget is called.
- * @param array|string Optional. $options Widget Options.
+ * @param array|string $options Optional. Widget Options.
  * @param mixed $params,... Widget parameters to add to widget.
  * @return null Will return if $output_callback is empty after removing widget.
  */
@@ -854,6 +854,8 @@ function dynamic_sidebar($index = 1) {
 	}
 
 	$sidebars_widgets = wp_get_sidebars_widgets();
+	if ( empty( $sidebars_widgets ) )
+		return false;
 
 	if ( empty($wp_registered_sidebars[$index]) || !array_key_exists($index, $sidebars_widgets) || !is_array($sidebars_widgets[$index]) || empty($sidebars_widgets[$index]) )
 		return false;
@@ -897,7 +899,7 @@ function dynamic_sidebar($index = 1) {
 }
 
 /**
- * Whether widget is displayied on the front-end.
+ * Whether widget is displayed on the front-end.
  *
  * Either $callback or $id_base can be used
  * $id_base is the first argument when extending WP_Widget class
@@ -911,7 +913,7 @@ function dynamic_sidebar($index = 1) {
  *
  * @since 2.2.0
  *
- * @param callback Optional, Widget callback to check.
+ * @param string $callback Optional, Widget callback to check.
  * @param int $widget_id Optional, but needed for checking. Widget ID.
  * @param string $id_base Optional, the base ID of a widget created by extending WP_Widget.
  * @param bool $skip_inactive Optional, whether to check in 'wp_inactive_widgets'.
@@ -965,7 +967,7 @@ function is_dynamic_sidebar() {
  *
  * @since 2.8
  *
- * @param mixed $index, sidebar name, id or number to check.
+ * @param mixed $index Sidebar name, id or number to check.
  * @return bool true if the sidebar is in use, false otherwise.
  */
 function is_active_sidebar( $index ) {
@@ -988,7 +990,7 @@ function is_active_sidebar( $index ) {
  * @since 2.2.0
  * @access private
  *
- * @param bool $deprecated. Not used.
+ * @param bool $deprecated Not used (deprecated).
  * @return array Upgraded list of widgets to version 3 array format when called from the admin.
  */
 function wp_get_sidebars_widgets($deprecated = true) {

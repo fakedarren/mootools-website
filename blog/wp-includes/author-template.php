@@ -102,6 +102,8 @@ function get_the_author_meta($field = '', $user_id = false) {
 	else
 		$authordata = get_userdata( $user_id );
 
+	// Keys used as object vars cannot have dashes.
+	$field = str_replace('-', '', $field);
 	$field = strtolower($field);
 	$user_field = "user_$field";
 
@@ -201,8 +203,10 @@ function the_author_posts_link($deprecated = '') {
 		_deprecated_argument( __FUNCTION__, '2.1' );
 
 	global $authordata;
+	if ( !is_object( $authordata ) )
+		return false;
 	$link = sprintf(
-		'<a href="%1$s" title="%2$s">%3$s</a>',
+		'<a href="%1$s" title="%2$s" rel="author">%3$s</a>',
 		get_author_posts_url( $authordata->ID, $authordata->user_nicename ),
 		esc_attr( sprintf( __( 'Posts by %s' ), get_the_author() ) ),
 		get_the_author()
@@ -211,7 +215,7 @@ function the_author_posts_link($deprecated = '') {
 }
 
 /**
- * Retrieve the URL to the author page of the author of the current post.
+ * Retrieve the URL to the author page for the user with the ID provided.
  *
  * @since 2.1.0
  * @uses $wp_rewrite WP_Rewrite
@@ -223,7 +227,7 @@ function get_author_posts_url($author_id, $author_nicename = '') {
 	$link = $wp_rewrite->get_author_permastruct();
 
 	if ( empty($link) ) {
-		$file = home_url() . '/';
+		$file = home_url( '/' );
 		$link = $file . '?author=' . $auth_ID;
 	} else {
 		if ( '' == $author_nicename ) {
@@ -232,7 +236,7 @@ function get_author_posts_url($author_id, $author_nicename = '') {
 				$author_nicename = $user->user_nicename;
 		}
 		$link = str_replace('%author%', $author_nicename, $link);
-		$link = home_url() . trailingslashit($link);
+		$link = home_url( user_trailingslashit( $link ) );
 	}
 
 	$link = apply_filters('author_link', $link, $author_id, $author_nicename);
@@ -257,7 +261,7 @@ function get_author_posts_url($author_id, $author_nicename = '') {
  * echoing.</li>
  * <li>style (string) ('list'): Whether to display list of authors in list form
  * or as a string.</li>
- * <li>html (bool) (true): Whether to list the items in html for or plaintext.
+ * <li>html (bool) (true): Whether to list the items in html form or plaintext.
  * </li>
  * </ul>
  *
@@ -270,102 +274,128 @@ function wp_list_authors($args = '') {
 	global $wpdb;
 
 	$defaults = array(
+		'orderby' => 'name', 'order' => 'ASC', 'number' => '',
 		'optioncount' => false, 'exclude_admin' => true,
 		'show_fullname' => false, 'hide_empty' => true,
 		'feed' => '', 'feed_image' => '', 'feed_type' => '', 'echo' => true,
 		'style' => 'list', 'html' => true
 	);
 
-	$r = wp_parse_args( $args, $defaults );
-	extract($r, EXTR_SKIP);
+	$args = wp_parse_args( $args, $defaults );
+	extract( $args, EXTR_SKIP );
+
 	$return = '';
 
-	/** @todo Move select to get_authors(). */
-	$users = get_users_of_blog();
-	$author_ids = array();
-	foreach ( (array) $users as $user )
-		$author_ids[] = $user->user_id;
-	if ( count($author_ids) > 0  ) {
-		$author_ids = implode(',', $author_ids );
-		$authors = $wpdb->get_results( "SELECT ID, user_nicename from $wpdb->users WHERE ID IN($author_ids) " . ($exclude_admin ? "AND user_login <> 'admin' " : '') . "ORDER BY display_name" );
-	} else {
-		$authors = array();
-	}
+	$query_args = wp_array_slice_assoc( $args, array( 'orderby', 'order', 'number' ) );
+	$query_args['fields'] = 'ids';
+	$authors = get_users( $query_args );
 
 	$author_count = array();
 	foreach ( (array) $wpdb->get_results("SELECT DISTINCT post_author, COUNT(ID) AS count FROM $wpdb->posts WHERE post_type = 'post' AND " . get_private_posts_cap_sql( 'post' ) . " GROUP BY post_author") as $row )
 		$author_count[$row->post_author] = $row->count;
 
-	foreach ( (array) $authors as $author ) {
+	foreach ( $authors as $author_id ) {
+		$author = get_userdata( $author_id );
+
+		if ( $exclude_admin && 'admin' == $author->display_name )
+			continue;
+
+		$posts = isset( $author_count[$author->ID] ) ? $author_count[$author->ID] : 0;
+
+		if ( !$posts && $hide_empty )
+			continue;
 
 		$link = '';
 
-		$author = get_userdata( $author->ID );
-		$posts = (isset($author_count[$author->ID])) ? $author_count[$author->ID] : 0;
-		$name = $author->display_name;
-
-		if ( $show_fullname && ($author->first_name != '' && $author->last_name != '') )
+		if ( $show_fullname && $author->first_name && $author->last_name )
 			$name = "$author->first_name $author->last_name";
+		else
+			$name = $author->display_name;
 
-		if( !$html ) {
-			if ( $posts == 0 ) {
-				if ( ! $hide_empty )
-					$return .= $name . ', ';
-			} else
-				$return .= $name . ', ';
+		if ( !$html ) {
+			$return .= $name . ', ';
 
-			// No need to go further to process HTML.
-			continue;
+			continue; // No need to go further to process HTML.
 		}
 
-		if ( !($posts == 0 && $hide_empty) && 'list' == $style )
+		if ( 'list' == $style ) {
 			$return .= '<li>';
-		if ( $posts == 0 ) {
-			if ( ! $hide_empty )
-				$link = $name;
-		} else {
-			$link = '<a href="' . get_author_posts_url($author->ID, $author->user_nicename) . '" title="' . esc_attr( sprintf(__("Posts by %s"), $author->display_name) ) . '">' . $name . '</a>';
+		}
 
-			if ( (! empty($feed_image)) || (! empty($feed)) ) {
-				$link .= ' ';
-				if (empty($feed_image))
-					$link .= '(';
-				$link .= '<a href="' . get_author_feed_link($author->ID) . '"';
+		$link = '<a href="' . get_author_posts_url( $author->ID, $author->user_nicename ) . '" title="' . esc_attr( sprintf(__("Posts by %s"), $author->display_name) ) . '">' . $name . '</a>';
 
-				if ( !empty($feed) ) {
-					$title = ' title="' . esc_attr($feed) . '"';
-					$alt = ' alt="' . esc_attr($feed) . '"';
-					$name = $feed;
-					$link .= $title;
-				}
-
-				$link .= '>';
-
-				if ( !empty($feed_image) )
-					$link .= "<img src=\"" . esc_url($feed_image) . "\" style=\"border: none;\"$alt$title" . ' />';
-				else
-					$link .= $name;
-
-				$link .= '</a>';
-
-				if ( empty($feed_image) )
-					$link .= ')';
+		if ( !empty( $feed_image ) || !empty( $feed ) ) {
+			$link .= ' ';
+			if ( empty( $feed_image ) ) {
+				$link .= '(';
 			}
 
-			if ( $optioncount )
-				$link .= ' ('. $posts . ')';
+			$link .= '<a href="' . get_author_feed_link( $author->ID ) . '"';
 
+			$alt = $title = '';
+			if ( !empty( $feed ) ) {
+				$title = ' title="' . esc_attr( $feed ) . '"';
+				$alt = ' alt="' . esc_attr( $feed ) . '"';
+				$name = $feed;
+				$link .= $title;
+			}
+
+			$link .= '>';
+
+			if ( !empty( $feed_image ) )
+				$link .= '<img src="' . esc_url( $feed_image ) . '" style="border: none;"' . $alt . $title . ' />';
+			else
+				$link .= $name;
+
+			$link .= '</a>';
+
+			if ( empty( $feed_image ) )
+				$link .= ')';
 		}
 
-		if ( $posts || ! $hide_empty )
-			$return .= $link . ( ( 'list' == $style ) ? '</li>' : ', ' );
+		if ( $optioncount )
+			$link .= ' ('. $posts . ')';
+
+		$return .= $link;
+		$return .= ( 'list' == $style ) ? '</li>' : ', ';
 	}
 
-	$return = trim($return, ', ');
+	$return = rtrim($return, ', ');
 
-	if ( ! $echo )
+	if ( !$echo )
 		return $return;
+
 	echo $return;
 }
+
+/**
+ * Does this site have more than one author
+ *
+ * Checks to see if more than one author has published posts.
+ *
+ * @since 3.2.0
+ * @return bool Whether or not we have more than one author
+ */
+function is_multi_author() {
+	global $wpdb;
+
+	if ( false === ( $is_multi_author = wp_cache_get('is_multi_author', 'posts') ) ) {
+		$rows = (array) $wpdb->get_col("SELECT DISTINCT post_author FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' LIMIT 2");
+		$is_multi_author = 1 < count( $rows ) ? 1 : 0;
+		wp_cache_set('is_multi_author', $is_multi_author, 'posts');
+	}
+
+	return (bool) $is_multi_author;
+}
+
+/**
+ * Helper function to clear the cache for number of authors.
+ *
+ * @private
+ */
+function __clear_multi_author_cache() {
+	wp_cache_delete('is_multi_author', 'posts');
+}
+add_action('transition_post_status', '__clear_multi_author_cache');
 
 ?>

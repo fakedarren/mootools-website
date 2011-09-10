@@ -19,9 +19,6 @@ tr.image-size div.image-size-item {
 tr.image-size label {
 	margin: 0 1em 0 0;
 }
-.filename.original {
-	float: right;
-}
 .crunching {
 	text-align: left;
 	margin-right: 0;
@@ -52,11 +49,6 @@ button.dismiss {
 #media-upload .media-upload-form p {
 	margin: 0 0 1em 1em;
 }
-.filename {
-	float: right;
-	margin-left: 0;
-	margin-right: 10px;
-}
 #media-upload .describe th.label {
 	text-align: right;
 }
@@ -82,4 +74,19 @@ button.dismiss {
 }
 #gallery-settings .align .field label {
 	margin: 0 0 0 1.5em;
+}
+#sort-buttons {
+	margin: 3px 0 -8px 25px;
+	text-align: left;
+}
+
+#sort-buttons #asc,
+#sort-buttons #showall {
+	padding-left: 0;
+	padding-right: 5px;
+}
+
+#sort-buttons span {
+	margin-right: 0;
+	margin-left: 25px;
 }

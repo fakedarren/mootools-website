@@ -38,13 +38,6 @@ div.star {
 div.star img {
 	width: 19px;
 	height: 19px;
-	border-left: 1px solid #fff;
-	border-right: 1px solid #fff;
-}
-
-/* Table layout CSS */
-table#install-plugins th.num {
-	white-space: nowrap; /* Prevents long plugin titles from causing the version column to wrap */
 }
 
 /* Header on thickbox */

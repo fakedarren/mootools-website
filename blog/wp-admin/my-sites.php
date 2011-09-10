@@ -42,7 +42,7 @@ add_contextual_help($current_screen,
 	'<p>' . __('This screen shows an individual user all of their sites in this network, and also allows that user to set a primary site. He or she can use the links under each site to visit either the frontend or the dashboard for that site.') . '</p>' .
 	'<p>' . __('Up until WordPress version 3.0, what is now called a Multi-site Network had to be installed separately as WordPress MU (multi-user).') . '</p>' .
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Dashboard_My_Sites_SubPanel" target="_blank">My Sites Documentation</a>') . '</p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Dashboard_My_Sites_Screen" target="_blank">Documentation on My Sites</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -102,9 +102,7 @@ if ( $updated ) { ?>
 	</table>
 	<input type="hidden" name="action" value="updateblogsettings" />
 	<?php wp_nonce_field( 'update-my-sites' ); ?>
-	<p>
-	 <input type="submit" class="button-primary" value="<?php _e( 'Save Changes' ) ?>" />
-	</p>
+	<?php submit_button(); ?>
 	</form>
 	</div>
 <?php

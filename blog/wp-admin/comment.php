@@ -1,6 +1,6 @@
 <?php
 /**
- * Comment Management Panel
+ * Comment Management Screen
  *
  * @package WordPress
  * @subpackage Administration
@@ -48,8 +48,8 @@ case 'editcomment' :
 	add_contextual_help( $current_screen, '<p>' . __( 'You can edit the information left in a comment if needed. This is often useful when you notice that a commenter has made a typographical error.' ) . '</p>' .
 	'<p>' . __( 'You can also moderate the comment from this screen using the Status box, where you can also change the timestamp of the comment.' ) . '</p>' .
 	'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-	'<p>' . __( '<a href="http://codex.wordpress.org/Administration_Panels#Comments" target="_blank">Comments Documentation</a>' ) . '</p>' .
-	'<p>' . __( '<a href="http://wordpress.org/support/" target="_blank" >Support Forums</a>' ) . '</p>'
+	'<p>' . __( '<a href="http://codex.wordpress.org/Administration_Screens#Comments" target="_blank">Documentation on Comments</a>' ) . '</p>' .
+	'<p>' . __( '<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>' ) . '</p>'
 	);
 
 	wp_enqueue_script('comment');
@@ -60,8 +60,8 @@ case 'editcomment' :
 	if ( !$comment = get_comment( $comment_id ) )
 		comment_footer_die( __('Oops, no comment with this ID.') . sprintf(' <a href="%s">'.__('Go back').'</a>!', 'javascript:history.go(-1)') );
 
-	if ( !current_user_can('edit_post', $comment->comment_post_ID) )
-		comment_footer_die( __('You are not allowed to edit comments on this post.') );
+	if ( !current_user_can( 'edit_comment', $comment_id ) )
+		comment_footer_die( __('You are not allowed to edit this comment.') );
 
 	if ( 'trash' == $comment->comment_approved )
 		comment_footer_die( __('This comment is in the Trash. Please move it out of the Trash if you want to edit it.') );
@@ -77,6 +77,8 @@ case 'approve' :
 case 'trash'   :
 case 'spam'    :
 
+	$title = __('Moderate Comment');
+
 	$comment_id = absint( $_GET['c'] );
 
 	if ( !$comment = get_comment_to_edit( $comment_id ) ) {
@@ -84,7 +86,7 @@ case 'spam'    :
 		die();
 	}
 
-	if ( !current_user_can( 'edit_post', $comment->comment_post_ID ) ) {
+	if ( !current_user_can( 'edit_comment', $comment->comment_ID ) ) {
 		wp_redirect( admin_url('edit-comments.php?error=2') );
 		die();
 	}
@@ -107,7 +109,7 @@ case 'spam'    :
 <div class="narrow">
 
 <?php screen_icon(); ?>
-<h2><?php esc_html_e( 'Moderate Comment' ); ?></h2>
+<h2><?php echo esc_html( $title ); ?></h2>
 
 <?php
 switch ( $action ) {
@@ -178,13 +180,12 @@ if ( $comment->comment_approved != '0' ) { // if not unapproved
 <table width="100%">
 <tr>
 <td><a class="button" href="<?php echo admin_url('edit-comments.php'); ?>"><?php esc_attr_e('No'); ?></a></td>
-<td class="textright"><input type='submit' class="button" value='<?php echo esc_attr($button); ?>' /></td>
+<td class="textright"><?php submit_button( $button, 'button' ); ?></td>
 </tr>
 </table>
 
 <?php wp_nonce_field( $nonce_action ); ?>
 <input type='hidden' name='action' value='<?php echo esc_attr($formaction); ?>' />
-<input type='hidden' name='p' value='<?php echo esc_attr($comment->comment_post_ID); ?>' />
 <input type='hidden' name='c' value='<?php echo esc_attr($comment->comment_ID); ?>' />
 <input type='hidden' name='noredir' value='1' />
 </form>
@@ -212,7 +213,7 @@ case 'unapprovecomment' :
 
 	if ( !$comment = get_comment($comment_id) )
 		comment_footer_die( __('Oops, no comment with this ID.') . sprintf(' <a href="%s">'.__('Go back').'</a>!', 'edit-comments.php') );
-	if ( !current_user_can('edit_post', $comment->comment_post_ID ) )
+	if ( !current_user_can( 'edit_comment', $comment->comment_ID ) )
 		comment_footer_die( __('You are not allowed to edit comments on this post.') );
 
 	if ( '' != wp_get_referer() && ! $noredir && false === strpos(wp_get_referer(), 'comment.php') )

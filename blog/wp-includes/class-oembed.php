@@ -21,14 +21,7 @@ class WP_oEmbed {
 	var $providers = array();
 
 	/**
-	 * PHP4 constructor
-	 */
-	function WP_oEmbed() {
-		return $this->__construct();
-	}
-
-	/**
-	 * PHP5 constructor
+	 * Constructor
 	 *
 	 * @uses apply_filters() Filters a list of pre-defined oEmbed providers.
 	 */
@@ -39,7 +32,7 @@ class WP_oEmbed {
 		$this->providers = apply_filters( 'oembed_providers', array(
 			'#http://(www\.)?youtube.com/watch.*#i'         => array( 'http://www.youtube.com/oembed',            true  ),
 			'http://youtu.be/*'                             => array( 'http://www.youtube.com/oembed',            false ),
-			'http://blip.tv/file/*'                         => array( 'http://blip.tv/oembed/',                   false ),
+			'http://blip.tv/*'                              => array( 'http://blip.tv/oembed/',                   false ),
 			'#http://(www\.)?vimeo\.com/.*#i'               => array( 'http://www.vimeo.com/api/oembed.{format}', true  ),
 			'#http://(www\.)?dailymotion\.com/.*#i'         => array( 'http://www.dailymotion.com/api/oembed',    true  ),
 			'#http://(www\.)?flickr\.com/.*#i'              => array( 'http://www.flickr.com/services/oembed/',   true  ),
@@ -165,8 +158,8 @@ class WP_oEmbed {
 	function fetch( $provider, $url, $args = '' ) {
 		$args = wp_parse_args( $args, wp_embed_defaults() );
 
-		$provider = add_query_arg( 'maxwidth', $args['width'], $provider );
-		$provider = add_query_arg( 'maxheight', $args['height'], $provider );
+		$provider = add_query_arg( 'maxwidth', (int) $args['width'], $provider );
+		$provider = add_query_arg( 'maxheight', (int) $args['height'], $provider );
 		$provider = add_query_arg( 'url', urlencode($url), $provider );
 
 		foreach( array( 'json', 'xml' ) as $format ) {
@@ -242,7 +235,7 @@ class WP_oEmbed {
 					return false;
 
 				$title = ( !empty($data->title) ) ? $data->title : '';
-				$return = '<img src="' . esc_url( $data->url ) . '" alt="' . esc_attr($title) . '" width="' . esc_attr($data->width) . '" height="' . esc_attr($data->height) . '" />';
+				$return = '<a href="' . esc_url( $url ) . '"><img src="' . esc_url( $data->url ) . '" alt="' . esc_attr($title) . '" width="' . esc_attr($data->width) . '" height="' . esc_attr($data->height) . '" /></a>';
 				break;
 
 			case 'video':

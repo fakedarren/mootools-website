@@ -35,14 +35,14 @@ $parent_file = 'themes.php';
 
 $help = '
 	<p>' . __('Widgets are independent sections of content that can be placed into any widgetized area provided by your theme (commonly called sidebars). To populate your sidebars/widget areas with individual widgets, drag and drop the title bars into the desired area. By default, only the first widget area is expanded. To populate additional widget areas, click on their title bars to expand them.') . '</p>
-	<p>' . __('Available Widgets section contains all the widgets you can choose from. Once you drag a widget into a sidebar, it will open to allow you to configure its settings. When you are happy with the widget settings, click the Save button and the widget will go live on your site. If you click Delete, it will remove the widget.') . '</p>
+	<p>' . __('The Available Widgets section contains all the widgets you can choose from. Once you drag a widget into a sidebar, it will open to allow you to configure its settings. When you are happy with the widget settings, click the Save button and the widget will go live on your site. If you click Delete, it will remove the widget.') . '</p>
 	<p>' . __('If you want to remove the widget but save its setting for possible future use, just drag it into the Inactive Widgets area. You can add them back anytime from there. This is especially helpful when you switch to a theme with fewer or different widget areas.') . '</p>
 	<p>' . __('Widgets may be used multiple times. You can give each widget a title, to display on your site, but it&#8217;s not required.') . '</p>
 	<p>' . __('Enabling Accessibility Mode, via Screen Options, allows you to use Add and Edit buttons instead of using drag and drop.') . '</p>
 	<p>' . __('Many themes show some sidebar widgets by default until you edit your sidebars, but they are not automatically displayed in your sidebar management tool. After you make your first widget change, you can re-add the default widgets by adding them from the Available Widgets area.') . '</p>
 ';
 $help .= '<p><strong>' . __('For more information:') . '</strong></p>';
-$help .= '<p>' . __('<a href="http://codex.wordpress.org/Appearance_Widgets_SubPanel" target="_blank">Widgets Documentation</a>') . '</p>';
+$help .= '<p>' . __('<a href="http://codex.wordpress.org/Appearance_Widgets_Screen" target="_blank">Documentation on Widgets</a>') . '</p>';
 $help .= '<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>';
 add_contextual_help($current_screen, $help);
 
@@ -175,7 +175,7 @@ if ( isset($_POST['savewidget']) || isset($_POST['removewidget']) ) {
 	if ( isset($_POST['removewidget']) && $_POST['removewidget'] ) {
 
 		if ( !in_array($widget_id, $sidebar, true) ) {
-			wp_redirect('widgets.php?error=0');
+			wp_redirect( admin_url('widgets.php?error=0') );
 			exit;
 		}
 
@@ -208,7 +208,7 @@ if ( isset($_POST['savewidget']) || isset($_POST['removewidget']) ) {
 	}
 
 	wp_set_sidebars_widgets($sidebars_widgets);
-	wp_redirect('widgets.php?message=0');
+	wp_redirect( admin_url('widgets.php?message=0') );
 	exit;
 }
 
@@ -306,12 +306,14 @@ if ( isset($_GET['editwidget']) && $_GET['editwidget'] ) {
 	</div>
 
 	<div class="widget-control-actions">
-<?php	if ( isset($_GET['addnew']) ) { ?>
+<?php
+	if ( isset($_GET['addnew']) ) { ?>
 	<a href="widgets.php" class="button alignleft"><?php _e('Cancel'); ?></a>
-<?php	} else { ?>
-	<input type="submit" name="removewidget" class="button alignleft" value="<?php esc_attr_e('Delete'); ?>" />
-<?php	} ?>
-	<input type="submit" name="savewidget" class="button-primary alignright" value="<?php esc_attr_e('Save Widget'); ?>" />
+<?php
+	} else {
+		submit_button( __( 'Delete' ), 'button alignleft', 'removewidget', false );
+	}
+	submit_button( __( 'Save Widget' ), 'button-primary alignright', 'savewidget', false ); ?>
 	<input type="hidden" name="widget-id" class="widget-id" value="<?php echo esc_attr($widget_id); ?>" />
 	<input type="hidden" name="id_base" class="id_base" value="<?php echo esc_attr($id_base); ?>" />
 	<input type="hidden" name="multi_number" class="multi_number" value="<?php echo esc_attr($multi_number); ?>" />
@@ -355,7 +357,7 @@ require_once( './admin-header.php' ); ?>
 	<div id="available-widgets" class="widgets-holder-wrap">
 		<div class="sidebar-name">
 		<div class="sidebar-name-arrow"><br /></div>
-		<h3><?php _e('Available Widgets'); ?> <span id="removing-widget"><?php _e('Deactivate'); ?> <span></span></span></h3></div>
+		<h3><?php _e('Available Widgets'); ?> <span id="removing-widget"><?php _ex('Deactivate', 'removing-widget'); ?> <span></span></span></h3></div>
 		<div class="widget-holder">
 		<p class="description"><?php _e('Drag widgets from here to a sidebar on the right to activate them. Drag widgets back here to deactivate them and delete their settings.'); ?></p>
 		<div id="widget-list">

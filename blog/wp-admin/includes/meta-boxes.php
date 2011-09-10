@@ -22,7 +22,7 @@ function post_submit_meta_box($post) {
 
 <?php // Hidden submit button early on so that the browser chooses the right button when form is submitted with Return key ?>
 <div style="display:none;">
-<input type="submit" name="save" value="<?php esc_attr_e('Save'); ?>" />
+<?php submit_button( __( 'Save' ), 'button', 'save' ); ?>
 </div>
 
 <div id="minor-publishing-actions">
@@ -32,16 +32,20 @@ function post_submit_meta_box($post) {
 <?php } elseif ( 'pending' == $post->post_status && $can_publish ) { ?>
 <input type="submit" name="save" id="save-post" value="<?php esc_attr_e('Save as Pending'); ?>" tabindex="4" class="button button-highlighted" />
 <?php } ?>
+<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" class="ajax-loading" id="draft-ajax-loading" alt="" />
 </div>
 
 <div id="preview-action">
 <?php
 if ( 'publish' == $post->post_status ) {
-	$preview_link = esc_url(get_permalink($post->ID));
-	$preview_button = __('Preview Changes');
+	$preview_link = esc_url( get_permalink( $post->ID ) );
+	$preview_button = __( 'Preview Changes' );
 } else {
-	$preview_link = esc_url(apply_filters('preview_post_link', add_query_arg('preview', 'true', get_permalink($post->ID))));
-	$preview_button = __('Preview');
+	$preview_link = get_permalink( $post->ID );
+	if ( is_ssl() )
+		$preview_link = str_replace( 'http://', 'https://', $preview_link );
+	$preview_link = esc_url( apply_filters( 'preview_post_link', add_query_arg( 'preview', 'true', $preview_link ) ) );
+	$preview_button = __( 'Preview' );
 }
 ?>
 <a class="preview button" href="<?php echo $preview_link; ?>" target="wp-preview" id="post-preview" tabindex="4"><?php echo $preview_button; ?></a>
@@ -72,9 +76,6 @@ switch ( $post->post_status ) {
 	case 'draft':
 	case 'auto-draft':
 		_e('Draft');
-		break;
-	case 'auto-draft':
-		_e('Unsaved');
 		break;
 }
 ?>
@@ -137,8 +138,8 @@ echo esc_html( $visibility_trans ); ?></span>
 
 
 <input type="radio" name="visibility" id="visibility-radio-public" value="public" <?php checked( $visibility, 'public' ); ?> /> <label for="visibility-radio-public" class="selectit"><?php _e('Public'); ?></label><br />
-<?php if ($post_type == 'post'): ?>
-<span id="sticky-span"><input id="sticky" name="sticky" type="checkbox" value="sticky" <?php checked(is_sticky($post->ID)); ?> tabindex="4" /> <label for="sticky" class="selectit"><?php _e('Stick this post to the front page') ?></label><br /></span>
+<?php if ( $post_type == 'post' && current_user_can( 'edit_others_posts' ) ) : ?>
+<span id="sticky-span"><input id="sticky" name="sticky" type="checkbox" value="sticky" <?php checked( is_sticky( $post->ID ) ); ?> tabindex="4" /> <label for="sticky" class="selectit"><?php _e( 'Stick this post to the front page' ); ?></label><br /></span>
 <?php endif; ?>
 <input type="radio" name="visibility" id="visibility-radio-password" value="password" <?php checked( $visibility, 'password' ); ?> /> <label for="visibility-radio-password" class="selectit"><?php _e('Password protected'); ?></label><br />
 <span id="password-span"><label for="post_password"><?php _e('Password:'); ?></label> <input type="text" name="post_password" id="post_password" value="<?php echo esc_attr($post->post_password); ?>" /><br /></span>
@@ -152,7 +153,6 @@ echo esc_html( $visibility_trans ); ?></span>
 <?php } ?>
 
 </div><?php // /misc-pub-section ?>
-
 
 <?php
 // translators: Publish box date formt, see http://php.net/date
@@ -204,20 +204,20 @@ if ( current_user_can( "delete_post", $post->ID ) ) {
 </div>
 
 <div id="publishing-action">
-<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" id="ajax-loading" style="visibility:hidden;" alt="" />
+<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" class="ajax-loading" id="ajax-loading" alt="" />
 <?php
 if ( !in_array( $post->post_status, array('publish', 'future', 'private') ) || 0 == $post->ID ) {
 	if ( $can_publish ) :
 		if ( !empty($post->post_date_gmt) && time() < strtotime( $post->post_date_gmt . ' +0000' ) ) : ?>
 		<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Schedule') ?>" />
-		<input name="publish" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e('Schedule') ?>" />
+		<?php submit_button( __( 'Schedule' ), 'primary', 'publish', false, array( 'tabindex' => '5', 'accesskey' => 'p' ) ); ?>
 <?php	else : ?>
 		<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Publish') ?>" />
-		<input name="publish" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e('Publish') ?>" />
+		<?php submit_button( __( 'Publish' ), 'primary', 'publish', false, array( 'tabindex' => '5', 'accesskey' => 'p' ) ); ?>
 <?php	endif;
 	else : ?>
 		<input name="original_publish" type="hidden" id="original_publish" value="<?php esc_attr_e('Submit for Review') ?>" />
-		<input name="publish" type="submit" class="button-primary" id="publish" tabindex="5" accesskey="p" value="<?php esc_attr_e('Submit for Review') ?>" />
+		<?php submit_button( __( 'Submit for Review' ), 'primary', 'publish', false, array( 'tabindex' => '5', 'accesskey' => 'p' ) ); ?>
 <?php
 	endif;
 } else { ?>
@@ -231,6 +231,34 @@ if ( !in_array( $post->post_status, array('publish', 'future', 'private') ) || 0
 </div>
 
 <?php
+}
+
+/**
+ * Display post format form elements.
+ *
+ * @since 3.1.0
+ *
+ * @param object $post
+ */
+function post_format_meta_box( $post, $box ) {
+	if ( current_theme_supports( 'post-formats' ) && post_type_supports( $post->post_type, 'post-formats' ) ) :
+	$post_formats = get_theme_support( 'post-formats' );
+
+	if ( is_array( $post_formats[0] ) ) :
+		$post_format = get_post_format( $post->ID );
+		if ( !$post_format )
+			$post_format = '0';
+		// Add in the current one if it isn't there yet, in case the current theme doesn't support it
+		if ( $post_format && !in_array( $post_format, $post_formats[0] ) )
+			$post_formats[0][] = $post_format;
+	?>
+	<div id="post-formats-select">
+		<input type="radio" name="post_format" class="post-format" id="post-format-0" value="0" <?php checked( $post_format, '0' ); ?> /> <label for="post-format-0"><?php _e('Standard'); ?></label>
+		<?php foreach ( $post_formats[0] as $format ) : ?>
+		<br /><input type="radio" name="post_format" class="post-format" id="post-format-<?php echo esc_attr( $format ); ?>" value="<?php echo esc_attr( $format ); ?>" <?php checked( $post_format, $format ); ?> /> <label for="post-format-<?php echo esc_attr( $format ); ?>"><?php echo esc_html( get_post_format_string( $format ) ); ?></label>
+		<?php endforeach; ?><br />
+	</div>
+	<?php endif; endif;
 }
 
 
@@ -256,7 +284,7 @@ function post_tags_meta_box($post, $box) {
 	<div class="jaxtag">
 	<div class="nojs-tags hide-if-js">
 	<p><?php echo $taxonomy->labels->add_or_remove_items; ?></p>
-	<textarea name="<?php echo "tax_input[$tax_name]"; ?>" rows="3" cols="20" class="the-tags" id="tax-input-<?php echo $tax_name; ?>" <?php echo $disabled; ?>><?php echo esc_attr(get_terms_to_edit( $post->ID, $tax_name )); ?></textarea></div>
+	<textarea name="<?php echo "tax_input[$tax_name]"; ?>" rows="3" cols="20" class="the-tags" id="tax-input-<?php echo $tax_name; ?>" <?php echo $disabled; ?>><?php echo get_terms_to_edit( $post->ID, $tax_name ); // textarea_escaped by esc_attr() ?></textarea></div>
  	<?php if ( current_user_can($taxonomy->cap->assign_terms) ) : ?>
 	<div class="ajaxtag hide-if-no-js">
 		<label class="screen-reader-text" for="new-tag-<?php echo $tax_name; ?>"><?php echo $box['title']; ?></label>
@@ -271,8 +299,6 @@ function post_tags_meta_box($post, $box) {
 </div>
 <?php if ( current_user_can($taxonomy->cap->assign_terms) ) : ?>
 <p class="hide-if-no-js"><a href="#titlediv" class="tagcloud-link" id="link-<?php echo $tax_name; ?>"><?php echo $taxonomy->labels->choose_from_most_used; ?></a></p>
-<?php else : ?>
-<p><em><?php _e('You cannot modify this taxonomy.'); ?></em></p>
 <?php endif; ?>
 <?php
 }
@@ -316,9 +342,6 @@ function post_categories_meta_box( $post, $box ) {
 				<?php wp_terms_checklist($post->ID, array( 'taxonomy' => $taxonomy, 'popular_cats' => $popular_ids ) ) ?>
 			</ul>
 		</div>
-	<?php if ( !current_user_can($tax->cap->assign_terms) ) : ?>
-	<p><em><?php _e('You cannot modify this taxonomy.'); ?></em></p>
-	<?php endif; ?>
 	<?php if ( current_user_can($tax->cap->edit_terms) ) : ?>
 			<div id="<?php echo $taxonomy; ?>-adder" class="wp-hidden-children">
 				<h4>
@@ -356,7 +379,7 @@ function post_categories_meta_box( $post, $box ) {
  */
 function post_excerpt_meta_box($post) {
 ?>
-<label class="screen-reader-text" for="excerpt"><?php _e('Excerpt') ?></label><textarea rows="1" cols="40" name="excerpt" tabindex="6" id="excerpt"><?php echo $post->post_excerpt ?></textarea>
+<label class="screen-reader-text" for="excerpt"><?php _e('Excerpt') ?></label><textarea rows="1" cols="40" name="excerpt" tabindex="6" id="excerpt"><?php echo $post->post_excerpt; // textarea_escaped ?></textarea>
 <p><?php _e('Excerpts are optional hand-crafted summaries of your content that can be used in your theme. <a href="http://codex.wordpress.org/Excerpt" target="_blank">Learn more about manual excerpts.</a>'); ?></p>
 <?php
 }
@@ -423,6 +446,7 @@ function post_comment_status_meta_box($post) {
 <p class="meta-options">
 	<label for="comment_status" class="selectit"><input name="comment_status" type="checkbox" id="comment_status" value="open" <?php checked($post->comment_status, 'open'); ?> /> <?php _e( 'Allow comments.' ) ?></label><br />
 	<label for="ping_status" class="selectit"><input name="ping_status" type="checkbox" id="ping_status" value="open" <?php checked($post->ping_status, 'open'); ?> /> <?php printf( __( 'Allow <a href="%s" target="_blank">trackbacks and pingbacks</a> on this page.' ), __( 'http://codex.wordpress.org/Introduction_to_Blogging#Managing_Comments' ) ); ?></label>
+	<?php do_action('post_comment_status_meta_box-options', $post); ?>
 </p>
 <?php
 }
@@ -432,8 +456,8 @@ function post_comment_status_meta_box($post) {
  *
  * @since 3.0.0
  *
- * @param $result table header rows
- * @return
+ * @param array $result table header rows
+ * @return array
  */
 function post_comment_meta_box_thead($result) {
 	unset($result['cb'], $result['response']);
@@ -458,15 +482,10 @@ function post_comment_meta_box($post) {
 	}
 
 	wp_nonce_field( 'get-comments', 'add_comment_nonce', false );
-	add_filter('manage_edit-comments_columns', 'post_comment_meta_box_thead', 8, 1);
-?>
 
-<table class="widefat comments-box fixed" cellspacing="0" style="display:none;">
-<thead><tr>
-	<?php print_column_headers('edit-comments'); ?>
-</tr></thead>
-<tbody id="the-comment-list" class="list:comment"></tbody>
-</table>
+	$wp_list_table = _get_list_table('WP_Post_Comments_List_Table');
+	$wp_list_table->display( true );
+?>
 <p class="hide-if-no-js"><a href="#commentstatusdiv" id="show-comments" onclick="commentsBox.get(<?php echo $total; ?>);return false;"><?php _e('Show comments'); ?></a> <img class="waiting" style="display:none;" src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" alt="" /></p>
 <?php
 	$hidden = get_hidden_meta_boxes('post');
@@ -474,7 +493,6 @@ function post_comment_meta_box($post) {
 		<script type="text/javascript">jQuery(document).ready(function(){commentsBox.get(<?php echo $total; ?>, 10);});</script>
 <?php
 	}
-	remove_filter('manage_edit-comments_columns', 'post_comment_meta_box_thead');
 	wp_comment_trashnotice();
 }
 
@@ -488,7 +506,7 @@ function post_comment_meta_box($post) {
  */
 function post_slug_meta_box($post) {
 ?>
-<label class="screen-reader-text" for="post_name"><?php _e('Slug') ?></label><input name="post_name" type="text" size="13" id="post_name" value="<?php echo esc_attr( $post->post_name ); ?>" />
+<label class="screen-reader-text" for="post_name"><?php _e('Slug') ?></label><input name="post_name" type="text" size="13" id="post_name" value="<?php echo esc_attr( apply_filters('editable_slug', $post->post_name) ); ?>" />
 <?php
 }
 
@@ -502,12 +520,15 @@ function post_slug_meta_box($post) {
  */
 function post_author_meta_box($post) {
 	global $user_ID;
-	$authors = get_editable_user_ids( get_current_user_id(), true, $post->post_type ); // TODO: ROLE SYSTEM
-	if ( $post->post_author && !in_array($post->post_author, $authors) )
-		$authors[] = $post->post_author;
 ?>
-<label class="screen-reader-text" for="post_author_override"><?php _e('Author'); ?></label><?php wp_dropdown_users( array('include' => $authors, 'name' => 'post_author_override', 'selected' => empty($post->ID) ? $user_ID : $post->post_author) ); ?>
+<label class="screen-reader-text" for="post_author_override"><?php _e('Author'); ?></label>
 <?php
+	wp_dropdown_users( array(
+		'who' => 'authors',
+		'name' => 'post_author_override',
+		'selected' => empty($post->ID) ? $user_ID : $post->post_author,
+		'include_selected' => true
+	) );
 }
 
 
@@ -578,7 +599,7 @@ function link_submit_meta_box($link) {
 
 <?php // Hidden submit button early on so that the browser chooses the right button when form is submitted with Return key ?>
 <div style="display:none;">
-<input type="submit" name="save" value="<?php esc_attr_e('Save'); ?>" />
+<?php submit_button( __( 'Save' ), 'button', 'save', false ); ?>
 </div>
 
 <div id="minor-publishing-actions">
@@ -862,7 +883,7 @@ function link_advanced_meta_box($link) {
 	</tr>
 	<tr class="form-field">
 		<th valign="top"  scope="row"><label for="link_notes"><?php _e('Notes') ?></label></th>
-		<td><textarea name="link_notes" id="link_notes" cols="50" rows="10" style="width: 95%"><?php echo  ( isset( $link->link_notes ) ? $link->link_notes : ''); ?></textarea></td>
+		<td><textarea name="link_notes" id="link_notes" cols="50" rows="10" style="width: 95%"><?php echo ( isset( $link->link_notes ) ? $link->link_notes : ''); // textarea_escaped ?></textarea></td>
 	</tr>
 	<tr class="form-field">
 		<th valign="top"  scope="row"><label for="link_rating"><?php _e('Rating') ?></label></th>

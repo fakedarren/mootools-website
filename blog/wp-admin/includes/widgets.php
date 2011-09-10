@@ -7,20 +7,15 @@
  */
 
 /**
- * Display list of the available widgets, either all or matching search.
+ * Display list of the available widgets.
  *
- * The search parameter are search terms separated by spaces.
- *
- * @since unknown
- *
- * @param string $show Optional, default is all. What to display, can be 'all', 'unused', or 'used'.
- * @param string $_search Optional. Search for widgets. Should be unsanitized.
+ * @since 2.5.0
  */
 function wp_list_widgets() {
 	global $wp_registered_widgets, $sidebars_widgets, $wp_registered_widget_controls;
 
 	$sort = $wp_registered_widgets;
-	usort( $sort, create_function( '$a, $b', 'return strnatcasecmp( $a["name"], $b["name"] );' ) );
+	usort( $sort, '_sort_name_callback' );
 	$done = array();
 
 	foreach ( $sort as $widget ) {
@@ -52,10 +47,20 @@ function wp_list_widgets() {
 }
 
 /**
+ * Callback to sort array by a 'name' key.
+ *
+ * @since 3.1.0
+ * @access private
+ */
+function _sort_name_callback( $a, $b ) {
+	return strnatcasecmp( $a['name'], $b['name'] );
+}
+
+/**
  * Show the widgets and their settings for a sidebar.
  * Used in the the admin widget config screen.
  *
- * @since unknown
+ * @since 2.5.0
  *
  * @param string $sidebar id slug of the sidebar
  */
@@ -79,7 +84,7 @@ function wp_list_widget_controls( $sidebar ) {
 /**
  * {@internal Missing Short Description}}
  *
- * @since unknown
+ * @since 2.5.0
  *
  * @param array $params
  * @return array
@@ -93,7 +98,7 @@ function wp_list_widget_controls_dynamic_sidebar( $params ) {
 	$id = isset($params[0]['_temp_id']) ? $params[0]['_temp_id'] : $widget_id;
 	$hidden = isset($params[0]['_hide']) ? ' style="display:none;"' : '';
 
-	$params[0]['before_widget'] = "<div id='widget-${i}_$id' class='widget'$hidden>";
+	$params[0]['before_widget'] = "<div id='widget-{$i}_{$id}' class='widget'$hidden>";
 	$params[0]['after_widget'] = "</div>";
 	$params[0]['before_title'] = "%BEG_OF_TITLE%"; // deprecated
 	$params[0]['after_title'] = "%END_OF_TITLE%"; // deprecated
@@ -123,7 +128,7 @@ function next_widget_id_number($id_base) {
  *
  * Called from dynamic_sidebar().
  *
- * @since unknown
+ * @since 2.5.0
  *
  * @param array $sidebar_args
  * @return array
@@ -202,8 +207,8 @@ function wp_widget_control( $sidebar_args ) {
 		<a class="widget-control-close" href="#close"><?php _e('Close'); ?></a>
 		</div>
 		<div class="alignright<?php if ( 'noform' === $has_form ) echo ' widget-control-noform'; ?>">
-		<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" class="ajax-feedback " title="" alt="" />
-		<input type="submit" name="savewidget" class="button-primary widget-control-save" value="<?php esc_attr_e('Save'); ?>" />
+		<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>" class="ajax-feedback" title="" alt="" />
+		<?php submit_button( __( 'Save' ), 'button-primary widget-control-save', 'savewidget', false, array( 'id' => 'widget-' . esc_attr( $id_format ) . '-savewidget' ) ); ?>
 		</div>
 		<br class="clear" />
 	</div>

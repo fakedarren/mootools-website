@@ -9,6 +9,9 @@
  * @subpackage Administration
  */
 
+if ( ! isset( $_GET['inline'] ) )
+	define( 'IFRAME_REQUEST' , true );
+
 /** Load WordPress Administration Bootstrap */
 require_once('./admin.php');
 
@@ -35,6 +38,7 @@ if ( isset($_GET['inline']) ) {
 	$errors = array();
 
 	if ( isset($_POST['html-upload']) && !empty($_FILES) ) {
+		check_admin_referer('media-form');
 		// Upload File button was clicked
 		$id = media_handle_upload('async-upload', $_REQUEST['post_id']);
 		unset($_FILES);
@@ -52,6 +56,7 @@ if ( isset($_GET['inline']) ) {
 			$location .= '?message=3';
 
 		wp_redirect( admin_url($location) );
+		exit;
 	}
 
 	$title = __('Upload New Media');
@@ -61,7 +66,7 @@ if ( isset($_GET['inline']) ) {
 '<p>' . __('You can upload media files here without creating a post first. This allows you to upload files to use with posts and pages later and/or to get a web link for a particular file that you can share.') . '</p>' .
 		'<p>' . __('There are two options for uploading files: <em>Select Files</em> will open the Flash-based uploader (multiple file upload allowed), or you can use the <em>Browser Uploader</em>. Clicking <em>Select Files</em> opens a navigation window showing you files in your operating system. Selecting <em>Open</em> after clicking on the file you want activates a progress bar on the uploader screen. Basic image editing is available after upload is complete. Make sure you click <em>Save</em> before leaving this screen.') . '</p>' .
 		'<p><strong>' . __('For more information:') . '</strong></p>' .
-		'<p>' . __('<a href="http://codex.wordpress.org/Media_Add_New_SubPanel" target="_blank">Documentation on Uploading Media Files</a>') . '</p>' .
+		'<p>' . __('<a href="http://codex.wordpress.org/Media_Add_New_Screen" target="_blank">Documentation on Uploading Media Files</a>') . '</p>' .
 		'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 	);
 
@@ -88,9 +93,7 @@ if ( isset($_GET['inline']) ) {
 	<input type="hidden" name="post_id" id="post_id" value="0" />
 	<?php wp_nonce_field('media-form'); ?>
 	<div id="media-items" class="hide-if-no-js"> </div>
-	<p>
-	<input type="submit" class="button savebutton hide-if-no-js" name="save" value="<?php esc_attr_e( 'Save all changes' ); ?>" />
-	</p>
+	<?php submit_button( __( 'Save all changes' ), 'button savebutton hide-if-no-js', 'save' ); ?>
 	</form>
 	</div>
 

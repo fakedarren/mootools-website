@@ -9,6 +9,11 @@
 /** WordPress Administration Bootstrap */
 require_once('./admin.php');
 
+if ( is_multisite() && ! is_network_admin() ) {
+	wp_redirect( network_admin_url( 'plugin-editor.php' ) );
+	exit();
+}
+
 if ( !current_user_can('edit_plugins') )
 	wp_die( __('You do not have sufficient permissions to edit plugins for this site.') );
 
@@ -67,9 +72,9 @@ case 'update':
 			wp_redirect(add_query_arg('_wpnonce', wp_create_nonce('edit-plugin-test_' . $file), "plugin-editor.php?file=$file&liveupdate=1&scrollto=$scrollto&networkwide=" . $network_wide));
 			exit;
 		}
-		wp_redirect("plugin-editor.php?file=$file&a=te&scrollto=$scrollto");
+		wp_redirect( self_admin_url("plugin-editor.php?file=$file&a=te&scrollto=$scrollto") );
 	} else {
-		wp_redirect("plugin-editor.php?file=$file&scrollto=$scrollto");
+		wp_redirect( self_admin_url("plugin-editor.php?file=$file&scrollto=$scrollto") );
 	}
 	exit;
 
@@ -84,10 +89,10 @@ default:
 		if ( is_wp_error($error) )
 			wp_die( $error );
 
-		if ( ! is_plugin_active($file) )
+		if ( ( ! empty( $_GET['networkwide'] ) && ! is_plugin_active_for_network($file) ) || ! is_plugin_active($file) )
 			activate_plugin($file, "plugin-editor.php?file=$file&phperror=1", ! empty( $_GET['networkwide'] ) ); // we'll override this later if the plugin can be included without fatal error
 
-		wp_redirect("plugin-editor.php?file=$file&a=te&scrollto=$scrollto");
+		wp_redirect( self_admin_url("plugin-editor.php?file=$file&a=te&scrollto=$scrollto") );
 		exit;
 	}
 
@@ -111,13 +116,15 @@ default:
 		'<p>' . __('You can use the editor to make changes to any of your plugins&#8217; individual PHP files. Be aware that if you make changes, plugins updates will overwrite your customizations.') . '</p>' .
 		'<p>' . __('Choose a plugin to edit from the menu in the upper right and click the Select button. Click once on any file name to load it in the editor, and make your changes. Don&#8217;t forget to save your changes (Update File) when you&#8217;re finished.') . '</p>' .
 		'<p>' . __('The Documentation menu below the editor lists the PHP functions recognized in the plugin file. Clicking Lookup takes you to a web page about that particular function.') . '</p>' .
-		'<p>' . __('If you want to make changes but don&#8217;t want them to be overwritten when the plugin is updated, you may be ready to think about writing your own plugin. For information on how to edit a plugin or start from scratch, check out the links below.') . '</p>' .
+		'<p>' . __('If you want to make changes but don&#8217;t want them to be overwritten when the plugin is updated, you may be ready to think about writing your own plugin. For information on how to edit plugins, write your own from scratch, or just better understand their anatomy, check out the links below.') . '</p>' .
+		( is_network_admin() ? '<p>' . __('Any edits to files from this screen will be reflected on all sites in the network.') . '</p>' : '' ) .
 		'<p><strong>' . __('For more information:') . '</strong></p>' .
-		'<p>' . __('<a href="http://codex.wordpress.org/Plugins_Editor_SubPanel" target="_blank">Documentation on Editing Plugins</a>') . '</p>' .
+		'<p>' . __('<a href="http://codex.wordpress.org/Plugins_Editor_Screen" target="_blank">Documentation on Editing Plugins</a>') . '</p>' .
+		'<p>' . __('<a href="http://codex.wordpress.org/Writing_a_Plugin" target="_blank">Documentation on Writing Plugins</a>') . '</p>' .
 		'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 	);
 
-	require_once('./admin-header.php');
+	require_once(ABSPATH . 'wp-admin/admin-header.php');
 
 	update_recently_edited(WP_PLUGIN_DIR . '/' . $file);
 
@@ -136,7 +143,7 @@ default:
 		}
 	}
 
-	$content = htmlspecialchars( $content );
+	$content = esc_textarea( $content );
 	?>
 <?php if (isset($_GET['a'])) : ?>
  <div id="message" class="updated"><p><?php _e('File edited successfully.') ?></p></div>
@@ -185,7 +192,7 @@ default:
 	}
 ?>
 		</select>
-		<input type="submit" name="Submit" value="<?php esc_attr_e('Select') ?>" class="button" />
+		<?php submit_button( __( 'Select' ), 'button', 'Submit', false ); ?>
 	</form>
 </div>
 <br class="clear" />
@@ -208,7 +215,7 @@ foreach ( $plugin_files as $plugin_file ) :
 		continue;
 	}
 ?>
-		<li<?php echo $file == $plugin_file ? ' class="highlight"' : ''; ?>><a href="plugin-editor.php?file=<?php echo $plugin_file; ?>&amp;plugin=<?php echo $plugin; ?>"><?php echo $plugin_file ?></a></li>
+		<li<?php echo $file == $plugin_file ? ' class="highlight"' : ''; ?>><a href="plugin-editor.php?file=<?php echo urlencode( $plugin_file ) ?>&amp;plugin=<?php echo urlencode( $plugin ) ?>"><?php echo $plugin_file ?></a></li>
 <?php endforeach; ?>
 	</ul>
 </div>
@@ -229,10 +236,12 @@ foreach ( $plugin_files as $plugin_file ) :
 	<?php } ?>
 	<p class="submit">
 	<?php
-		if ( isset($_GET['phperror']) )
-			echo "<input type='hidden' name='phperror' value='1' /><input type='submit' name='submit' class='button-primary' value='" . esc_attr__('Update File and Attempt to Reactivate') . "' tabindex='2' />";
-		else
-			echo "<input type='submit' name='submit' class='button-primary' value='" . esc_attr__('Update File') . "' tabindex='2' />";
+		if ( isset($_GET['phperror']) ) {
+			echo "<input type='hidden' name='phperror' value='1' />";
+			submit_button( __( 'Update File and Attempt to Reactivate' ), 'primary', 'submit', false, array( 'tabindex' => '2' ) );
+		} else {
+			submit_button( __( 'Update File' ), 'primary', 'submit', false, array( 'tabindex' => '2' ) );
+		}
 	?>
 	</p>
 <?php else : ?>
@@ -252,4 +261,4 @@ jQuery(document).ready(function($){
 <?php
 	break;
 }
-include("./admin-footer.php");
+include(ABSPATH . "wp-admin/admin-footer.php");

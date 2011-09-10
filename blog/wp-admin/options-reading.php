@@ -15,13 +15,39 @@ if ( ! current_user_can( 'manage_options' ) )
 $title = __( 'Reading Settings' );
 $parent_file = 'options-general.php';
 
+/**
+ * Display JavaScript on the page.
+ *
+ * @package WordPress
+ * @subpackage Reading_Settings_Screen
+ */
+function add_js() {
+?>
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function($){
+		var section = $('#front-static-pages'),
+			staticPage = section.find('input:radio[value="page"]'),
+			selects = section.find('select'),
+			check_disabled = function(){
+				selects.prop( 'disabled', ! staticPage.prop('checked') );
+			};
+		check_disabled();
+ 		section.find('input:radio').change(check_disabled);
+	});
+//]]>
+</script>
+<?php
+}
+add_action('admin_head', 'add_js');
+
 add_contextual_help($current_screen,
 	'<p>' . __('This screen contains the settings that affect the display of your content.') . '</p>' .
 	'<p>' . sprintf(__('You can choose what&#8217;s displayed on the front page of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static home page, you first need to create two <a href="%s">Pages</a>. One will become the front page, and the other will be where your posts are displayed.'), 'post-new.php?post_type=page') . '</p>' .
 	'<p>' . __('You can also control the display of your content in RSS feeds, including the maximum numbers of posts to display, whether to show full text or a summary, and the character set encoding.') . '</p>' .
 	'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>' .
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Reading_SubPanel" target="_blank">Reading Settings Documentation</a>') . '</p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Reading_Screen" target="_blank">Documentation on Reading Settings</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -38,7 +64,12 @@ include( './admin-header.php' );
 <?php if ( ! get_pages() ) : ?>
 <input name="show_on_front" type="hidden" value="posts" />
 <table class="form-table">
-<?php else :
+<?php
+	if ( 'posts' != get_option( 'show_on_front' ) ) :
+		update_option( 'show_on_front', 'posts' );
+	endif;
+
+else :
 	if ( 'page' == get_option( 'show_on_front' ) && ! get_option( 'page_on_front' ) && ! get_option( 'page_for_posts' ) )
 		update_option( 'show_on_front', 'posts' );
 ?>
@@ -94,9 +125,7 @@ include( './admin-header.php' );
 
 <?php do_settings_sections( 'reading' ); ?>
 
-<p class="submit">
-	<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
-</p>
+<?php submit_button(); ?>
 </form>
 </div>
 <?php include( './admin-footer.php' ); ?>

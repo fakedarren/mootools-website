@@ -5,7 +5,7 @@ inlineEditTax = {
 	init : function() {
 		var t = this, row = $('#inline-edit');
 
-		t.type = $('#the-list').attr('className').substr(5);
+		t.type = $('#the-list').attr('class').substr(5);
 		t.what = '#'+t.type+'-';
 
 		$('.editinline').live('click', function(){
@@ -20,9 +20,8 @@ inlineEditTax = {
 		$('a.save', row).click(function() { return inlineEditTax.save(this); });
 		$('input, select', row).keydown(function(e) { if(e.which == 13) return inlineEditTax.save(this); });
 
-		$('#posts-filter input[type="submit"]').click(function(e){
-			if ( $('form#posts-filter tr.inline-editor').length > 0 )
-				t.revert();
+		$('#posts-filter input[type="submit"]').mousedown(function(e){
+			t.revert();
 		});
 	},
 

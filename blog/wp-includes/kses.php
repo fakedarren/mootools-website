@@ -1,26 +1,34 @@
 <?php
 /**
- * HTML/XHTML filter that only allows some elements and attributes
+ * kses 0.2.2 - HTML/XHTML filter that only allows some elements and attributes
+ * Copyright (C) 2002, 2003, 2005  Ulf Harnhammar
+ *
+ * This program is free software and open source software; you can redistribute
+ * it and/or modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ * [kses strips evil scripts!]
  *
  * Added wp_ prefix to avoid conflicts with existing kses users
  *
  * @version 0.2.2
  * @copyright (C) 2002, 2003, 2005
- * @author Ulf Harnhammar <metaur@users.sourceforge.net>
+ * @author Ulf Harnhammar <http://advogato.org/person/metaur/>
  *
  * @package External
  * @subpackage KSES
  *
- * @internal
- * *** CONTACT INFORMATION ***
- * E-mail:      metaur at users dot sourceforge dot net
- * Web page:    http://sourceforge.net/projects/kses
- * Paper mail:  Ulf Harnhammar
- *              Ymergatan 17 C
- *              753 25  Uppsala
- *              SWEDEN
- *
- * [kses strips evil scripts!]
  */
 
 /**
@@ -505,7 +513,7 @@ function wp_kses($string, $allowed_html, $allowed_protocols = array ()) {
  * You add any kses hooks here.
  *
  * There is currently only one kses WordPress hook and it is called here. All
- * parameters are passed to the hooks and expected to recieve a string.
+ * parameters are passed to the hooks and expected to receive a string.
  *
  * @since 1.0.0
  *
@@ -546,8 +554,18 @@ function wp_kses_split($string, $allowed_html, $allowed_protocols) {
 	global $pass_allowed_html, $pass_allowed_protocols;
 	$pass_allowed_html = $allowed_html;
 	$pass_allowed_protocols = $allowed_protocols;
-	return preg_replace_callback('%((<!--.*?(-->|$))|(<[^>]*(>|$)|>))%',
-		create_function('$match', 'global $pass_allowed_html, $pass_allowed_protocols; return wp_kses_split2($match[1], $pass_allowed_html, $pass_allowed_protocols);'), $string);
+	return preg_replace_callback( '%(<!--.*?(-->|$))|(<[^>]*(>|$)|>)%', '_wp_kses_split_callback', $string );
+}
+
+/**
+ * Callback for wp_kses_split.
+ *
+ * @since 3.1.0
+ * @access private
+ */
+function _wp_kses_split_callback( $match ) {
+	global $pass_allowed_html, $pass_allowed_protocols;
+	return wp_kses_split2( $match[0], $pass_allowed_html, $pass_allowed_protocols );
 }
 
 /**
@@ -578,9 +596,9 @@ function wp_kses_split2($string, $allowed_html, $allowed_protocols) {
 		return '&gt;';
 	# It matched a ">" character
 
-	if (preg_match('%^<!--(.*?)(-->)?$%', $string, $matches)) {
-		$string = str_replace(array('<!--', '-->'), '', $matches[1]);
-		while ( $string != $newstring = wp_kses($string, $allowed_html, $allowed_protocols) )
+	if ( '<!--' == substr( $string, 0, 4 ) ) {
+		$string = str_replace( array('<!--', '-->'), '', $string );
+		while ( $string != ($newstring = wp_kses($string, $allowed_html, $allowed_protocols)) )
 			$string = $newstring;
 		if ( $string == '' )
 			return '';
@@ -600,15 +618,15 @@ function wp_kses_split2($string, $allowed_html, $allowed_protocols) {
 	$elem = $matches[2];
 	$attrlist = $matches[3];
 
-	if (!@isset($allowed_html[strtolower($elem)]))
+	if ( ! isset($allowed_html[strtolower($elem)]) )
 		return '';
 	# They are using a not allowed HTML element
 
 	if ($slash != '')
-		return "<$slash$elem>";
+		return "</$elem>";
 	# No attributes are allowed for closing elements
 
-	return wp_kses_attr("$slash$elem", $attrlist, $allowed_html, $allowed_protocols);
+	return wp_kses_attr( $elem, $attrlist, $allowed_html, $allowed_protocols );
 }
 
 /**
@@ -636,50 +654,47 @@ function wp_kses_attr($element, $attr, $allowed_html, $allowed_protocols) {
 		$xhtml_slash = ' /';
 
 	# Are any attributes allowed at all for this element?
-
-	if (@ count($allowed_html[strtolower($element)]) == 0)
+	if ( ! isset($allowed_html[strtolower($element)]) || count($allowed_html[strtolower($element)]) == 0 )
 		return "<$element$xhtml_slash>";
 
 	# Split it
-
 	$attrarr = wp_kses_hair($attr, $allowed_protocols);
 
 	# Go through $attrarr, and save the allowed attributes for this element
 	# in $attr2
-
 	$attr2 = '';
 
+	$allowed_attr = $allowed_html[strtolower($element)];
 	foreach ($attrarr as $arreach) {
-		if (!@ isset ($allowed_html[strtolower($element)][strtolower($arreach['name'])]))
+		if ( ! isset( $allowed_attr[strtolower($arreach['name'])] ) )
 			continue; # the attribute is not allowed
 
-		$current = $allowed_html[strtolower($element)][strtolower($arreach['name'])];
-		if ($current == '')
+		$current = $allowed_attr[strtolower($arreach['name'])];
+		if ( $current == '' )
 			continue; # the attribute is not allowed
 
-		if (!is_array($current))
+		if ( ! is_array($current) ) {
 			$attr2 .= ' '.$arreach['whole'];
 		# there are no checks
 
-		else {
+		} else {
 			# there are some checks
 			$ok = true;
-			foreach ($current as $currkey => $currval)
-				if (!wp_kses_check_attr_val($arreach['value'], $arreach['vless'], $currkey, $currval)) {
+			foreach ($current as $currkey => $currval) {
+				if ( ! wp_kses_check_attr_val($arreach['value'], $arreach['vless'], $currkey, $currval) ) {
 					$ok = false;
 					break;
 				}
+			}
 
-			if ( $arreach['name'] == 'style' ) {
+			if ( strtolower($arreach['name']) == 'style' ) {
 				$orig_value = $arreach['value'];
-
 				$value = safecss_filter_attr($orig_value);
 
 				if ( empty($value) )
 					continue;
 
 				$arreach['value'] = $value;
-
 				$arreach['whole'] = str_replace($orig_value, $value, $arreach['whole']);
 			}
 
@@ -689,7 +704,6 @@ function wp_kses_attr($element, $attr, $allowed_html, $allowed_protocols) {
 	} # foreach
 
 	# Remove any "<" or ">" characters
-
 	$attr2 = preg_replace('/[<>]/', '', $attr2);
 
 	return "<$element$attr2$xhtml_slash>";
@@ -762,7 +776,7 @@ function wp_kses_hair($attr, $allowed_protocols) {
 					# "value"
 					{
 					$thisval = $match[1];
-					if ( in_array($attrname, $uris) )
+					if ( in_array(strtolower($attrname), $uris) )
 						$thisval = wp_kses_bad_protocol($thisval, $allowed_protocols);
 
 					if(FALSE === array_key_exists($attrname, $attrarr)) {
@@ -778,7 +792,7 @@ function wp_kses_hair($attr, $allowed_protocols) {
 					# 'value'
 					{
 					$thisval = $match[1];
-					if ( in_array($attrname, $uris) )
+					if ( in_array(strtolower($attrname), $uris) )
 						$thisval = wp_kses_bad_protocol($thisval, $allowed_protocols);
 
 					if(FALSE === array_key_exists($attrname, $attrarr)) {
@@ -794,7 +808,7 @@ function wp_kses_hair($attr, $allowed_protocols) {
 					# value
 					{
 					$thisval = $match[1];
-					if ( in_array($attrname, $uris) )
+					if ( in_array(strtolower($attrname), $uris) )
 						$thisval = wp_kses_bad_protocol($thisval, $allowed_protocols);
 
 					if(FALSE === array_key_exists($attrname, $attrarr)) {
@@ -1017,14 +1031,9 @@ function wp_kses_html_error($string) {
  * @return string Sanitized content
  */
 function wp_kses_bad_protocol_once($string, $allowed_protocols) {
-	global $_kses_allowed_protocols;
-	$_kses_allowed_protocols = $allowed_protocols;
-
-	$string2 = preg_split('/:|&#58;|&#x3a;/i', $string, 2);
-	if ( isset($string2[1]) && !preg_match('%/\?%', $string2[0]) )
-		$string = wp_kses_bad_protocol_once2($string2[0]) . trim($string2[1]);
-	else
-		$string = preg_replace_callback('/^((&[^;]*;|[\sA-Za-z0-9])*)'.'(:|&#58;|&#[Xx]3[Aa];)\s*/', 'wp_kses_bad_protocol_once2', $string);
+	$string2 = preg_split( '/:|&#0*58;|&#x0*3a;/i', $string, 2 );
+	if ( isset($string2[1]) && ! preg_match('%/\?%', $string2[0]) )
+		$string = wp_kses_bad_protocol_once2( $string2[0], $allowed_protocols ) . trim( $string2[1] );
 
 	return $string;
 }
@@ -1038,29 +1047,19 @@ function wp_kses_bad_protocol_once($string, $allowed_protocols) {
  * @access private
  * @since 1.0.0
  *
- * @param mixed $matches string or preg_replace_callback() matches array to check for bad protocols
+ * @param string $string URI scheme to check against the whitelist
+ * @param string $allowed_protocols Allowed protocols
  * @return string Sanitized content
  */
-function wp_kses_bad_protocol_once2($matches) {
-	global $_kses_allowed_protocols;
-
-	if ( is_array($matches) ) {
-		if ( empty($matches[1]) )
-			return '';
-
-		$string = $matches[1];
-	} else {
-		$string = $matches;
-	}
-
+function wp_kses_bad_protocol_once2( $string, $allowed_protocols ) {
 	$string2 = wp_kses_decode_entities($string);
 	$string2 = preg_replace('/\s/', '', $string2);
 	$string2 = wp_kses_no_null($string2);
 	$string2 = strtolower($string2);
 
 	$allowed = false;
-	foreach ( (array) $_kses_allowed_protocols as $one_protocol)
-		if (strtolower($one_protocol) == $string2) {
+	foreach ( (array) $allowed_protocols as $one_protocol )
+		if ( strtolower($one_protocol) == $string2 ) {
 			$allowed = true;
 			break;
 		}

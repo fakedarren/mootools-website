@@ -19,7 +19,7 @@ add_contextual_help($current_screen,
 	'<p>' . __('This screen provides many options for controlling the management and display of comments and links to your posts/pages. So many, in fact, they won&#8217;t all fit here! :) Use the documentation link below to get information on what each discussion setting does.') . '</p>' .
 	'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>' .
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Discussion_SubPanel" target="_blank">Discussion Settings Documentation</a>') . '</p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Discussion_Screen" target="_blank">Documentation on Discussion Settings</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -60,7 +60,7 @@ include('./admin-header.php');
 <label for="comment_registration">
 <input name="comment_registration" type="checkbox" id="comment_registration" value="1" <?php checked('1', get_option('comment_registration')); ?> />
 <?php _e('Users must be registered and logged in to comment') ?>
-<?php if ( !get_option( 'users_can_register' ) && is_multisite() ) _e( ' (Signup has been disabled. Only members of this site can comment.)' ); ?>
+<?php if ( !get_option( 'users_can_register' ) && is_multisite() ) echo ' ' . __( '(Signup has been disabled. Only members of this site can comment.)' ); ?>
 </label>
 <br />
 
@@ -141,7 +141,7 @@ printf( __('Comments should be displayed with the %s comments at the top of each
 
 <p><label for="moderation_keys"><?php _e('When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be held in the <a href="edit-comments.php?comment_status=moderated">moderation queue</a>. One word or IP per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;.') ?></label></p>
 <p>
-<textarea name="moderation_keys" rows="10" cols="50" id="moderation_keys" class="large-text code"><?php form_option('moderation_keys'); ?></textarea>
+<textarea name="moderation_keys" rows="10" cols="50" id="moderation_keys" class="large-text code"><?php echo esc_textarea( get_option( 'moderation_keys' ) ); ?></textarea>
 </p>
 </fieldset></td>
 </tr>
@@ -150,7 +150,7 @@ printf( __('Comments should be displayed with the %s comments at the top of each
 <td><fieldset><legend class="screen-reader-text"><span><?php _e('Comment Blacklist') ?></span></legend>
 <p><label for="blacklist_keys"><?php _e('When a comment contains any of these words in its content, name, URL, e-mail, or IP, it will be marked as spam. One word or IP per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;.') ?></label></p>
 <p>
-<textarea name="blacklist_keys" rows="10" cols="50" id="blacklist_keys" class="large-text code"><?php form_option('blacklist_keys'); ?></textarea>
+<textarea name="blacklist_keys" rows="10" cols="50" id="blacklist_keys" class="large-text code"><?php echo esc_textarea( get_option( 'blacklist_keys' ) ); ?></textarea>
 </p>
 </fieldset></td>
 </tr>
@@ -212,7 +212,8 @@ $avatar_defaults = array(
 	'gravatar_default' => __('Gravatar Logo'),
 	'identicon' => __('Identicon (Generated)'),
 	'wavatar' => __('Wavatar (Generated)'),
-	'monsterid' => __('MonsterID (Generated)')
+	'monsterid' => __('MonsterID (Generated)'),
+	'retro' => __('Retro (Generated)')
 );
 $avatar_defaults = apply_filters('avatar_defaults', $avatar_defaults);
 $default = get_option('avatar_default');
@@ -240,9 +241,7 @@ echo apply_filters('default_avatar_select', $avatar_list);
 
 <?php do_settings_sections('discussion'); ?>
 
-<p class="submit">
-<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
-</p>
+<?php submit_button(); ?>
 </form>
 </div>
 

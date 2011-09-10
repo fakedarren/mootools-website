@@ -13,7 +13,8 @@
  * @name $self
  * @var string
  */
-$self = preg_replace('|^.*/wp-admin/|i', '', $_SERVER['PHP_SELF']);
+$self = preg_replace('|^.*/wp-admin/network/|i', '', $_SERVER['PHP_SELF']);
+$self = preg_replace('|^.*/wp-admin/|i', '', $self);
 $self = preg_replace('|^.*/plugins/|i', '', $self);
 $self = preg_replace('|^.*/mu-plugins/|i', '', $self);
 
@@ -35,6 +36,9 @@ get_admin_page_parent();
 function _wp_menu_output( $menu, $submenu, $submenu_as_parent = true ) {
 	global $self, $parent_file, $submenu_file, $plugin_page, $pagenow, $typenow;
 
+	$menu_setting_increment = -1;
+	$user_settings = get_all_user_settings();
+
 	$first = true;
 	// 0 = name, 1 = capability, 2 = file, 3 = class, 4 = id, 5 = icon src
 	foreach ( $menu as $key => $item ) {
@@ -44,14 +48,18 @@ function _wp_menu_output( $menu, $submenu, $submenu_as_parent = true ) {
 			$class[] = 'wp-first-item';
 			$first = false;
 		}
-		if ( !empty($submenu[$item[2]]) )
+		if ( !empty($submenu[$item[2]]) ) {
 			$class[] = 'wp-has-submenu';
+			$menu_setting_increment++;
+		}
 
-		if ( ( $parent_file && $item[2] == $parent_file ) || ( false === strpos($parent_file, '?') && $self == $item[2] ) ) {
+		if ( ( $parent_file && $item[2] == $parent_file ) || ( empty($typenow) && $self == $item[2] ) ) {
 			if ( !empty($submenu[$item[2]]) )
 				$class[] = 'wp-has-current-submenu wp-menu-open';
 			else
 				$class[] = 'current';
+		} elseif ( ! empty( $submenu[ $item[2] ] ) && isset( $user_settings[ 'm' . $menu_setting_increment ] ) && 'o' == $user_settings[ 'm' . $menu_setting_increment ] ) {
+				$class[] = 'wp-menu-open';
 		}
 
 		if ( ! empty($item[4]) )
@@ -68,13 +76,14 @@ function _wp_menu_output( $menu, $submenu, $submenu_as_parent = true ) {
 				$img = '<img src="' . $item[6] . '" alt="" />';
 		}
 		$toggle = '<div class="wp-menu-toggle"><br /></div>';
+		$arrow = '<div class="wp-menu-arrow"><div></div></div>';
 
 		$title = wptexturize($item[0]);
 
 		echo "\n\t<li$class$id>";
 
-		if ( false !== strpos($class, 'wp-menu-separator') ) {
-			echo '<a class="separator" href="?unfoldmenu=1"><br /></a>';
+		if ( false !== strpos( $class, 'wp-menu-separator' ) ) {
+			echo '<div class="separator"></div>';
 		} elseif ( $submenu_as_parent && !empty($submenu[$item[2]]) ) {
 			$submenu[$item[2]] = array_values($submenu[$item[2]]);  // Re-index.
 			$menu_hook = get_plugin_page_hook($submenu[$item[2]][0][2], $item[2]);
@@ -83,25 +92,26 @@ function _wp_menu_output( $menu, $submenu, $submenu_as_parent = true ) {
 				$menu_file = substr($menu_file, 0, $pos);
 			if ( ( ('index.php' != $submenu[$item[2]][0][2]) && file_exists(WP_PLUGIN_DIR . "/$menu_file") ) || !empty($menu_hook)) {
 				$admin_is_parent = true;
-				echo "<div class='wp-menu-image'><a href='admin.php?page={$submenu[$item[2]][0][2]}'>$img</a></div>$toggle<a href='admin.php?page={$submenu[$item[2]][0][2]}'$class$tabindex>$title</a>";
+				echo "<div class='wp-menu-image'><a href='admin.php?page={$submenu[$item[2]][0][2]}'>$img</a></div>$arrow$toggle<a href='admin.php?page={$submenu[$item[2]][0][2]}'$class$tabindex>$title</a>";
 			} else {
-				echo "\n\t<div class='wp-menu-image'><a href='{$submenu[$item[2]][0][2]}'>$img</a></div>$toggle<a href='{$submenu[$item[2]][0][2]}'$class$tabindex>$title</a>";
+				echo "\n\t<div class='wp-menu-image'><a href='{$submenu[$item[2]][0][2]}'>$img</a></div>$arrow$toggle<a href='{$submenu[$item[2]][0][2]}'$class$tabindex>$title</a>";
 			}
-		} else if ( current_user_can($item[1]) ) {
+		} else if ( !empty($item[2]) && current_user_can($item[1]) ) {
 			$menu_hook = get_plugin_page_hook($item[2], 'admin.php');
 			$menu_file = $item[2];
 			if ( false !== $pos = strpos($menu_file, '?') )
 				$menu_file = substr($menu_file, 0, $pos);
 			if ( ('index.php' != $item[2]) && file_exists(WP_PLUGIN_DIR . "/$menu_file") || !empty($menu_hook) ) {
 				$admin_is_parent = true;
-				echo "\n\t<div class='wp-menu-image'><a href='admin.php?page={$item[2]}'>$img</a></div>$toggle<a href='admin.php?page={$item[2]}'$class$tabindex>{$item[0]}</a>";
+				echo "\n\t<div class='wp-menu-image'><a href='admin.php?page={$item[2]}'>$img</a></div>$arrow$toggle<a href='admin.php?page={$item[2]}'$class$tabindex>{$item[0]}</a>";
 			} else {
-				echo "\n\t<div class='wp-menu-image'><a href='{$item[2]}'>$img</a></div>$toggle<a href='{$item[2]}'$class$tabindex>{$item[0]}</a>";
+				echo "\n\t<div class='wp-menu-image'><a href='{$item[2]}'>$img</a></div>$arrow$toggle<a href='{$item[2]}'$class$tabindex>{$item[0]}</a>";
 			}
 		}
 
 		if ( !empty($submenu[$item[2]]) ) {
-			echo "\n\t<div class='wp-submenu'><div class='wp-submenu-head'>{$item[0]}</div><ul>";
+			echo "\n\t<div class='wp-submenu'><div class='wp-submenu-wrap'>";
+			echo "<div class='wp-submenu-head'>{$item[0]}</div><ul>";
 			$first = true;
 			foreach ( $submenu[$item[2]] as $sub_key => $sub_item ) {
 				if ( !current_user_can($sub_item[1]) )
@@ -154,14 +164,21 @@ function _wp_menu_output( $menu, $submenu, $submenu_as_parent = true ) {
 					echo "<li$class><a href='{$sub_item[2]}'$class$tabindex>$title</a></li>";
 				}
 			}
-			echo "</ul></div>";
+			echo "</ul></div></div>";
 		}
 		echo "</li>";
 	}
+
+	echo '<li id="collapse-menu" class="hide-if-no-js"><div id="collapse-button"><div></div></div>';
+	echo '<span>' . esc_html__( 'Collapse menu' ) . '</span>';
+	echo '</li>';
 }
 
 ?>
 
+<div id="adminmenuback"></div>
+<div id="adminmenuwrap">
+<div id="adminmenushadow"></div>
 <ul id="adminmenu">
 
 <?php
@@ -171,3 +188,4 @@ do_action( 'adminmenu' );
 
 ?>
 </ul>
+</div>

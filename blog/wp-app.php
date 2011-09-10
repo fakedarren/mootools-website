@@ -216,14 +216,14 @@ class AtomServer {
 	var $do_output = true;
 
 	/**
-	 * PHP4 constructor - Sets up object properties.
+	 * Constructor - Sets up object properties.
 	 *
 	 * @since 2.2.0
 	 * @return AtomServer
 	 */
-	function AtomServer() {
+	function __construct() {
 
-		$this->script_name = array_pop( $var_by_ref = explode( '/', $_SERVER['SCRIPT_NAME'] ) );
+		$this->script_name = array_pop( explode( '/', $_SERVER['SCRIPT_NAME'] ) );
 		$this->app_base = site_url( $this->script_name . '/' );
 
 		$this->selectors = array(
@@ -387,7 +387,7 @@ EOD;
 	 * @since 2.2.0
 	 */
 	function create_post() {
-		global $blog_id, $user_ID;
+		global $user_ID;
 		$this->get_accepted_content_type($this->atom_content_types);
 
 		$parser = new AtomParser();
@@ -419,7 +419,7 @@ EOD;
 		if ( !current_user_can($cap) )
 			$this->auth_required(__('Sorry, you do not have the right to edit/publish new posts.'));
 
-		$blog_ID = (int ) $blog_id;
+		$blog_ID = get_current_blog_id();
 		$post_status = ($publish) ? 'publish' : 'draft';
 		$post_author = (int) $user_ID;
 		$post_title = $entry->title[1];
@@ -607,13 +607,13 @@ EOD;
 
 		$slug = '';
 		if ( isset( $_SERVER['HTTP_SLUG'] ) )
-			$slug = sanitize_file_name( $_SERVER['HTTP_SLUG'] );
+			$slug = $_SERVER['HTTP_SLUG'];
 		elseif ( isset( $_SERVER['HTTP_TITLE'] ) )
-			$slug = sanitize_file_name( $_SERVER['HTTP_TITLE'] );
+			$slug = $_SERVER['HTTP_TITLE'];
 		elseif ( empty( $slug ) ) // just make a random name
 			$slug = substr( md5( uniqid( microtime() ) ), 0, 7);
 		$ext = preg_replace( '|.*/([a-z0-9]+)|', '$1', $_SERVER['CONTENT_TYPE'] );
-		$slug = "$slug.$ext";
+		$slug = sanitize_file_name( "$slug.$ext" );
 		$file = wp_upload_bits( $slug, NULL, $bits);
 
 		log_app('wp_upload_bits returns:',print_r($file,true));
@@ -712,7 +712,7 @@ EOD;
 		$filetype = wp_check_filetype($location);
 
 		if ( !isset($location) || 'attachment' != $entry['post_type'] || empty($filetype['ext']) )
-			$this->internal_error(__('Error ocurred while accessing post metadata for file location.'));
+			$this->internal_error(__('Error occurred while accessing post metadata for file location.'));
 
 		// delete file
 		@unlink($location);
@@ -749,7 +749,7 @@ EOD;
 		$filetype = wp_check_filetype($location);
 
 		if ( !isset($location) || 'attachment' != $entry['post_type'] || empty($filetype['ext']) )
-			$this->internal_error(__('Error ocurred while accessing post metadata for file location.'));
+			$this->internal_error(__('Error occurred while accessing post metadata for file location.'));
 
 		status_header('200');
 		header('Content-Type: ' . $entry['post_mime_type']);
@@ -801,7 +801,7 @@ EOD;
 		$location = "{$upload_dir['basedir']}/{$location}";
 
 		if (!isset($location) || 'attachment' != $entry['post_type'] || empty($filetype['ext']))
-			$this->internal_error(__('Error ocurred while accessing post metadata for file location.'));
+			$this->internal_error(__('Error occurred while accessing post metadata for file location.'));
 
 		$fp = fopen("php://input", "rb");
 		$localfp = fopen($location, "w+");

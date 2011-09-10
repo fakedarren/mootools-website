@@ -27,8 +27,8 @@ function the_permalink() {
  * @since 2.2.0
  * @uses $wp_rewrite
  *
- * @param $string String a URL with or without a trailing slash.
- * @param $type_of_url String the type of URL being considered (e.g. single, category, etc) for use in the filter.
+ * @param string $string URL with or without a trailing slash.
+ * @param string $type_of_url The type of URL being considered (e.g. single, category, etc) for use in the filter.
  * @return string
  */
 function user_trailingslashit($string, $type_of_url = '') {
@@ -39,7 +39,7 @@ function user_trailingslashit($string, $type_of_url = '') {
 		$string = untrailingslashit($string);
 
 	// Note that $type_of_url can be one of following:
-	// single, single_trackback, single_feed, single_paged, feed, category, page, year, month, day, paged
+	// single, single_trackback, single_feed, single_paged, feed, category, page, year, month, day, paged, post_type_archive
 	$string = apply_filters('user_trailingslashit', $string, $type_of_url);
 	return $string;
 }
@@ -185,11 +185,11 @@ function get_post_permalink( $id = 0, $leavename = false, $sample = false ) {
 
 	$slug = $post->post_name;
 
-	$draft_or_pending = in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) );
+	$draft_or_pending = isset($post->post_status) && in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) );
 
 	$post_type = get_post_type_object($post->post_type);
 
-	if ( !empty($post_link) && ( ( isset($post->post_status) && !$draft_or_pending ) || $sample ) ) {
+	if ( !empty($post_link) && ( !$draft_or_pending || $sample ) ) {
 		if ( ! $leavename ) {
 			if ( $post_type->hierarchical )
 				$slug = get_page_uri($id);
@@ -271,11 +271,15 @@ function _get_page_link( $id = false, $leavename = false, $sample = false ) {
 	else
 		$post = &get_post($id);
 
+	$draft_or_pending = in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) );
+
 	$link = $wp_rewrite->get_page_permastruct();
 
-	if ( '' != $link && ( ( isset($post->post_status) && 'draft' != $post->post_status && 'pending' != $post->post_status ) || $sample ) ) {
-		if ( ! $leavename )
+	if ( !empty($link) && ( ( isset($post->post_status) && !$draft_or_pending ) || $sample ) ) {
+		if ( ! $leavename ) {
 			$link = str_replace('%pagename%', get_page_uri($id), $link);
+		}
+
 		$link = home_url($link);
 		$link = user_trailingslashit($link, 'page');
 	} else {
@@ -461,13 +465,13 @@ function get_feed_link($feed = '') {
  * @param string $feed Optional. Feed type.
  * @return string
  */
-function get_post_comments_feed_link($post_id = '', $feed = '') {
-	global $id;
+function get_post_comments_feed_link($post_id = 0, $feed = '') {
+	$post_id = absint( $post_id );
 
-	if ( empty($post_id) )
-		$post_id = (int) $id;
+	if ( ! $post_id )
+		$post_id = get_the_ID();
 
-	if ( empty($feed) )
+	if ( empty( $feed ) )
 		$feed = get_default_feed();
 
 	if ( '' != get_option('permalink_structure') ) {
@@ -649,18 +653,11 @@ function get_tag_feed_link($tag_id, $feed = '') {
  * @since 2.7.0
  *
  * @param int $tag_id Tag ID
+ * @param string $taxonomy Taxonomy
  * @return string
  */
-function get_edit_tag_link( $tag_id = 0, $taxonomy = 'post_tag' ) {
-	global $post_type;
-	$tax = get_taxonomy($taxonomy);
-	if ( !current_user_can($tax->cap->edit_terms) )
-		return;
-
-	$tag = get_term($tag_id, $taxonomy);
-
-	$location = admin_url('edit-tags.php?action=edit&amp;taxonomy=' . $taxonomy . '&amp;' . (!empty($post_type) ? 'post_type=' . $post_type .'&amp;' : '') .'tag_ID=' . $tag->term_id);
-	return apply_filters( 'get_edit_tag_link', $location );
+function get_edit_tag_link( $tag_id, $taxonomy = 'post_tag' ) {
+	return apply_filters( 'get_edit_tag_link', get_edit_term_link( $tag_id, $taxonomy ) );
 }
 
 /**
@@ -672,20 +669,74 @@ function get_edit_tag_link( $tag_id = 0, $taxonomy = 'post_tag' ) {
  * @param string $before Optional. Display before edit link.
  * @param string $after Optional. Display after edit link.
  * @param int|object $tag Tag object or ID
- * @return string|null HTML content, if $echo is set to false.
+ * @return string HTML content.
  */
 function edit_tag_link( $link = '', $before = '', $after = '', $tag = null ) {
-	$tax = get_taxonomy('post_tag');
+	$link = edit_term_link( $link, '', '', false, $tag );
+	echo $before . apply_filters( 'edit_tag_link', $link ) . $after;
+}
+
+/**
+ * Retrieve edit term url.
+ *
+ * @since 3.1.0
+ *
+ * @param int $term_id Term ID
+ * @param string $taxonomy Taxonomy
+ * @param string $object_type The object type
+ * @return string
+ */
+function get_edit_term_link( $term_id, $taxonomy, $object_type = '' ) {
+	$tax = get_taxonomy( $taxonomy );
+	if ( !current_user_can( $tax->cap->edit_terms ) )
+		return;
+
+	$term = get_term( $term_id, $taxonomy );
+
+	$args = array(
+		'action' => 'edit',
+		'taxonomy' => $taxonomy,
+		'tag_ID' => $term->term_id,
+	);
+
+	if ( $object_type )
+		$args['post_type'] = $object_type;
+
+	$location = add_query_arg( $args, admin_url( 'edit-tags.php' ) );
+
+	return apply_filters( 'get_edit_term_link', $location, $term_id, $taxonomy, $object_type );
+}
+
+/**
+ * Display or retrieve edit term link with formatting.
+ *
+ * @since 3.1.0
+ *
+ * @param string $link Optional. Anchor text.
+ * @param string $before Optional. Display before edit link.
+ * @param string $after Optional. Display after edit link.
+ * @param object $term Term object
+ * @return string HTML content.
+ */
+function edit_term_link( $link = '', $before = '', $after = '', $term = null, $echo = true ) {
+	if ( is_null( $term ) ) {
+		$term = get_queried_object();
+	}
+
+	$tax = get_taxonomy( $term->taxonomy );
 	if ( !current_user_can($tax->cap->edit_terms) )
 		return;
 
-	$tag = get_term($tag, 'post_tag');
-
-	if ( empty($link) )
+	if ( empty( $link ) )
 		$link = __('Edit This');
 
-	$link = '<a href="' . get_edit_tag_link( $tag->term_id ) . '" title="' . __( 'Edit Tag' ) . '">' . $link . '</a>';
-	echo $before . apply_filters( 'edit_tag_link', $link, $tag->term_id ) . $after;
+	$link = '<a href="' . get_edit_term_link( $term->term_id, $term->taxonomy ) . '" title="' . $link . '">' . $link . '</a>';
+	$link = $before . apply_filters( 'edit_term_link', $link, $term->term_id ) . $after;
+
+	if ( $echo )
+		echo $link;
+	else
+		return $link;
 }
 
 /**
@@ -777,6 +828,65 @@ function get_search_comments_feed_link($search_query = '', $feed = '') {
 }
 
 /**
+ * Retrieve the permalink for a post type archive.
+ *
+ * @since 3.1.0
+ *
+ * @param string $post_type Post type
+ * @return string
+ */
+function get_post_type_archive_link( $post_type ) {
+	global $wp_rewrite;
+	if ( ! $post_type_obj = get_post_type_object( $post_type ) )
+		return false;
+
+	if ( ! $post_type_obj->has_archive )
+		return false;
+
+	if ( get_option( 'permalink_structure' ) && is_array( $post_type_obj->rewrite ) ) {
+		$struct = ( true === $post_type_obj->has_archive ) ? $post_type_obj->rewrite['slug'] : $post_type_obj->has_archive;
+		if ( $post_type_obj->rewrite['with_front'] )
+			$struct = $wp_rewrite->front . $struct;
+		else
+			$struct = $wp_rewrite->root . $struct;
+		$link = home_url( user_trailingslashit( $struct, 'post_type_archive' ) );
+	} else {
+		$link = home_url( '?post_type=' . $post_type );
+	}
+
+	return apply_filters( 'post_type_archive_link', $link, $post_type );
+}
+
+/**
+ * Retrieve the permalink for a post type archive feed.
+ *
+ * @since 3.1.0
+ *
+ * @param string $post_type Post type
+ * @param string $feed Optional. Feed type
+ * @return string
+ */
+function get_post_type_archive_feed_link( $post_type, $feed = '' ) {
+	$default_feed = get_default_feed();
+	if ( empty( $feed ) )
+		$feed = $default_feed;
+
+	if ( ! $link = get_post_type_archive_link( $post_type ) )
+		return false;
+	$post_type_obj = get_post_type_object( $post_type );
+	if ( $post_type_obj->rewrite['feeds'] && get_option( 'permalink_structure' ) ) {
+		$link = trailingslashit($link);
+		$link .= 'feed/';
+		if ( $feed != $default_feed )
+			$link .= "$feed/";
+	} else {
+		$link = add_query_arg( 'feed', $feed, $link );
+	}
+
+	return apply_filters( 'post_type_archive_feed_link', $link, $feed );
+}
+
+/**
  * Retrieve edit posts link for post.
  *
  * Can be used within the WordPress loop or outside of it. Can be used with
@@ -846,7 +956,7 @@ function edit_post_link( $link = null, $before = '', $after = '', $id = 0 ) {
  */
 function get_delete_post_link( $id = 0, $deprecated = '', $force_delete = false ) {
 	if ( ! empty( $deprecated ) )
-		_deprecated_argument( __FUNCTION__, '3.0.0' );
+		_deprecated_argument( __FUNCTION__, '3.0' );
 
 	if ( !$post = &get_post( $id ) )
 		return;
@@ -875,15 +985,9 @@ function get_delete_post_link( $id = 0, $deprecated = '', $force_delete = false 
  */
 function get_edit_comment_link( $comment_id = 0 ) {
 	$comment = &get_comment( $comment_id );
-	$post = &get_post( $comment->comment_post_ID );
 
-	if ( $post->post_type == 'page' ) {
-		if ( !current_user_can( 'edit_page', $post->ID ) )
-			return;
-	} else {
-		if ( !current_user_can( 'edit_post', $post->ID ) )
-			return;
-	}
+	if ( !current_user_can( 'edit_comment', $comment->comment_ID ) )
+		return;
 
 	$location = admin_url('comment.php?action=editcomment&amp;c=') . $comment->comment_ID;
 	return apply_filters( 'get_edit_comment_link', $location );
@@ -900,20 +1004,15 @@ function get_edit_comment_link( $comment_id = 0 ) {
  * @return string|null HTML content, if $echo is set to false.
  */
 function edit_comment_link( $link = null, $before = '', $after = '' ) {
-	global $comment, $post;
+	global $comment;
 
-	if ( $post->post_type == 'page' ) {
-		if ( !current_user_can( 'edit_page', $post->ID ) )
-			return;
-	} else {
-		if ( !current_user_can( 'edit_post', $post->ID ) )
-			return;
-	}
+	if ( !current_user_can( 'edit_comment', $comment->comment_ID ) )
+		return;
 
 	if ( null === $link )
 		$link = __('Edit This');
 
-	$link = '<a class="comment-edit-link" href="' . get_edit_comment_link( $comment->comment_ID ) . '" title="' . __( 'Edit comment' ) . '">' . $link . '</a>';
+	$link = '<a class="comment-edit-link" href="' . get_edit_comment_link( $comment->comment_ID ) . '" title="' . esc_attr__( 'Edit comment' ) . '">' . $link . '</a>';
 	echo $before . apply_filters( 'edit_comment_link', $link, $comment->comment_ID ) . $after;
 }
 
@@ -954,49 +1053,49 @@ function edit_bookmark_link( $link = '', $before = '', $after = '', $bookmark = 
 	if ( empty($link) )
 		$link = __('Edit This');
 
-	$link = '<a href="' . get_edit_bookmark_link( $link ) . '" title="' . __( 'Edit Link' ) . '">' . $link . '</a>';
+	$link = '<a href="' . get_edit_bookmark_link( $bookmark ) . '" title="' . esc_attr__( 'Edit Link' ) . '">' . $link . '</a>';
 	echo $before . apply_filters( 'edit_bookmark_link', $link, $bookmark->link_id ) . $after;
 }
 
 // Navigation links
 
 /**
- * Retrieve previous post link that is adjacent to current post.
+ * Retrieve previous post that is adjacent to current post.
  *
  * @since 1.5.0
  *
- * @param bool $in_same_cat Optional. Whether link should be in same category.
+ * @param bool $in_same_cat Optional. Whether post should be in same category.
  * @param string $excluded_categories Optional. Excluded categories IDs.
- * @return string
+ * @return mixed Post object if successful. Null if global $post is not set. Empty string if no corresponding post exists.
  */
 function get_previous_post($in_same_cat = false, $excluded_categories = '') {
 	return get_adjacent_post($in_same_cat, $excluded_categories);
 }
 
 /**
- * Retrieve next post link that is adjacent to current post.
+ * Retrieve next post that is adjacent to current post.
  *
  * @since 1.5.0
  *
- * @param bool $in_same_cat Optional. Whether link should be in same category.
+ * @param bool $in_same_cat Optional. Whether post should be in same category.
  * @param string $excluded_categories Optional. Excluded categories IDs.
- * @return string
+ * @return mixed Post object if successful. Null if global $post is not set. Empty string if no corresponding post exists.
  */
 function get_next_post($in_same_cat = false, $excluded_categories = '') {
 	return get_adjacent_post($in_same_cat, $excluded_categories, false);
 }
 
 /**
- * Retrieve adjacent post link.
+ * Retrieve adjacent post.
  *
- * Can either be next or previous post link.
+ * Can either be next or previous post.
  *
  * @since 2.5.0
  *
- * @param bool $in_same_cat Optional. Whether link should be in same category.
+ * @param bool $in_same_cat Optional. Whether post should be in same category.
  * @param string $excluded_categories Optional. Excluded categories IDs.
  * @param bool $previous Optional. Whether to retrieve previous post.
- * @return string
+ * @return mixed Post object if successful. Null if global $post is not set. Empty string if no corresponding post exists.
  */
 function get_adjacent_post($in_same_cat = false, $excluded_categories = '', $previous = true) {
 	global $post, $wpdb;
@@ -1147,14 +1246,14 @@ function prev_post_rel_link($title = '%title', $in_same_cat = false, $excluded_c
 /**
  * Retrieve boundary post.
  *
- * Boundary being either the first or last post by publish date within the contraitns specified
+ * Boundary being either the first or last post by publish date within the constraints specified
  * by in same category or excluded categories.
  *
  * @since 2.8.0
  *
  * @param bool $in_same_cat Optional. Whether returned post should be in same category.
  * @param string $excluded_categories Optional. Excluded categories IDs.
- * @param bool $previous Optional. Whether to retrieve first post.
+ * @param bool $start Optional. Whether to retrieve first or last post.
  * @return object
  */
 function get_boundary_post($in_same_cat = false, $excluded_categories = '', $start = true) {
@@ -1187,7 +1286,7 @@ function get_boundary_post($in_same_cat = false, $excluded_categories = '', $sta
 
 	$order = $start ? 'ASC' : 'DESC';
 
-	return get_posts( array('numberposts' => 1, 'no_found_rows' => true, 'order' => $order, 'orderby' => 'ID', 'category' => $categories) );
+	return get_posts( array('numberposts' => 1, 'category' => $categories, 'order' => $order, 'update_post_term_cache' => false, 'update_post_meta_cache' => false) );
 }
 
 /**
@@ -1200,11 +1299,11 @@ function get_boundary_post($in_same_cat = false, $excluded_categories = '', $sta
  * @param string $title Optional. Link title format.
  * @param bool $in_same_cat Optional. Whether link should be in same category.
  * @param string $excluded_categories Optional. Excluded categories IDs.
- * @param bool $start Optional, default is true. Whether display link to first post.
+ * @param bool $start Optional, default is true. Whether display link to first or last post.
  * @return string
  */
 function get_boundary_post_rel_link($title = '%title', $in_same_cat = false, $excluded_categories = '', $start = true) {
-	$posts = get_boundary_post($in_same_cat,$excluded_categories,$start);
+	$posts = get_boundary_post($in_same_cat, $excluded_categories, $start);
 	// If there is no post stop.
 	if ( empty($posts) )
 		return;
@@ -1411,7 +1510,7 @@ function get_pagenum_link($pagenum = 1) {
 			$query_string = '';
 		}
 
-		$request = preg_replace( '|page/\d+/?$|', '', $request);
+		$request = preg_replace( "|$wp_rewrite->pagination_base/\d+/?$|", '', $request);
 		$request = preg_replace( '|^index\.php|', '', $request);
 		$request = ltrim($request, '/');
 
@@ -1421,7 +1520,7 @@ function get_pagenum_link($pagenum = 1) {
 			$base .= 'index.php/';
 
 		if ( $pagenum > 1 ) {
-			$request = ( ( !empty( $request ) ) ? trailingslashit( $request ) : $request ) . user_trailingslashit( 'page/' . $pagenum, 'paged' );
+			$request = ( ( !empty( $request ) ) ? trailingslashit( $request ) : $request ) . user_trailingslashit( $wp_rewrite->pagination_base . "/" . $pagenum, 'paged' );
 		}
 
 		$result = $base . $request . $query_string;
@@ -1480,7 +1579,7 @@ function next_posts( $max_page = 0, $echo = true ) {
  * @param int $max_page Optional. Max pages.
  * @return string|null
  */
-function get_next_posts_link( $label = 'Next Page &raquo;', $max_page = 0 ) {
+function get_next_posts_link( $label = null, $max_page = 0 ) {
 	global $paged, $wp_query;
 
 	if ( !$max_page )
@@ -1491,7 +1590,10 @@ function get_next_posts_link( $label = 'Next Page &raquo;', $max_page = 0 ) {
 
 	$nextpage = intval($paged) + 1;
 
-	if ( !is_single() && ( empty($paged) || $nextpage <= $max_page) ) {
+	if ( null === $label )
+		$label = __( 'Next Page &raquo;' );
+
+	if ( !is_single() && ( $nextpage <= $max_page ) ) {
 		$attr = apply_filters( 'next_posts_link_attributes', '' );
 		return '<a href="' . next_posts( $max_page, false ) . "\" $attr>" . preg_replace('/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label) . '</a>';
 	}
@@ -1506,7 +1608,7 @@ function get_next_posts_link( $label = 'Next Page &raquo;', $max_page = 0 ) {
  * @param string $label Content for link text.
  * @param int $max_page Optional. Max pages.
  */
-function next_posts_link( $label = 'Next Page &raquo;', $max_page = 0 ) {
+function next_posts_link( $label = null, $max_page = 0 ) {
 	echo get_next_posts_link( $label, $max_page );
 }
 
@@ -1556,8 +1658,11 @@ function previous_posts( $echo = true ) {
  * @param string $label Optional. Previous page link text.
  * @return string|null
  */
-function get_previous_posts_link( $label = '&laquo; Previous Page' ) {
+function get_previous_posts_link( $label = null ) {
 	global $paged;
+
+	if ( null === $label )
+		$label = __( '&laquo; Previous Page' );
 
 	if ( !is_single() && $paged > 1 ) {
 		$attr = apply_filters( 'previous_posts_link_attributes', '' );
@@ -1573,7 +1678,7 @@ function get_previous_posts_link( $label = '&laquo; Previous Page' ) {
  *
  * @param string $label Optional. Previous page link text.
  */
-function previous_posts_link( $label = '&laquo; Previous Page' ) {
+function previous_posts_link( $label = null ) {
 	echo get_previous_posts_link( $label );
 }
 
@@ -1859,11 +1964,12 @@ function get_home_url( $blog_id = null, $path = '', $scheme = null ) {
 		$scheme = is_ssl() && !is_admin() ? 'https' : 'http';
 
 	if ( empty( $blog_id ) || !is_multisite() )
-		$home = get_option( 'home' );
+		$url = get_option( 'home' );
 	else
-		$home = get_blog_option( $blog_id, 'home' );
+		$url = get_blog_option( $blog_id, 'home' );
 
-	$url = str_replace( 'http://', "$scheme://", $home );
+	if ( 'http' != $scheme )
+		$url = str_replace( 'http://', "$scheme://", $url );
 
 	if ( !empty( $path ) && is_string( $path ) && strpos( $path, '..' ) === false )
 		$url .= '/' . ltrim( $path, '/' );
@@ -1925,7 +2031,8 @@ function get_site_url( $blog_id = null, $path = '', $scheme = null ) {
 	else
 		$url = get_blog_option( $blog_id, 'siteurl' );
 
-	$url = str_replace( 'http://', "{$scheme}://", $url );
+	if ( 'http' != $scheme )
+		$url = str_replace( 'http://', "{$scheme}://", $url );
 
 	if ( !empty( $path ) && is_string( $path ) && strpos( $path, '..' ) === false )
 		$url .= '/' . ltrim( $path, '/' );
@@ -2076,9 +2183,7 @@ function network_site_url( $path = '', $scheme = null ) {
 			$scheme = ( is_ssl() ? 'https' : 'http' );
 	}
 
-	$url = 'http://' . $current_site->domain . $current_site->path;
-
-	$url = str_replace( 'http://', "{$scheme}://", $url );
+	$url = $scheme . '://' . $current_site->domain . $current_site->path;
 
 	if ( !empty($path) && is_string($path) && strpos($path, '..') === false )
 		$url .= ltrim($path, '/');
@@ -2111,9 +2216,7 @@ function network_home_url( $path = '', $scheme = null ) {
 	if ( !in_array($scheme, array('http', 'https')) )
 		$scheme = is_ssl() && !is_admin() ? 'https' : 'http';
 
-	$url = 'http://' . $current_site->domain . $current_site->path;
-
-	$url = str_replace( 'http://', "$scheme://", $url );
+	$url = $scheme . '://' . $current_site->domain . $current_site->path;
 
 	if ( !empty( $path ) && is_string( $path ) && strpos( $path, '..' ) === false )
 		$url .= ltrim( $path, '/' );
@@ -2132,12 +2235,113 @@ function network_home_url( $path = '', $scheme = null ) {
  * @return string Admin url link with optional path appended
 */
 function network_admin_url( $path = '', $scheme = 'admin' ) {
-	$url = network_site_url('wp-admin/', $scheme);
+	if ( ! is_multisite() )
+		return admin_url( $path, $scheme );
+
+	$url = network_site_url('wp-admin/network/', $scheme);
 
 	if ( !empty($path) && is_string($path) && strpos($path, '..') === false )
 		$url .= ltrim($path, '/');
 
 	return apply_filters('network_admin_url', $url, $path);
+}
+
+/**
+ * Retrieve the url to the admin area for the current user.
+ *
+ * @package WordPress
+ * @since 3.0.0
+ *
+ * @param string $path Optional path relative to the admin url
+ * @param string $scheme The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.
+ * @return string Admin url link with optional path appended
+*/
+function user_admin_url( $path = '', $scheme = 'admin' ) {
+	$url = network_site_url('wp-admin/user/', $scheme);
+
+	if ( !empty($path) && is_string($path) && strpos($path, '..') === false )
+		$url .= ltrim($path, '/');
+
+	return apply_filters('user_admin_url', $url, $path);
+}
+
+/**
+ * Retrieve the url to the admin area for either the current blog or the network depending on context.
+ *
+ * @package WordPress
+ * @since 3.1.0
+ *
+ * @param string $path Optional path relative to the admin url
+ * @param string $scheme The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.
+ * @return string Admin url link with optional path appended
+*/
+function self_admin_url($path = '', $scheme = 'admin') {
+	if ( is_network_admin() )
+		return network_admin_url($path, $scheme);
+	elseif ( is_user_admin() )
+		return user_admin_url($path, $scheme);
+	else
+		return admin_url($path, $scheme);
+}
+
+/**
+ * Get the URL to the user's dashboard.
+ *
+ * If a user does not belong to any sites, the global user dashboard is used.  If the user belongs to the current site,
+ * the dashboard for the current site is returned.  If the user cannot edit the current site, the dashboard to the user's
+ * primary blog is returned.
+ *
+ * @since 3.1.0
+ *
+ * @param int $user_id User ID
+ * @param string $path Optional path relative to the dashboard.  Use only paths known to both blog and user admins.
+ * @param string $scheme The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.
+ * @return string Dashboard url link with optional path appended
+ */
+function get_dashboard_url( $user_id, $path = '', $scheme = 'admin' ) {
+	$user_id = (int) $user_id;
+
+	$blogs = get_blogs_of_user( $user_id );
+	if ( ! is_super_admin() && empty($blogs) ) {
+		$url = user_admin_url( $path, $scheme );
+	} elseif ( ! is_multisite() ) {
+		$url = admin_url( $path, $scheme );
+	} else {
+		$current_blog = get_current_blog_id();
+		if ( $current_blog  && ( is_super_admin( $user_id ) || in_array( $current_blog, array_keys( $blogs ) ) ) ) {
+			$url = admin_url( $path, $scheme );
+		} else {
+			$active = get_active_blog_for_user( $user_id );
+			if ( $active )
+				$url = get_admin_url( $active->blog_id, $path, $scheme );
+			else
+				$url = user_admin_url( $path, $scheme );
+		}
+	}
+
+	return apply_filters( 'user_dashboard_url', $url, $user_id, $path, $scheme);
+}
+
+/**
+ * Get the URL to the user's profile editor.
+ *
+ * @since 3.1.0
+ *
+ * @param int $user User ID
+ * @param string $scheme The scheme to use. Default is 'admin', which obeys force_ssl_admin() and is_ssl(). 'http' or 'https' can be passed to force those schemes.
+ * @return string Dashboard url link with optional path appended
+ */
+function get_edit_profile_url( $user, $scheme = 'admin' ) {
+	$user = (int) $user;
+
+	if ( is_user_admin() )
+		$url = user_admin_url( 'profile.php', $scheme );
+	elseif ( is_network_admin() )
+		$url = network_admin_url( 'profile.php', $scheme );
+	else
+		$url = get_dashboard_url( $user, 'profile.php', $scheme );
+
+	return apply_filters( 'edit_profile_url', $url, $user, $scheme);
 }
 
 /**
@@ -2169,7 +2373,7 @@ function rel_canonical() {
  * @since 3.0.0.
  *
  * @param int $id A post or blog id.  Default is 0, which means the current post or blog.
- * @param string $contex Whether the id is a 'blog' id, 'post' id, or 'media' id.  If 'post', the post_type of the post is consulted.  If 'query', the current query is consulted to determine the id and context. Default is 'post'.
+ * @param string $context Whether the id is a 'blog' id, 'post' id, or 'media' id. If 'post', the post_type of the post is consulted. If 'query', the current query is consulted to determine the id and context. Default is 'post'.
  * @param bool $allow_slugs Whether to allow post slugs in the shortlink. It is up to the plugin how and whether to honor this.
  * @return string A shortlink or an empty string if no shortlink exists for the requested resource or if shortlinks are not enabled.
  */
@@ -2215,7 +2419,7 @@ function wp_shortlink_wp_head() {
 	if ( empty( $shortlink ) )
 		return;
 
-	echo "<link rel='shortlink' href='" . esc_url_raw( $shortlink ) . "' />\n";
+	echo "<link rel='shortlink' href='" . esc_url( $shortlink ) . "' />\n";
 }
 
 /**
@@ -2228,7 +2432,7 @@ function wp_shortlink_wp_head() {
  * @uses wp_get_shortlink()
  */
 function wp_shortlink_header() {
-    if ( headers_sent() )
+	if ( headers_sent() )
 		return;
 
 	$shortlink = wp_get_shortlink(0, 'query');

@@ -5,7 +5,7 @@ html {
 body {
 	background: #fff;
 	color: #333;
-	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+	font-family: sans-serif;
 	margin: 2em auto;
 	width: 700px;
 	padding: 1em 2em;
@@ -74,7 +74,7 @@ abbr {
 }
 
 .submit input, .button, .button-secondary {
-	font-family: "Lucida Grande", Verdana, Arial, "Bitstream Vera Sans", sans-serif;
+	font-family: sans-serif;
 	text-decoration: none;
 	font-size: 14px !important;
 	line-height: 16px;
@@ -107,10 +107,10 @@ abbr {
 
 textarea {
 	border: 1px solid #bbb;
-	-moz-border-radius: 4px;
-	-khtml-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
 .form-table {
@@ -170,7 +170,7 @@ textarea {
 }
 
 #error-page code, .code {
-	font-family: Consolas, Monaco, Courier, monospace;
+	font-family: Consolas, Monaco, monospace;
 }
 
 #pass-strength-result {
@@ -182,6 +182,7 @@ textarea {
 	padding: 5px;
 	text-align: center;
 	width: 200px;
+	display: none;
 }
 
 #pass-strength-result.bad {

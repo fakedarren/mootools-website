@@ -14,7 +14,6 @@
 	font-family: Tahoma, Arial;
 }
 #dashboard_right_now p.sub  {
-	font-style:normal;
 	left:auto;
 	right:15px;
 }
@@ -34,15 +33,16 @@
 #dashboard_right_now .table_discussion {
 	float:left;
 }
-#dashboard_right_now .versions {
-	clear:right;
-}
 #dashboard_right_now .versions a {
 	font-family: Tahoma, Arial;
 }
 #dashboard_right_now a.button {
 	float: left;
 	clear: left;
+}
+#dashboard_plugins .inside span {
+	 padding-left: 0;
+	 padding-right: 5px;
 }
 #dashboard-widgets h3 .postbox-title-action {
 	right: auto;

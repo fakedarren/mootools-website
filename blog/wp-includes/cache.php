@@ -110,7 +110,7 @@ function wp_cache_init() {
  * @uses $wp_object_cache Object Cache Class
  * @see WP_Object_Cache::replace()
  *
- * @param int|string $id What to call the contents in the cache
+ * @param int|string $key What to call the contents in the cache
  * @param mixed $data The contents to store in the cache
  * @param string $flag Where to group the cache contents
  * @param int $expire When to expire the cache contents
@@ -129,7 +129,7 @@ function wp_cache_replace($key, $data, $flag = '', $expire = 0) {
  * @uses $wp_object_cache Object Cache Class
  * @see WP_Object_Cache::set()
  *
- * @param int|string $id What to call the contents in the cache
+ * @param int|string $key What to call the contents in the cache
  * @param mixed $data The contents to store in the cache
  * @param string $flag Where to group the cache contents
  * @param int $expire When to expire the cache contents
@@ -171,8 +171,6 @@ function wp_cache_add_non_persistent_groups( $groups ) {
  * this function instructs the backend to reset those keys and perform any cleanup since blog or site IDs have changed since cache init.
  *
  * @since 2.6.0
- *
- * @param string|array $groups A group or an array of groups to add
  */
 function wp_cache_reset() {
 	global $wp_object_cache;
@@ -352,7 +350,7 @@ class WP_Object_Cache {
 		if ( isset ($this->cache[$group][$id]) ) {
 			$this->cache_hits += 1;
 			if ( is_object($this->cache[$group][$id]) )
-				return wp_clone($this->cache[$group][$id]);
+				return clone $this->cache[$group][$id];
 			else
 				return $this->cache[$group][$id];
 		}
@@ -428,7 +426,7 @@ class WP_Object_Cache {
 			$data = '';
 
 		if ( is_object($data) )
-			$data = wp_clone($data);
+			$data = clone $data;
 
 		$this->cache[$group][$id] = $data;
 
@@ -451,26 +449,11 @@ class WP_Object_Cache {
 		echo "<strong>Cache Hits:</strong> {$this->cache_hits}<br />";
 		echo "<strong>Cache Misses:</strong> {$this->cache_misses}<br />";
 		echo "</p>";
-
+		echo '<ul>';
 		foreach ($this->cache as $group => $cache) {
-			echo "<p>";
-			echo "<strong>Group:</strong> $group<br />";
-			echo "<strong>Cache:</strong>";
-			echo "<pre>";
-			print_r($cache);
-			echo "</pre>";
+			echo "<li><strong>Group:</strong> $group - ( " . number_format( strlen( serialize( $cache ) ) / 1024, 2 ) . 'k )</li>';
 		}
-	}
-
-	/**
-	 * PHP4 constructor; Calls PHP 5 style constructor
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return WP_Object_Cache
-	 */
-	function WP_Object_Cache() {
-		return $this->__construct();
+		echo '</ul>';
 	}
 
 	/**

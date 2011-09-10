@@ -7,12 +7,12 @@
  */
 
 /**
- * Retrieve Bookmark data based on ID
+ * Retrieve Bookmark data
  *
  * @since 2.1.0
  * @uses $wpdb Database Object
  *
- * @param int $bookmark_id
+ * @param mixed $bookmark
  * @param string $output Optional. Either OBJECT, ARRAY_N, or ARRAY_A constant
  * @param string $filter Optional, default is 'raw'.
  * @return array|object Type returned depends on $output value.
@@ -213,22 +213,32 @@ function get_bookmarks($args = '') {
 
 	$orderby = strtolower($orderby);
 	$length = '';
-	switch ($orderby) {
+	switch ( $orderby ) {
 		case 'length':
 			$length = ", CHAR_LENGTH(link_name) AS length";
 			break;
 		case 'rand':
 			$orderby = 'rand()';
 			break;
+		case 'link_id':
+			$orderby = "$wpdb->links.link_id";
+			break;
 		default:
 			$orderparams = array();
-			foreach ( explode(',', $orderby) as $ordparam )
-				$orderparams[] = 'link_' . trim($ordparam);
+			foreach ( explode(',', $orderby) as $ordparam ) {
+				$ordparam = trim($ordparam);
+				if ( in_array( $ordparam, array( 'name', 'url', 'visible', 'rating', 'owner', 'updated' ) ) )
+					$orderparams[] = 'link_' . $ordparam;
+			}
 			$orderby = implode(',', $orderparams);
 	}
 
-	if ( 'link_id' == $orderby )
-		$orderby = "$wpdb->links.link_id";
+	if ( empty( $orderby ) )
+		$orderby = 'link_name';
+
+	$order = strtoupper( $order );
+	if ( '' !== $order && !in_array( $order, array( 'ASC', 'DESC' ) ) )
+		$order = 'ASC';
 
 	$visible = '';
 	if ( $hide_invisible )
@@ -334,11 +344,10 @@ function sanitize_bookmark_field($field, $value, $bookmark_id, $context) {
 		return $value;
 
 	if ( 'edit' == $context ) {
-		$format_to_edit = array('link_notes');
 		$value = apply_filters("edit_$field", $value, $bookmark_id);
 
-		if ( in_array($field, $format_to_edit) ) {
-			$value = format_to_edit($value);
+		if ( 'link_notes' == $field ) {
+			$value = esc_html( $value ); // textarea_escaped
 		} else {
 			$value = esc_attr($value);
 		}

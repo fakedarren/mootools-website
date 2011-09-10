@@ -24,7 +24,7 @@ if ( !function_exists('wp_install') ) :
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 2.1.0
  *
  * @param string $blog_title Blog title.
  * @param string $user_name User's username.
@@ -64,7 +64,7 @@ function wp_install( $blog_title, $user_name, $user_email, $public, $deprecated 
 	$user_password = trim($user_password);
 	$email_password = false;
 	if ( !$user_id && empty($user_password) ) {
-		$user_password = wp_generate_password();
+		$user_password = wp_generate_password( 12, false );
 		$message = __('<strong><em>Note that password</em></strong> carefully! It is a <em>random</em> password that was generated just for you.');
 		$user_id = wp_create_user($user_name, $user_password, $user_email);
 		update_user_option($user_id, 'default_password_nag', true, true);
@@ -98,7 +98,7 @@ if ( !function_exists('wp_install_defaults') ) :
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 2.1.0
  *
  * @param int $user_id User ID.
  */
@@ -243,7 +243,15 @@ function wp_install_defaults($user_id) {
 								));
 
 	// First Page
-	$first_page = __('This is an example of a WordPress page, you could edit this to put information about yourself or your site so readers know where you are coming from. You can create as many pages like this one or sub-pages as you like and manage all of your content inside of WordPress.');
+	$first_page = sprintf( __( "This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:
+
+<blockquote>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my blog. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)</blockquote>
+
+...or something like this:
+
+<blockquote>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickies to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.</blockquote>
+
+As a new WordPress user, you should go to <a href=\"%s\">your dashboard</a> to delete this page and create new pages for your content. Have fun!" ), admin_url() );
 	if ( is_multisite() )
 		$first_page = get_site_option( 'first_page', $first_page );
 	$first_post_guid = get_option('home') . '/?page_id=2';
@@ -253,9 +261,9 @@ function wp_install_defaults($user_id) {
 								'post_date_gmt' => $now_gmt,
 								'post_content' => $first_page,
 								'post_excerpt' => '',
-								'post_title' => __('About'),
+								'post_title' => __( 'Sample Page' ),
 								/* translators: Default page slug */
-								'post_name' => _x('about', 'Default page slug'),
+								'post_name' => __( 'sample-page' ),
 								'post_modified' => $now,
 								'post_modified_gmt' => $now_gmt,
 								'guid' => $first_post_guid,
@@ -266,7 +274,7 @@ function wp_install_defaults($user_id) {
 								));
 	$wpdb->insert( $wpdb->postmeta, array( 'post_id' => 2, 'meta_key' => '_wp_page_template', 'meta_value' => 'default' ) );
 
-	// Setup default widgets for default theme.
+	// Set up default widgets for default theme.
 	update_option( 'widget_search', array ( 2 => array ( 'title' => '' ), '_multiwidget' => 1 ) );
 	update_option( 'widget_recent-posts', array ( 2 => array ( 'title' => '', 'number' => 5 ), '_multiwidget' => 1 ) );
 	update_option( 'widget_recent-comments', array ( 2 => array ( 'title' => '', 'number' => 5 ), '_multiwidget' => 1 ) );
@@ -300,7 +308,7 @@ if ( !function_exists('wp_new_blog_notification') ) :
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 2.1.0
  *
  * @param string $blog_title Blog title.
  * @param string $blog_url Blog url.
@@ -336,7 +344,7 @@ if ( !function_exists('wp_upgrade') ) :
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 2.1.0
  *
  * @return null
  */
@@ -375,7 +383,7 @@ endif;
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.0.1
  */
 function upgrade_all() {
 	global $wp_current_db_version, $wp_db_version, $wp_rewrite;
@@ -1187,7 +1195,7 @@ function upgrade_network() {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.0.0
  *
  * @param string $table_name Database table name to create.
  * @param string $create_ddl SQL statement to create table.
@@ -1210,7 +1218,7 @@ function maybe_create_table($table_name, $create_ddl) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.0.1
  *
  * @param string $table Database table name.
  * @param string $index Index name to drop.
@@ -1233,7 +1241,7 @@ function drop_index($table, $index) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.0.1
  *
  * @param string $table Database table name.
  * @param string $index Database table index column.
@@ -1296,7 +1304,7 @@ function get_alloptions_110() {
 /**
  * Version of get_option that is private to install/upgrade.
  *
- * @since unknown
+ * @since 1.5.1
  * @access private
  *
  * @param string $setting Option name.
@@ -1333,7 +1341,7 @@ function __get_option($setting) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.5.0
  *
  * @param string $content
  * @return string
@@ -1360,7 +1368,7 @@ function deslash($content) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.5.0
  *
  * @param unknown_type $queries
  * @param unknown_type $execute
@@ -1567,7 +1575,7 @@ function dbDelta($queries, $execute = true) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.5.0
  */
 function make_db_current() {
 	global $wp_queries;
@@ -1583,7 +1591,7 @@ function make_db_current() {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.5.0
  */
 function make_db_current_silent() {
 	global $wp_queries;
@@ -1596,7 +1604,7 @@ function make_db_current_silent() {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.5.0
  *
  * @param unknown_type $theme_name
  * @param unknown_type $template
@@ -1656,7 +1664,7 @@ function make_site_theme_from_oldschool($theme_name, $template) {
 	}
 
 	// Add a theme header.
-	$header = "/*\nTheme Name: $theme_name\nTheme URI: " . __get_option('siteurl') . "\nDescription: A theme automatically created by the upgrade.\nVersion: 1.0\nAuthor: Moi\n*/\n";
+	$header = "/*\nTheme Name: $theme_name\nTheme URI: " . __get_option('siteurl') . "\nDescription: A theme automatically created by the update.\nVersion: 1.0\nAuthor: Moi\n*/\n";
 
 	$stylelines = file_get_contents("$site_dir/style.css");
 	if ($stylelines) {
@@ -1675,7 +1683,7 @@ function make_site_theme_from_oldschool($theme_name, $template) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.5.0
  *
  * @param unknown_type $theme_name
  * @param unknown_type $template
@@ -1741,7 +1749,7 @@ function make_site_theme_from_default($theme_name, $template) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 1.5.0
  *
  * @return unknown
  */
@@ -1789,7 +1797,7 @@ function make_site_theme() {
 /**
  * Translate user level to user role name.
  *
- * @since unknown
+ * @since 2.0.0
  *
  * @param int $level User level.
  * @return string User role name.
@@ -1820,7 +1828,7 @@ function translate_level_to_role($level) {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 2.1.0
  */
 function wp_check_mysql_version() {
 	global $wpdb;
@@ -1834,7 +1842,7 @@ function wp_check_mysql_version() {
  *
  * {@internal Missing Long Description}}
  *
- * @since unknown
+ * @since 2.2.0
  */
 function maybe_disable_automattic_widgets() {
 	$plugins = __get_option( 'active_plugins' );
@@ -1850,6 +1858,8 @@ function maybe_disable_automattic_widgets() {
 
 /**
  * Runs before the schema is upgraded.
+ *
+ * @since 2.9.0
  */
 function pre_schema_upgrade() {
 	global $wp_current_db_version, $wp_db_version, $wpdb;

@@ -4,7 +4,16 @@ body {
 
 #poststuff #edButtonPreview,
 #poststuff #edButtonHTML {
-	margin: 0 0 0 5px;
+	float: left;
+}
+
+#poststuff #edButtonHTML {
+	margin-left: 15px;
+	margin-right: 5px;
+}
+
+#header-logo,
+#wphead h1 {
 	float: right;
 }
 
@@ -15,23 +24,15 @@ div#poststuff {
 }
 
 .posting {
+	margin-left: 212px;
 	margin-right: 0;
-	margin-left: 228px;
-	left: auto;
-	right: 0;
+	position: relative;
 }
 
 #side-info-column {
 	float: left;
 	right: auto;
 	left: 0;
-	margin-right: 0;
-	margin-left: 10px;
-}
-
-#side-info-column .sleeve {
-	padding-left: 0;
-	padding-right: 10px;
 }
 
 h3.tb {
@@ -39,24 +40,26 @@ h3.tb {
 	margin-right: 5px;
 }
 
-#actions {
+#publish {
 	float: left;
 }
 
-#extra_fields #actions {
-	right: auto;
-	left: 4px;
+.postbox .handlediv {
+	float: left;
 }
 
-#actions li {
+.actions {
+	float: left;
+}
+
+.actions li {
 	float: right;
 	margin-right: 0;
 	margin-left: 10px;
 }
 
-#extra_fields .button {
-	margin-right: 0;
-	margin-left: 5px;
+#extra-fields .actions {
+    margin: -23px 0 0 -7px;
 }
 
 /* Photo Styles */
@@ -64,7 +67,8 @@ h3.tb {
 	float: right;
 }
 
-#category-add input, #category-add select {
+#category-add input,
+#category-add select {
 	font-family: Tahoma, Arial;
 }
 
@@ -73,6 +77,12 @@ h3.tb {
 #linkcategorydiv ul.categorychecklist ul {
 	margin-left: 0;
 	margin-right: 18px;
+}
+
+/* Categories */
+.category-tabs li {
+	padding-left: 0;
+	padding-right: 8px;
 }
 
 /* Tags */

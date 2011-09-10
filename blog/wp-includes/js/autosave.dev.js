@@ -1,4 +1,4 @@
-var autosave, autosaveLast = '', autosavePeriodical, autosaveOldMessage = '', autosaveDelayPreview = false, notSaved = true, blockSave = false, interimLogin = false;
+var autosave, autosaveLast = '', autosavePeriodical, autosaveOldMessage = '', autosaveDelayPreview = false, notSaved = true, blockSave = false, fullscreen;
 
 jQuery(document).ready( function($) {
 	var dotabkey = true;
@@ -21,7 +21,10 @@ jQuery(document).ready( function($) {
 			else
 				t.addClass('button-disabled');
 		});
-		$('#ajax-loading').css('visibility', 'visible');
+		if ( $(this).attr('id') == 'publish' )
+			$('#ajax-loading').css('visibility', 'visible');
+		else
+			$('#draft-ajax-loading').css('visibility', 'visible');
 	});
 
 	window.onbeforeunload = function(){
@@ -31,7 +34,14 @@ jQuery(document).ready( function($) {
 			if ( mce.isDirty() )
 				return autosaveL10n.saveAlert;
 		} else {
-			title = $('#post #title').val(), content = $('#post #content').val();
+			if ( fullscreen && fullscreen.settings.visible ) {
+				title = $('#wp-fullscreen-title').val();
+				content = $("#wp_mce_fullscreen").val();
+			} else {
+				title = $('#post #title').val();
+				content = $('#post #content').val();
+			}
+
 			if ( ( title || content ) && title + content != autosaveLast )
 				return autosaveL10n.saveAlert;
 		}
@@ -80,7 +90,7 @@ jQuery(document).ready( function($) {
 });
 
 function autosave_parse_response(response) {
-	var res = wpAjax.parseAjaxResponse(response, 'autosave'), message = '', postID, sup, url;
+	var res = wpAjax.parseAjaxResponse(response, 'autosave'), message = '', postID, sup;
 
 	if ( res && res.responses && res.responses.length ) {
 		message = res.responses[0].data; // The saved message or error.
@@ -91,13 +101,12 @@ function autosave_parse_response(response) {
 				autosave = function() {};
 				res = { errors: true };
 			}
-			if ( sup['session_expired'] && (url = sup['session_expired']) ) {
-				if ( !interimLogin || interimLogin.closed ) {
-					interimLogin = window.open(url, 'login', 'width=600,height=450,resizable=yes,scrollbars=yes,status=yes');
-					interimLogin.focus();
-				}
-				delete sup['session_expired'];
+
+			if ( sup['alert'] ) {
+				jQuery('#autosave-alert').remove();
+				jQuery('#titlediv').after('<div id="autosave-alert" class="error below-h2"><p>' + sup['alert'] + '</p></div>');
 			}
+
 			jQuery.each(sup, function(selector, value) {
 				if ( selector.match(/^replace-/) ) {
 					jQuery('#'+selector.replace('replace-', '')).val(value);
@@ -113,8 +122,11 @@ function autosave_parse_response(response) {
 			}
 		}
 	}
-	if ( message ) { jQuery('#autosave').html(message); } // update autosave message
-	else if ( autosaveOldMessage && res ) { jQuery('#autosave').html( autosaveOldMessage ); }
+	if ( message ) { // update autosave message
+		jQuery('.autosave-message').html(message);
+	} else if ( autosaveOldMessage && res ) {
+		jQuery('.autosave-message').html( autosaveOldMessage );
+	}
 	return res;
 }
 
@@ -128,7 +140,7 @@ function autosave_saved(response) {
 // called when autosaving new post
 function autosave_saved_new(response) {
 	blockSave = false;
-	var res = autosave_parse_response(response), tempID, postID;
+	var res = autosave_parse_response(response), postID;
 	if ( res && res.responses.length && !res.errors ) {
 		// An ID is sent only for real auto-saves, not for autosave=0 "keepalive" saves
 		postID = parseInt( res.responses[0].id, 10 );
@@ -149,36 +161,36 @@ function autosave_saved_new(response) {
 function autosave_update_slug(post_id) {
 	// create slug area only if not already there
 	if ( 'undefined' != makeSlugeditClickable && jQuery.isFunction(makeSlugeditClickable) && !jQuery('#edit-slug-box > *').size() ) {
-		jQuery.post(
-			ajaxurl,
-			{
+		jQuery.post( ajaxurl, {
 				action: 'sample-permalink',
 				post_id: post_id,
-				new_title: jQuery('#title').val(),
+				new_title: fullscreen && fullscreen.settings.visible ? jQuery('#wp-fullscreen-title').val() : jQuery('#title').val(),
 				samplepermalinknonce: jQuery('#samplepermalinknonce').val()
 			},
 			function(data) {
-				jQuery('#edit-slug-box').html(data);
-				makeSlugeditClickable();
+				if ( data !== '-1' ) {
+					jQuery('#edit-slug-box').html(data);
+					makeSlugeditClickable();
+				}
 			}
 		);
 	}
 }
 
 function autosave_loading() {
-	jQuery('#autosave').html(autosaveL10n.savingText);
+	jQuery('.autosave-message').html(autosaveL10n.savingText);
 }
 
 function autosave_enable_buttons() {
 	// delay that a bit to avoid some rare collisions while the DOM is being updated.
 	setTimeout(function(){
 		jQuery(':button, :submit', '#submitpost').removeAttr('disabled');
-		jQuery('#ajax-loading').css('visibility', 'hidden');
+		jQuery('.ajax-loading').css('visibility', 'hidden');
 	}, 500);
 }
 
 function autosave_disable_buttons() {
-	jQuery(':button, :submit', '#submitpost').attr('disabled', 'disabled');
+	jQuery(':button, :submit', '#submitpost').prop('disabled', true);
 	// Re-enable 5 sec later.  Just gives autosave a head start to avoid collisions.
 	setTimeout(autosave_enable_buttons, 5000);
 }
@@ -194,14 +206,14 @@ function delayed_autosave() {
 autosave = function() {
 	// (bool) is rich editor enabled and active
 	blockSave = true;
-	var rich = (typeof tinyMCE != "undefined") && tinyMCE.activeEditor && !tinyMCE.activeEditor.isHidden(), post_data, doAutoSave, ed, origStatus, successCallback;
+	var rich = (typeof tinyMCE != "undefined") && tinyMCE.activeEditor && !tinyMCE.activeEditor.isHidden(),
+		post_data, doAutoSave, ed, origStatus, successCallback;
 
 	autosave_disable_buttons();
 
 	post_data = {
 		action: "autosave",
 		post_ID:  jQuery("#post_ID").val() || 0,
-		post_title: jQuery("#title").val() || "",
 		autosavenonce: jQuery('#autosavenonce').val(),
 		post_type: jQuery('#post_type').val() || "",
 		autosave: 1
@@ -226,13 +238,20 @@ autosave = function() {
 		if ( ed.plugins.spellchecker && ed.plugins.spellchecker.active ) {
 			doAutoSave = false;
 		} else {
-			if ( 'mce_fullscreen' == ed.id )
+			if ( 'mce_fullscreen' == ed.id || 'wp_mce_fullscreen' == ed.id )
 				tinyMCE.get('content').setContent(ed.getContent({format : 'raw'}), {format : 'raw'});
-			tinyMCE.get('content').save();
+			tinyMCE.triggerSave();
 		}
 	}
 
-	post_data["content"] = jQuery("#content").val();
+	if ( fullscreen && fullscreen.settings.visible ) {
+		post_data["post_title"] = jQuery('#wp-fullscreen-title').val();
+		post_data["content"] = jQuery("#wp_mce_fullscreen").val();
+	} else {
+		post_data["post_title"] = jQuery("#title").val()
+		post_data["content"] = jQuery("#content").val();
+	}
+
 	if ( jQuery('#post_name').val() )
 		post_data["post_name"] = jQuery('#post_name').val();
 
@@ -249,22 +268,23 @@ autosave = function() {
 	} );
 	post_data["catslist"] = goodcats.join(",");
 
-	if ( jQuery("#comment_status").attr("checked") )
+	if ( jQuery("#comment_status").prop("checked") )
 		post_data["comment_status"] = 'open';
-	if ( jQuery("#ping_status").attr("checked") )
+	if ( jQuery("#ping_status").prop("checked") )
 		post_data["ping_status"] = 'open';
 	if ( jQuery("#excerpt").size() )
 		post_data["excerpt"] = jQuery("#excerpt").val();
 	if ( jQuery("#post_author").size() )
 		post_data["post_author"] = jQuery("#post_author").val();
-	if ( jQuery("#parent_id").val() ) 
-		post_data["parent_id"] = jQuery("#parent_id").val(); 
+	if ( jQuery("#parent_id").val() )
+		post_data["parent_id"] = jQuery("#parent_id").val();
 	post_data["user_ID"] = jQuery("#user-id").val();
 	if ( jQuery('#auto_draft').val() == '1' )
 		post_data["auto_draft"] = '1';
 
 	if ( doAutoSave ) {
-		autosaveLast = jQuery("#title").val() + jQuery("#content").val();
+		autosaveLast = post_data["post_title"] + post_data["content"];
+		jQuery(document).triggerHandler('wpcountwords', [ post_data["content"] ]);
 	} else {
 		post_data['autosave'] = 0;
 	}
@@ -280,7 +300,7 @@ autosave = function() {
 		data: post_data,
 		beforeSend: doAutoSave ? autosave_loading : null,
 		type: "POST",
-		url: autosaveL10n.requestFile,
+		url: ajaxurl,
 		success: successCallback
 	});
 }

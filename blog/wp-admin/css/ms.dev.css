@@ -6,6 +6,11 @@
 	position: static;
 }
 
+.rtl #dashboard_right_now p.musub {
+	padding-left: 0;
+	padding-right: 16px;
+}
+
 #dashboard_right_now td.b a.musublink {
 	font-size: 16px;
 }
@@ -18,27 +23,16 @@
 	white-space: normal;
 }
 
-/* No drag and drop on ms-sites.php */
-.ms-sites-php .postbox h3 {
-	cursor: auto;
-}
-
-.ms-sites-php .postbox .description {
-	margin:10px 0 0px;
-	padding:0px 10px 10px;
-	border-bottom:1px solid #DFDFDF;
-}
-
 /* Background Color for Site Status */
-tr.site-deleted {
+.wp-list-table .site-deleted {
 	background: #ff8573;
 }
-tr.site-spammed {
-	background: #faa;
+.wp-list-table .site-spammed {
+	background: #faafaa;
 }
-tr.site-archived {
-	background:#ffebe8;
+.wp-list-table .site-archived {
+	background: #ffebe8;
 }
-tr.site-mature {
+.wp-list-table .site-mature {
 	background: #fecac2;
 }

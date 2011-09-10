@@ -26,6 +26,36 @@ function is_subdomain_install() {
 }
 
 /**
+ * Returns array of network plugin files to be included in global scope.
+ *
+ * The default directory is wp-content/plugins. To change the default directory
+ * manually, define <code>WP_PLUGIN_DIR</code> and <code>WP_PLUGIN_URL</code>
+ * in wp-config.php.
+ *
+ * @access private
+ * @since 3.1.0
+ * @return array Files to include
+ */
+function wp_get_active_network_plugins() {
+	$active_plugins = (array) get_site_option( 'active_sitewide_plugins', array() );
+	if ( empty( $active_plugins ) )
+		return array();
+
+	$plugins = array();
+	$active_plugins = array_keys( $active_plugins );
+	sort( $active_plugins );
+
+	foreach ( $active_plugins as $plugin ) {
+		if ( ! validate_file( $plugin ) // $plugin must validate as file
+			&& '.php' == substr( $plugin, -4 ) // $plugin must end with '.php'
+			&& file_exists( WP_PLUGIN_DIR . '/' . $plugin ) // $plugin must exist
+			)
+		$plugins[] = WP_PLUGIN_DIR . '/' . $plugin;
+	}
+	return $plugins;
+}
+
+/**
  * Checks status of current blog.
  *
  * Checks if the blog is deleted, inactive, archived, or spammed.
@@ -51,28 +81,24 @@ function ms_site_check() {
 		return true;
 
 	if ( '1' == $current_blog->deleted ) {
-		if ( file_exists( WP_CONTENT_DIR . '/blog-deleted.php' ) ) {
+		if ( file_exists( WP_CONTENT_DIR . '/blog-deleted.php' ) )
 			return WP_CONTENT_DIR . '/blog-deleted.php';
-		} else {
-			header( 'HTTP/1.1 410 Gone' );
-			wp_die( /*WP_I18N_USER_DELETED_BLOG*/'This user has elected to delete their account and the content is no longer available.'/*/WP_I18N_USER_DELETED_BLOG*/ );
-		}
+		else
+			wp_die( __( 'This user has elected to delete their account and the content is no longer available.' ), '', array( 'response' => 410 ) );
 	}
 
 	if ( '2' == $current_blog->deleted ) {
 		if ( file_exists( WP_CONTENT_DIR . '/blog-inactive.php' ) )
 			return WP_CONTENT_DIR . '/blog-inactive.php';
 		else
-			wp_die( sprintf( /*WP_I18N_BLOG_NOT_ACTIVATED*/'This site has not been activated yet. If you are having problems activating your site, please contact <a href="mailto:%1$s">%1$s</a>.'/*/WP_I18N_BLOG_NOT_ACTIVATED*/, str_replace( '@', ' AT ', get_site_option( 'admin_email', "support@{$current_site->domain}" ) ) ) );
+			wp_die( sprintf( __( 'This site has not been activated yet. If you are having problems activating your site, please contact <a href="mailto:%1$s">%1$s</a>.' ), str_replace( '@', ' AT ', get_site_option( 'admin_email', "support@{$current_site->domain}" ) ) ) );
 	}
 
 	if ( $current_blog->archived == '1' || $current_blog->spam == '1' ) {
-		if ( file_exists( WP_CONTENT_DIR . '/blog-suspended.php' ) ) {
+		if ( file_exists( WP_CONTENT_DIR . '/blog-suspended.php' ) )
 			return WP_CONTENT_DIR . '/blog-suspended.php';
-		} else {
-			header( 'HTTP/1.1 410 Gone' );
-			wp_die( /*WP_I18N_ARCHIVED*/'This site has been archived or suspended.'/*/WP_I18N_ARCHIVED*/ );
-		}
+		else
+			wp_die( __( 'This site has been archived or suspended.' ), '', array( 'response' => 410 ) );
 	}
 
 	return true;
@@ -87,16 +113,15 @@ function ms_site_check() {
  */
 function get_current_site_name( $current_site ) {
 	global $wpdb;
-	$current_site->site_name = wp_cache_get( $current_site->id . ':current_site_name', 'site-options' );
+
+	$current_site->site_name = wp_cache_get( $current_site->id . ':site_name', 'site-options' );
 	if ( ! $current_site->site_name ) {
-		$current_site->site_name = wp_cache_get( $current_site->id . ':site_name', 'site-options' );
-		if ( ! $current_site->site_name ) {
-			$current_site->site_name = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->sitemeta WHERE site_id = %d AND meta_key = 'site_name'", $current_site->id ) );
-			if ( ! $current_site->site_name )
-				$current_site->site_name = ucfirst( $current_site->domain );
-		}
-		wp_cache_set( $current_site->id . ':current_site_name', $current_site->site_name, 'site-options' );
+		$current_site->site_name = $wpdb->get_var( $wpdb->prepare( "SELECT meta_value FROM $wpdb->sitemeta WHERE site_id = %d AND meta_key = 'site_name'", $current_site->id ) );
+		if ( ! $current_site->site_name )
+			$current_site->site_name = ucfirst( $current_site->domain );
 	}
+	wp_cache_set( $current_site->id . ':site_name', $current_site->site_name, 'site-options' );
+
 	return $current_site;
 }
 

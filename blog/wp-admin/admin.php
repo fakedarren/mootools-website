@@ -7,12 +7,22 @@
  */
 
 /**
- * In WordPress Administration Panels
+ * In WordPress Administration Screens
  *
- * @since unknown
+ * @since 2.3.2
  */
-if ( !defined('WP_ADMIN') )
+if ( ! defined('WP_ADMIN') )
 	define('WP_ADMIN', TRUE);
+
+if ( ! defined('WP_NETWORK_ADMIN') )
+	define('WP_NETWORK_ADMIN', FALSE);
+
+if ( ! defined('WP_USER_ADMIN') )
+	define('WP_USER_ADMIN', FALSE);
+
+if ( ! WP_NETWORK_ADMIN && ! WP_USER_ADMIN ) {
+	define('WP_BLOG_ADMIN', TRUE);
+}
 
 if ( isset($_GET['import']) && !defined('WP_LOAD_IMPORTERS') )
 	define('WP_LOAD_IMPORTERS', true);
@@ -57,8 +67,6 @@ auth_redirect();
 
 nocache_headers();
 
-update_category_cache();
-
 // Schedule trash collection
 if ( !wp_next_scheduled('wp_scheduled_delete') && !defined('WP_INSTALLING') )
 	wp_schedule_event(time(), 'daily', 'wp_scheduled_delete');
@@ -90,10 +98,15 @@ if ( isset($_GET['taxonomy']) )
 else
 	$taxnow = '';
 
-require(ABSPATH . 'wp-admin/menu.php');
+if ( WP_NETWORK_ADMIN )
+	require(ABSPATH . 'wp-admin/network/menu.php');
+elseif ( WP_USER_ADMIN )
+	require(ABSPATH . 'wp-admin/user/menu.php');
+else
+	require(ABSPATH . 'wp-admin/menu.php');
 
 if ( current_user_can( 'manage_options' ) )
-	@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', '256M' ) );
+	@ini_set( 'memory_limit', apply_filters( 'admin_memory_limit', WP_MAX_MEMORY_LIMIT ) );
 
 do_action('admin_init');
 
@@ -111,7 +124,7 @@ if ( isset($plugin_page) ) {
 				$query_string = $_SERVER[ 'QUERY_STRING' ];
 			else
 				$query_string = 'page=' . $plugin_page;
-			wp_redirect( 'tools.php?' . $query_string );
+			wp_redirect( admin_url('tools.php?' . $query_string) );
 			exit;
 		}
 	}
@@ -165,13 +178,17 @@ if ( isset($plugin_page) ) {
 	if ( ! current_user_can('import') )
 		wp_die(__('You are not allowed to import.'));
 
-	if ( validate_file($importer) )
+	if ( validate_file($importer) ) {
 		wp_redirect( admin_url( 'import.php?invalid=' . $importer ) );
+		exit;
+	}
 
 	// Allow plugins to define importers as well
 	if ( !isset($wp_importers) || !isset($wp_importers[$importer]) || ! is_callable($wp_importers[$importer][2])) {
-		if (! file_exists(ABSPATH . "wp-admin/import/$importer.php"))
+		if (! file_exists(ABSPATH . "wp-admin/import/$importer.php")) {
 			wp_redirect( admin_url( 'import.php?invalid=' . $importer ) );
+			exit;
+		}
 		include(ABSPATH . "wp-admin/import/$importer.php");
 	}
 
@@ -186,8 +203,8 @@ if ( isset($plugin_page) ) {
 
 	define('WP_IMPORTING', true);
 
-	if ( is_multisite() )
-		kses_init_filters();  // Always filter imported data with kses.
+	if ( apply_filters( 'force_filtered_html_on_import', false ) )
+		kses_init_filters();  // Always filter imported data with kses on multisite.
 
 	call_user_func($wp_importers[$importer][2]);
 
@@ -200,15 +217,18 @@ if ( isset($plugin_page) ) {
 	exit();
 } else {
 	do_action("load-$pagenow");
-	// Backwards compatibility with old load-page-new.php, load-page.php,   
-	// and load-categories.php actions.  
-	if ( $typenow == 'page' ) {  
-		if ( $pagenow == 'post-new.php' )  
-			do_action( 'load-page-new.php' );  
-		elseif ( $pagenow == 'post.php' )  
-			do_action( 'load-page.php' );  
-	}  elseif ( $taxnow == 'category' && $pagenow == 'edit-tags.php' ) {
-		do_action( 'load-categories.php' );
+	// Backwards compatibility with old load-page-new.php, load-page.php,
+	// and load-categories.php actions.
+	if ( $typenow == 'page' ) {
+		if ( $pagenow == 'post-new.php' )
+			do_action( 'load-page-new.php' );
+		elseif ( $pagenow == 'post.php' )
+			do_action( 'load-page.php' );
+	}  elseif ( $pagenow == 'edit-tags.php' ) {
+		if ( $taxnow == 'category' )
+			do_action( 'load-categories.php' );
+		elseif ( $taxnow == 'link_category' )
+			do_action( 'load-edit-link-categories.php' );
 	}
 }
 

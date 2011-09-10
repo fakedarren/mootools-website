@@ -19,7 +19,7 @@ class Custom_Background {
 	 * Callback for administration header.
 	 *
 	 * @var callback
-	 * @since unknown
+	 * @since 3.0.0
 	 * @access private
 	 */
 	var $admin_header_callback;
@@ -43,14 +43,14 @@ class Custom_Background {
 	var $page = '';
 
 	/**
-	 * PHP4 Constructor - Register administration header callback.
+	 * Constructor - Register administration header callback.
 	 *
 	 * @since 3.0.0
 	 * @param callback $admin_header_callback
 	 * @param callback $admin_image_div_callback Optional custom image div output callback.
 	 * @return Custom_Background
 	 */
-	function Custom_Background($admin_header_callback = '', $admin_image_div_callback = '') {
+	function __construct($admin_header_callback = '', $admin_image_div_callback = '') {
 		$this->admin_header_callback = $admin_header_callback;
 		$this->admin_image_div_callback = $admin_image_div_callback;
 	}
@@ -85,7 +85,7 @@ class Custom_Background {
 		'<p>' . __( 'You can also choose a background color. If you know the hexadecimal code for the color you want, enter it in the Color field. If not, click on the Select a Color link, and a color picker will allow you to choose the exact shade you want.' ) . '</p>' .
 		'<p>' . __( 'Don&#8217;t forget to click on the Save Changes button when you are finished.' ) . '</p>' .
 		'<p><strong>' . __( 'For more information:' ) . '</strong></p>' .
-		'<p>' . __( '<a href="http://codex.wordpress.org/Appearance_Background_SubPanel" target="_blank">Documentation on Custom Background</a>' ) . '</p>' .
+		'<p>' . __( '<a href="http://codex.wordpress.org/Appearance_Background_Screen" target="_blank">Documentation on Custom Background</a>' ) . '</p>' .
 		'<p>' . __( '<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>' ) . '</p>' );
 		wp_enqueue_script('custom-background');
 		wp_enqueue_style('farbtastic');
@@ -210,7 +210,7 @@ if ( get_background_image() ) {
 <td>
 <form method="post" action="">
 <?php wp_nonce_field('custom-background-remove', '_wpnonce-custom-background-remove'); ?>
-<input type="submit" class="button" name="remove-background" value="<?php esc_attr_e('Remove Background Image'); ?>" /><br/>
+<?php submit_button( __( 'Remove Background Image' ), 'button', 'remove-background', false ); ?><br/>
 <?php _e('This will remove the background image. You will not be able to restore any customizations.') ?>
 </form>
 </td>
@@ -223,7 +223,7 @@ if ( get_background_image() ) {
 <td>
 <form method="post" action="">
 <?php wp_nonce_field('custom-background-reset', '_wpnonce-custom-background-reset'); ?>
-<input type="submit" class="button" name="reset-background" value="<?php esc_attr_e('Restore Original Image'); ?>" /><br/>
+<?php submit_button( __( 'Restore Original Image' ), 'button', 'reset-background', false ); ?><br/>
 <?php _e('This will restore the original background image. You will not be able to restore any customizations.') ?>
 </form>
 </td>
@@ -236,8 +236,7 @@ if ( get_background_image() ) {
 <label for="upload"><?php _e('Choose an image from your computer:'); ?></label><br /><input type="file" id="upload" name="import" />
 <input type="hidden" name="action" value="save" />
 <?php wp_nonce_field('custom-background-upload', '_wpnonce-custom-background-upload') ?>
-<input type="submit" class="button" value="<?php esc_attr_e('Upload'); ?>" />
-</p>
+<?php submit_button( __( 'Upload' ), 'button', 'submit', false ); ?>
 </form>
 </td>
 </tr>
@@ -270,10 +269,10 @@ if ( get_background_image() ) {
 <tr valign="top">
 <th scope="row"><?php _e( 'Repeat' ); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e( 'Background Repeat' ); ?></span></legend>
-<label><input type="radio" name="background-repeat" value="no-repeat"<?php checked('no-repeat', get_theme_mod('background_repeat', 'repeat')); ?>> <?php _e('No Repeat'); ?></option></label>
-	<label><input type="radio" name="background-repeat" value="repeat"<?php checked('repeat', get_theme_mod('background_repeat', 'repeat')); ?>> <?php _e('Tile'); ?></option></label>
-	<label><input type="radio" name="background-repeat" value="repeat-x"<?php checked('repeat-x', get_theme_mod('background_repeat', 'repeat')); ?>> <?php _e('Tile Horizontally'); ?></option></label>
-	<label><input type="radio" name="background-repeat" value="repeat-y"<?php checked('repeat-y', get_theme_mod('background_repeat', 'repeat')); ?>> <?php _e('Tile Vertically'); ?></option></label>
+<label><input type="radio" name="background-repeat" value="no-repeat"<?php checked('no-repeat', get_theme_mod('background_repeat', 'repeat')); ?> /> <?php _e('No Repeat'); ?></label>
+	<label><input type="radio" name="background-repeat" value="repeat"<?php checked('repeat', get_theme_mod('background_repeat', 'repeat')); ?> /> <?php _e('Tile'); ?></label>
+	<label><input type="radio" name="background-repeat" value="repeat-x"<?php checked('repeat-x', get_theme_mod('background_repeat', 'repeat')); ?> /> <?php _e('Tile Horizontally'); ?></label>
+	<label><input type="radio" name="background-repeat" value="repeat-y"<?php checked('repeat-y', get_theme_mod('background_repeat', 'repeat')); ?> /> <?php _e('Tile Vertically'); ?></label>
 </fieldset></td>
 </tr>
 
@@ -294,8 +293,9 @@ if ( get_background_image() ) {
 <tr valign="top">
 <th scope="row"><?php _e( 'Color' ); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e( 'Background Color' ); ?></span></legend>
+<?php $show_clear = get_background_color() ? '' : ' style="display:none"'; ?>
 <input type="text" name="background-color" id="background-color" value="#<?php echo esc_attr(get_background_color()) ?>" />
-<a class="hide-if-no-js" href="#" id="pickcolor"><?php _e('Select a Color'); ?></a>
+<a class="hide-if-no-js" href="#" id="pickcolor"><?php _e('Select a Color'); ?></a> <span <?php echo $show_clear; ?>class="hide-if-no-js" id="clearcolor"> (<a href="#"><?php _e( 'Clear' ); ?></a>)</span>
 <div id="colorPickerDiv" style="z-index: 100; background:#eee; border:1px solid #ccc; position:absolute; display:none;"></div>
 </fieldset></td>
 </tr>
@@ -303,7 +303,7 @@ if ( get_background_image() ) {
 </table>
 
 <?php wp_nonce_field('custom-background'); ?>
-<p class="submit"><input type="submit" class="button-primary" name="save-background-options" value="<?php esc_attr_e('Save Changes'); ?>" /></p>
+<?php submit_button( null, 'primary', 'save-background-options' ); ?>
 </form>
 
 </div>
@@ -311,7 +311,7 @@ if ( get_background_image() ) {
 	}
 
 	/**
-	 * Handle a Image upload for the background image.
+	 * Handle an Image upload for the background image.
 	 *
 	 * @since 3.0.0
 	 */
@@ -337,7 +337,8 @@ if ( get_background_image() ) {
 			'post_title' => $filename,
 			'post_content' => $url,
 			'post_mime_type' => $type,
-			'guid' => $url
+			'guid' => $url,
+			'context' => 'custom-background'
 		);
 
 		// Save the data
@@ -345,6 +346,7 @@ if ( get_background_image() ) {
 
 		// Add the meta-data
 		wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $file ) );
+		update_post_meta( $id, '_wp_attachment_is_custom_background', get_option('stylesheet' ) );
 
 		set_theme_mod('background_image', esc_url($url));
 

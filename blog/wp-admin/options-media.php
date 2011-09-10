@@ -18,10 +18,10 @@ $parent_file = 'options-general.php';
 add_contextual_help($current_screen,
 	'<p>' . __('You can set maximum sizes for images inserted into your written content; you can also insert an image as Full Size.') . '</p>' .
 	'<p>' . __('The Embed option allows you embed a video, image, or other media content into your content automatically by typing the URL (of the web page where the file lives) on its own line when you create your content.') . '</p>' .
-	'<p>' . __('Uploading Options gives you folder and path choices for storing your files in your installation&#8217;s directory.') . '</p>' .
+	( is_multisite() ? '' : '<p>' . __('Uploading Options gives you folder and path choices for storing your files in your installation&#8217;s directory.') . '</p>' ) .
 	'<p>' . __('You must click the Save Changes button at the bottom of the screen for new settings to take effect.') . '</p>' .
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Media_SubPanel" target="_blank">Documentation on Media Settings</a>') . '</p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Settings_Media_Screen" target="_blank">Documentation on Media Settings</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -81,8 +81,8 @@ include('./admin-header.php');
 
 <tr valign="top">
 <th scope="row"><?php _e('Auto-embeds'); ?></th>
-<td><fieldset><legend class="screen-reader-text"><span><?php _e('Attempt to automatically embed all plain text URLs'); ?></span></legend>
-<label for="embed_autourls"><input name="embed_autourls" type="checkbox" id="embed_autourls" value="1" <?php checked( '1', get_option('embed_autourls') ); ?>/> <?php _e('Attempt to automatically embed all plain text URLs'); ?></label>
+<td><fieldset><legend class="screen-reader-text"><span><?php _e('When possible, embed the media content from a URL directly onto the page. For example: links to Flickr and YouTube.'); ?></span></legend>
+<label for="embed_autourls"><input name="embed_autourls" type="checkbox" id="embed_autourls" value="1" <?php checked( '1', get_option('embed_autourls') ); ?>/> <?php _e('When possible, embed the media content from a URL directly onto the page. For example: links to Flickr and YouTube.'); ?></label>
 </fieldset></td>
 </tr>
 
@@ -132,9 +132,7 @@ include('./admin-header.php');
 
 <?php do_settings_sections('media'); ?>
 
-<p class="submit">
-	<input type="submit" name="Submit" class="button-primary" value="<?php esc_attr_e('Save Changes') ?>" />
-</p>
+<?php submit_button(); ?>
 
 </form>
 

@@ -186,8 +186,8 @@ function esc_html_e( $text, $domain = 'default' ) {
  * @param string $domain Optional. Domain to retrieve the translated text
  * @return string Translated context string without pipe
  */
-function _x( $single, $context, $domain = 'default' ) {
-	return translate_with_gettext_context( $single, $context, $domain );
+function _x( $text, $context, $domain = 'default' ) {
+	return translate_with_gettext_context( $text, $context, $domain );
 }
 
 /**
@@ -201,8 +201,8 @@ function _x( $single, $context, $domain = 'default' ) {
  * @param string $domain Optional. Domain to retrieve the translated text
  * @return string Translated context string without pipe
  */
-function _ex( $single, $context, $domain = 'default' ) {
-	echo _x( $single, $context, $domain );
+function _ex( $text, $context, $domain = 'default' ) {
+	echo _x( $text, $context, $domain );
 }
 
 function esc_attr_x( $single, $context, $domain = 'default' ) {
@@ -267,15 +267,15 @@ function _nx($single, $plural, $number, $context, $domain = 'default') {
  *  );
  *  ...
  *  $message = $messages[$type];
- *  $usable_text = sprintf(_n($message[0], $message[1], $count), $count);
+ *  $usable_text = sprintf( translate_nooped_plural( $message, $count ), $count );
  *
  * @since 2.5
- * @param $single Single form to be i18ned
- * @param $plural Plural form to be i18ned
- * @return array array($single, $plural)
+ * @param string $singular Single form to be i18ned
+ * @param string $plural Plural form to be i18ned
+ * @return array array($singular, $plural)
  */
-function _n_noop( $single, $plural ) {
-	return array( $single, $plural );
+function _n_noop( $singular, $plural ) {
+	return array( 0 => $singular, 1 => $plural, 'singular' => $singular, 'plural' => $plural, 'context' => null );
 }
 
 /**
@@ -283,8 +283,23 @@ function _n_noop( $single, $plural ) {
  *
  * @see _n_noop()
  */
-function _nx_noop( $single, $plural, $context ) {
-	return array( $single, $plural, $context );
+function _nx_noop( $singular, $plural, $context ) {
+	return array( 0 => $singular, 1 => $plural, 2 => $context, 'singular' => $singular, 'plural' => $plural, 'context' => $context );
+}
+
+/**
+ * Translate the result of _n_noop() or _nx_noop()
+ *
+ * @since 3.1
+ * @param array $nooped_plural array with singular, plural and context keys, usually the result of _n_noop() or _nx_noop()
+ * @param int $count number of objects
+ * @param string $domain Optional. The domain identifier the text should be retrieved in
+ */
+function translate_nooped_plural( $nooped_plural, $count, $domain = 'default' ) {
+	if ( $nooped_plural['context'] )
+		return _nx( $nooped_plural['singular'], $nooped_plural['plural'], $count, $nooped_plural['context'], $domain );
+	else
+		return _n( $nooped_plural['singular'], $nooped_plural['plural'], $count, $domain );
 }
 
 /**

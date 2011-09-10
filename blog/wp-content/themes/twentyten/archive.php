@@ -32,9 +32,9 @@ get_header(); ?>
 <?php if ( is_day() ) : ?>
 				<?php printf( __( 'Daily Archives: <span>%s</span>', 'twentyten' ), get_the_date() ); ?>
 <?php elseif ( is_month() ) : ?>
-				<?php printf( __( 'Monthly Archives: <span>%s</span>', 'twentyten' ), get_the_date('F Y') ); ?>
+				<?php printf( __( 'Monthly Archives: <span>%s</span>', 'twentyten' ), get_the_date( 'F Y' ) ); ?>
 <?php elseif ( is_year() ) : ?>
-				<?php printf( __( 'Yearly Archives: <span>%s</span>', 'twentyten' ), get_the_date('Y') ); ?>
+				<?php printf( __( 'Yearly Archives: <span>%s</span>', 'twentyten' ), get_the_date( 'Y' ) ); ?>
 <?php else : ?>
 				<?php _e( 'Blog Archives', 'twentyten' ); ?>
 <?php endif; ?>
@@ -49,7 +49,7 @@ get_header(); ?>
 
 	/* Run the loop for the archives page to output the posts.
 	 * If you want to overload this in a child theme then include a file
-	 * called loop-archives.php and that will be used instead.
+	 * called loop-archive.php and that will be used instead.
 	 */
 	 get_template_part( 'loop', 'archive' );
 ?>

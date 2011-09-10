@@ -16,13 +16,13 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'blog');
+define('DB_NAME', 'wordpress');
 
 /** MySQL database username */
 define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', 'password');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -42,14 +42,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         'V-m|u]TwZ:K>fc(+Ot-5m>,%XdQ}T[mCPuxvuoNjkBFw`ZFi>tsWY|3T-)->j8.Y');
-define('SECURE_AUTH_KEY',  'm1)EuSP,H1``GrFwaG|]*ewu9]rFXH,yY}36w]AX1u>&hE5dJH8W7twJiR(M lb+');
-define('LOGGED_IN_KEY',    'Kj(4JIeZ~>!F,RIar1JG6-a~/I}&}D8ibWuG+s0Z|WwH3qVl4UD4v.@ml.}*v&]^');
-define('NONCE_KEY',        '%bzf(`W!M=}X!/JTKhRJL;]u)*N s^VoQfL _2o?72rXevLqX:rA5) Bi_8fsk_)');
-define('AUTH_SALT',        'tB*nwdMbDe[Mv+FhMF[*&Sudg7Wp$?H)7Bs;pE,Dr3]tNv1*A~QipXLC)l4UV+Gg');
-define('SECURE_AUTH_SALT', 'fxe7Z7.sawX=xq?aU9{yIPVcU6VRPL-)_;D:YhEXngym ]l)-(0<n]%089`du_ud');
-define('LOGGED_IN_SALT',   'YJ0fc~Sgd90;*c^r!C4{A[Z NA8#A_lro7x`!8S D)!{+%5F3znOnKSF=m?4A{Nn');
-define('NONCE_SALT',       'g$AG^=Jp7;k6k 1~7uB/K.`D]4U$[zF|/B3k/)4SElcM}&@_[#Y}u/.Pue;$6j8}');
+define('AUTH_KEY',         'ApUCCs25IdKLaJMhd;$x?z27T}PpIqQs5H$sLFnk2YZqMhLe<JB0O6iD?c4 nh<a');
+define('SECURE_AUTH_KEY',  '}o&xD ).C.h-~u?]19LF <0l+1ppvkXHJcg}k*Q{XuN!C8Ct/?4F7bPIJ^B)U0]}');
+define('LOGGED_IN_KEY',    'BFUtl;d G;!w2;T-_Kvx[-F^b|]IV?n`JIXm/5kH93wnJU9@Z5Fdx])*@*YH&K&&');
+define('NONCE_KEY',        '<DZ%k.v`220)9mS]k21Y>&<G?d9BD?Jedht}VvkEoT08oQT/<3]_jB3dr9tXj)L7');
+define('AUTH_SALT',        '(^CS[?B.c@$0XfV-C^%TbI%#Iup_,U+Mn3#Fh8C$_J61!Q24>uQ1unmDab&Kys<,');
+define('SECURE_AUTH_SALT', '&K_ma_D+HeefQbS&TEhZCiK!S]ZTDi,$$Ku<G^kaGIC+GSM&s}:R/UMi{>Lh8&8m');
+define('LOGGED_IN_SALT',   '%o?$nEZtoEO-F`g[/[#tmMvXa^Fwmn<Y-M1u%7uG&t#OB2[i99v;Hz,1zXi`MW1~');
+define('NONCE_SALT',       'GSNeg0qpbh;#.l3%,[<TIHg8d4+;!5ND)m{L~8xGHv(%OU~9,0Dpc).h;+=u(%rZ');
 
 /**#@-*/
 
@@ -64,12 +64,12 @@ $table_prefix  = 'wp_';
 /**
  * WordPress Localized Language, defaults to English.
  *
- * Change this to localize WordPress.  A corresponding MO file for the chosen
+ * Change this to localize WordPress. A corresponding MO file for the chosen
  * language must be installed to wp-content/languages. For example, install
- * de.mo to wp-content/languages and set WPLANG to 'de' to enable German
+ * de_DE.mo to wp-content/languages and set WPLANG to 'de_DE' to enable German
  * language support.
  */
-define ('WPLANG', '');
+define('WPLANG', '');
 
 /**
  * For developers: WordPress debugging mode.

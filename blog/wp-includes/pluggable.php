@@ -81,7 +81,7 @@ function get_currentuserinfo() {
 		return;
 
 	if ( ! $user = wp_validate_auth_cookie() ) {
-		 if ( is_admin() || empty($_COOKIE[LOGGED_IN_COOKIE]) || !$user = wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in') ) {
+		 if ( is_blog_admin() || is_network_admin() || empty($_COOKIE[LOGGED_IN_COOKIE]) || !$user = wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in') ) {
 		 	wp_set_current_user(0);
 		 	return false;
 		 }
@@ -281,7 +281,7 @@ function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()
 	if ( !is_object( $phpmailer ) || !is_a( $phpmailer, 'PHPMailer' ) ) {
 		require_once ABSPATH . WPINC . '/class-phpmailer.php';
 		require_once ABSPATH . WPINC . '/class-smtp.php';
-		$phpmailer = new PHPMailer();
+		$phpmailer = new PHPMailer( true );
 	}
 
 	// Headers
@@ -296,6 +296,8 @@ function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()
 			$tempheaders = $headers;
 		}
 		$headers = array();
+		$cc = array();
+		$bcc = array();
 
 		// If it's actually got contents
 		if ( !empty( $tempheaders ) ) {
@@ -400,7 +402,19 @@ function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()
 		$to = explode( ',', $to );
 
 	foreach ( (array) $to as $recipient ) {
-		$phpmailer->AddAddress( trim( $recipient ) );
+		try {
+			// Break $recipient into name and address parts if in the format "Foo <bar@baz.com>"
+			$recipient_name = '';
+			if( preg_match( '/(.+)\s?<(.+)>/', $recipient, $matches ) ) {
+				if ( count( $matches ) == 3 ) {
+					$recipient_name = $matches[1];
+					$recipient = $matches[2];
+				}
+			}
+			$phpmailer->AddAddress( trim( $recipient ), $recipient_name);
+		} catch ( phpmailerException $e ) {
+			continue;
+		}
 	}
 
 	// Set mail's subject and body
@@ -410,13 +424,37 @@ function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()
 	// Add any CC and BCC recipients
 	if ( !empty( $cc ) ) {
 		foreach ( (array) $cc as $recipient ) {
-			$phpmailer->AddCc( trim($recipient) );
+			try {
+				// Break $recipient into name and address parts if in the format "Foo <bar@baz.com>"
+				$recipient_name = '';
+				if( preg_match( '/(.+)\s?<(.+)>/', $recipient, $matches ) ) {
+					if ( count( $matches ) == 3 ) {
+						$recipient_name = $matches[1];
+						$recipient = $matches[2];
+					}
+				}
+				$phpmailer->AddCc( trim($recipient), $recipient_name );
+			} catch ( phpmailerException $e ) {
+				continue;
+			}
 		}
 	}
 
 	if ( !empty( $bcc ) ) {
 		foreach ( (array) $bcc as $recipient) {
-			$phpmailer->AddBcc( trim($recipient) );
+			try {
+				// Break $recipient into name and address parts if in the format "Foo <bar@baz.com>"
+				$recipient_name = '';
+				if( preg_match( '/(.+)\s?<(.+)>/', $recipient, $matches ) ) {
+					if ( count( $matches ) == 3 ) {
+						$recipient_name = $matches[1];
+						$recipient = $matches[2];
+					}
+				}
+				$phpmailer->AddBcc( trim($recipient), $recipient_name );
+			} catch ( phpmailerException $e ) {
+				continue;
+			}
 		}
 	}
 
@@ -455,16 +493,24 @@ function wp_mail( $to, $subject, $message, $headers = '', $attachments = array()
 
 	if ( !empty( $attachments ) ) {
 		foreach ( $attachments as $attachment ) {
-			$phpmailer->AddAttachment($attachment);
+			try {
+				$phpmailer->AddAttachment($attachment);
+			} catch ( phpmailerException $e ) {
+				continue;
+			}
 		}
 	}
 
 	do_action_ref_array( 'phpmailer_init', array( &$phpmailer ) );
 
 	// Send!
-	$result = @$phpmailer->Send();
+	try {
+		$phpmailer->Send();
+	} catch ( phpmailerException $e ) {
+		return false;
+	}
 
-	return $result;
+	return true;
 }
 endif;
 
@@ -671,6 +717,9 @@ function wp_set_auth_cookie($user_id, $remember = false, $secure = '') {
 	if ( '' === $secure )
 		$secure = is_ssl();
 
+	$secure = apply_filters('secure_auth_cookie', $secure, $user_id);
+	$secure_logged_in_cookie = apply_filters('secure_logged_in_cookie', false, $user_id, $secure);
+
 	if ( $secure ) {
 		$auth_cookie_name = SECURE_AUTH_COOKIE;
 		$scheme = 'secure_auth';
@@ -685,23 +734,11 @@ function wp_set_auth_cookie($user_id, $remember = false, $secure = '') {
 	do_action('set_auth_cookie', $auth_cookie, $expire, $expiration, $user_id, $scheme);
 	do_action('set_logged_in_cookie', $logged_in_cookie, $expire, $expiration, $user_id, 'logged_in');
 
-	// Set httponly if the php version is >= 5.2.0
-	if ( version_compare(phpversion(), '5.2.0', 'ge') ) {
-		setcookie($auth_cookie_name, $auth_cookie, $expire, PLUGINS_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
-		setcookie($auth_cookie_name, $auth_cookie, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
-		setcookie(LOGGED_IN_COOKIE, $logged_in_cookie, $expire, COOKIEPATH, COOKIE_DOMAIN, false, true);
-		if ( COOKIEPATH != SITECOOKIEPATH )
-			setcookie(LOGGED_IN_COOKIE, $logged_in_cookie, $expire, SITECOOKIEPATH, COOKIE_DOMAIN, false, true);
-	} else {
-		$cookie_domain = COOKIE_DOMAIN;
-		if ( !empty($cookie_domain) )
-			$cookie_domain .= '; HttpOnly';
-		setcookie($auth_cookie_name, $auth_cookie, $expire, PLUGINS_COOKIE_PATH, $cookie_domain, $secure);
-		setcookie($auth_cookie_name, $auth_cookie, $expire, ADMIN_COOKIE_PATH, $cookie_domain, $secure);
-		setcookie(LOGGED_IN_COOKIE, $logged_in_cookie, $expire, COOKIEPATH, $cookie_domain);
-		if ( COOKIEPATH != SITECOOKIEPATH )
-			setcookie(LOGGED_IN_COOKIE, $logged_in_cookie, $expire, SITECOOKIEPATH, $cookie_domain);
-	}
+	setcookie($auth_cookie_name, $auth_cookie, $expire, PLUGINS_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
+	setcookie($auth_cookie_name, $auth_cookie, $expire, ADMIN_COOKIE_PATH, COOKIE_DOMAIN, $secure, true);
+	setcookie(LOGGED_IN_COOKIE, $logged_in_cookie, $expire, COOKIEPATH, COOKIE_DOMAIN, $secure_logged_in_cookie, true);
+	if ( COOKIEPATH != SITECOOKIEPATH )
+		setcookie(LOGGED_IN_COOKIE, $logged_in_cookie, $expire, SITECOOKIEPATH, COOKIE_DOMAIN, $secure_logged_in_cookie, true);
 }
 endif;
 
@@ -764,6 +801,8 @@ function auth_redirect() {
 
 	$secure = ( is_ssl() || force_ssl_admin() );
 
+	$secure = apply_filters('secure_auth_redirect', $secure);
+
 	// If https is required and request is http, redirect
 	if ( $secure && !is_ssl() && false !== strpos($_SERVER['REQUEST_URI'], 'wp-admin') ) {
 		if ( 0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
@@ -775,7 +814,12 @@ function auth_redirect() {
 		}
 	}
 
-	if ( $user_id = wp_validate_auth_cookie( '', apply_filters( 'auth_redirect_scheme', '' ) ) ) {
+	if ( is_user_admin() )
+		$scheme = 'logged_in';
+	else
+		$scheme = apply_filters( 'auth_redirect_scheme', '' );
+
+	if ( $user_id = wp_validate_auth_cookie( '',  $scheme) ) {
 		do_action('auth_redirect', $user_id);
 
 		// If the user wants ssl but the session is not ssl, redirect.
@@ -822,10 +866,13 @@ if ( !function_exists('check_admin_referer') ) :
  * @param string $query_arg where to look for nonce in $_REQUEST (since 2.5)
  */
 function check_admin_referer($action = -1, $query_arg = '_wpnonce') {
+	if ( -1 == $action )
+		_doing_it_wrong( __FUNCTION__, __( 'You should specify a nonce action to be verified by using the first parameter.' ), '3.2' );
+
 	$adminurl = strtolower(admin_url());
 	$referer = strtolower(wp_get_referer());
 	$result = isset($_REQUEST[$query_arg]) ? wp_verify_nonce($_REQUEST[$query_arg], $action) : false;
-	if ( !$result && !(-1 == $action && strpos($referer, $adminurl) !== false) ) {
+	if ( !$result && !(-1 == $action && strpos($referer, $adminurl) === 0) ) {
 		wp_nonce_ays($action);
 		die();
 	}
@@ -861,9 +908,8 @@ endif;
 
 if ( !function_exists('wp_redirect') ) :
 /**
- * Redirects to another page, with a workaround for the IIS Set-Cookie bug.
+ * Redirects to another page.
  *
- * @link http://support.microsoft.com/kb/q176113/
  * @since 1.5.1
  * @uses apply_filters() Calls 'wp_redirect' hook on $location and $status.
  *
@@ -882,13 +928,10 @@ function wp_redirect($location, $status = 302) {
 
 	$location = wp_sanitize_redirect($location);
 
-	if ( $is_IIS ) {
-		header("Refresh: 0;url=$location");
-	} else {
-		if ( php_sapi_name() != 'cgi-fcgi' )
-			status_header($status); // This causes problems on IIS and some FastCGI setups
-		header("Location: $location", true, $status);
-	}
+	if ( !$is_IIS && php_sapi_name() != 'cgi-fcgi' )
+		status_header($status); // This causes problems on IIS and some FastCGI setups
+
+	header("Location: $location", true, $status);
 }
 endif;
 
@@ -1000,14 +1043,22 @@ if ( ! function_exists('wp_notify_postauthor') ) :
  * @param string $comment_type Optional. The comment type either 'comment' (default), 'trackback', or 'pingback'
  * @return bool False if user email does not exist. True on completion.
  */
-function wp_notify_postauthor($comment_id, $comment_type='') {
-	$comment = get_comment($comment_id);
-	$post    = get_post($comment->comment_post_ID);
-	$user    = get_userdata( $post->post_author );
+function wp_notify_postauthor( $comment_id, $comment_type = '' ) {
+	$comment = get_comment( $comment_id );
+	$post    = get_post( $comment->comment_post_ID );
+	$author  = get_userdata( $post->post_author );
 
-	if ( $comment->user_id == $post->post_author ) return false; // The author moderated a comment on his own post
+	// The comment was left by the author
+	if ( $comment->user_id == $post->post_author )
+		return false;
 
-	if ('' == $user->user_email) return false; // If there's no email to send the comment to
+	// The author moderated a comment on his own post
+	if ( $post->post_author == get_current_user_id() )
+		return false;
+
+	// If there's no email to send the comment to
+	if ( '' == $author->user_email )
+		return false;
 
 	$comment_author_domain = @gethostbyaddr($comment->comment_author_IP);
 
@@ -1023,7 +1074,7 @@ function wp_notify_postauthor($comment_id, $comment_type='') {
 		$notify_message .= sprintf( __('Author : %1$s (IP: %2$s , %3$s)'), $comment->comment_author, $comment->comment_author_IP, $comment_author_domain ) . "\r\n";
 		$notify_message .= sprintf( __('E-mail : %s'), $comment->comment_author_email ) . "\r\n";
 		$notify_message .= sprintf( __('URL    : %s'), $comment->comment_author_url ) . "\r\n";
-		$notify_message .= sprintf( __('Whois  : http://ws.arin.net/cgi-bin/whois.pl?queryinput=%s'), $comment->comment_author_IP ) . "\r\n";
+		$notify_message .= sprintf( __('Whois  : http://whois.arin.net/rest/ip/%s'), $comment->comment_author_IP ) . "\r\n";
 		$notify_message .= __('Comment: ') . "\r\n" . $comment->comment_content . "\r\n\r\n";
 		$notify_message .= __('You can see all comments on this post here: ') . "\r\n";
 		/* translators: 1: blog name, 2: post title */
@@ -1048,6 +1099,7 @@ function wp_notify_postauthor($comment_id, $comment_type='') {
 		$subject = sprintf( __('[%1$s] Pingback: "%2$s"'), $blogname, $post->post_title );
 	}
 	$notify_message .= get_permalink($comment->comment_post_ID) . "#comments\r\n\r\n";
+	$notify_message .= sprintf( __('Permalink: %s'), get_permalink( $comment->comment_post_ID ) . '#comment-' . $comment_id ) . "\r\n";
 	if ( EMPTY_TRASH_DAYS )
 		$notify_message .= sprintf( __('Trash it: %s'), admin_url("comment.php?action=trash&c=$comment_id") ) . "\r\n";
 	else
@@ -1076,7 +1128,7 @@ function wp_notify_postauthor($comment_id, $comment_type='') {
 	$subject = apply_filters('comment_notification_subject', $subject, $comment_id);
 	$message_headers = apply_filters('comment_notification_headers', $message_headers, $comment_id);
 
-	@wp_mail($user->user_email, $subject, $notify_message, $message_headers);
+	@wp_mail( $author->user_email, $subject, $notify_message, $message_headers );
 
 	return true;
 }
@@ -1095,11 +1147,16 @@ if ( !function_exists('wp_notify_moderator') ) :
 function wp_notify_moderator($comment_id) {
 	global $wpdb;
 
-	if( get_option( "moderation_notify" ) == 0 )
+	if ( 0 == get_option( 'moderation_notify' ) )
 		return true;
 
-	$comment = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->comments WHERE comment_ID=%d LIMIT 1", $comment_id));
-	$post = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->posts WHERE ID=%d LIMIT 1", $comment->comment_post_ID));
+	$comment = get_comment($comment_id);
+	$post = get_post($comment->comment_post_ID);
+	$user = get_userdata( $post->post_author );
+	// Send to the administation and to the post author if the author can modify the comment.
+	$email_to = array( get_option('admin_email') );
+	if ( user_can($user->ID, 'edit_comment', $comment_id) && !empty($user->user_email) && ( get_option('admin_email') != $user->user_email) )
+		$email_to[] = $user->user_email;
 
 	$comment_author_domain = @gethostbyaddr($comment->comment_author_IP);
 	$comments_waiting = $wpdb->get_var("SELECT count(comment_ID) FROM $wpdb->comments WHERE comment_approved = '0'");
@@ -1130,7 +1187,7 @@ function wp_notify_moderator($comment_id) {
 			$notify_message .= sprintf( __('Author : %1$s (IP: %2$s , %3$s)'), $comment->comment_author, $comment->comment_author_IP, $comment_author_domain ) . "\r\n";
 			$notify_message .= sprintf( __('E-mail : %s'), $comment->comment_author_email ) . "\r\n";
 			$notify_message .= sprintf( __('URL    : %s'), $comment->comment_author_url ) . "\r\n";
-			$notify_message .= sprintf( __('Whois  : http://ws.arin.net/cgi-bin/whois.pl?queryinput=%s'), $comment->comment_author_IP ) . "\r\n";
+			$notify_message .= sprintf( __('Whois  : http://whois.arin.net/rest/ip/%s'), $comment->comment_author_IP ) . "\r\n";
 			$notify_message .= __('Comment: ') . "\r\n" . $comment->comment_content . "\r\n\r\n";
 			break;
 	}
@@ -1147,14 +1204,14 @@ function wp_notify_moderator($comment_id) {
 	$notify_message .= admin_url("edit-comments.php?comment_status=moderated") . "\r\n";
 
 	$subject = sprintf( __('[%1$s] Please moderate: "%2$s"'), $blogname, $post->post_title );
-	$admin_email = get_option('admin_email');
 	$message_headers = '';
 
 	$notify_message = apply_filters('comment_moderation_text', $notify_message, $comment_id);
 	$subject = apply_filters('comment_moderation_subject', $subject, $comment_id);
 	$message_headers = apply_filters('comment_moderation_headers', $message_headers);
 
-	@wp_mail($admin_email, $subject, $notify_message, $message_headers);
+	foreach ( $email_to as $email )
+		@wp_mail($email, $subject, $notify_message, $message_headers);
 
 	return true;
 }
@@ -1646,7 +1703,7 @@ function get_avatar( $id_or_email, $size = '96', $default = '', $alt = false ) {
 		$host = 'https://secure.gravatar.com';
 	} else {
 		if ( !empty($email) )
-			$host = sprintf( "http://%d.gravatar.com", ( hexdec( $email_hash{0} ) % 2 ) );
+			$host = sprintf( "http://%d.gravatar.com", ( hexdec( $email_hash[0] ) % 2 ) );
 		else
 			$host = 'http://0.gravatar.com';
 	}

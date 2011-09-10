@@ -51,12 +51,7 @@ if ( $post_id ) {
  * @param int $post_id Optional. Post ID.
  */
 function redirect_post($post_id = '') {
-	if ( !empty($_POST['mode']) && 'sidebar' == $_POST['mode'] ) {
-		if ( isset($_POST['saveasdraft']) )
-			$location = 'sidebar.php?a=c';
-		elseif ( isset($_POST['publish']) )
-			$location = 'sidebar.php?a=b';
-	} elseif ( isset($_POST['save']) || isset($_POST['publish']) ) {
+	if ( isset($_POST['save']) || isset($_POST['publish']) ) {
 		$status = get_post_status( $post_id );
 
 		if ( isset( $_POST['publish'] ) ) {
@@ -90,6 +85,7 @@ function redirect_post($post_id = '') {
 	}
 
 	wp_redirect( apply_filters( 'redirect_post_location', $location, $post_id ) );
+	exit;
 }
 
 if ( isset( $_POST['deletepost'] ) )
@@ -131,7 +127,7 @@ case 'post-quickpress-save':
 		$_POST['post_ID'] = $post_id;
 		// output the quickpress dashboard widget
 		require_once(ABSPATH . 'wp-admin/includes/dashboard.php');
-		wp_dashboard_quick_press_output();
+		wp_dashboard_quick_press();
 		exit;
 	}
 
@@ -143,7 +139,7 @@ case 'edit':
 	$editing = true;
 
 	if ( empty( $post_id ) ) {
-		wp_redirect("post.php");
+		wp_redirect( admin_url('post.php') );
 		exit();
 	}
 
@@ -165,9 +161,14 @@ case 'edit':
 	if ( 'post' == $post_type ) {
 		$parent_file = "edit.php";
 		$submenu_file = "edit.php";
+		$post_new_file = "post-new.php";
 	} else {
-		$parent_file = "edit.php?post_type=$post_type";
+		if ( isset( $post_type_object ) && $post_type_object->show_in_menu && $post_type_object->show_in_menu !== true )
+			$parent_file = $post_type_object->show_in_menu;
+		else
+			$parent_file = "edit.php?post_type=$post_type";
 		$submenu_file = "edit.php?post_type=$post_type";
+		$post_new_file = "post-new.php?post_type=$post_type";
 	}
 
 	if ( $last = wp_check_post_lock( $post->ID ) ) {
@@ -270,7 +271,7 @@ case 'preview':
 	break;
 
 default:
-		wp_redirect('edit.php');
+	wp_redirect( admin_url('edit.php') );
 	exit();
 	break;
 } // end switch

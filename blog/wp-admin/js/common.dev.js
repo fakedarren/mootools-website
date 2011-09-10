@@ -1,4 +1,4 @@
-var showNotice, adminMenu, columns, validateForm;
+var showNotice, adminMenu, columns, validateForm, screenMeta;
 (function($){
 // sidebar admin menu
 adminMenu = {
@@ -15,7 +15,7 @@ adminMenu = {
 
 		this.favorites();
 
-		$('.separator', menu).click(function(){
+		$('#collapse-menu', menu).click(function(){
 			if ( $('body').hasClass('folded') ) {
 				adminMenu.fold(1);
 				deleteUserSetting( 'mfold' );
@@ -28,36 +28,24 @@ adminMenu = {
 
 		if ( $('body').hasClass('folded') )
 			this.fold();
-
-		this.restoreMenuState();
 	},
 
 	restoreMenuState : function() {
-		$('li.wp-has-submenu', '#adminmenu').each(function(i, e) {
-			var v = getUserSetting( 'm'+i );
-			if ( $(e).hasClass('wp-has-current-submenu') )
-				return true; // leave the current parent open
-
-			if ( 'o' == v )
-				$(e).addClass('wp-menu-open');
-			else if ( 'c' == v )
-				$(e).removeClass('wp-menu-open');
-		});
+		// (perhaps) needed for back-compat
 	},
 
 	toggle : function(el) {
-		var id = el.slideToggle(150, function() {
-			el.css('display','');
-		}).parent().toggleClass( 'wp-menu-open' ).attr('id');
-
-		if ( id ) {
-			$('li.wp-has-submenu', '#adminmenu').each(function(i, e) {
-				if ( id == e.id ) {
-				    var v = $(e).hasClass('wp-menu-open') ? 'o' : 'c';
-				    setUserSetting( 'm'+i, v );
-				}
-			});
-		}
+		el.slideToggle(150, function() {
+			var id = el.css('display','').parent().toggleClass( 'wp-menu-open' ).attr('id');
+			if ( id ) {
+				$('li.wp-has-submenu', '#adminmenu').each(function(i, e) {
+					if ( id == e.id ) {
+						var v = $(e).hasClass('wp-menu-open') ? 'o' : 'c';
+						setUserSetting( 'm'+i, v );
+					}
+				});
+			}
+		});
 
 		return false;
 	},
@@ -86,7 +74,9 @@ adminMenu = {
 					}
 					m.addClass('sub-open');
 				},
-				out: function(){ $(this).find('.wp-submenu').removeClass('sub-open').css({'marginTop':''}); },
+				out: function(){
+					$(this).find('.wp-submenu').removeClass('sub-open');
+				},
 				timeout: 220,
 				sensitivity: 8,
 				interval: 100
@@ -126,7 +116,7 @@ columns = {
 		var that = this;
 		$('.hide-column-tog', '#adv-settings').click( function() {
 			var $t = $(this), column = $t.val();
-			if ( $t.attr('checked') )
+			if ( $t.prop('checked') )
 				that.checked(column);
 			else
 				that.unchecked(column);
@@ -147,10 +137,12 @@ columns = {
 
 	checked : function(column) {
 		$('.column-' + column).show();
+		this.colSpanChange(+1);
 	},
 
 	unchecked : function(column) {
 		$('.column-' + column).hide();
+		this.colSpanChange(-1);
 	},
 
 	hidden : function() {
@@ -164,6 +156,14 @@ columns = {
 				return id.substring( id, id.length - 5 );
 			}).get().join(',');
 		};
+	},
+
+	colSpanChange : function(diff) {
+		var $t = $('table').find('.colspanchange'), n;
+		if ( !$t.length )
+			return;
+		n = parseInt( $t.attr('colspan'), 10 ) + diff;
+		$t.attr('colspan', n.toString());
 	}
 }
 
@@ -172,8 +172,6 @@ $(document).ready(function(){columns.init();});
 validateForm = function( form ) {
 	return !$( form ).find('.form-required').filter( function() { return $('input:visible', this).val() == ''; } ).addClass( 'form-invalid' ).find('input:visible').change( function() { $(this).closest('.form-invalid').removeClass( 'form-invalid' ); } ).size();
 }
-
-})(jQuery);
 
 // stub for doing better warnings
 showNotice = {
@@ -191,48 +189,72 @@ showNotice = {
 	}
 };
 
-jQuery(document).ready( function($) {
-	var lastClicked = false, checks, first, last, checked;
+screenMeta = {
+	links: {
+		'screen-options-link-wrap': 'screen-options-wrap',
+		'contextual-help-link-wrap': 'contextual-help-wrap'
+	},
+	init: function() {
+		$('.screen-meta-toggle').click( screenMeta.toggleEvent );
+	},
+	toggleEvent: function( e ) {
+		var panel;
+		e.preventDefault();
+
+		// Check to see if we found a panel.
+		if ( ! screenMeta.links[ this.id ] )
+			return;
+
+		panel = $('#' + screenMeta.links[ this.id ]);
+
+		if ( panel.is(':visible') )
+			screenMeta.close( panel, $(this) );
+		else
+			screenMeta.open( panel, $(this) );
+	},
+	open: function( panel, link ) {
+		$('.screen-meta-toggle').not( link ).css('visibility', 'hidden');
+
+		panel.slideDown( 'fast', function() {
+			link.addClass('screen-meta-active');
+		});
+	},
+	close: function( panel, link ) {
+		panel.slideUp( 'fast', function() {
+			link.removeClass('screen-meta-active');
+			$('.screen-meta-toggle').css('visibility', '');
+		});
+	}
+};
+
+$(document).ready( function() {
+	var lastClicked = false, checks, first, last, checked, dropdown,
+		pageInput = $('input[name="paged"]'), currentPage;
 
 	// Move .updated and .error alert boxes. Don't move boxes designed to be inline.
 	$('div.wrap h2:first').nextAll('div.updated, div.error').addClass('below-h2');
 	$('div.updated, div.error').not('.below-h2, .inline').insertAfter( $('div.wrap h2:first') );
 
-	// screen settings tab
-	$('#show-settings-link').click(function () {
-		if ( ! $('#screen-options-wrap').hasClass('screen-options-open') )
-			$('#contextual-help-link-wrap').css('visibility', 'hidden');
+	// Init screen meta
+	screenMeta.init();
 
-		$('#screen-options-wrap').slideToggle('fast', function(){
-			if ( $(this).hasClass('screen-options-open') ) {
-				$('#show-settings-link').css({'backgroundImage':'url("images/screen-options-right.gif?ver=20100531")'});
-				$('#contextual-help-link-wrap').css('visibility', '');
-				$(this).removeClass('screen-options-open');
-			} else {
-				$('#show-settings-link').css({'backgroundImage':'url("images/screen-options-right-up.gif?ver=20100531")'});
-				$(this).addClass('screen-options-open');
+	// User info dropdown.
+	dropdown = {
+		doc: $(document),
+		element: $('#user_info'),
+		open: function() {
+			if ( ! dropdown.element.hasClass('active') ) {
+				dropdown.element.addClass('active');
+				dropdown.doc.one( 'click', dropdown.close );
+				return false;
 			}
-		});
-		return false;
-	});
+		},
+		close: function() {
+			dropdown.element.removeClass('active');
+		}
+	};
 
-	// help tab
-	$('#contextual-help-link').click(function () {
-		if ( ! $('#contextual-help-wrap').hasClass('contextual-help-open') )
-			$('#screen-options-link-wrap').css('visibility', 'hidden');
-
-		$('#contextual-help-wrap').slideToggle('fast', function() {
-			if ( $(this).hasClass('contextual-help-open') ) {
-				$('#contextual-help-link').css({'backgroundImage':'url("images/screen-options-right.gif?ver=20100531")'});
-				$('#screen-options-link-wrap').css('visibility', '');
-				$(this).removeClass('contextual-help-open');
-			} else {
-				$('#contextual-help-link').css({'backgroundImage':'url("images/screen-options-right-up.gif?ver=20100531")'});
-				$(this).addClass('contextual-help-open');
-			}
-		});
-		return false;
-	});
+	dropdown.element.click( dropdown.open );
 
 	// check all checkboxes
 	$('tbody').children().children('.check-column').find(':checkbox').click( function(e) {
@@ -242,13 +264,13 @@ jQuery(document).ready( function($) {
 			checks = $( lastClicked ).closest( 'form' ).find( ':checkbox' );
 			first = checks.index( lastClicked );
 			last = checks.index( this );
-			checked = $(this).attr('checked');
+			checked = $(this).prop('checked');
 			if ( 0 < first && 0 < last && first != last ) {
-				checks.slice( first, last ).attr( 'checked', function(){
+				checks.slice( first, last ).prop( 'checked', function(){
 					if ( $(this).closest('tr').is(':visible') )
-						return checked ? 'checked' : '';
+						return checked;
 
-					return '';
+					return false;
 				});
 			}
 		}
@@ -256,31 +278,31 @@ jQuery(document).ready( function($) {
 		return true;
 	});
 
-	$('thead, tfoot').find(':checkbox').click( function(e) {
-		var c = $(this).attr('checked'),
+	$('thead, tfoot').find('.check-column :checkbox').click( function(e) {
+		var c = $(this).prop('checked'),
 			kbtoggle = 'undefined' == typeof toggleWithKeyboard ? false : toggleWithKeyboard,
 			toggle = e.shiftKey || kbtoggle;
 
 		$(this).closest( 'table' ).children( 'tbody' ).filter(':visible')
 		.children().children('.check-column').find(':checkbox')
-		.attr('checked', function() {
+		.prop('checked', function() {
 			if ( $(this).closest('tr').is(':hidden') )
-				return '';
+				return false;
 			if ( toggle )
-				return $(this).attr( 'checked' ) ? '' : 'checked';
+				return $(this).prop( 'checked' );
 			else if (c)
-				return 'checked';
-			return '';
+				return true;
+			return false;
 		});
 
 		$(this).closest('table').children('thead,  tfoot').filter(':visible')
 		.children().children('.check-column').find(':checkbox')
-		.attr('checked', function() {
+		.prop('checked', function() {
 			if ( toggle )
-				return '';
+				return false;
 			else if (c)
-				return 'checked';
-			return '';
+				return true;
+			return false;
 		});
 	});
 
@@ -291,7 +313,7 @@ jQuery(document).ready( function($) {
 	});
 
 	// tab in textareas
-	$('#newcontent').keydown(function(e) {
+	$('#newcontent').bind('keydown.wpevent_InsertTab', function(e) {
 		if ( e.keyCode != 9 )
 			return true;
 
@@ -318,8 +340,31 @@ jQuery(document).ready( function($) {
 			e.preventDefault();
 	});
 
-	$('#newcontent').blur(function(e) {
+	$('#newcontent').bind('blur.wpevent_InsertTab', function(e) {
 		if ( this.lastKey && 9 == this.lastKey )
 			this.focus();
 	});
+
+	if ( pageInput.length ) {
+		currentPage = pageInput.val();
+		pageInput.closest('form').submit( function(){
+			// Reset paging var for new filters/searches. See #17685.
+			if ( pageInput.val() == currentPage )
+				pageInput.val('1');
+		});
+	}
+
 });
+
+// internal use
+$(document).bind( 'wp_CloseOnEscape', function( e, data ) {
+	if ( typeof(data.cb) != 'function' )
+		return;
+
+	if ( typeof(data.condition) != 'function' || data.condition() )
+		data.cb();
+
+	return true;
+});
+
+})(jQuery);

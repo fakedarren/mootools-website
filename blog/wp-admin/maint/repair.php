@@ -72,15 +72,15 @@ if ( !defined('WP_ALLOW_REPAIR') ) {
 		$problem_output = array();
 		foreach ( $problems as $table => $problem )
 			$problem_output[] = "$table: $problem";
-		echo '<textarea name="errors" id="errors" rows="20" cols="60">' . format_to_edit(implode("\n", $problem_output)) . '</textarea>';
+		echo '<textarea name="errors" id="errors" rows="20" cols="60">' . esc_textarea( implode("\n", $problem_output) ) . '</textarea>';
 	} else {
 		echo '<p>'.__('Repairs complete.  Please remove the following line from wp-config.php to prevent this page from being used by unauthorized users.')."</p><code>define('WP_ALLOW_REPAIR', true);</code>";
 	}
 } else {
 	if ( isset($_GET['referrer']) && 'is_blog_installed' == $_GET['referrer'] )
-		_e('One or more database tables is unavailable.  To allow WordPress to attempt to repair these tables, press the "Repair Database" button. Repairing can take awhile, so please be patient.');
+		_e('One or more database tables are unavailable. To allow WordPress to attempt to repair these tables, press the &#8220;Repair Database&#8221; button. Repairing can take a while, so please be patient.');
 	else
-		_e('WordPress can automatically look for some common database problems and repair them.  Repairing can take awhile, so please be patient.')
+		_e('WordPress can automatically look for some common database problems and repair them.  Repairing can take a while, so please be patient.')
 ?>
 	<p class="step"><a class="button" href="<?php echo wp_nonce_url('repair.php?repair=1', 'repair_db') ?>"><?php _e( 'Repair Database' ); ?></a></p>
 	<?php _e('WordPress can also attempt to optimize the database.  This improves performance in some situations.  Repairing and optimizing the database can take a long time and the database will be locked while optimizing.'); ?>

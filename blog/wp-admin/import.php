@@ -1,6 +1,6 @@
 <?php
 /**
- * Import WordPress Administration Panel
+ * Import WordPress Administration Screen
  *
  * @package WordPress
  * @subpackage Administration
@@ -20,7 +20,7 @@ add_contextual_help($current_screen,
 	'<p>' . __('This screen lists links to plugins to import data from blogging/content management platforms. Choose the platform you want to import from, and click Install Now when you are prompted in the popup window. If your platform is not listed, click the link to search the plugin directory for other importer plugins to see if there is one for your platform.') . '</p>' .
 	'<p>' . __('In previous versions of WordPress, all the importers were built-in, but they have been turned into plugins as of version 3.0 since most people only use them once or infrequently.') . '</p>' .
 	'<p><strong>' . __('For more information:') . '</strong></p>' .
-	'<p>' . __('<a href="http://codex.wordpress.org/Tools_Import_SubPanel" target="_blank">Import Documentation</a>') . '</p>' .
+	'<p>' . __('<a href="http://codex.wordpress.org/Tools_Import_Screen" target="_blank">Documentation on Import</a>') . '</p>' .
 	'<p>' . __('<a href="http://wordpress.org/support/" target="_blank">Support Forums</a>') . '</p>'
 );
 
@@ -37,11 +37,14 @@ if ( current_user_can('install_plugins') )
 	);
 
 if ( ! empty( $_GET['invalid'] ) && !empty($popular_importers[$_GET['invalid']][3]) ) {
-	wp_redirect("import.php?import=" . $popular_importers[$_GET['invalid']][3]);
+	wp_redirect( admin_url('import.php?import=' . $popular_importers[$_GET['invalid']][3]) );
 	exit;
 }
 
 add_thickbox();
+wp_enqueue_script( 'plugin-install' );
+wp_admin_css( 'plugin-install' );
+
 require_once ('admin-header.php');
 $parent_file = 'tools.php';
 ?>
@@ -58,18 +61,21 @@ $parent_file = 'tools.php';
 
 // Load all importers so that they can register.
 $import_loc = 'wp-admin/import';
-$import_root = ABSPATH.$import_loc;
-$imports_dir = @ opendir($import_root);
-if ($imports_dir) {
-	while (($file = readdir($imports_dir)) !== false) {
-		if ($file{0} == '.') {
-			continue;
-		} elseif (substr($file, -4) == '.php') {
-			require_once($import_root . '/' . $file);
+$import_root = ABSPATH . $import_loc;
+
+if ( file_exists( $import_root ) ) {
+	$imports_dir = opendir($import_root);
+	if ($imports_dir) {
+		while (($file = readdir($imports_dir)) !== false) {
+			if ($file[0] == '.') {
+				continue;
+			} elseif (substr($file, -4) == '.php') {
+				require_once($import_root . '/' . $file);
+			}
 		}
 	}
+	closedir( $imports_dir );
 }
-@closedir($imports_dir);
 
 $importers = get_importers();
 
@@ -108,8 +114,8 @@ if (empty ($importers)) {
 				}
 			}
 			if ( empty($action) )
-				$action = '<a href="' . esc_url(admin_url('plugin-install.php?tab=plugin-information&plugin=' . $plugin_slug .
-										'&from=import&TB_iframe=true&width=600&height=550')) . '" class="thickbox" title="' .
+				$action = '<a href="' . esc_url( network_admin_url( 'plugin-install.php?tab=plugin-information&plugin=' . $plugin_slug .
+										'&from=import&TB_iframe=true&width=600&height=550' ) ) . '" class="thickbox" title="' .
 										esc_attr__('Install importer') . '">' . $data[0] . '</a>';
 		} else {
 			$action = "<a href='" . esc_url("admin.php?import=$id") . "' title='" . esc_attr( wptexturize(strip_tags($data[1])) ) ."'>{$data[0]}</a>";
@@ -130,7 +136,7 @@ if (empty ($importers)) {
 }
 
 if ( current_user_can('install_plugins') )
-	echo '<p>' . sprintf( __('If the importer you need is not listed, <a href="%s">search the plugins directory</a> to see if an importer is available.'), esc_url(admin_url('plugin-install.php?tab=search&type=tag&s=importer')) ) . '</p>';
+	echo '<p>' . sprintf( __('If the importer you need is not listed, <a href="%s">search the plugins directory</a> to see if an importer is available.'), esc_url( network_admin_url( 'plugin-install.php?tab=search&type=tag&s=importer' ) ) ) . '</p>';
 ?>
 
 </div>

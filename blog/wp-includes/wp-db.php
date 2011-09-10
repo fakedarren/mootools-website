@@ -39,16 +39,14 @@ define( 'ARRAY_N', 'ARRAY_N' );
  *
  * It is possible to replace this class with your own
  * by setting the $wpdb global variable in wp-content/db.php
- * file with your class. You can name it wpdb also, since
- * this file will not be included, if the other file is
- * available.
+ * file to your class. The wpdb class will still be included,
+ * so you can extend it or simply use your own.
  *
  * @link http://codex.wordpress.org/Function_Reference/wpdb_Class
  *
  * @package WordPress
  * @subpackage Database
  * @since 0.71
- * @final
  */
 class wpdb {
 
@@ -65,7 +63,7 @@ class wpdb {
 	 * Whether to suppress errors during the DB bootstrapping.
 	 *
 	 * @access private
-	 * @since 2.5
+	 * @since 2.5.0
 	 * @var bool
 	 */
 	var $suppress_errors = false;
@@ -74,7 +72,7 @@ class wpdb {
 	 * The last error during query.
 	 *
 	 * @see get_last_error()
-	 * @since 2.5
+	 * @since 2.5.0
 	 * @access private
 	 * @var string
 	 */
@@ -92,7 +90,7 @@ class wpdb {
 	/**
 	 * Count of rows returned by previous query
 	 *
-	 * @since 1.2
+	 * @since 1.2.0
 	 * @access private
 	 * @var int
 	 */
@@ -456,30 +454,11 @@ class wpdb {
 	/**
 	 * A textual description of the last query/get_row/get_var call
 	 *
-	 * @since unknown
+	 * @since 3.0.0
 	 * @access public
 	 * @var string
 	 */
 	var $func_call;
-
-	/**
-	 * Connects to the database server and selects a database
-	 *
-	 * PHP4 compatibility layer for calling the PHP5 constructor.
-	 *
-	 * @uses wpdb::__construct() Passes parameters and returns result
-	 * @since 0.71
-	 *
-	 * @param string $dbuser MySQL database user
-	 * @param string $dbpassword MySQL database password
-	 * @param string $dbname MySQL database name
-	 * @param string $dbhost MySQL database host
-	 */
-	function wpdb( $dbuser, $dbpassword, $dbname, $dbhost ) {
-		if( defined( 'WP_USE_MULTIPLE_DB' ) && WP_USE_MULTIPLE_DB )
-			$this->db_connect();
-		return $this->__construct( $dbuser, $dbpassword, $dbname, $dbhost );
-	}
 
 	/**
 	 * Connects to the database server and selects a database
@@ -502,51 +481,14 @@ class wpdb {
 		if ( WP_DEBUG )
 			$this->show_errors();
 
-		if ( is_multisite() ) {
-			$this->charset = 'utf8';
-			if ( defined( 'DB_COLLATE' ) && DB_COLLATE )
-				$this->collate = DB_COLLATE;
-			else
-				$this->collate = 'utf8_general_ci';
-		} elseif ( defined( 'DB_COLLATE' ) ) {
-			$this->collate = DB_COLLATE;
-		}
-
-		if ( defined( 'DB_CHARSET' ) )
-			$this->charset = DB_CHARSET;
+		$this->init_charset();
 
 		$this->dbuser = $dbuser;
+		$this->dbpassword = $dbpassword;
+		$this->dbname = $dbname;
+		$this->dbhost = $dbhost;
 
-		$this->dbh = @mysql_connect( $dbhost, $dbuser, $dbpassword, true );
-		if ( !$this->dbh ) {
-			$this->bail( sprintf( /*WP_I18N_DB_CONN_ERROR*/"
-<h1>Error establishing a database connection</h1>
-<p>This either means that the username and password information in your <code>wp-config.php</code> file is incorrect or we can't contact the database server at <code>%s</code>. This could mean your host's database server is down.</p>
-<ul>
-	<li>Are you sure you have the correct username and password?</li>
-	<li>Are you sure that you have typed the correct hostname?</li>
-	<li>Are you sure that the database server is running?</li>
-</ul>
-<p>If you're unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href='http://wordpress.org/support/'>WordPress Support Forums</a>.</p>
-"/*/WP_I18N_DB_CONN_ERROR*/, $dbhost ), 'db_connect_fail' );
-			return;
-		}
-
-		$this->ready = true;
-
-		if ( $this->has_cap( 'collation' ) && !empty( $this->charset ) ) {
-			if ( function_exists( 'mysql_set_charset' ) ) {
-				mysql_set_charset( $this->charset, $this->dbh );
-				$this->real_escape = true;
-			} else {
-				$query = $this->prepare( 'SET NAMES %s', $this->charset );
-				if ( ! empty( $this->collate ) )
-					$query .= $this->prepare( ' COLLATE %s', $this->collate );
-				$this->query( $query );
-			}
-		}
-
-		$this->select( $dbname, $this->dbh );
+		$this->db_connect();
 	}
 
 	/**
@@ -558,6 +500,53 @@ class wpdb {
 	 */
 	function __destruct() {
 		return true;
+	}
+
+	/**
+	 * Set $this->charset and $this->collate
+	 *
+	 * @since 3.1.0
+	 */
+	function init_charset() {
+		if ( function_exists('is_multisite') && is_multisite() ) {
+			$this->charset = 'utf8';
+			if ( defined( 'DB_COLLATE' ) && DB_COLLATE )
+				$this->collate = DB_COLLATE;
+			else
+				$this->collate = 'utf8_general_ci';
+		} elseif ( defined( 'DB_COLLATE' ) ) {
+			$this->collate = DB_COLLATE;
+		}
+
+		if ( defined( 'DB_CHARSET' ) )
+			$this->charset = DB_CHARSET;
+	}
+
+	/**
+	 * Sets the connection's character set.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param resource $dbh     The resource given by mysql_connect
+	 * @param string   $charset The character set (optional)
+	 * @param string   $collate The collation (optional)
+	 */
+	function set_charset($dbh, $charset = null, $collate = null) {
+		if ( !isset($charset) )
+			$charset = $this->charset;
+		if ( !isset($collate) )
+			$collate = $this->collate;
+		if ( $this->has_cap( 'collation', $dbh ) && !empty( $charset ) ) {
+			if ( function_exists( 'mysql_set_charset' ) && $this->has_cap( 'set_charset', $dbh ) ) {
+				mysql_set_charset( $charset, $dbh );
+				$this->real_escape = true;
+			} else {
+				$query = $this->prepare( 'SET NAMES %s', $charset );
+				if ( ! empty( $collate ) )
+					$query .= $this->prepare( ' COLLATE %s', $collate );
+				mysql_query( $query, $dbh );
+			}
+		}
 	}
 
 	/**
@@ -637,6 +626,7 @@ class wpdb {
 		if ( is_multisite() ) {
 			if ( null === $blog_id )
 				$blog_id = $this->blogid;
+			$blog_id = (int) $blog_id;
 			if ( defined( 'MULTISITE' ) && ( 0 == $blog_id || 1 == $blog_id ) )
 				return $this->base_prefix;
 			else
@@ -737,13 +727,12 @@ class wpdb {
 	 * @return null Always null.
 	 */
 	function select( $db, $dbh = null) {
-		if ( is_null($dbh) ) 
+		if ( is_null($dbh) )
 			$dbh = $this->dbh;
 
 		if ( !@mysql_select_db( $db, $dbh ) ) {
 			$this->ready = false;
-			$this->bail( sprintf( /*WP_I18N_DB_SELECT_DB*/'
-<h1>Can&#8217;t select database</h1>
+			$this->bail( sprintf( /*WP_I18N_DB_SELECT_DB*/'<h1>Can&#8217;t select database</h1>
 <p>We were able to connect to the database server (which means your username and password is okay) but not able to select the <code>%1$s</code> database.</p>
 <ul>
 <li>Are you sure it exists?</li>
@@ -774,7 +763,7 @@ class wpdb {
 	 *
 	 * @see mysql_real_escape_string()
 	 * @see addslashes()
-	 * @since 2.8
+	 * @since 2.8.0
 	 * @access private
 	 *
 	 * @param  string $string to escape
@@ -790,9 +779,9 @@ class wpdb {
 	/**
 	 * Escape data. Works on arrays.
 	 *
-     * @uses wpdb::_escape()
-     * @uses wpdb::_real_escape()
-	 * @since  2.8
+	 * @uses wpdb::_escape()
+	 * @uses wpdb::_real_escape()
+	 * @since  2.8.0
 	 * @access private
 	 *
 	 * @param  string|array $data
@@ -995,7 +984,7 @@ class wpdb {
 	 * By default database errors are suppressed, with a simple
 	 * call to this function they can be enabled.
 	 *
-	 * @since 2.5
+	 * @since 2.5.0
 	 * @see wpdb::hide_errors()
 	 * @param bool $suppress Optional. New value. Defaults to true.
 	 * @return bool Old value
@@ -1018,28 +1007,19 @@ class wpdb {
 		$this->last_query  = null;
 	}
 
-	function db_connect( $query = "SELECT" ) {
-		global $db_list, $global_db_list;
-		if ( ! is_array( $db_list ) )
-			return true;
-
-		if ( $this->blogs != '' && preg_match("/(" . $this->blogs . "|" . $this->users . "|" . $this->usermeta . "|" . $this->site . "|" . $this->sitemeta . "|" . $this->sitecategories . ")/i",$query) ) {
-			$action = 'global';
-			$details = $global_db_list[ mt_rand( 0, count( $global_db_list ) -1 ) ];
-			$this->db_global = $details;
-		} elseif ( preg_match("/^\\s*(alter table|create|insert|delete|update|replace) /i",$query) ) {
-			$action = 'write';
-			$details = $db_list[ 'write' ][ mt_rand( 0, count( $db_list[ 'write' ] ) -1 ) ];
-			$this->db_write = $details;
+	/**
+	 * Connect to and select database
+	 *
+	 * @since 3.0.0
+	 */
+	function db_connect() {
+		if ( WP_DEBUG ) {
+			$this->dbh = mysql_connect( $this->dbhost, $this->dbuser, $this->dbpassword, true );
 		} else {
-			$action = '';
-			$details = $db_list[ 'read' ][ mt_rand( 0, count( $db_list[ 'read' ] ) -1 ) ];
-			$this->db_read = $details;
+			$this->dbh = @mysql_connect( $this->dbhost, $this->dbuser, $this->dbpassword, true );
 		}
 
-		$dbhname = "dbh" . $action;
-		$this->$dbhname = @mysql_connect( $details[ 'db_host' ], $details[ 'db_user' ], $details[ 'db_password' ] );
-		if (!$this->$dbhname ) {
+		if ( !$this->dbh ) {
 			$this->bail( sprintf( /*WP_I18N_DB_CONN_ERROR*/"
 <h1>Error establishing a database connection</h1>
 <p>This either means that the username and password information in your <code>wp-config.php</code> file is incorrect or we can't contact the database server at <code>%s</code>. This could mean your host's database server is down.</p>
@@ -1049,9 +1029,16 @@ class wpdb {
 	<li>Are you sure that the database server is running?</li>
 </ul>
 <p>If you're unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href='http://wordpress.org/support/'>WordPress Support Forums</a>.</p>
-"/*/WP_I18N_DB_CONN_ERROR*/, $details['db_host'] ), 'db_connect_fail' );
+"/*/WP_I18N_DB_CONN_ERROR*/, $this->dbhost ), 'db_connect_fail' );
+
+			return;
 		}
-		$this->select( $details[ 'db_name' ], $this->$dbhname );
+
+		$this->set_charset( $this->dbh );
+
+		$this->ready = true;
+
+		$this->select( $this->dbname, $this->dbh );
 	}
 
 	/**
@@ -1084,48 +1071,25 @@ class wpdb {
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES )
 			$this->timer_start();
 
-		// use $this->dbh for read ops, and $this->dbhwrite for write ops
-		// use $this->dbhglobal for gloal table ops
-		unset( $dbh );
-		if( defined( 'WP_USE_MULTIPLE_DB' ) && WP_USE_MULTIPLE_DB ) {
-			if( $this->blogs != '' && preg_match("/(" . $this->blogs . "|" . $this->users . "|" . $this->usermeta . "|" . $this->site . "|" . $this->sitemeta . "|" . $this->sitecategories . ")/i",$query) ) {
-				if( false == isset( $this->dbhglobal ) ) {
-					$this->db_connect( $query );
-				}
-				$dbh =& $this->dbhglobal;
-				$this->last_db_used = "global";
-			} elseif ( preg_match("/^\\s*(alter table|create|insert|delete|update|replace) /i",$query) ) {
-				if( false == isset( $this->dbhwrite ) ) {
-					$this->db_connect( $query );
-				}
-				$dbh =& $this->dbhwrite;
-				$this->last_db_used = "write";
-			} else {
-				$dbh =& $this->dbh;
-				$this->last_db_used = "read";
-			}
-		} else {
-			$dbh =& $this->dbh;
-			$this->last_db_used = "other/read";
-		}
-
-		$this->result = @mysql_query( $query, $dbh );
+		$this->result = @mysql_query( $query, $this->dbh );
 		$this->num_queries++;
 
 		if ( defined( 'SAVEQUERIES' ) && SAVEQUERIES )
 			$this->queries[] = array( $query, $this->timer_stop(), $this->get_caller() );
 
 		// If there is an error then take note of it..
-		if ( $this->last_error = mysql_error( $dbh ) ) {
+		if ( $this->last_error = mysql_error( $this->dbh ) ) {
 			$this->print_error();
 			return false;
 		}
 
-		if ( preg_match( "/^\\s*(insert|delete|update|replace|alter) /i", $query ) ) {
-			$this->rows_affected = mysql_affected_rows( $dbh );
+		if ( preg_match( '/^\s*(create|alter|truncate|drop) /i', $query ) ) {
+			$return_val = $this->result;
+		} elseif ( preg_match( '/^\s*(insert|delete|update|replace) /i', $query ) ) {
+			$this->rows_affected = mysql_affected_rows( $this->dbh );
 			// Take note of the insert_id
-			if ( preg_match( "/^\\s*(insert|replace) /i", $query ) ) {
-				$this->insert_id = mysql_insert_id($dbh);
+			if ( preg_match( '/^\s*(insert|replace) /i', $query ) ) {
+				$this->insert_id = mysql_insert_id($this->dbh);
 			}
 			// Return number of rows affected
 			$return_val = $this->rows_affected;
@@ -1402,7 +1366,7 @@ class wpdb {
 			// Return an array of row objects with keys from column 1
 			// (Duplicates are discarded)
 			foreach ( $this->last_result as $row ) {
-				$key = array_shift( $var_by_ref = get_object_vars( $row ) );
+				$key = array_shift( get_object_vars( $row ) );
 				if ( ! isset( $new_array[ $key ] ) )
 					$new_array[ $key ] = $row;
 			}
@@ -1531,7 +1495,7 @@ class wpdb {
 	/**
 	 * Determine if a database supports a particular feature
 	 *
-	 * @since 2.7
+	 * @since 2.7.0
 	 * @see   wpdb::db_version()
 	 *
 	 * @param string $db_cap the feature
@@ -1545,6 +1509,8 @@ class wpdb {
 			case 'group_concat' : // @since 2.7
 			case 'subqueries' :   // @since 2.7
 				return version_compare( $version, '4.1', '>=' );
+			case 'set_charset' :
+				return version_compare($version, '5.0.7', '>=');
 		};
 
 		return false;
@@ -1576,6 +1542,8 @@ class wpdb {
 	/**
 	 * The database version number.
 	 *
+	 * @since 2.7.0
+	 *
 	 * @return false|string false on failure, version number on success
 	 */
 	function db_version() {
@@ -1583,12 +1551,4 @@ class wpdb {
 	}
 }
 
-if ( ! isset( $wpdb ) ) {
-	/**
-	 * WordPress Database Object, if it isn't set already in wp-content/db.php
-	 * @global object $wpdb Creates a new wpdb object based on wp-config.php Constants for the database
-	 * @since 0.71
-	 */
-	$wpdb = new wpdb( DB_USER, DB_PASSWORD, DB_NAME, DB_HOST );
-}
 ?>

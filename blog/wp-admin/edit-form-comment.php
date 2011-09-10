@@ -71,7 +71,7 @@ $date = date_i18n( $datef, strtotime( $comment->comment_date ) );
 <?php echo "<a class='submitdelete deletion' href='" . wp_nonce_url("comment.php?action=" . ( !EMPTY_TRASH_DAYS ? 'deletecomment' : 'trashcomment' ) . "&amp;c=$comment->comment_ID&amp;_wp_original_http_referer=" . urlencode(wp_get_referer()), 'delete-comment_' . $comment->comment_ID) . "'>" . ( !EMPTY_TRASH_DAYS ? __('Delete Permanently') : __('Move to Trash') ) . "</a>\n"; ?>
 </div>
 <div id="publishing-action">
-<input type="submit" name="save" value="<?php esc_attr_e('Update Comment'); ?>" tabindex="4" class="button-primary" />
+<?php submit_button( __( 'Update Comment' ), 'primary', 'save', false, array( 'tabindex' => '4' ) ); ?>
 </div>
 <div class="clear"></div>
 </div>
@@ -120,7 +120,7 @@ $date = date_i18n( $datef, strtotime( $comment->comment_date ) );
 </div>
 
 <div id="postdiv" class="postarea">
-<?php the_editor($comment->comment_content, 'content', 'newcomment_author_url', false, 4); ?>
+<?php the_editor($comment->comment_content, 'content', 'newcomment_author_url', false, 4, false); ?>
 <?php wp_nonce_field( 'closedpostboxes', 'closedpostboxesnonce', false ); ?>
 </div>
 

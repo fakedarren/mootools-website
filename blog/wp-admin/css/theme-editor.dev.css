@@ -1,7 +1,17 @@
+.alignleft h3 {
+	margin: 0;
+}
+
+h3 span {
+	font-weight: normal;
+}
+
 #template textarea {
-	font-family: Consolas, Monaco, Courier, monospace;
+	font-family: Consolas, Monaco, monospace;
 	font-size: 12px;
 	width: 97%;
+	background: #f9f9f9;
+	outline: none;
 }
 
 #template p {
@@ -47,10 +57,10 @@
 	padding: 3px 3px 3px 12px;
 	margin-left: -12px;
 	font-weight: bold;
-	-moz-border-radius: 8px;
-	-khtml-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-moz-border-radius: 3px;
+	-khtml-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 }
 
 div.tablenav {

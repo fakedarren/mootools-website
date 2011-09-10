@@ -20,8 +20,8 @@ function fileQueued(fileObj) {
 	jQuery('.progress', '#media-item-' + fileObj.id).show();
 
 	// Disable submit and enable cancel
-	jQuery('#insert-gallery').attr('disabled', 'disabled');
-	jQuery('#cancel-upload').attr('disabled', '');
+	jQuery('#insert-gallery').prop('disabled', true);
+	jQuery('#cancel-upload').prop('disabled', false);
 }
 
 function uploadStart(fileObj) {
@@ -68,7 +68,7 @@ function prepareMediaItem(fileObj, serverData) {
 function prepareMediaItemInit(fileObj) {
 	var item = jQuery('#media-item-' + fileObj.id);
 	// Clone the thumbnail as a "pinkynail" -- a tiny image to the left of the filename
-	jQuery('.thumbnail', item).clone().attr('className', 'pinkynail toggle').prependTo(item);
+	jQuery('.thumbnail', item).clone().attr('class', 'pinkynail toggle').prependTo(item);
 
 	// Replace the original filename with the new (unique) one assigned during upload
 	jQuery('.filename.original', item).replaceWith( jQuery('.filename.new', item) );
@@ -232,8 +232,8 @@ function uploadSuccess(fileObj, serverData) {
 function uploadComplete(fileObj) {
 	// If no more uploads queued, enable the submit button
 	if ( swfu.getStats().files_queued == 0 ) {
-		jQuery('#cancel-upload').attr('disabled', 'disabled');
-		jQuery('#insert-gallery').attr('disabled', '');
+		jQuery('#cancel-upload').prop('disabled', true);
+		jQuery('#insert-gallery').prop('disabled', false);
 	}
 }
 
