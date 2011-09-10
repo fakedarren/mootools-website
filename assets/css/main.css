@@ -28,6 +28,10 @@ H1, H2, H3, H4, H5, H6, P, IMG, A, UL, OL, LI, FORM, FIELDSET, BUTTON {
 	padding: 0;
 }
 
+UL UL {
+	padding: 0 0 0 10px;
+}
+
 A {
 	color: #366993;
 	text-decoration: none;
@@ -35,6 +39,12 @@ A {
 	A:FOCUS, A:HOVER {
 		text-decoration: underline;
 	}
+	
+PRE {
+	background: #FFF;
+	font-size: 1.2em;
+	padding: 4px;
+}
 
 .content {
 	margin: 0 auto;
