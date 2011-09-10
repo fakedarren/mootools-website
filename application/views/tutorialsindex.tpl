@@ -9,10 +9,10 @@
 	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 
-<div class="content">
+<div id="content">
+	TUTORIALS
 	<br />
-	<br />
-	<br />
+	<a href="/tutorials/Test">Test</a>
 	<br />
 	<br />
 	<br />

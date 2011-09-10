@@ -12,6 +12,11 @@ BODY {
 	font: 62.5% Helvetica, Arial, sans-serif;
 }
 
+.content {
+	margin: 0 auto;
+	width: 960px;
+}
+
 HEADER, FOOTER, ASIDE {
 	display: block;
 }

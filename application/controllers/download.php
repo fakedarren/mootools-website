@@ -6,5 +6,4 @@ class Download extends Control {
 	}
 	
 }
-
 ?>

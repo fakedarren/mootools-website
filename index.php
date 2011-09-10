@@ -12,6 +12,7 @@ Control::config("views_folder", "application/views");
 Control::route("/docs/", "docs");
 Control::route("/demos/", "demos");
 Control::route("/people/", "developers");
+Control::route("/tutorials/", "tutorials");
 
 new Control();
 ?>
