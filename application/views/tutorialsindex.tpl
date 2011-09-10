@@ -6,28 +6,12 @@
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 </head>
 <body>
-	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
-
-<div id="content">
-	TUTORIALS
-	<br />
-	<a href="/tutorials/Test">Test</a>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
+<div class="content">
+	<h2>TUTORIALS</h2>
+	<?=$this->tutoriallist?>
 </div>
-
 <?php require($this->config('views_folder') . '/shared/footer.tpl');?>
-	
 <?php require($this->config('views_folder') . '/shared/javascript.tpl');?>
-
 </body>
 </html>

@@ -1,12 +1,12 @@
 .inline-demo {
-	border: 10px solid red;
-}
-
-.inline-demo {
     background: #EEE;
+	border: 10px solid red;
     padding: 5px;
     width: 940px;
 }
+	.inline-demo .demo.results {
+		min-height: 100px;
+	}
 	.inline-demo H2 {
 	    background: #CCC;
 	    color: #666;

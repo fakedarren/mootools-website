@@ -5,7 +5,7 @@ class Tutorials extends Control {
 
 		$url = explode("/", $_SERVER["REQUEST_URI"]);
 		$path = array_slice($url, 2);
-		
+
 		if (@strlen($path[0]) > 0){
 			$content = file_get_contents('Source/Tutorials/' . $path[0] . '/example.md');
 			$html = Markdown($content);
@@ -13,7 +13,9 @@ class Tutorials extends Control {
 			$html = $this->createDemos($html);
 			$html = $this->createExamples($html);
 			$html = $this->formatCodeBlocks($html);
-
+			
+			$html = preg_replace('/\/\*([\s\S]*?)\*\//', '', $html);
+						
 			$parts = preg_split('/<hr \/>\s*<hr \/>/', $html);
 			$index = (isset($path[0]) && isset($path[1]) ? $path[1] - 1 : 0);
 			
@@ -23,6 +25,8 @@ class Tutorials extends Control {
 			$this->nextpage = (isset($parts[$index + 1]) ? $index + 2 : false);
 			$this->render();
 		} else {
+			$packagemenu = new PackageMenu('Source/Tutorials', '/tutorials');
+			$this->tutoriallist = $packagemenu->html;
 			$this->render('tutorialsindex');
 		}
 	}
