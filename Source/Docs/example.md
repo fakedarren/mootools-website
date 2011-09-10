@@ -17,10 +17,10 @@ Heading 2
 
 #### HTML
 
-	<div id="foo"></div>
+	<div id="foo" style="height: 100px; width: 100px; background: red;">asdasd</div>
 	
 #### JavaScript
-
+	
 	var foo = 'bar';
 	$$('foo').set('foo', 'bar');
 	
