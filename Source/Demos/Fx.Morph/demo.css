@@ -1,0 +1,32 @@
+
+
+#idList,
+#idList2 {
+	margin: 0 50px 0 0;
+	width: 130px;
+	padding: 0;
+	float: left;
+}
+
+#idList li,
+#idList2 li {
+	display: block;
+	margin: 0;
+	padding: 4px;
+	width: 120px;
+	background-color: #333;
+	color: #888;
+}
+
+/* The styles for the second list defined in the CSS */
+.hover {
+	background-color: #666;
+	color: #FF8;
+	margin-left: 5px
+}
+
+.default {
+	background-color: #333;
+	color: #888;
+	margin-left: 0;
+}

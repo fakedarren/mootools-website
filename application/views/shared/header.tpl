@@ -9,6 +9,7 @@
 			<ul>
 				<li class="home"><a href="/">Home</a></li>
 				<li class="downloads"><a href="/download">Downloads</a></li>
+				<li class="demos"><a href="/demos">Demos</a></li>
 				<li class="docs"><a href="/docs">Documentation</a></li>
 				<li class="blog"><a href="/blog">Blog</a></li>
 				<li class="forge"><a href="/forge">Forge</a></li>

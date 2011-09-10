@@ -1,0 +1,27 @@
+/*
+---
+
+name: Fx.Morph
+
+description: Fx.Morph demo
+
+authors:
+  -
+
+keywords:
+  - Fx
+
+docs:
+  - name: Fx.Morph
+    url: http://mootools.net/docs/core/Fx/Fx.Morph
+
+...
+*/
+
+<p>The always-requested hover transition</p>
+
+<p>
+	For the left list the styles are defined in a JavaScript object. For the right list the styles are defined in the
+	CSS file. Fx.Morph can fetch those styles by a simple CSS selector. The main advantage of the last approach is that
+	you can keep your styles in the CSS, and the logic in the JavaScript.
+</p>
