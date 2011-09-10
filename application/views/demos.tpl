@@ -11,12 +11,18 @@
 <div class="content">
 	<?=$this->data['details'];?>
 	<div class="inline-demo">
-		<h2>HTML</h2>
-		<textarea class='demo html'><?=$this->data['html'];?></textarea>
+		<h2 class="selected">HTML</h2>
+		<div class="selected content">
+			<textarea class='demo html'><?=$this->data['html'];?></textarea>
+		</div>
 		<h2>JavaScript</h2>
-		<textarea class='demo script'><?=$this->data['js'];?></textarea>
+		<div class="content">
+			<textarea class='demo script'><?=$this->data['js'];?></textarea>
+		</div>
 		<h2>CSS</h2>
-		<textarea class='demo css'><?=$this->data['css'];?></textarea>
+		<div class="content">
+			<textarea class='demo css'><?=$this->data['css'];?></textarea>
+		</div>
 	</div>
 </div>
 <?php require($this->config('views_folder') . '/shared/footer.tpl');?>
