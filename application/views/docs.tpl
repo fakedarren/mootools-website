@@ -9,7 +9,7 @@
 <body>
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="content">
-	
+	<?=$this->data['html'];?>
 </div>
 <?php require($this->config('views_folder') . '/shared/footer.tpl');?>
 <?php require($this->config('views_folder') . '/shared/javascript.tpl');?>
