@@ -1,3 +1,0 @@
-[submodule "application/packager"]
-	path = application/packager
-	url = http://github.com/kamicane/packager.git
