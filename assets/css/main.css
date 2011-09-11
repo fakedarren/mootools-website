@@ -7,9 +7,9 @@ HTML {
 	font-size: 100%;
 }
 BODY {
-	background: #F7F9FA;
-	color: #222;
-	font: 62.5% Helvetica, Arial, sans-serif;
+	background: url(graphics/bg.png) repeat-x 50% 0;
+	border-top: 4px solid #3F639B;
+	font: 62.5% "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
 }
 
 .content {
@@ -17,7 +17,7 @@ BODY {
 	width: 960px;
 }
 
-HEADER, FOOTER, ASIDE {
+HEADER, FOOTER {
 	display: block;
 }
 
@@ -28,17 +28,27 @@ H1, H2, H3, H4, H5, H6, P, IMG, A, UL, OL, LI, FORM, FIELDSET, BUTTON {
 	padding: 0;
 }
 
-UL UL {
-	padding: 0 0 0 10px;
+@font-face {
+	font-family: CartoGothic;
+	src: url('fonts/CartoGothicStd-Book.otf');
+}
+
+H1, H2, H3, H4, H5, H6 {
+	color: #10426F;
+	font-family: CartoGothic;
+}
+H2 {
+	font-size: 2.8em;
 }
 
 P {
-	font-size: 1.1em;
+	font-size: 1.3em;
+	line-height: 20px;
 	padding: 0 0 10px;
 }
 
 A {
-	color: #366993;
+	color: #BD2121;
 	text-decoration: none;
 }
 	A:FOCUS, A:HOVER {
@@ -51,81 +61,47 @@ PRE {
 	padding: 4px;
 }
 
-.content {
+HEADER {
+	height: 80px;
 	margin: 0 auto;
+	padding: 15px 0 0;
 	width: 960px;
 }
-
-/* HEADER */
-HEADER {
-	background: #FFF;
-	border-top: 10px solid #1B3549;
-	height: 110px;
-	-moz-box-shadow: 0px 0px 30px #777;
-	-webkit-box-shadow: 0px 0px 30px #777;
-	box-shadow: 0px 0px 30px #777;
-}
-	HEADER .content {
-		position: relative;
+	HEADER .logo {
+		border-top: 1px solid #D9D9D9;
+		float: left;
+		padding: 14px 0;
+		width: 131px;
 	}
-	HEADER P {
-		background: url(graphics/logo.png) no-repeat;
-		height: 31px;
-		position: absolute;
-		text-indent: -9999px;
-		top: 30px;
-		width: 164px;
-	}
+		HEADER .logo A {
+			background: url(graphics/logo.png);
+			display: block;
+			height: 24px;
+			text-indent: -9999px;
+		}
 	HEADER .subtitle {
-		background: url(graphics/subtitle.png) no-repeat;		
-		height: 11px;
-		top: 70px;
+		left: -9999px;
+		position: absolute;
 	}
 	HEADER NAV {
-		height: 25px;
-		line-height: 25px;
-		position: absolute;
-		right: 0;
-		top: 25px;
+		float: right;
 	}
 		HEADER NAV LI {
-			float: left;
-			font-family: "CartoGothic Std";
-			font-size: 1.3em;
+			border-top: 1px solid #D9D9D9;
+			display: inline-block;
+			margin: 0 0 0 20px;
+			text-transform: uppercase;
+			width: 130px;
 		}
 			HEADER NAV LI A {
-				background: url(graphics/nav-icons.png) no-repeat;
-				border-right: 2px solid red;
-				display: inline-block;
-				padding: 0 12px 0 28px;
+				color: #000;
+				display: block;
+				padding: 28px 0 0;
 			}
-			HEADER NAV .home A {
-				background-position: 10px 7px;
-			}
-			HEADER NAV .downloads A {
-				background-position: 10px -18px;
-			}
-			HEADER NAV .docs A {
-				background-position: 10px -44px;
-			}
-			HEADER NAV .blog A {
-				background-position: 10px -69px;
-			}
-			HEADER NAV .forge A {
-				background-position: 10px -94px;
-			}
-			HEADER NAV .people A {
-				background-position: 10px -118px;
-			}
-		HEADER NAV LI:LAST-CHILD {
+		HEADER NAV LI.selected {
+			border-top-color: #3F639B;
 		}
-			HEADER NAV LI:LAST-CHILD A {
-				border-right: none;
-			}
 		
-/* FOOTER */
 FOOTER {
-	border-top: 3px solid #E3E4E4;
 	clear: both;
-	height: 100px;
 }

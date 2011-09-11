@@ -3,18 +3,15 @@
 <![endif]-->
 <header>
 	<div class="content">
-		<p>MooTools</p>
+		<p class="logo"><a href="/">MooTools</a></p>
 		<p class="subtitle">A compact JavaScript framework</p>
 		<nav>
 			<ul>
-				<li class="home"><a href="/">Home</a></li>
 				<li class="downloads"><a href="/download">Downloads</a></li>
-				<li class="demos"><a href="/demos">Demos</a></li>
-				<li class="docs"><a href="/docs">Documentation</a></li>
-				<li class="tutorials"><a href="/tutorials">Tutorial</a></li>
+				<li class="selected docs"><a href="/learn">Documentation</a></li>
 				<li class="blog"><a href="/blog">Blog</a></li>
-				<li class="forge"><a href="/forge">Forge</a></li>
-				<li class="people"><a href="/developers">People</a></li>
+				<li class="people"><a href="/community">Community</a></li>
+				<li class="forge"><a href="/plugins">Plugins</a></li>
 			</ul>
 		</nav>	
 	</div>

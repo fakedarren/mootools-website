@@ -1,0 +1,20 @@
+.menu > LI {
+	float: left;
+	width: 298px;
+}
+.menu > LI:nth-child(2n){
+	margin: 0 33px;
+}
+	.menu > LI > A {
+		background: url(graphics/promote.bg.png);
+		color: #10426F;
+		display: block;
+		font: 3.2em CartoGothic;
+		height: 126px;
+		padding: 30px;
+		width: 238px;
+	}
+	.menu > LI > A SPAN {
+		display: block;
+		font-size: 0.5em;
+	}
