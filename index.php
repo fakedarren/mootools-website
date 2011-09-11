@@ -11,6 +11,7 @@ include("application/lib/geshi/geshi.php");
 Control::config("controllers_folder", "application/controllers");
 Control::config("views_folder", "application/views");
 
+Control::route("/^learn/", "learn");
 Control::route("/^docs/", "docs");
 Control::route("/^demos/", "demos");
 Control::route("/^people/", "developers");

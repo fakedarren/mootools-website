@@ -16,7 +16,7 @@ class Demos extends Control {
 			
 			$this->render();
 		} else {
-			$packagemenu = new PackageMenu('Source/Demos', '/demos');
+			$packagemenu = new PackageMenu('Source/Demos', '/demos', 1, true);
 			$this->demoslist = $packagemenu->html;
 			$this->render('demosindex');
 		}

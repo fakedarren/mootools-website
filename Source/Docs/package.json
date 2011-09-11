@@ -2,9 +2,11 @@
 	{
 		"url": "/test",
 		"title": "Test",
-		"submenu": {
-			"url": "/test/whatever",
-			"title": "Test Whatever"
-		}
+		"submenu": [
+			{
+				"url": "/test/whatever",
+				"title": "Test Whatever"
+			}
+		]
 	}	
 ]
