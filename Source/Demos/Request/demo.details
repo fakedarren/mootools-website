@@ -1,0 +1,21 @@
+/*
+---
+
+name: Request
+
+description: Simple Ajax example
+
+authors:
+  -
+
+keywords:
+  - Request
+
+docs:
+  - name: Request
+    url: http://mootools.net/docs/core/Request/Request
+
+...
+*/
+
+<p>Request is the basic XHR request class in MooTools. While not extremely useful on its own, it provides the basic functionality for both Request.HTML and Request.JSON.</p>

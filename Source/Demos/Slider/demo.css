@@ -1,0 +1,36 @@
+.slider {
+	background: #CCC;
+	height: 16px;
+	width: 200px;
+}
+	.slider .knob {
+		background: #000;
+		width: 16px;
+		height: 16px;
+	}
+
+#fontSize {
+	height: 50px;
+	line-height: 50px;
+}
+
+.advanced {
+	width: 400px;
+	margin: 5px 0;
+	background: #CCC;
+}
+	.advanced .knob {
+		cursor: pointer;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		border-radius: 6px;
+	}
+#red .knob {
+	background: red;
+}
+#green .knob {
+	background: green;
+}
+#blue .knob {
+	background: blue;
+}

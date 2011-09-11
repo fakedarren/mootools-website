@@ -1,0 +1,20 @@
+
+#container {
+	width: 145px;
+	margin: 20px 0;
+	overflow: hidden;
+	border: 1px solid #999;
+}
+
+.item {
+	float: left;
+	height: 40px;
+	width: 40px;
+	margin: 4px;
+	background-color: #78BA91;
+	cursor: pointer;
+}
+
+.new {
+	background-color: #6B7B95;
+}

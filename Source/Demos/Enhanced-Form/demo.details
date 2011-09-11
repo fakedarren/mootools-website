@@ -1,0 +1,31 @@
+/*
+---
+
+name: Enhanced Forms
+
+description:
+
+authors:
+  - Tim Wienk
+
+keywords:
+  - Elements, Events
+
+docs:
+  - name: Form.Request
+    url: http://mootools.net/docs/more/Forms/Form.Request
+  - name: Form.Validator
+    url: http://mootools.net/docs/more/Forms/Form.Validator
+  - name: Form.Validator.Inline
+    url: http://mootools.net/docs/more/Forms/Form.Validator.Inline
+  - name: OverText
+    url: http://mootools.net/docs/more/Forms/OverText
+
+...
+*/
+
+<p>
+	MooTools More has several plugins to enhance your forms, with a Form Validator,
+	send your data with Request, and display text in your input fields with
+	OverText.
+</p>

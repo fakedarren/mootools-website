@@ -1,0 +1,30 @@
+/*
+---
+
+name: Slick.Finder
+
+description: A demo of Slick.Finder including its awesome Reversed Combinators
+
+keywords:
+  - Drag
+
+docs:
+  - name: Slick on Github
+    url: https://github.com/mootools/slick
+  - name: Reversed Combinators Wiki on Github
+    url: https://github.com/mootools/slick/wiki/reversed-combinators
+  - name: W3C Selectors
+    url: http://www.w3.org/TR/css3-selectors/#selectors
+
+...
+*/
+
+<p>
+	A new standalone selector engine that is totally slick! And it is the new Selector Engine of MooTools
+</p>
+
+<p>
+	Reversed Combinators are a classification of combinators that are the reverse of their original. They redirect the flow of
+	selectors and combinators to travel up the node tree rather than down. Slick implements these by prepending <code>!</code> to a selector
+	or combinator.
+</p>

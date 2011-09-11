@@ -1,0 +1,35 @@
+
+.container .sort {
+	display: inline-block;
+}
+.sort {
+	border: 1px solid #333;
+	color: #FFF;
+	cursor: pointer;
+	margin: 3px;
+	padding: 2px;
+	width: 100px;
+}
+.red {
+	background-color: #C17878;
+}
+.purple {
+	background-color: #A87AAD;
+}
+.green {
+	background-color: #78BA91;
+}
+.orange {
+	background-color: #E79D35;
+}
+.blue {
+	background-color: #6B7B95;
+}
+strong {
+	color: #C17878;
+}
+
+#note {
+	color: #A87AAD;
+	font-size: 0.9em;
+}

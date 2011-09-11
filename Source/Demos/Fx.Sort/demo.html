@@ -1,0 +1,50 @@
+
+<label for="fxTransition">Transition</label>
+<select id="fxTransition" style="width: 100px;">
+	<option value="linear">Linear</option>
+	<option value="Quad">Quadratic</option>
+	<option value="Cubic">Cubic</option>
+	<option value="Quart">Quartic</option>
+	<option value="Quint">Quintic</option>
+	<option value="Sine">Sinusoidal</option>
+	<option value="Expo">Exponential</option>
+	<option value="Circ">Circular</option>
+	<option value="Bounce">Bouncing</option>
+	<option value="Back" selected="">Back</option>
+	<option value="Elastic">Elastic</option>
+</select>
+
+<select id="fxEase" style="width: 100px;">
+	<option value="easeIn">easeIn</option>
+	<option value="easeOut">easeOut</option>
+	<option value="easeInOut" selected="">easeInOut</option>
+</select>
+
+<label for="duration">duration</label>
+<input type="text" id="duration" value="1000" style="width: 60px;" />
+
+<input id="mode" type="checkbox" value="vertical" checked />
+<label for="mode">vertical sort</label>
+
+<p id="note">*you can click on any two elements below to swap their position</p>
+
+<div id="container">
+	<div class="red sort">red</div>
+    <div class="purple sort">purple</div>
+    <div class="green sort">green</div>
+    <div class="orange sort">orange</div>
+    <div class="blue sort">blue</div>
+</div>
+
+<p>
+	<a href="#" class="fireSort" title="Arrange the items in the original order reversed (...3,2,1,0)">backward</a> |
+	<a href="#" class="fireSort" title="Arrange the items in the original order (0,1,2,3,etc)">forward</a> |
+	<a href="#" class="fireSort" title="Arrange the items in the current order reversed">reverse</a>  |
+	<a href="#" id="sort" title="Rearranges the items visually into a new order">Sort [1,3,0,2,4]</a> |
+	<a href="#" id="swap" title="Swaps the position of one item with another">Swap first and last child</a> |
+	<a href="#" id="order" title="Retrieves the current sort order">Current order</a> |
+	<a href="#" id="reorderDOM" title="Rearranges the DOM to the current sort order">rearrangeDOM</a>
+</p>
+
+<h3> Current DOM order </h3>
+<pre id="output"></pre>

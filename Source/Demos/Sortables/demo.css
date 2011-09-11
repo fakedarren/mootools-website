@@ -1,0 +1,23 @@
+
+ul#example1 {
+	width: 200px;
+}
+
+#example1 LI,
+#example2 LI	{
+	cursor: move;
+	padding: 3px;
+}
+
+#example2 UL {
+	border: 1px solid #000;
+	float: left;
+	min-height: 10px;
+	margin: 5px;
+	width: 200px;
+}
+
+#example LI {
+	margin: 0;
+	background: #F9F9F9;
+}

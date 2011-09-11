@@ -1,0 +1,19 @@
+/*
+---
+
+name: Accordion
+
+description: A really simple example of an accordion
+
+authors:
+  - Valerio Proietti
+  - Christoph Pojer
+
+docs:
+  - name: Fx.Accordion
+    url: http://mootools.net/docs/more/Fx/Fx.Accordion
+
+...
+*/
+
+<p>Accordions are quite simply the most important UI element on the web today. This demo shows you how to use this Web 3.0 interface element.</p>

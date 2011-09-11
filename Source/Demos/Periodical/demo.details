@@ -1,0 +1,24 @@
+/*
+---
+
+name: Periodical
+
+description: Periodically shows another Fx
+
+authors:
+  -
+
+keywords:
+  - Function
+  - Periodical
+
+docs:
+  - name: Function:periodical
+    url: http://mootools.net/docs/core/Types/Function#Function:periodical
+  - name: MDC clearInterval
+    url: https://developer.mozilla.org/en/DOM/window.clearInterval
+
+...
+*/
+
+<p>Periodically shows another Fx</p>

@@ -1,0 +1,26 @@
+
+<form id="myForm" action="/echo/html/" method="post">
+	<fieldset>
+		<legend>Contact form example</legend>
+		<ul>
+			<li><input type="text" name="name" class="required" title="Name" /></li>
+			<li><input type="text" name="email" class="required validate-email" title="Email" /></li>
+			<li><input type="text" name="phone" title="Phone" /></li>
+			<li><input type="text" name="url" title="Website / blog" /></li>
+			<li><textarea id="myMessage" name="message" class="required" title="Message" rows="5" cols="30"></textarea></li>
+			<li>
+				<label>Would you like to &lt;something&gt;?</label>
+				<input type="radio" id="news_y" name="newsletter" />
+				<label for="news_y">Yes</label>
+				<input type="radio" id="news_n" name="newsletter" class="validate-one-required" />
+				<label for="news_n">No</label>
+			</li>
+		</ul>
+
+		<div><input type="submit" value="Send" /></div>
+
+	</fieldset>
+
+	<div id="myResult"></div>
+
+</form>

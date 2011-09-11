@@ -1,0 +1,28 @@
+
+#selector_list,
+#search_wrapper {
+	float: left;
+	width: 50%;
+}
+
+#selector_list li {
+	margin-bottom: 5px;
+}
+
+#selector_list a {
+	font-family: "Courier New", Courier, monospace;
+}
+
+#seach_in_here {
+	border: 1px solid #333;
+	padding: 10px;
+}
+
+#seach_in_here div {
+	margin-bottom: 20px;
+}
+
+#seach_in_here div p {
+	margin: 0;
+	border-style
+}

@@ -1,0 +1,20 @@
+/*
+---
+
+name: Drag.Drop
+
+description: Another simple Drag example showing droppable areas
+
+authors:
+  - Djamil Legato
+
+docs:
+  - name: Element:makeDraggable
+    url: http://mootools.net/docs/more/Drag/Drag.Move#Element:makeDraggable
+  - name: Element:morph
+    url: http://mootools.net/docs/core/Fx/Fx.Morph#Element:morph
+
+...
+*/
+
+<p>The Drag.Move class in MooTools More makes it easy to make an element draggable, and define 'droppable' elements which can interact with the dragged element. This is a simple example showing how you define these elements and add the relevant events.</p>

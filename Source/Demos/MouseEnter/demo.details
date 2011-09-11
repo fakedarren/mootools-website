@@ -1,0 +1,17 @@
+/*
+---
+
+name: MouseEnter
+
+description:
+
+authors:
+  -
+
+keywords:
+  - Elements, Events
+
+...
+*/
+
+<p>This demo shows how to use the custom mouseenter and mouseleave events. Just hover the grey box below.</p>

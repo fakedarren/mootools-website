@@ -1,0 +1,26 @@
+/*
+---
+
+name: Effects
+
+description: Effects
+
+authors:
+  - Darren Waddell
+
+docs:
+  - name: Fx.Tween
+    url: http://mootools.net/docs/core/Fx/Fx.Tween
+  - name: Fx.Morph
+    url: http://mootools.net/docs/core/Fx/Fx.Morph
+  - name: Element:tween
+    url: http://mootools.net/docs/core/Fx/Fx.Tween#Element:tween
+  - name: Element:morph
+    url: http://mootools.net/docs/core/Fx/Fx.Morph#Element:morph
+  - name: Element:erase
+    url: http://mootools.net/docs/core/Element/Element#Element:erase
+
+...
+*/
+
+<p>The powerful Fx Classes allow you to change any number of css styles with any transition and any duration.</p>

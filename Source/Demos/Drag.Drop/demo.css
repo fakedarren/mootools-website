@@ -1,0 +1,22 @@
+#draggables {
+	height: 100px;
+	position: relative;
+} 
+	#draggables DIV {
+		background: #78BA91;
+		cursor: move;
+		height: 50px;
+		left: 10px;
+		position: absolute;
+		top: 10px;
+		width: 50px;
+	}
+	 
+#droppables DIV {
+	background: #6B7B95;
+	float: left;
+	height: 100px;
+	margin: 10px;
+	width: 100px;
+}
+ 

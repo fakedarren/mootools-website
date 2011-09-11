@@ -1,0 +1,22 @@
+/*
+---
+
+name: Request.JSON
+
+description: Request JSON
+
+authors:
+  -
+
+keywords:
+  - Request
+  - HTML
+
+docs:
+  - name: Request.JSON
+    url: http://mootools.net/docs/core/Request/Request.JSON
+
+...
+*/
+
+<p>Request is the basic XHR request class in MooTools. While not extremely useful on its own, it provides the basic functionality for both Request.HTML and Request.JSON.</p>

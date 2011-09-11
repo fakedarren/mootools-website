@@ -1,0 +1,28 @@
+/*
+---
+
+name: Drag.Cart
+
+description: A shopping cart demo
+
+authors:
+  - The MooTools Development Team
+
+docs:
+  - name: Drag.Move
+    url: http://mootools.net/docs/more/Drag/Drag.Move
+  - name: Drag
+    url: http://mootools.net/docs/more/Drag/Drag
+  - name: Element:addEvent
+    url: http://mootools.net/docs/core/Element/Element.Event#Element:addEvent
+  - name: Event:stop
+    url: http://mootools.net/docs/core/Types/Event#Event:stop
+  - name: Element:getCoordinates
+    url: http://mootools.net/docs/core/Element/Element.Dimensions#Element:getCoordinates
+  - name: "Fx.Tween element methods: Element:highlight and Elementtween"
+    url: http://mootools.net/docs/core/Fx/Fx.Tween#Element
+
+...
+*/
+
+<p>Ghost dragging for Shopping Carts.</p>

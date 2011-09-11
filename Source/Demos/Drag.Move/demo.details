@@ -1,0 +1,18 @@
+/*
+---
+
+name: Drag.Move
+
+description: A drag example showing how to manage droppable areas
+
+authors:
+  - Djamil Legato
+
+docs:
+  - name: Drag.Move
+    url: http://mootools.net/docs/more/Drag/Drag.Move
+
+...
+*/
+
+<p>The Drag.Move class in MooTools More makes it easy to make an element draggable, and define 'droppable' elements which can interact with the dragged element. This is a simple example showing how you define these elements and add the relevant events.</p>

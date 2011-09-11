@@ -1,0 +1,95 @@
+
+<p>
+	Try a CSS Selector or pick one of the predefined ones.
+</p>
+
+<input type="text" id="selector"  />
+<input type="button" value="Search the DOM" id="searchDOM" /><br />
+
+<ul id="selector_list">
+	<li><h4>CSS Selectors:</h4></li>
+	<li>
+		<a href="#">p, a, label</a><br />
+		Matches all paragraph, links and labels
+	</li>
+	<li>
+		<a href="#">tr td:first-child</a><br />
+		Matches all first td in every row
+	</li>
+	<li>
+		<a href="#">input:checked + label</a><br />
+		Matches only the next label element where the previous checkbox is checked
+	</li>
+	<li>
+		<a href="#">input[name=myCheckbox] + label</a><br />
+		Matches only the next label element where the previous has a name attribute containing "myCheckbox"
+	<li>
+		<a href="#">div:contains(Some text)</a><br />
+		Checks if an element contains the string "Some text"
+	</li>
+	<li>
+		<a href="#">table tr:odd td</a><br />
+		Selects all td elements of the odd rows of the table
+	</li>
+	<li><h4>Reversed Combinators:</h4></li>
+	<li>
+		<a href="#">p !> .chapter</a><br />
+		Matches a .chapter that is a direct parent of a paragraph
+	</li>
+	<li>
+		<a href="#">p ! div.chapter</a><br />
+		Matches a div.chapter which is any parent of a paragraph
+	</li>
+	<li>
+		<a href="#">a !> strong ! th:nth-child(3) ! table</a><br />
+		Give me every TABLE whose third TH contains a STRONG A
+	</li>
+</ul>
+
+
+<div id="search_wrapper">
+
+	<h4>The elements we search in:</h4>
+	
+	<div id="seach_in_here">
+
+
+		<div class="chapter">
+			<p>div.chapter > p</p>
+			<p><strong>div.chapter > p > strong</strong></p>
+		</div>
+
+		<table>
+			<tr>
+				<th>A</th>
+				<th>Simple table</th>
+				<th>with: <strong><a href="#">table > tr > th:nth-child(3) > strong > a</a></strong></th>
+			</tr>
+			<tr>
+				<td>Some</td><td>Other</td><td>Text</td>
+			</tr>
+			<tr>
+				<td>Some</td><td>Other</td><td>Text</td>
+			</tr>
+			<tr>
+				<td>Some</td><td>Other</td><td>Text</td>
+			</tr>
+			<tr>
+				<td>Some</td><td>Other</td><td>Text</td>
+			</tr>
+		</table>
+
+		<div>
+			<input type="checkbox" checked><label>div > label</label>
+			<input type="checkbox" checked><label>div > label</label>
+			<input type="checkbox" name="myCheckbox"><label>div > label</label>
+		</div>
+
+		<div>
+			Some text<br />
+			div
+		</div>
+
+	</div>
+
+</div>

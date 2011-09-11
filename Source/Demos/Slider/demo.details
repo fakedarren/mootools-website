@@ -1,0 +1,21 @@
+/*
+---
+
+name: Slider
+
+description: Slider demo
+
+authors:
+  -
+
+keywords:
+  - Effects
+
+docs:
+  - name: Slider
+    url: http://mootools.net/docs/more/Drag/Slider
+
+...
+*/
+
+<p>The Slider allows you to drag a knob inside an element to set a value within a certain range.</p>

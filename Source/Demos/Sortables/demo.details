@@ -1,0 +1,21 @@
+/*
+---
+
+name: Sortables
+
+description: Sortables
+
+authors:
+  -
+
+keywords:
+  - Effects
+
+docs:
+  - name: Sortables
+    url: http://mootools.net/docs/more/Drag/Sortables
+
+...
+*/
+
+<p>Back in the 90s you sorted items in a list with arrows up/down or maybe even with input-fields where you specified the item's position. But now you have the Sortables-Plugin, which comes in handy when you are using one or more lists and need the user to sort them.</p>

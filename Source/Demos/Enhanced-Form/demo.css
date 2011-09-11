@@ -1,0 +1,85 @@
+
+#myForm fieldset {
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #c0c0c0;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+#myForm ul {
+	list-style: none;
+}
+
+#myForm li {
+	position: relative;
+}
+
+#myForm [type=text],
+#myForm [type=submit],
+#myForm textarea {
+	margin-top: 3px;
+	padding: 1px;
+	border: 1px solid #000000;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+}
+
+#myForm [type=check],
+#myForm [type=radio],
+#myForm [type=submit] {
+	cursor: pointer;
+}
+
+#myForm label {
+	display: block;
+}
+
+#myForm [type=check] + label,
+#myForm [type=radio] + label {
+	display: inline-block;
+	cursor: pointer;
+}
+
+#myForm input:hover,
+#myForm textarea:hover,
+#myForm input:focus,
+#myForm textarea:focus {
+	background-color: #ddffdd;
+}
+
+#myForm .validation-failed {
+	border-color: #ff0000;
+	background-color: #ffdddd;
+}
+
+#myForm .validation-advice {
+	padding-bottom: 5px;
+	font-weight: bold;
+	color: #ff0000;
+}
+
+#myForm #myResult {
+	margin-top: 10px;
+	padding: 10px;
+	border: 1px solid #0000ff;
+	background-color: #ddddff;
+}
+
+#myForm #myResult:empty {
+	border-width: 0;
+	padding: 0;
+}
+
+#myForm .spinner {
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	background-color: #f0f0f0;
+}
+
+#myForm .overTxtLabel {
+	color: #888888;
+}

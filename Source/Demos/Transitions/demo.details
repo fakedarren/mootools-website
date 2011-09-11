@@ -1,0 +1,27 @@
+/*
+---
+
+name: Transitions
+
+description: Transitions
+
+authors:
+  -
+
+keywords:
+  - Transitions, Fx
+
+docs:
+  - name: Fx.Transitions
+    url: http://mootools.net/docs/core/Fx/Fx.Transitions
+  - name: Fx.Morph
+    url: http://mootools.net/docs/core/Fx/Fx.Morph
+  - name: Event page property
+    url: http://mootools.net/docs/core/Types/Event#Event:constructor
+
+...
+*/
+
+<p>Shows the transitions</p>
+
+<p>Click somewhere on the gray area to see the transition</p>

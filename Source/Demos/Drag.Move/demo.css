@@ -1,0 +1,24 @@
+#container {
+	background: #DDD;
+	height: 260px;
+	position: relative;
+}
+ 
+#drag {
+	background: #78BA91;
+	cursor: move;
+	height: 40px;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 40px;
+}
+ 
+.drop {
+	background: #6B7B95;
+	float: left;
+	height: 60px;
+	margin-left: 20px;
+	margin-top: 20px;
+	width: 72px;
+}

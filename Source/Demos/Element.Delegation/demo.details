@@ -1,0 +1,21 @@
+/*
+---
+
+name: Element.Delegation
+
+description:
+
+authors:
+  - Subhaze
+
+keywords:
+  - Elements, Events, Delegation
+
+docs:
+  - name: Element.Delegation
+    url: http://mootools.net/docs/more/Element/Element.Delegation
+
+...
+*/
+
+<p>This demo will show you how to: add a single event to a parent element and have it delegate that event to it's children based on a selector, even elements that were created after the event was setup.</p>

@@ -1,0 +1,22 @@
+/*
+---
+
+name: Chaining
+
+description: An example of chaining used for effects
+
+authors:
+  - Djamil Legato
+
+docs:
+  - name: Chain
+    url: http://mootools.net/docs/core/Class/Class.Extras#Chain
+  - name: Fx.Morph
+    url: http://mootools.net/docs/core/Fx/Fx.Morph#Fx-Morph
+  - name: Function:delay
+    url: http://mootools.net/docs/core/Types/Function#Function:delay
+
+...
+*/
+
+<p>An example of chaining used for effects.</p>

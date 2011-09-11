@@ -1,0 +1,51 @@
+#items {
+	float: left;
+	border: 1px solid #F9F9F9;
+	width: 525px;
+}
+
+.item {
+	background-color: #FFF;
+	background-position: left top;
+	background-repeat: no-repeat;
+	border: 1px solid #EEE;
+	border-bottom: 2px solid #DDD;
+	border-right: 2px solid #DDD;
+	cursor: move;
+	float: left;
+	height: 175px;
+	margin: 10px;
+	position: relative;
+	width: 150px;
+}
+	.item span {
+		bottom: 0;
+		font-size: 8px;
+		font-weight: bold;
+		left: 0;
+		position: absolute;
+		text-align: center;
+		width: 100%;
+	}
+
+#cart {
+	background-color: #FFF;
+	border: 1px solid #F9F9F9;
+	float: right;
+	padding-bottom: 50px;
+	width: 195px;
+}
+	#cart .info {
+		color: #444;
+		font-size: 9px;
+		font-weight: bold;
+		text-align: center;
+	}
+	#cart .item {
+		background-position: 50% -22px;
+		border-width: 1px;
+		cursor: default;
+		height: 85px;
+		margin: 5px;
+		width: 85px;
+	}
