@@ -12,8 +12,8 @@
 				"title": "Array"
 			},
 			{
-				"url": "/types/event",
-				"title": "Event"
+				"url": "/types/domevent",
+				"title": "DOMEvent"
 			},
 			{
 				"url": "/types/function",
