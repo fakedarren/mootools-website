@@ -1,0 +1,11 @@
+.menu {
+	float: left;
+	width: 150px;
+}
+.menu UL {
+	padding: 0 0 0 20px;
+}
+.main {
+	float: left;
+	width: 800px;
+}

@@ -9,9 +9,10 @@
 <body>
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="content">
-
-	DOCS HOMEPAGE
-
+	<?php echo $this->menu ?>
+	<div class="main">
+		<?php echo $this->html ?>
+	</div>
 </div>
 <?php require($this->config('views_folder') . '/shared/footer.tpl');?>
 <?php require($this->config('views_folder') . '/shared/javascript.tpl');?>

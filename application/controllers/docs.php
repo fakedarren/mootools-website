@@ -6,15 +6,28 @@ class Docs extends Control {
 		$url = explode("/", $_SERVER["REQUEST_URI"]);
 		$path = array_slice($url, 2);
 		
-		$content = file_get_contents('Source/Docs/example.md');
-		$html = Markdown($content);
-		
-		$html = $this->createDemos($html);
-		$html = $this->createExamples($html);
-		$html = $this->formatCodeBlocks($html);
-		
-		$this->data['html'] = $html;
-		$this->render();
+		$packagemenu = new PackageMenu('Source/Docs/api-ref.json', '/docs');
+		$this->menu = $packagemenu->html;
+
+		$this->currentnav = 'docs';
+
+		if (isset($path[0]) === false){
+			$content = file_get_contents('Source/Docs/intro.md');
+			$this->html = Markdown($content);
+			$this->render('docsindex');
+		} else {
+			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
+
+			$content = file_get_contents('Source/Docs/' . $stub . '.md');
+			$html = Markdown($content);
+
+			$html = $this->createDemos($html);
+			$html = $this->createExamples($html);
+			$html = $this->formatCodeBlocks($html);
+			$this->html = $html;
+
+			$this->render();
+		}
 	}
 	
 	protected function createDemos($source){

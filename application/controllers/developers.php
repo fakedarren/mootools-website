@@ -192,6 +192,8 @@ class Developers extends Control {
 		shuffle($devs);
 		shuffle($past);
 		
+		$this->currentnav = 'people';
+		
 		$this->data['super-dev'] = $super;
 		$this->data['devs'] = $devs;
 		$this->data['past-devs'] = $past;

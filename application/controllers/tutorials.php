@@ -6,6 +6,8 @@ class Tutorials extends Control {
 		$url = explode("/", $_SERVER["REQUEST_URI"]);
 		$path = array_slice($url, 2);
 		
+		$this->currentnav = 'docs';
+
 		if (@strlen($path[0]) > 0 && is_numeric($path[0]) === false){
 			$this->tutorial($path);
 		} else {
