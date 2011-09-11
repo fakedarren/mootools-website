@@ -3,11 +3,6 @@ Type: Window {#Window}
 
 The following functions are treated as Window methods.
 
-
-----------------------------------------
-
-
-
 Function: document.id {#Window:document-id}
 -------------------------------------------
 
@@ -28,8 +23,6 @@ The document.id function has a dual purpose: Getting the element by its id, and 
 
 * (*element*) A DOM element.
 * (*null*) Null if no matching id was found or if toElement did not return an element.
-
-### Demo: Fx.Sort
 
 ### Examples:
 
@@ -124,17 +117,10 @@ The Element instance returned is an array-like object, supporting every [Array][
 - Default Selectors supported are the same as you can find on [W3C CSS3 selectors](http://www.w3.org/TR/css3-selectors/#selectors).
 
 
-----------------------------------------
-
-
-
 Type: Element {#Element}
 ========================
 
 Custom Type to allow all of its methods to be used with any extended DOM Element.
-
-
-----------------------------------------
 
 
 
@@ -179,6 +165,10 @@ Creates a new Element of the type passed in.
 
 	// Using Selectors
 	var myNewElement = new Element('a.myClass');
+
+### Note:
+
+Because the element name is parsed as a CSS selector, colons in namespaced tags have to be escaped. So `new Element('fb\:name)` becomes `<fb:name>`.
 
 ### See Also:
 
@@ -802,7 +792,7 @@ Removes the Element from the DOM.
 
 ### See Also:
 
-- [MDC Element:removeChild](http://developer.mozilla.org/en/docs/DOM:element.removeChild)
+- [MDC Element:removeChild][]
 
 
 
@@ -830,7 +820,7 @@ Clones the Element and returns the cloned one.
 
 ##### HTML
 
-	<div id="myElement"></div>
+	<div id="myElement">ciao</div>
 
 ##### JavaScript
 
@@ -878,7 +868,7 @@ Replaces the passed Element with Element.
 
 ### See Also:
 
-- [MDC Element:replaceChild](http://developer.mozilla.org/en/docs/DOM:element.replaceChild)
+- [MDC Element:replaceChild][]
 
 
 
@@ -1216,8 +1206,7 @@ Empties an Element of all its children.
 Element Method: destroy {#Element:destroy}
 ------------------------------------------
 
-Empties an Element of all its children, removes and garbages the Element.
-Useful to clear memory before the pageUnload.
+Removes the Element and its children from the DOM and prepares them for garbage collection.
 
 ### Syntax:
 
@@ -1560,7 +1549,6 @@ Eliminates a key from the Elements storage.
 	$('element').eliminate('someProperty');
 
 
-----------------------------------------
 
 
 
@@ -1611,9 +1599,6 @@ Additionally, you can access these custom getters and setters using an object as
 - Since MooTools 1.3 this is a native JavaScript Object and not an instance of the deprecated Hash
 
 
-----------------------------------------
-
-
 
 Element Property: html {#Element-Properties:html}
 -------------------------------------------------
@@ -1624,11 +1609,11 @@ Sets the innerHTML of the Element.
 
 #### Syntax:
 
-	myElement.set('html', [htmlString[, htmlString2[, htmlString3[, ..]]]);
+	myElement.set('html', html);
 
 #### Arguments:
 
-1. Any number of string parameters with HTML.
+1. html - (*string*) The new content as HTML string.
 
 #### Returns:
 
@@ -1642,7 +1627,7 @@ Sets the innerHTML of the Element.
 
 ##### JavaScript
 
-	$('myElement').set('html', '<div></div>', '<p></p>');
+	$('myElement').set('html', '<div></div><p></p>');
 
 ##### Resulting HTML
 
@@ -1749,17 +1734,11 @@ Returns the tag name of the Element in lower case.
 	var myTag = $('myImage').get('tag'); // myTag = 'img'
 
 
-----------------------------------------
-
-
 
 Type: IFrame {#IFrame}
 ========================
 
 Custom Type to create and easily work with IFrames.
-
-
-----------------------------------------
 
 
 
@@ -1819,17 +1798,11 @@ Creates an IFrame HTML Element and extends its window and document with MooTools
 - An IFrame's window and document will not be extended with MooTools methods.
 
 
-----------------------------------------
-
-
 
 Type: Elements {#Elements}
 ============================
 
 The Elements class allows [Element][] methods to work on an [Elements][] array, as well as [Array][] Methods.
-
-
-----------------------------------------
 
 
 
@@ -1899,18 +1872,8 @@ It also works like [Array:filter][], by filtering collection of elements with a 
 * (*array*) A subset of this [Elements][] instance.
 
 
-----------------------------------------
-
-
-
 Deprecated Functions {#Deprecated-Functions}
 ============================================
-
-
-----------------------------------------
-
-
-
 
 Element Method: hasChild {#Deprecated-Functions:hasChild}
 ---------------------------------------------------------
@@ -1956,3 +1919,6 @@ This method has been deprecated. Use [Element:contains][] instead.
 [Element:setStyles]: /core/Element/Element.Style#Element:setStyles
 
 [The Dollar Save Mode]: http://mootools.net/blog/2009/06/22/the-dollar-safe-mode/
+
+[MDC Element:removeChild]: https://developer.mozilla.org/En/DOM/Node.removeChild
+[MDC Element:replaceChild]: https://developer.mozilla.org/En/DOM/Node.replaceChild

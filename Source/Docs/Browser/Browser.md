@@ -45,6 +45,15 @@ If 'Browser.chrome' is True, all other possible properties, like 'Browser.firefo
 
 If an IE document is set to backwards compatibility mode using the X-UA-Compatible header, then the Browser object is treated as if the earlier version of the browser is running.
 
+Browser.version {#Browser:Browser-version}
+------------------------------------------
+
+'Browser.version' reports the version of the Browser as number.
+
+### Example:
+
+	alert(Browser.version); // Alerts '3.6' in FireFox 3.6.13
+
 Browser.Platform {#Browser:Browser-Platform}
 --------------------------------------------
 
@@ -60,7 +69,7 @@ Browser.Platform {#Browser:Browser-Platform}
 Browser.Plugins {#Browser:Browser-Plugins}
 ------------------------------------------
 
-* Browser.Plugins.Flash - (*boolean*) - True if Flash is present.
+* Browser.Plugins.Flash - (*object*) - An object with properties corresponding to the `version` and `build` number of the installed Flash plugin. Note: if flash is not installed, both `Browser.Plugins.Flash.version` and `Browser.Plugins.Flash.build` will return zero.
 * Browser.Plugins.Flash.version - (*number*) The major version of the flash plugin installed.
 * Browser.Plugins.Flash.build - (*number*) The build version of the flash plugin installed.
 

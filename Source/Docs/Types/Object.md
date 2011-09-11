@@ -7,11 +7,6 @@ A collection of Object functions.
 
 - [MDC Object][]
 
-
-----------------------------------------
-
-
-
 Function: Object.each {#Object:Object-each}
 ------------------------------------
 
@@ -31,12 +26,12 @@ Used to iterate through an object.
 
 ##### Syntax:
 
-	fn(item, index, object)
+	fn(item, key, object)
 
 ##### Arguments:
 
 1. item   - (*mixed*) The current item in the array.
-2. index  - (*number*) The current item's key.
+2. key  - (*mixed*) The current item's key.
 3. object - (*mixed*) The actual array/object.
 
 ### Example:
@@ -486,17 +481,8 @@ Generates a query string from key/value pairs in an object and URI encodes the v
 	Object.toQueryString({apple: 'red', lemon: 'yellow'}, 'fruits'); // returns 'fruits[apple]=red&fruits[lemon]=yellow'
 
 
-----------------------------------------
-
-
-
 Deprecated Functions {#Deprecated-Functions}
 ============================================
-
-
-----------------------------------------
-
-
 
 Type: Hash {#Deprecated-Functions:Hash}
 --------------------------------------

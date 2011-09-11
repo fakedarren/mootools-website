@@ -1,19 +1,8 @@
-Object: JSON {#JSON}
-====================
+# Object: JSON {#JSON}
 
-JSON parser and encoder.
+JSON decoder and encoder.
 
-### See Also:
-
-- [JavaScript Object Notation (JSON.org)](http://www.json.org/)
-
-
-----------------------------------------
-
-
-
-JSON Method: encode {#JSON:encode}
-----------------------------------
+## JSON Method: encode {#JSON:encode}
 
 Converts an object or array to a JSON string.
 
@@ -33,12 +22,9 @@ Converts an object or array to a JSON string.
 
 	var fruitsJSON = JSON.encode({apple: 'red', lemon: 'yellow'}); // returns: '{"apple":"red","lemon":"yellow"}'
 
+## JSON Method: decode {#JSON:decode}
 
-
-JSON Method: decode {#JSON:decode}
-----------------------------------
-
-Converts a JSON string into an JavaScript object.
+Converts a JSON string into a JavaScript object.
 
 ### Syntax:
 
@@ -57,6 +43,14 @@ Converts a JSON string into an JavaScript object.
 
 	var myObject = JSON.decode('{"apple":"red","lemon":"yellow"}'); // returns: {apple: 'red', lemon: 'yellow'}
 
+### See Also:
+
+- [JSON (JavaScript Object Notation)][]
+
 ### Credits:
 
-- JSON test regexp is by [Douglas Crockford](http://crockford.com/) and [Tobie Langel](http://tobielangel.com/).
+- JSON test regular expression by [Douglas Crockford][] and [Tobie Langel][].
+
+[Douglas Crockford]: http://crockford.com/
+[JSON (JavaScript Object Notation)]: http://www.json.org/
+[Tobie Langel]: http://tobielangel.com/

@@ -12,9 +12,6 @@ A collection of the Number Object methods and functions.
 Every Math method is mirrored in the Number object, both as prototype and generic.
 
 
-----------------------------------------
-
-
 
 Function: Number.from {#Number:Number-from}
 ------------------------------------
@@ -132,7 +129,7 @@ Executes the function passed in the specified number of times.
 ### Arguments:
 
 1. fn   - (*function*) The function which should be executed on each iteration of the loop. This function is passed the current iteration's index.
-2. bind - (*object*, optional) The object to use as 'this' in the function. For more information see [Function:bind](/Native/Function/#Function:bind).
+2. bind - (*object*, optional) The object to use as 'this' in the function. For more information see [Function:bind][].
 
 ### Examples:
 
@@ -211,4 +208,5 @@ There are several methods available from the Math object that can be used as Num
 	(3).pow(4); // returns 81
 
 
+[Function:bind]: /core/Types/Function/#Function:bind
 [MDC Number]: https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Number

@@ -8,10 +8,6 @@ Type: Element {#Element}
 - Internet Explorer fires element events in random order if they are not fired by [Element:fireEvent](#Element:fireEvent).
 
 
-----------------------------------------
-
-
-
 Element Method: addEvent {#Element:addEvent}
 --------------------------------------------
 
@@ -237,11 +233,6 @@ Clones all events from an Element to this Element.
 ### Notes:
 
 - This method is also attached to Document and Window.
-
-
-----------------------------------------
-
-
 
 Object: Element.Events {#Element-Events}
 ========================================

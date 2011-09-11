@@ -8,9 +8,6 @@ Contains [Fx.Tween][] and the Element shortcut [Element.tween][].
 [Fx][]
 
 
-----------------------------------------
-
-
 
 Fx.Tween Method: constructor {#Fx-Tween:constructor}
 ----------------------------------------------------
@@ -140,20 +137,11 @@ Transitions the Element's CSS property to the specified value.
 - If you use the property option, you must not use the property argument in the start and set methods.
 
 
-----------------------------------------
-
-
 
 Object: Element.Properties {#Element-Properties}
 ==============================================
 
 see [Element.Properties][]
-
-
-----------------------------------------
-
-
-
 
 Element Property: tween {#Element-Properties:tween}
 ---------------------------------------------------
@@ -205,17 +193,11 @@ Sets and gets default options for the Fx.Tween instance of an Element.
 - As with the other Element shortcuts, the difference between a setter and a getter is that the getter returns the instance, while the setter returns the element (for chaining and initialization).
 
 
-----------------------------------------
-
-
 
 Type: Element {#Element}
 ========================
 
 Custom Type to allow all of its methods to be used with any DOM element via the dollar function [$][].
-
-
-----------------------------------------
 
 
 

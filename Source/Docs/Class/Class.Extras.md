@@ -6,9 +6,6 @@ Its methods can be implemented with [Class:implement][] into any [Class][], and 
 In [Fx][], for example, it is used to create custom, complex animations.
 
 
-----------------------------------------
-
-
 
 Chain Method: constructor {#Chain:constructor}
 ----------------------------------------------
@@ -137,9 +134,6 @@ Clears the stack of a Chain instance.
 - [Fx][], [Fx.Tween][]
 
 
-----------------------------------------
-
-
 
 Class: Events {#Events}
 =======================
@@ -186,9 +180,6 @@ Events in a Class that implements [Events][] must be either added as an option o
 ### See Also:
 
 - [Class][], [Options][]
-
-
-----------------------------------------
 
 
 
@@ -330,9 +321,6 @@ Removes all events of the given type from the stack of events of a Class instanc
 - removeEvents will not remove internal events. See [Events:removeEvent][].
 
 
-----------------------------------------
-
-
 
 Class: Options {#Options}
 =========================
@@ -352,14 +340,11 @@ Will also add Class [Events][] when the option property begins with 'on' and is 
 	MyClass.implement(Options);
 
 
-----------------------------------------
-
-
 
 Options Method: setOptions {#Options:setOptions}
 ------------------------------------------------
 
-Merges the default options of the Class with the options passed in.
+Merges the default options of the Class with the options passed in. Every value passed in to this method will be deep copied. Therefore other class instances or objects that are not intended for copying must be passed to a class in other ways.
 
 ### Syntax:
 
@@ -397,6 +382,18 @@ Merges the default options of the Class with the options passed in.
 	});
 
 	//myWidget.options is now: {color: #f00, size: {width: 200, height: 100}}
+
+	// Deep copy example
+	var mySize = {
+		width: 50,
+		height: 50
+	};
+
+	var myWidget = new Widget({
+		size: mySize
+	});
+
+	(mySize == myWidget.options.size) // false! mySize was copied in the setOptions call.
 
 ### Notes:
 
@@ -454,9 +451,3 @@ If a Class has [Events][] as well as [Options][] implemented, every option begin
 [Options]: #Options
 [addEvent]: #Events:addEvent
 [addEvents]: #Events:addEvents
-
-
-----------------------------------------
-
-
-

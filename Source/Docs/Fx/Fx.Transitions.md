@@ -8,10 +8,6 @@ Fx.Transitions overrides the base [Fx][] constructor, and adds the possibility t
 The equation to use for the effect. See [Fx.Transitions][]. It accepts both a function (ex: Fx.Transitions.Sine.easeIn) or a string ('sine:in', 'bounce:out' or 'quad:in:out') that will map to Fx.Transitions.Sine.easeIn / Fx.Transitions.Bounce.easeOut / Fx.Transitions.Quad.easeInOut
 
 
-----------------------------------------
-
-
-
 Object: Fx.Transitions {#Fx-Transitions}
 ======================================
 
@@ -106,9 +102,6 @@ Fx.Transitions Method: elastic {#Fx-Transitions:elastic}
 --------------------------------------------------------
 
 Elastic curve. Must be used as Elastic.easeIn or Elastic.easeOut or Elastic.easeInOut
-
-
-----------------------------------------
 
 
 

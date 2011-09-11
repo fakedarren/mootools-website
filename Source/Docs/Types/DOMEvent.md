@@ -1,19 +1,14 @@
-Type: Event {#Event}
+Type: DOMEvent {#Event}
 ====================
 
-MooTools Event Methods.
+MooTools DOMEvent Methods.
 
-
-----------------------------------------
-
-
-
-Event Method: constructor {#Event:constructor}
-----------------------------------------------
+DOMEvent Method: constructor {#DOMEvent:constructor}
+----------------------------------------------------
 
 ### Syntax:
 
-	new Event([event[, win]]);
+	new DOMEvent([event[, win]]);
 
 ### Arguments:
 
@@ -40,7 +35,7 @@ Event Method: constructor {#Event:constructor}
 ### Examples:
 
 	$('myLink').addEvent('keydown', function(event){
-	 	// the passed event parameter is already an instance of the Event class.
+	 	// the passed event parameter is already an instance of the Event type.
 		alert(event.key);   // returns the lowercase letter pressed.
 		alert(event.shift); // returns true if the key pressed is shift.
 		if (event.key == 's' && event.control) alert('Document saved.'); //executes if the user presses Ctr+S.
@@ -52,10 +47,10 @@ Event Method: constructor {#Event:constructor}
 - Every event added with addEvent gets the MooTools method automatically, without the need to manually instance it.
 
 
-Event Method: stop {#Event:stop}
---------------------------------
+DOMEvent Method: stop {#DOMEvent:stop}
+--------------------------------------
 
-Stop an Event from propagating and also executes preventDefault.
+Stop an event from propagating and also executes preventDefault.
 
 ### Syntax:
 
@@ -63,7 +58,7 @@ Stop an Event from propagating and also executes preventDefault.
 
 ### Returns:
 
-* (*object*) This Event instance.
+* (*object*) This DOMEvent instance.
 
 ### Examples:
 
@@ -87,12 +82,11 @@ Stop an Event from propagating and also executes preventDefault.
 
 ### See Also:
 
-- [Element.addEvent](#Element:addEvent), [Element.stopPropagation](#Event:stopPropagation), [Event.preventDefault](#Event:preventDefault), [Function:delay][]
+- [Element.addEvent](#Element:addEvent), [DOMEvent.stopPropagation](#DOMEvent:stopPropagation), [DOMEvent.preventDefault](#DOMEvent:preventDefault), [Function:delay][]
 
 
-
-Event Method: stopPropagation {#Event:stopPropagation}
-------------------------------------------------------
+DOMEvent Method: stopPropagation {#DOMEvent:stopPropagation}
+------------------------------------------------------------
 
 Cross browser method to stop the propagation of an event (this stops the event from bubbling up through the DOM).
 
@@ -102,7 +96,7 @@ Cross browser method to stop the propagation of an event (this stops the event f
 
 ### Returns:
 
-* (*object*) This Event object.
+* (*object*) This DOMEvent object.
 
 ### Examples:
 
@@ -127,12 +121,11 @@ Cross browser method to stop the propagation of an event (this stops the event f
 ### See Also:
 
 - [Element:addEvent][]
-- [MDC event.stopPropagation](http://developer.mozilla.org/en/docs/DOM:event.stopPropagation)
+- [MDC event.stopPropagation][]
 
 
-
-Event Method: preventDefault {#Event:preventDefault}
-----------------------------------------------------
+DOMEvent Method: preventDefault {#DOMEvent:preventDefault}
+--------------------------------------------
 
 Cross browser method to prevent the default action of the event.
 
@@ -142,7 +135,7 @@ Cross browser method to prevent the default action of the event.
 
 ### Returns:
 
-* (*object*) This Event object.
+* (*object*) This DOMEvent object.
 
 ### Examples:
 
@@ -161,26 +154,22 @@ Cross browser method to prevent the default action of the event.
 ### See Also:
 
 - [Element:addEvent][]
-- [MDC event.preventDefault](http://developer.mozilla.org/en/docs/DOM:event.preventDefault)
+- [MDC event.preventDefault][]
 
 
-----------------------------------------
+Function: DOMEvent.defineKey {#DOMEvent:DOMEvent-defineKey}
+-----------------------------------------------------------
 
-
-
-Object: Event.Keys {#Event-Keys}
-==============================
-
-Additional Event key codes can be added by adding properties to the Event.Keys Object.
+This function allows to add an additional event key code.
 
 #### Example:
 
-    Event.Keys.shift = 16;
+	DOMEvent.defineKey(16, 'shift');
     $('myInput').addEvent('keydown', function(event){
 	    if (event.key == 'shift') alert('You pressed shift.');
     });
 
-#### Possible Keys:
+#### Predefined keys:
 
 - enter
 - up
@@ -197,10 +186,21 @@ Additional Event key codes can be added by adding properties to the Event.Keys O
 
 - [MooTools More Keyboard][]
 
-### Note:
 
-Since MooTools 1.3 this is a native JavaScript Object and not an instance of the deprecated Hash
+Function: DOMEvent.defineKeys {#DOMEvent:DOMEvent-defineKey}
+-----------------------------------------------------------
 
+This function allows to add additional event key codes.
+
+#### Example:
+
+	DOMEvent.defineKeys({
+		'16': 'shift',
+		'17': 'control'
+	});
+    $('myInput').addEvent('keydown', function(event){
+	    if (event.key == 'control') alert('You pressed control.');
+    });
 
 
 [Element:addEvent]: /core/Element/Element.Event#Element:addEvent
@@ -209,3 +209,6 @@ Since MooTools 1.3 this is a native JavaScript Object and not an instance of the
 [Function:pass]: /core/Types/Function/#Function:pass
 [Function:delay]: /core/Types/Function/#Function:delay
 [MooTools More Keyboard]: /more/Interface/Keyboard
+
+[MDC event.stopPropagation]: https://developer.mozilla.org/en/DOM/event.stopPropagation
+[MDC event.preventDefault]: https://developer.mozilla.org/en/DOM/event.preventDefault
