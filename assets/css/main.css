@@ -32,6 +32,11 @@ UL UL {
 	padding: 0 0 0 10px;
 }
 
+P {
+	font-size: 1.1em;
+	padding: 0 0 10px;
+}
+
 A {
 	color: #366993;
 	text-decoration: none;

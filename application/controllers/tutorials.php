@@ -23,6 +23,9 @@ class Tutorials extends Control {
 			$this->route = $path[0];
 			$this->previouspage = $index;
 			$this->nextpage = (isset($parts[$index + 1]) ? $index + 2 : false);
+			
+			$this->html = str_replace('###path###', 'Source/Tutorials/' . $path[0], $this->html);
+			
 			$this->render();
 		} else {
 			$packagemenu = new PackageMenu('Source/Tutorials', '/tutorials');

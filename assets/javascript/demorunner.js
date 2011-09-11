@@ -21,9 +21,9 @@ Element.implement({
 	var codemirrorOptions = {
 		js: {
 			parserfile: ["tokenizejavascript.js", "parsejavascript.js"],
-		    stylesheet: "assets/codemirror/css/jscolors.css",
+		    stylesheet: "/assets/codemirror/css/jscolors.css",
 			height: "dynamic",
-		    path: "assets/codemirror/js/",
+		    path: "/assets/codemirror/js/",
 		    autoMatchParens: true,
 			readOnly: true
 		},
@@ -37,9 +37,9 @@ Element.implement({
 		},
 		html: {
 		    parserfile: ["parsexml.js", "parsecss.js", "tokenizejavascript.js", "parsejavascript.js", "parsehtmlmixed.js"],
-			stylesheet: ["assets/codemirror/css/xmlcolors.css", "assets/codemirror/css/jscolors.css", "assets/codemirror/css/csscolors.css"],
+			stylesheet: ["/assets/codemirror/css/xmlcolors.css", "/assets/codemirror/css/jscolors.css", "/assets/codemirror/css/csscolors.css"],
 			height: "dynamic",
-		    path: "assets/codemirror/js/",
+		    path: "/assets/codemirror/js/",
 		    autoMatchParens: true,
 			readOnly: true
 		}
@@ -48,14 +48,21 @@ Element.implement({
 
 	$$('.inline-demo .demo').each(function(item, index){
 		if (!item.hasClass('results')){
-		item.set('id', 'editor' + index);
+			item.set('id', 'editor' + index);
 		
-		var type = 'js';
-		if (item.hasClass('css')) type = 'css';
-		else if (item.hasClass('html')) type = 'html';
+			var type = 'js';
+			if (item.hasClass('css')) type = 'css';
+			else if (item.hasClass('html')) type = 'html';
 		
-		CodeMirror.fromTextArea('editor' + index, codemirrorOptions[type]);
+			CodeMirror.fromTextArea('editor' + index, codemirrorOptions[type]);
 		}
+	});
+	
+	$$('.inline-demo').each(function(demo){
+		var script = demo.getElement('.script').get('value');
+		demo.getElement('button').addEvent('click', function(){
+			Browser.exec(script);
+		});
 	});
 })();
 
