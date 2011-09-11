@@ -10,7 +10,7 @@
 				<li class="downloads"><a href="/download">Downloads</a></li>
 				<li class="selected docs"><a href="/learn">Documentation</a></li>
 				<li class="blog"><a href="/blog">Blog</a></li>
-				<li class="people"><a href="/community">Community</a></li>
+				<li class="people"><a href="/people">Community</a></li>
 				<li class="forge"><a href="/plugins">Plugins</a></li>
 			</ul>
 		</nav>	
