@@ -18,7 +18,7 @@ Design 'Assets'
 
 You can find all the files we're working with in the 'DESIGN ASSETS' folder.
 
-If you work in a specific application please place it in a folder that relates to the application used. Eg currently we only have [Photoshop CS5 files](https://github.com/fakedarren/mootools-website/tree/master/DESIGN%20ASSETS/Photoshop%20CS5).
+If you work in a specific application please place it in a folder that relates to the application used. Eg currently we have [Photoshop CS5 files](https://github.com/fakedarren/mootools-website/tree/master/DESIGN%20ASSETS/Photoshop%20CS5) and [Fireworks CS3 files](https://github.com/fakedarren/mootools-website/tree/master/DESIGN%20ASSETS/Fireworks%20CS3).
 
 Fireworks files are preferable because they are easier to cut up - it is sometimes extremely difficult to get the exact colour, for example, of an element when several filters are applied or multiple layers are involved in Photoshop files. 
 
