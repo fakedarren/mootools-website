@@ -29,7 +29,7 @@ As it will be almost impossible to 'merge' PSD or PNG files in git please use so
 What to work on?
 ----------------
 
-I have created [milestones](https://github.com/fakedarren/mootools-website/issues/milestones) and [individual tasks](https://github.com/fakedarren/mootools-website/issues) in Issues. These tickets are filed against milestones in the order required for completion, so whilst we welcome any work on future milestones, feel free to submit and comment on issues in future milestones. Some are not mutually exclusive so for instance once we compete 'Basics' we can work on 'Documentation Runner' and 'Demo Runner' in parallel.
+I have created [milestones](https://github.com/fakedarren/mootools-website/issues/milestones) and [individual tasks](https://github.com/fakedarren/mootools-website/issues) in Issues. These tickets are filed against milestones in the order required for completion, so whilst we welcome any work on future milestones, and feel free to submit and comment on issues in future milestones, it is unlikely any pull requests for future milestones will be accepted until the current one is complete. Some are not mutually exclusive so for instance once we compete 'Basics' we can work on 'Documentation Runner' and 'Demo Runner' in parallel.
 
 What do I get for all this hard work?
 -------------------------------------
