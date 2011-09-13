@@ -15,9 +15,10 @@ class Demo {
 	}
 
 	protected function split(){
-		return preg_replace_callback('/<h4[^>]*>([\s\S]*?)<h4[^>]*>/', function($matches){
+		function matcher($matches){
 			return "";
-		}, $this->source);
+		};
+		return preg_replace_callback('/<h4[^>]*>([\s\S]*?)<h4[^>]*>/', "matcher", $this->source);
 	}
 }
 
@@ -37,9 +38,10 @@ class Example {
 	}
 	
 	protected function split(){
-		return preg_replace_callback('/<h4[^>]*>([\s\S]*?)<h4[^>]*>/', function($matches){
+		function matcher($matches){
 			return "";
-		}, $this->source);
+		};
+		return preg_replace_callback('/<h4[^>]*>([\s\S]*?)<h4[^>]*>/', "matcher", $this->source);
 	}
 }
 ?>
