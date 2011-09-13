@@ -7,6 +7,7 @@ Currently the requirements to get running locally are:
 
 * PHP 5.3.2
 * MySQL for Wordpress (our blog) *not actually required to work on early milestones*
+* Java for SOLR (our search engine) *not actually required to work on early milestones*
 
 A quick peek
 ------------
