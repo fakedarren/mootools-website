@@ -4,7 +4,7 @@ class Tutorials extends Control {
 	protected function index(){
 
 		$url = explode("/", $_SERVER["REQUEST_URI"]);
-		$path = array_slice($url, 2);
+		$path = str_replace("-", " ", array_slice($url, 2));
 		
 		$this->currentnav = 'docs';
 
@@ -20,7 +20,7 @@ class Tutorials extends Control {
 	}
 	
 	protected function tutorial($path){
-		$content = file_get_contents('Source/Tutorials/' . $path[0] . '/example.md');
+		$content = file_get_contents('Source/Tutorials/' . $path[0] . '/'. $path[0] . '.md');
 		$html = Markdown($content);
 
 		$html = $this->createDemos($html);
@@ -43,28 +43,28 @@ class Tutorials extends Control {
 	}
 	
 	protected function createDemos($source){
-		function matcher($matches){
+		function matcherDemos($matches){
 			$demo = new Demo($matches[1]);
 			return $demo->output;
 		};
-		return preg_replace_callback('/<h3[^>]*>Demo: ([\s\S]*?)<hr \/>/', "matcher", $source);
+		return preg_replace_callback('/<h3[^>]*>Demo: ([\s\S]*?)<hr \/>/', "matcherDemos", $source);
 	}
 	
 	protected function createExamples($source){
-		function matcher($matches){
+		function matcherExamples($matches){
 			$demo = new Demo($matches[1]);
 			return $demo->output;
 		};
-		return preg_replace_callback('/<h3[^>]*>Example: ([\s\S]*?)<hr \/>/', "matcher", $source);
+		return preg_replace_callback('/<h3[^>]*>Example: ([\s\S]*?)<hr \/>/', "matcherExamples", $source);
 	}
 	
 	protected function formatCodeBlocks($source){
-		function matcher($matches){
+		function matcherCodeBlocks($matches){
 			$geshi = new GeSHi($matches[1], 'javascript');
 			$geshi->enable_classes();
 			return $geshi->parse_code();
 		};
-		return preg_replace_callback('/<code>([\s\S]*?)<\/code>/', "matcher", $source);
+		return preg_replace_callback('/<code>([\s\S]*?)<\/code>/', "matcherCodeBlocks", $source);
 	}
 	
 }
