@@ -19,20 +19,21 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
 #### HTML
 
 	<div id="foo"></div>
-	<div id="foo"></div>
+	<div id="bar"></div>
 
 
 #### JavaScript
 
 	var foo = 'bar';
-	$$('foo').set('foo', 'bar');
+	$$('#foo').setStyle('background-color', 'blue');
+	$$('#bar').setStyle('background-color', 'green');
 
 
 #### CSS
 
-	* {
-		color: red;
-		height: 100%;
+	#foo, #bar {
+		background-color: red;
+		height: 100px;
 	}
 	
 -------------------------

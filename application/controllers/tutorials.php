@@ -25,6 +25,7 @@ class Tutorials extends Control {
 
 		$html = $this->createDemos($html);
 		$html = $this->createExamples($html);
+		
 		$html = $this->formatCodeBlocks($html);
 		
 		$html = preg_replace('/\/\*([\s\S]*?)\*\//', '', $html);
