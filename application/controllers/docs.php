@@ -18,13 +18,25 @@ class Docs extends Control {
 			$this->html = $parser->html;
 			
 			$this->render('docsindex');
+		} else if (isset($path[2]) === false){
+			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
+			$parser = new DocsParser('Source/Docs/' . $stub . '.md', '/docs/' . $path[0] . '/' . $path[1]);
+			
+			// API STYLE
+			//$this->html = $parser->html;
+
+			// 'New' Style
+			$this->html = $parser->description;
+			foreach ($parser->titles as $title){
+				$this->html .= '<div class="section">' . $title . '</div>';
+			}
+			
+			$this->render();
 		} else {
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
-
-			$parser = new DocsParser('Source/Docs/' . $stub . '.md');
-			$this->html = $parser->html;
-
-			$this->render();
+			$parser = new DocsParser('Source/Docs/' . $stub . '.md', '/docs/' . $path[0] . '/' . $path[1]);
+			$this->html = $parser->titles[$path[2]] . $parser->texts[$path[2]];
+			$this->render('docsdetails');
 		}
 	}
 	

@@ -2,14 +2,34 @@
 class DocsParser {
 	
 	public $html = '';
+	public $parts;
 	
-	public function __construct($path){
+	public $description;
+	
+	public $titles;
+	public $texts;
+	
+	public function __construct($path, $rooturl){
 		$content = file_get_contents($path);
 		$html = Markdown($content);
 		$html = $this->createDemos($html);
 		$html = $this->createExamples($html);
 		$html = $this->formatCodeBlocks($html);
+		
+		$this->parts = preg_split('/<hr \/>\s*<hr \/>/', $html);
 		$this->html = $html;
+		
+		foreach ($this->parts as $index => $part){
+			if ($index = 0){
+				$this->description = $part;
+			} else {
+				$bits = preg_split('/<hr \/>/', $part);
+				$name = trim(strtolower(preg_replace('/<h2[^>]*>[\s\S]*?: ([\s\S]*?)<\/h2>[\s\S]*/', "$1", $bits[0])));
+				$url = $rooturl . '/' . $name;
+				$this->titles[$name] = preg_replace('/<h2[^>]*>[\s\S]*?: ([\s\S]*?)<\/h2>([\s\S]*)/', "<h2><a href='$url'>$1</a></h2>$2", $bits[0]);
+				@$this->texts[$name] = $bits[1];
+			}
+		}
 	}
 		
 	protected function createDemos($source){
