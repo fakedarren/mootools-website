@@ -8,7 +8,9 @@ class Docs extends Control {
 		$path = array_slice($url, 2);
 		
 		$menu = $api ? 'Source/Docs/api-ref.json' : 'Source/Docs/docs-ref.json';
-		$packagemenu = new PackageMenu($menu, '/docs');
+		$root = $api ? '/api' : '/docs';
+		
+		$packagemenu = new PackageMenu($menu, $root);
 		$this->menu = $packagemenu->html;
 
 		$this->currentnav = 'docs';
