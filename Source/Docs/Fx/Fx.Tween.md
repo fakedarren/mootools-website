@@ -7,12 +7,16 @@ Contains [Fx.Tween][] and the Element shortcut [Element.tween][].
 
 [Fx][]
 
+-------------------------
 
+-------------------------
 
 Fx.Tween Method: constructor {#Fx-Tween:constructor}
 ----------------------------------------------------
 
 The Tween effect, used to transition any CSS property from one value to another.
+
+-------------------------
 
 ### Syntax:
 
@@ -72,12 +76,16 @@ This is something you can choose for both the `Fx.Tween` constructor or this app
 		myElement.tween('height', 40, 100);
 	});
 
+-------------------------
 
+-------------------------
 
 Fx.Tween Method: set {#Fx-Tween:set}
 ------------------------------------
 
 Sets the Element's CSS property to the specified value immediately.
+
+-------------------------
 
 ### Syntax:
 
@@ -102,11 +110,16 @@ Sets the Element's CSS property to the specified value immediately.
 
 If you use the property option, you must not use the property argument in the start and set methods.
 
+-------------------------
+
+-------------------------
 
 Fx.Tween Method: start {#Fx-Tween:start}
 ----------------------------------------
 
 Transitions the Element's CSS property to the specified value.
+
+-------------------------
 
 ### Syntax:
 
@@ -136,17 +149,25 @@ Transitions the Element's CSS property to the specified value.
 - When using colors, either RGB or Hex values may be used.
 - If you use the property option, you must not use the property argument in the start and set methods.
 
+-------------------------
 
+-------------------------
 
 Object: Element.Properties {#Element-Properties}
 ==============================================
 
 see [Element.Properties][]
 
+-------------------------
+
+-------------------------
+
 Element Property: tween {#Element-Properties:tween}
 ---------------------------------------------------
 
 Sets and gets default options for the Fx.Tween instance of an Element.
+
+-------------------------
 
 ### Setter:
 
@@ -192,19 +213,25 @@ Sets and gets default options for the Fx.Tween instance of an Element.
 - When options are passed to the setter, the instance will be reset.
 - As with the other Element shortcuts, the difference between a setter and a getter is that the getter returns the instance, while the setter returns the element (for chaining and initialization).
 
+-------------------------
 
+-------------------------
 
 Type: Element {#Element}
 ========================
 
 Custom Type to allow all of its methods to be used with any DOM element via the dollar function [$][].
 
+-------------------------
 
+-------------------------
 
 Element Method: tween {#Element:tween}
 --------------------------------------
 
 Element shortcut method which immediately transitions any single CSS property of an Element from one value to another.
+
+-------------------------
 
 ### Syntax:
 
@@ -233,12 +260,16 @@ Element shortcut method which immediately transitions any single CSS property of
 
 - [Fx.Tween][]
 
+-------------------------
 
+-------------------------
 
 Element Method: fade {#Element:fade}
 ------------------------------------
 
 Element shortcut method for tween with opacity.  Useful for fading an Element in and out or to a certain opacity level.
+
+-------------------------
 
 ### Syntax:
 
@@ -263,12 +294,16 @@ Element shortcut method for tween with opacity.  Useful for fading an Element in
 	$('myElement').fade('out'); // fades 'myElement' out.
 	$('myElement').fade(0.7); // fades 'myElement' to 70% opacity.
 
+-------------------------
 
+-------------------------
 
 Element Method: highlight {#Element:highlight}
 ----------------------------------------------
 
 Element shortcut method for tweening the background color.  Immediately transitions an Element's background color to a specified highlight color then back to its set background color.
+
+-------------------------
 
 ### Syntax:
 
@@ -295,6 +330,9 @@ If no background color is set on the Element, or its background color is set to 
 	//immediately changes the background to light blue, then fades to grey:
 	$('myElement').highlight('#ddf', '#ccc');
 
+-------------------------
+
+-------------------------
 
 [$]: /core/Element/Element#Window:dollar
 [Fx]: /core/Fx/Fx

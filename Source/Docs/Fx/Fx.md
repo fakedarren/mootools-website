@@ -8,10 +8,14 @@ All of the other Fx Classes inherit from this one.
 
 - [Chain][], [Events][], [Options][]
 
+-------------------------
 
+-------------------------
 
 Fx Method: constructor {#Fx:constructor}
 ----------------------------------------
+
+-------------------------
 
 ### Syntax:
 
@@ -53,12 +57,16 @@ Fx Method: constructor {#Fx:constructor}
 
 - [Fx.Tween][], [Fx.Morph][].
 
+-------------------------
 
+-------------------------
 
 Fx Method: start {#Fx:start}
 ----------------------------
 
 The start method is used to begin a transition.  Fires the 'start' event.
+
+-------------------------
 
 ### Syntax:
 
@@ -82,12 +90,16 @@ The start method is used to begin a transition.  Fires the 'start' event.
 - If only one parameter is provided, the first argument to start will be used as the target value, and the initial value will be calculated from the current state of the element.
 - The format and type of this value will be dependent upon implementation, and may vary greatly on a case by case basis.  Check each implementation for more details.
 
+-------------------------
 
+-------------------------
 
 Fx Method: set {#Fx:set}
 ------------------------
 
 The set method is fired on every step of a transition.  It can also be called manually to set a specific value to be immediately applied to the effect.
+
+-------------------------
 
 ### Syntax:
 
@@ -105,12 +117,16 @@ The set method is fired on every step of a transition.  It can also be called ma
 
 - See examples in the documentation for each Fx subclass.
 
+-------------------------
 
+-------------------------
 
 Fx Method: cancel {#Fx:cancel}
 ------------------------------
 
 The cancel method is used to cancel a running transition.  Fires the 'cancel' event.
+
+-------------------------
 
 ### Syntax:
 
@@ -120,12 +136,16 @@ The cancel method is used to cancel a running transition.  Fires the 'cancel' ev
 
 * (*object*) - This Fx instance.
 
+-------------------------
 
+-------------------------
 
 Fx Method: pause {#Fx:pause}
 ----------------------------
 
 Temporarily pause a currently running effect.
+
+-------------------------
 
 ### Syntax:
 
@@ -140,12 +160,16 @@ Temporarily pause a currently running effect.
 - The timer will be stopped to allow the effect to continue where it left off by calling [Fx:resume](#Fx:resume).
 - If you call start on a paused effect, the timer will simply be cleared allowing the new transition to start.
 
+-------------------------
 
+-------------------------
 
 Fx Method: resume {#Fx:resume}
 ------------------------------
 
 Resume a previously paused effect.
+
+-------------------------
 
 ### Syntax:
 
@@ -159,7 +183,9 @@ Resume a previously paused effect.
 
 - The effect will only be resumed if it has been previously paused.  Otherwise, the call to resume will be ignored.
 
+-------------------------
 
+-------------------------
 
 [Fx]: #Fx
 [Fx.Transitions]: /core/Fx/Fx.Transitions

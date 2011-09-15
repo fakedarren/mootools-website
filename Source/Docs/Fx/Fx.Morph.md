@@ -3,6 +3,17 @@ Class: Fx.Morph {#Fx-Morph}
 
 Allows for the animation of multiple CSS properties at once, even by a simple CSS selector. Inherits methods, properties, options and events from [Fx][].
 
+-------------------------
+
+-------------------------
+
+Method: Constructor {#Constructor}
+--------------------------
+
+Create a new Fx.Morph instance.
+
+-------------------------
+
 ### Extends:
 
 - [Fx][]
@@ -67,12 +78,16 @@ separating the logic and styles:
 
 - [Fx][]
 
+-------------------------
 
+-------------------------
 
 Fx.Morph Method: set {#Fx-Morph:set}
 ------------------------------------
 
 Sets the Element's CSS properties to the specified values immediately.
+
+-------------------------
 
 ### Syntax:
 
@@ -96,12 +111,16 @@ Sets the Element's CSS properties to the specified values immediately.
 	});
 	var myFx = new Fx.Morph('myElement').set('.myClass');
 
+-------------------------
 
+-------------------------
 
 Fx.Morph Method: start {#Fx-Morph:start}
 ----------------------------------------
 
 Executes a transition for any number of CSS properties in tandem.
+
+-------------------------
 
 ### Syntax:
 
@@ -133,14 +152,23 @@ Executes a transition for any number of CSS properties in tandem.
 - Multiple selectors (with commas) are not supported.
 - @import'ed CSS rules will not be available for Morph calls. All CSS selectors must be present in CSS directly loaded into the page.
 
+-------------------------
+
+-------------------------
 
 Object: Element.Properties {#Element-Properties}
 ==============================================
 
 see [Element.Properties][]
 
+-------------------------
+
+-------------------------
+
 Element Property: morph {#Element-Properties:morph}
 ---------------------------------------------------
+
+-------------------------
 
 ### Setter
 
@@ -185,15 +213,23 @@ Gets the default Fx.Morph instance for the Element.
 	el.morph({height: 100, width: 100});
 	el.get('morph'); // the Fx.Morph instance.
 
+-------------------------
 
+-------------------------
 
 Type: Element {#Element}
 ==========================
+
+-------------------------
+
+-------------------------
 
 Element Method: morph {#Element:morph}
 --------------------------------------
 
 Animates an Element given the properties passed in.
+
+-------------------------
 
 ### Syntax:
 
@@ -221,7 +257,9 @@ With a selector:
 
 - [Fx.Morph][]
 
+-------------------------
 
+-------------------------
 
 [$]: /core/Element/Element#Window:dollar
 [Fx]: /core/Fx/Fx

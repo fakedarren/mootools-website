@@ -3,6 +3,15 @@ Class: Request {#Request}
 
 An XMLHttpRequest Wrapper.
 
+-------------------------
+
+-------------------------
+
+Method: Constructor {#Constructor}
+----------------------------------
+
+-------------------------
+
 ### Implements:
 
 [Chain][], [Events][], [Options][]
@@ -198,12 +207,16 @@ data-userid attribute of the clicked link, which will be used for the querystrin
 		myRequest.send('userid=' + this.get('data-userid'));
 	});
 
+-------------------------
 
+-------------------------
 
 Request Method: setHeader {#Request:setHeader}
 --------------------------------------
 
 Add or modify a header for the request. It will not override headers from the options.
+
+-------------------------
 
 ### Syntax:
 
@@ -223,10 +236,16 @@ Add or modify a header for the request. It will not override headers from the op
 	var myRequest = new Request({url: 'getData.php', method: 'get', headers: {'X-Request': 'JSON'}});
 	myRequest.setHeader('Last-Modified', 'Sat, 1 Jan 2005 05:00:00 GMT');
 
+-------------------------
+
+-------------------------
+
 Request Method: getHeader {#Request:getHeader}
 --------------------------------------
 
 Returns the given response header or null if not found.
+
+-------------------------
 
 ### Syntax:
 
@@ -247,10 +266,16 @@ Returns the given response header or null if not found.
 		alert(this.getHeader('Date')); // alerts the server date (for example, 'Thu, 26 Feb 2009 20:26:06 GMT')
 	}});
 
+-------------------------
+
+-------------------------
+
 Request Method: send {#Request:send}
 ----------------------------
 
 Opens the Request connection and sends the provided data with the specified options.
+
+-------------------------
 
 ### Syntax:
 
@@ -270,11 +295,16 @@ Opens the Request connection and sends the provided data with the specified opti
 		url: 'http://localhost/some_url'
 	}).send('save=username&name=John');
 
+-------------------------
+
+-------------------------
 
 Request Methods: send aliases {#Request:send-aliases}
 -----------------------------------------------------
 
 MooTools provides several aliases for [Request:send][] to make it easier to use different methods.
+
+-------------------------
 
 These aliases are:
 
@@ -317,12 +347,16 @@ These aliases are:
 
 By default the emulation option is set to true, so the *put* and *delete* send methods are emulated and will actually send as *post* while the method name is sent as e.g. `_method=delete`.
 
+-------------------------
 
+-------------------------
 
 Request Method: cancel {#Request:cancel}
 --------------------------------
 
 Cancels the currently running request, if any.
+
+-------------------------
 
 ### Syntax:
 
@@ -337,10 +371,16 @@ Cancels the currently running request, if any.
 	var myRequest = new Request({url: 'mypage.html', method: 'get'}).send('some=data');
 	myRequest.cancel();
 
+-------------------------
+
+-------------------------
+
 Request Method: isRunning {#Request:isRunning}
 --------------------------------
 
 Returns true if the request is currently running
+
+-------------------------
 
 ### Syntax:
 
@@ -356,14 +396,23 @@ Returns true if the request is currently running
 
 	if (myRequest.isRunning()) // It runs!
 
+-------------------------
+
+-------------------------
 
 Object: Element.Properties {#Element-Properties}
 ==============================================
 
 see [Element.Properties][]
 
+-------------------------
+
+-------------------------
+
 Element Property: send {#Element-Properties:send}
 -------------------------------------------------
+
+-------------------------
 
 ### Setter
 
@@ -408,16 +457,25 @@ Returns the previously set Request instance (or a new one with default options).
 	el.send();
 	el.get('send'); // returns the Request instance.
 
+-------------------------
+
+-------------------------
+
 Type: Element {#Element}
 ========================
 
 Custom Type to allow all of its methods to be used with any DOM element via the dollar function [$][].
 
+-------------------------
+
+-------------------------
 
 Element Method: send {#Element:send}
 ------------------------------------
 
 Sends a form or a container of inputs with an HTML request.
+
+-------------------------
 
 ### Syntax:
 
@@ -450,7 +508,9 @@ Sends a form or a container of inputs with an HTML request.
 
 * The URL is taken from the action attribute of the form.
 
+-------------------------
 
+-------------------------
 
 [$]: /core/Element/Element/#Window:dollar
 [Request:send]: #Request:send

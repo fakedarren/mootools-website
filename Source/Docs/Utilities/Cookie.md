@@ -2,6 +2,10 @@
 
 Reads and writes a cookie.
 
+-------------------------
+
+-------------------------
+
 ## Options: {#Cookie-options}
 
 * domain   - (*string*: defaults to false) The domain the cookie belongs to.
@@ -9,9 +13,15 @@ Reads and writes a cookie.
 * duration - (*number*: defaults to false) The duration of the cookie (in days) before it expires. If set to false or 0, the cookie will be a session cookie that expires when the browser is closed.
 * secure   - (*boolean*: defaults to false) Stored cookie information can be accessed only from a secure environment.
 
+-------------------------
+
+-------------------------
+
 ## Cookie Method: write {#Cookie:write}
 
 Writes a cookie in the browser.
+
+-------------------------
 
 ### Syntax:
 
@@ -41,9 +51,15 @@ Saves the cookie for a day:
 
 In order to share the cookie with pages located in a different path, the [Cookie.options.domain][Cookie.options] value must be set.
 
+-------------------------
+
+-------------------------
+
 ## Cookie Method: read {#Cookie:read}
 
 Reads the value of a cookie.
+
+-------------------------
 
 ### Syntax:
 
@@ -61,9 +77,15 @@ Reads the value of a cookie.
 
 	Cookie.read('username');
 
+-------------------------
+
+-------------------------
+
 ## Cookie Method: dispose {#Cookie:dispose}
 
 Removes a cookie from the browser.
+
+-------------------------
 
 ### Syntax:
 
@@ -88,6 +110,10 @@ Creating a cookie and removing it right away:
 ### Credits:
 
 - Based on the functions by Peter-Paul Koch of [QuirksMode][].
+
+-------------------------
+
+-------------------------
 
 [Cookie.dispose]: #Cookie:dispose
 [Cookie.options]: #Cookie-options

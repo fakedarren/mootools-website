@@ -7,6 +7,9 @@ Fx.Transitions overrides the base [Fx][] constructor, and adds the possibility t
 
 The equation to use for the effect. See [Fx.Transitions][]. It accepts both a function (ex: Fx.Transitions.Sine.easeIn) or a string ('sine:in', 'bounce:out' or 'quad:in:out') that will map to Fx.Transitions.Sine.easeIn / Fx.Transitions.Bounce.easeOut / Fx.Transitions.Quad.easeInOut
 
+-------------------------
+
+-------------------------
 
 Object: Fx.Transitions {#Fx-Transitions}
 ======================================
@@ -26,84 +29,123 @@ A collection of tweening transitions for use with the [Fx][] classes.
 
 Since MooTools 1.3 this is a native JavaScript Object and not an instance of the deprecated Hash
 
+-------------------------
 
+-------------------------
 
 Fx.Transitions Method: linear {#Fx-Transitions:linear}
 ------------------------------------------------------
 
 Displays a linear transition.
 
+-------------------------
+
+-------------------------
+
 Fx.Transitions Method: quad {#Fx-Transitions:quad}
 --------------------------------------------------
 
 Displays a quadratic transition. Must be used as Quad.easeIn or Quad.easeOut or Quad.easeInOut.
+
+-------------------------
+
+-------------------------
 
 Fx.Transitions Method: cubic {#Fx-Transitions:cubic}
 ----------------------------------------------------
 
 Displays a cubicular transition. Must be used as Cubic.easeIn or Cubic.easeOut or Cubic.easeInOut.
 
+-------------------------
+
+-------------------------
 
 Fx.Transitions Method: quart {#Fx-Transitions:quart}
 ----------------------------------------------------
 
 Displays a quartetic transition. Must be used as Quart.easeIn or Quart.easeOut or Quart.easeInOut.
 
+-------------------------
+
+-------------------------
+
 Fx.Transitions Method: quint {#Fx-Transitions:quint}
 ----------------------------------------------------
 
 Displays a quintic transition. Must be used as Quint.easeIn or Quint.easeOut or Quint.easeInOut
+
+-------------------------
+
+-------------------------
 
 Fx.Transitions Method: pow {#Fx-Transitions:pow}
 ------------------------------------------------
 
 Used to generate Quad, Cubic, Quart and Quint.
 
+-------------------------
+
 ### Note:
 
 - The default is `p^6`.
+
+-------------------------
+
+-------------------------
 
 Fx.Transitions Method: expo {#Fx-Transitions:expo}
 --------------------------------------------------
 
 Displays a exponential transition. Must be used as Expo.easeIn or Expo.easeOut or Expo.easeInOut.
 
+-------------------------
 
+-------------------------
 
 Fx.Transitions Method: circ {#Fx-Transitions:circ}
 --------------------------------------------------
 
 Displays a circular transition. Must be used as Circ.easeIn or Circ.easeOut or Circ.easeInOut.
 
+-------------------------
 
+-------------------------
 
 Fx.Transitions Method: sine {#Fx-Transitions:sine}
 --------------------------------------------------
 
 Displays a sineousidal transition. Must be used as Sine.easeIn or Sine.easeOut or Sine.easeInOut.
 
+-------------------------
 
+-------------------------
 
 Fx.Transitions Method: back {#Fx-Transitions:back}
 --------------------------------------------------
 
 Makes the transition go back, then all forth. Must be used as Back.easeIn or Back.easeOut or Back.easeInOut.
 
+-------------------------
 
+-------------------------
 
 Fx.Transitions Method: bounce {#Fx-Transitions:bounce}
 ------------------------------------------------------
 
 Makes the transition bouncy. Must be used as Bounce.easeIn or Bounce.easeOut or Bounce.easeInOut.
 
+-------------------------
 
+-------------------------
 
 Fx.Transitions Method: elastic {#Fx-Transitions:elastic}
 --------------------------------------------------------
 
 Elastic curve. Must be used as Elastic.easeIn or Elastic.easeOut or Elastic.easeInOut
 
+-------------------------
 
+-------------------------
 
 Class: Fx.Transition {#Fx-Transition}
 =====================================
@@ -140,6 +182,9 @@ Returns an [Fx][] transition function with 'easeIn', 'easeOut', and 'easeInOut' 
 
 - [Fx.Transitions][]
 
+-------------------------
+
+-------------------------
 
 [Fx]: /core/Fx/Fx
 [Fx.Transitions]: #Fx-Transitions

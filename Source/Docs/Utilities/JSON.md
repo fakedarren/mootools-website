@@ -2,9 +2,15 @@
 
 JSON decoder and encoder.
 
+-------------------------
+
+-------------------------
+
 ## JSON Method: encode {#JSON:encode}
 
 Converts an object or array to a JSON string.
+
+-------------------------
 
 ### Syntax:
 
@@ -22,9 +28,15 @@ Converts an object or array to a JSON string.
 
 	var fruitsJSON = JSON.encode({apple: 'red', lemon: 'yellow'}); // returns: '{"apple":"red","lemon":"yellow"}'
 
+-------------------------
+
+-------------------------
+
 ## JSON Method: decode {#JSON:decode}
 
 Converts a JSON string into a JavaScript object.
+
+-------------------------
 
 ### Syntax:
 
@@ -50,6 +62,10 @@ Converts a JSON string into a JavaScript object.
 ### Credits:
 
 - JSON test regular expression by [Douglas Crockford][] and [Tobie Langel][].
+
+-------------------------
+
+-------------------------
 
 [Douglas Crockford]: http://crockford.com/
 [JSON (JavaScript Object Notation)]: http://www.json.org/
