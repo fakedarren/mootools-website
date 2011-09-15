@@ -8,4 +8,14 @@
 .main {
 	float: left;
 	width: 800px;
-}
+}	
+	.main OL, .main UL {
+		font-size: 1.3em;
+		padding: 0 0 10px 20px;
+	}
+	.main OL LI {
+		list-style: decimal;
+	}
+	.main UL LI {
+		list-style: disc;
+	}
