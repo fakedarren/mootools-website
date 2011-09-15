@@ -2,9 +2,15 @@
 
 Core contains common functions used in [MooTools][].
 
+-------------------------
+
+-------------------------
+
 ## Function: typeOf {#Core:typeOf}
 
 Returns the type of an object.
+
+-------------------------
 
 ### Syntax:
 
@@ -45,9 +51,15 @@ Returns the type of an object.
 
 This method is equivalent to *$type* from MooTools 1.2, with the exception that undefined and null values now return 'null' as a string, instead of false.
 
+-------------------------
+
+-------------------------
+
 ## Function: instanceOf {#Core:instanceOf}
 
 Checks if an object is an instance of a particular type.
+
+-------------------------
 
 ### Syntax:
 
@@ -72,7 +84,11 @@ Checks if an object is an instance of a particular type.
 	var bar = new myClass();
 	instanceOf(bar, myClass) // returns true
 
-### Type {#Type}
+-------------------------
+
+-------------------------
+
+# Type {#Type}
 
 MooTools extends native types, like string, array or number to make them even more useful.
 
@@ -92,9 +108,15 @@ Custom MooTools types are:
 - Elements
 - Event
 
+-------------------------
+
+-------------------------
+
 ## Type method: implement {#Type:implement}
 
 This method implements a new method to the type's prototype.
+
+-------------------------
 
 ### Syntax:
 
@@ -145,9 +167,15 @@ It is also possible to pass an object of methods:
 	'MooTools'.ftw(); // returns "MooTools FTW!"
 	('MooTools'.ftw() + ' ').repeat(2); // returns "MooTools FTW! MooTools FTW! "
 
+-------------------------
+
+-------------------------
+
 ## Type method: extend {#Type:extend}
 
 Adds one or more functions to the type. These are static functions that accept for example other types to parse them into the type, or other utility functions that belong to the certain type.
+
+-------------------------
 
 ### Syntax:
 
@@ -181,9 +209,15 @@ Adds one or more functions to the type. These are static functions that accept f
 		// do certain calculations
 	});
 
+-------------------------
+
+-------------------------
+
 ## Generics {#Type:generics}
 
 Most methods of types can be used as generic functions. These are the already existing JavaScript methods, methods MooTools adds, or methods you [implemented][implement] yourself.
+
+-------------------------
 
 ### Example:
 
@@ -214,169 +248,6 @@ This is useful if methods of a certain type should be used as function of anothe
 [Elements]: /core/Element/Element
 [implement]: core/Core/Core#Type:implement
 [MooTools]: http://mootools.net
-
----
-
-Deprecated Functions {#Deprecated-Functions}
-============================================
-
-
-Function: $chk {#Deprecated-Functions:chk}
----------------------
-
-This method has been deprecated and will have no equivalent in MooTools 1.3.
-
-If you really need this function you can implement it like so:
-
-### Example:
-
-	var $chk = function(obj){
-		return !!(obj || obj === 0);
-	};
-
-
-
-Function: $clear {#Deprecated-Functions:clear}
--------------------------
-
-This method has been deprecated. Please use *clearInterval* or *clearTimeout* instead.
-
-### See Also:
-
-- [MDC clearTimeout][], [MDC clearInterval][]
-
-
-Function: $defined {#Deprecated-Functions:defined}
------------------------------
-
-This method has been deprecated.
-
-If you really need this function you can implement it like so:
-
-### Example:
-
-	var $defined = function(obj){
-		return (obj != undefined);
-	};
-
-	// or just use it like this:
-	if(obj != undefined){
-		// do something
-	}
-
-
-Function: $arguments {#Deprecated-Functions:arguments}
----------------------------------
-
-This method has been deprecated and will have no equivalent in MooTools 1.3.
-
-If you really need this function you can implement it like so:
-
-### Example:
-
-	var $arguments = function(i){
-		return function(){
-			return arguments[i];
-		};
-	};
-
-
-
-Function: $empty {#Deprecated-Functions:empty}
--------------------------
-
-This method has been deprecated. Use [Function.from](/core/Types/Function#Function:Function-from) instead.
-
-### Example:
-
-	var myFunc = Function.from();
-	// or better:
-	var myFunc = function(){};
-
-
-
-Function: $lambda {#Deprecated-Functions:lambda}
----------------------------
-
-This method has been deprecated. Use [Function.from](/core/Types/Function#Function:Function-from) instead.
-
-### Example:
-
-	myLink.addEvent('click', Function.from(false)); // prevents a link Element from being clickable
-
-
-
-Function: $extend {#Deprecated-Functions:extend}
----------------------------
-
-This method has been deprecated. Please use [Object.append](/core/Types/Object#Object:Object-append) instead.
-
-
-
-Function: $merge {#Deprecated-Functions:merge}
--------------------------
-
-This method has been deprecated. Please use [Object.merge](/core/Types/Object#Object:Object-merge) instead.
-
-
-
-Function: $each {#Deprecated-Functions:each}
------------------------
-
-This method has been deprecated. Please use [Array.each](/core/Types/Array#Array:Array-each) or [Object.each](/core/Types/Object#Object:Object-each) instead.
-
-
-
-Function: $pick {#Deprecated-Functions:pick}
------------------------
-
-This method has been deprecated. Please use [Array.pick](/core/Types/Array#Array:pick) instead.
-
-
-
-Function: $random {#Deprecated-Functions:random}
----------------------------
-
-This method has been deprecated. Please use [Number.random](/core/Types/Number#Number:Number-random) instead.
-
-
-
-Function: $splat {#Deprecated-Functions:splat}
--------------------------
-
-This method has been deprecated. Please use [Array.from](/core/Types/Array#Array:Array-from) instead.
-However `$splat` does *not* transform Array-like objects such as NodeList or FileList in arrays, `Array.from` does.
-
-
-Function: $time {#Deprecated-Functions:time}
------------------------
-
-This method has been deprecated. Please use *Date.now()* instead.
-
-### Syntax:
-
-	var time = Date.now();
-
-### Returns:
-
-* (*number*) - The current timestamp.
-
-
-
-Function: $try {#Deprecated-Functions:try}
----------------------
-
-This method has been deprecated. Please use [Function.attempt](/core/Types/Function#Function:Function-attempt) instead.
-
-
-
-Function: $type {#Deprecated-Functions:type}
------------------------
-
-This method has been deprecated. Please use [typeOf](#Core:typeOf) instead.
-
-
-
 [Array]: /core/Types/Array
 [Function:bind]: /core/Types/Function/#bind
 [Function:delay]: /core/Types/Function/#delay
