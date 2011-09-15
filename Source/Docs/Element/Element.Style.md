@@ -3,12 +3,16 @@ Type: Element {#Element}
 
 Custom Type to allow all of its methods to be used with any DOM element via the dollar function [$][].
 
+-------------------------
 
+-------------------------
 
 Element Method: setStyle {#Element:setStyle}
 --------------------------------------------
 
 Sets a CSS property to the Element.
+
+-------------------------
 
 ### Syntax:
 
@@ -32,12 +36,16 @@ Sets a CSS property to the Element.
 
 - All number values will automatically be rounded to the nearest whole number.
 
+-------------------------
 
+-------------------------
 
 Element Method: getStyle {#Element:getStyle}
 --------------------------------------------
 
 Returns the style of the Element given the property passed in.
+
+-------------------------
 
 ### Syntax:
 
@@ -56,12 +64,16 @@ Returns the style of the Element given the property passed in.
 	$('myElement').getStyle('width'); // returns "300px".
 	$('myElement').getStyle('width').toInt(); // returns 300.
 
+-------------------------
 
+-------------------------
 
 Element Method: setStyles {#Element:setStyles}
 ----------------------------------------------
 
 Applies a collection of styles to the Element.
+
+-------------------------
 
 ### Syntax:
 
@@ -87,12 +99,16 @@ Applies a collection of styles to the Element.
 
 - [Element:getStyle][]
 
+-------------------------
 
+-------------------------
 
 Element Method: getStyles {#Element:getStyles}
 ----------------------------------------------
 
 Returns an object of styles of the Element for each argument passed in.
+
+-------------------------
 
 ### Syntax:
 
@@ -115,7 +131,9 @@ Returns an object of styles of the Element for each argument passed in.
 
 - [Element:getStyle][]
 
+-------------------------
 
+-------------------------
 
 [$]: /core/Element/Element/#Window:dollar
 [Element:getStyle]: #Element:getStyle

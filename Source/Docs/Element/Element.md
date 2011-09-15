@@ -3,10 +3,16 @@ Type: Window {#Window}
 
 The following functions are treated as Window methods.
 
+-------------------------
+
+-------------------------
+
 Function: document.id {#Window:document-id}
 -------------------------------------------
 
 The document.id function has a dual purpose: Getting the element by its id, and making an element in Internet Explorer "grab" all the [Element][] methods.
+
+-------------------------
 
 ### Syntax:
 
@@ -42,12 +48,17 @@ The document.id function has a dual purpose: Getting the element by its id, and 
 - Browsers with native HTMLElement support, such as Safari, Firefox, and Opera, apply all the [Element][] Methods to every DOM element automatically.
 - Because MooTools detects if an element needs to be extended or not, this function may be called on the same Element many times with no ill effects.
 
+-------------------------
+
+-------------------------
 
 Function: $ {#Window:dollar}
 ----------------------------
 
 The dollar function is an alias for [document:id][] if the $ variable is not set already.
 However it is not recommended to use more frameworks, the $ variable can be set by another framework or script. MooTools will detect this and determine if it will set the $ function so it will not be overwritten.
+
+-------------------------
 
 ### Examples:
 
@@ -67,12 +78,17 @@ However it is not recommended to use more frameworks, the $ variable can be set 
 ### See Also:
  - MooTools Blogpost: [The Dollar Save Mode][]
 
+-------------------------
+
+-------------------------
 
 Function: $$ {#Window:dollars}
 ------------------------------
 
 Selects and extends DOM elements. Return an Elements instance.
 The Element instance returned is an array-like object, supporting every [Array][] method and every [Element][] method.
+
+-------------------------
 
 ### Syntax:
 
@@ -116,18 +132,25 @@ The Element instance returned is an array-like object, supporting every [Array][
 - The return type of element methods run through [$$][] is always an Elements instance, regardless of the amount of results.
 - Default Selectors supported are the same as you can find on [W3C CSS3 selectors](http://www.w3.org/TR/css3-selectors/#selectors).
 
+-------------------------
+
+-------------------------
 
 Type: Element {#Element}
 ========================
 
 Custom Type to allow all of its methods to be used with any extended DOM Element.
 
+-------------------------
 
+-------------------------
 
 Element Method: constructor {#Element:constructor}
 --------------------------------------------------
 
 Creates a new Element of the type passed in.
+
+-------------------------
 
 ### Syntax:
 
@@ -174,12 +197,16 @@ Because the element name is parsed as a CSS selector, colons in namespaced tags 
 
 - [$][], [Element:set][]
 
+-------------------------
 
+-------------------------
 
 Element Method: getElement {#Element:getElement}
 ------------------------------------------------
 
 Gets the first descendant element whose tag name matches the tag provided. CSS selectors may also be passed.
+
+-------------------------
 
 ### Syntax:
 
@@ -202,12 +229,16 @@ Gets the first descendant element whose tag name matches the tag provided. CSS s
 - This method is also available for Document instances.
 - Default Selectors supported are the same as you can find on [W3C CSS3 selectors](http://www.w3.org/TR/css3-selectors/#selectors).
 
+-------------------------
 
+-------------------------
 
 Element Method: getElements {#Element:getElements}
 --------------------------------------------------
 
 Collects all decedent elements whose tag name matches the tag provided. CSS selectors may also be passed.
+
+-------------------------
 
 ### Syntax:
 
@@ -230,12 +261,16 @@ Collects all decedent elements whose tag name matches the tag provided. CSS sele
 - This method is also available for Document instances.
 - Default Selectors supported are the same as you can find on [W3C CSS3 selectors](http://www.w3.org/TR/css3-selectors/#selectors).
 
+-------------------------
 
+-------------------------
 
 Element Method: getElementById {#Element:getElementById}
 --------------------------------------------------------
 
 Gets the element with the specified id found inside the current Element.
+
+-------------------------
 
 ### Syntax:
 
@@ -257,12 +292,16 @@ Gets the element with the specified id found inside the current Element.
 
 - This method is not provided for Document instances as document.getElementById is provided natively.
 
+-------------------------
 
+-------------------------
 
 Element Method: set {#Element:set}
 ----------------------------
 
 This is a "dynamic arguments" method. Properties passed in can be any of the 'set' properties in the [Element.Properties][] Object.
+
+-------------------------
 
 ### Syntax:
 
@@ -325,12 +364,16 @@ This is a "dynamic arguments" method. Properties passed in can be any of the 'se
 
 - [Element][], [Element.Properties][], [Element:setProperty][], [Element:addEvents][], [Element:setStyles][]
 
+-------------------------
 
+-------------------------
 
 Element Method: get {#Element:get}
 ----------------------------------
 
 This is a "dynamic arguments" method. Properties passed in can be any of the 'get' properties in the [Element.Properties][] Object.
+
+-------------------------
 
 ### Syntax:
 
@@ -363,12 +406,16 @@ This is a "dynamic arguments" method. Properties passed in can be any of the 'ge
 
 - [Element][], [Element.Properties][], [Element:getProperty][]
 
+-------------------------
 
+-------------------------
 
 Element Method: erase {#Element:erase}
 --------------------------------------
 
 This is a "dynamic arguments" method. Properties passed in can be any of the 'erase' properties in the [Element.Properties][] Object.
+
+-------------------------
 
 ### Syntax:
 
@@ -395,12 +442,16 @@ This is a "dynamic arguments" method. Properties passed in can be any of the 'er
 
 - [Element][], [Element.Properties][], [Element:removeProperty][]
 
+-------------------------
 
+-------------------------
 
 Element Method: match {#Element:match}
 --------------------------------------
 
 Tests this Element to see if it matches the argument passed in.
+
+-------------------------
 
 ### Syntax:
 
@@ -434,13 +485,16 @@ Tests this Element to see if it matches the argument passed in.
 	$('myDiv').match(el); // returns true
 	$('otherElement').match(el); // returns false
 
+-------------------------
 
+-------------------------
 
 Element Method: contains {#Element:contains}
 --------------------------------------------
 
 Checks all descendants of this Element for a match.
 
+-------------------------
 
 ### Syntax:
 
@@ -466,12 +520,16 @@ Checks all descendants of this Element for a match.
 
 	if ($('Darth_Vader').contains('Luke')) alert('Luke, I am your father.'); //tan tan tannn...
 
+-------------------------
 
+-------------------------
 
 Element Method: inject {#Element:inject}
 ----------------------------------------
 
 Injects, or inserts, the Element at a particular place relative to the Element's children (specified by the second the argument).
+
+-------------------------
 
 ### Syntax:
 
@@ -551,7 +609,9 @@ Injects, or inserts, the Element at a particular place relative to the Element's
 
 [Element:adopt](#Element:adopt), [Element:grab](#Element:grab), [Element:wraps](#Element:wraps)
 
+-------------------------
 
+-------------------------
 
 Element Method: grab {#Element:grab}
 ------------------------------------
@@ -559,6 +619,8 @@ Element Method: grab {#Element:grab}
 Works as [Element:inject](#Element:inject), but in reverse.
 
 Appends the Element at a particular place relative to the Element's children (specified by the where parameter).
+
+-------------------------
 
 ### Syntax:
 
@@ -609,7 +671,9 @@ Appends the Element at a particular place relative to the Element's children (sp
 
 [Element:adopt](#Element:adopt), [Element:inject](#Element:inject), [Element:wraps](#Element:wraps)
 
+-------------------------
 
+-------------------------
 
 Element Method: adopt {#Element:adopt}
 --------------------------------------
@@ -617,6 +681,8 @@ Element Method: adopt {#Element:adopt}
 Works like [Element:grab](#Element:grab), but allows multiple elements to be adopted and only appended at the bottom.
 
 Inserts the passed element(s) inside the Element (which will then become the parent element).
+
+-------------------------
 
 ### Syntax:
 
@@ -661,12 +727,16 @@ Inserts the passed element(s) inside the Element (which will then become the par
 
 [Element:grab](#Element:grab), [Element:inject](#Element:inject), [Element:wraps](#Element:wraps)
 
+-------------------------
 
+-------------------------
 
 Element Method: wraps {#Element:wraps}
 --------------------------------------
 
 Works like [Element:grab](#Element:grab), but replaces the element in its place, and then appends the replaced element in the location specified inside the this element.
+
+-------------------------
 
 ### Syntax:
 
@@ -726,11 +796,17 @@ Works like [Element:grab](#Element:grab), but replaces the element in its place,
 		<div id="child"></div>
 	</div>
 
+-------------------------
+
+-------------------------
+
 Element Method: appendText {#Element:appendText}
 ------------------------------------------------
 
 Works like [Element:grab](#Element:grab), but instead of accepting an id or an element, it only accepts text.
 A text node will be created inside this Element, in either the top or bottom position.
+
+-------------------------
 
 ### Syntax:
 
@@ -759,13 +835,16 @@ A text node will be created inside this Element, in either the top or bottom pos
 
 	<div id="myElement">Hey. Howdy.</div>
 
+-------------------------
 
+-------------------------
 
 Element Method: dispose {#Element:dispose}
 ------------------------------------------
 
 Removes the Element from the DOM.
 
+-------------------------
 
 ### Syntax:
 
@@ -794,13 +873,16 @@ Removes the Element from the DOM.
 
 - [MDC Element:removeChild][]
 
+-------------------------
 
+-------------------------
 
 Element Method: clone {#Element:clone}
 --------------------------------------
 
 Clones the Element and returns the cloned one.
 
+-------------------------
 
 ### Syntax:
 
@@ -810,7 +892,6 @@ Clones the Element and returns the cloned one.
 
 1. contents - (*boolean*, optional: defaults to true) When set to false the Element's contents are not cloned.
 2. keepid - (*boolean*, optional: defaults to false) When true the cloned Element keeps the id attribute, if present. Same goes for any of the cloned childNodes.
-
 
 ### Returns:
 
@@ -842,12 +923,16 @@ Clones the Element and returns the cloned one.
 
 - [Element:cloneEvents](/Element/Element.Event#Element:cloneEvents).
 
+-------------------------
 
+-------------------------
 
 Element Method: replaces {#Element:replaces}
 --------------------------------------------------
 
 Replaces the passed Element with Element.
+
+-------------------------
 
 ### Syntax:
 
@@ -870,12 +955,16 @@ Replaces the passed Element with Element.
 
 - [MDC Element:replaceChild][]
 
+-------------------------
 
+-------------------------
 
 Element Method: hasClass {#Element:hasClass}
 --------------------------------------------
 
 Tests the Element to see if it has the passed in className.
+
+-------------------------
 
 ### Syntax:
 
@@ -899,12 +988,16 @@ Tests the Element to see if it has the passed in className.
 
 	$('myElement').hasClass('testClass'); // returns true
 
+-------------------------
 
+-------------------------
 
 Element Method: addClass {#Element:addClass}
 --------------------------------------------
 
 Adds the passed in class to the Element, if the Element doesnt already have it.
+
+-------------------------
 
 ### Syntax:
 
@@ -932,13 +1025,16 @@ Adds the passed in class to the Element, if the Element doesnt already have it.
 
 	<div id="myElement" class="testClass newClass"></div>
 
+-------------------------
 
+-------------------------
 
 Element Method: removeClass {#Element:removeClass}
 ----------------------------
 
 Works like [Element:addClass](#Element:addClass), but removes the class from the Element.
 
+-------------------------
 
 ### Syntax:
 
@@ -966,12 +1062,16 @@ Works like [Element:addClass](#Element:addClass), but removes the class from the
 
 	<div id="myElement" class="testClass"></div>
 
+-------------------------
 
+-------------------------
 
 Element Method: toggleClass {#Element:toggleClass}
 --------------------------------------------------
 
 Adds or removes the passed in class name to the Element, depending on whether or not it's already present.
+
+-------------------------
 
 ### Syntax:
 
@@ -1008,12 +1108,16 @@ Adds or removes the passed in class name to the Element, depending on whether or
 
 	<div id="myElement" class="myClass"></div>
 
+-------------------------
 
+-------------------------
 
 Element Method: getPrevious {#Element:getPrevious}
 --------------------------------------------------
 
 Returns the previousSibling of the Element (excluding text nodes).
+
+-------------------------
 
 ### Syntax:
 
@@ -1027,20 +1131,25 @@ Returns the previousSibling of the Element (excluding text nodes).
 
 * (*mixed*) The previous sibling Element or null if none found.
 
+-------------------------
 
+-------------------------
 
 Element Method: getAllPrevious {#Element:getAllPrevious}
 --------------------------------------------------------
 
 Like [Element:getPrevious][], but returns a collection of all the matched previousSiblings.
 
+-------------------------
 
+-------------------------
 
 Element Method: getNext {#Element:getNext}
 ------------------------------------------
 
 As [Element:getPrevious][], but tries to find the nextSibling (excluding text nodes).
 
+-------------------------
 
 ### Syntax:
 
@@ -1054,19 +1163,25 @@ As [Element:getPrevious][], but tries to find the nextSibling (excluding text no
 
 * (*mixed*) The next sibling Element or null if none found.
 
+-------------------------
+
+-------------------------
 
 Element Method: getAllNext {#Element:getAllNext}
 ------------------------------------------------
 
 Like Element.getNext, but returns a collection of all the matched nextSiblings.
 
+-------------------------
 
+-------------------------
 
 Element Method: getFirst {#Element:getFirst}
 --------------------------------------------
 
 Gets the first element that matches the passed in expression.
 
+-------------------------
 
 ### Syntax:
 
@@ -1080,12 +1195,16 @@ Gets the first element that matches the passed in expression.
 
 * (*mixed*) The first found element or null if none found.
 
+-------------------------
 
+-------------------------
 
 Element Method: getLast {#Element:getLast}
 ------------------------------------------
 
 Gets the last element that matches the passed in expression.
+
+-------------------------
 
 ### Syntax:
 
@@ -1099,13 +1218,16 @@ Gets the last element that matches the passed in expression.
 
 * (*mixed*) The last found element, or returns null if none found.
 
+-------------------------
 
+-------------------------
 
 Element Method: getParent {#Element:getParent}
 ----------------------------------------------
 
 Works as [Element:getPrevious][], but tries to find the parentNode.
 
+-------------------------
 
 ### Syntax:
 
@@ -1119,20 +1241,25 @@ Works as [Element:getPrevious][], but tries to find the parentNode.
 
 * (*mixed*) The target Element's parent or null if no matching parent is found.
 
+-------------------------
 
+-------------------------
 
 Element Method: getParents {#Element:getParents}
 ------------------------------------------------
 
 Like [Element:getParent](#Element:getParent), but returns a collection of all the matched parentNodes up the tree.
 
+-------------------------
 
+-------------------------
 
 Element Method: getSiblings {#Element:getSiblings}
 --------------------------------------------------
 
 Like [Element:getAllPrevious][] but returns all Element's previous and next siblings (excluding text nodes). Returns as [Elements][].
 
+-------------------------
 
 ### Syntax:
 
@@ -1146,13 +1273,16 @@ Like [Element:getAllPrevious][] but returns all Element's previous and next sibl
 
 * (*array*) A [Elements](#Elements) array with all of the Element's siblings, except the text nodes.
 
+-------------------------
 
+-------------------------
 
 Element Method: getChildren {#Element:getChildren}
 --------------------------------------------------
 
 Returns all the Element's children (excluding text nodes). Returns as [Elements][].
 
+-------------------------
 
 ### Syntax:
 
@@ -1170,11 +1300,16 @@ Returns all the Element's children (excluding text nodes). Returns as [Elements]
 
 The difference between the methods *getChildren* and *getElements* is that getChildren will only return its direct children while getElements searches for all the Elements in any depth.
 
+-------------------------
+
+-------------------------
+
 Element Method: empty {#Element:empty}
 --------------------------------------
 
 Empties an Element of all its children.
 
+-------------------------
 
 ### Syntax:
 
@@ -1201,12 +1336,16 @@ Empties an Element of all its children.
 
 	<div id="myElement"></div>
 
+-------------------------
 
+-------------------------
 
 Element Method: destroy {#Element:destroy}
 ------------------------------------------
 
 Removes the Element and its children from the DOM and prepares them for garbage collection.
+
+-------------------------
 
 ### Syntax:
 
@@ -1216,13 +1355,16 @@ Removes the Element and its children from the DOM and prepares them for garbage 
 
 * (*null*)
 
+-------------------------
 
+-------------------------
 
 Element Method: toQueryString {#Element:toQueryString}
 ------------------------------------------------------
 
 Reads the child inputs of the Element and generates a query string based on their values.
 
+-------------------------
 
 ### Syntax:
 
@@ -1245,12 +1387,16 @@ Reads the child inputs of the Element and generates a query string based on thei
 
 	$('myForm').toQueryString(); // returns "email=bob@bob.com&zipCode=90210".
 
+-------------------------
+
+-------------------------
 
 Element Method: getSelected {#Element:getSelected}
 --------------------------------------------------
 
 Returns the selected options of a select element.
 
+-------------------------
 
 ### Syntax:
 
@@ -1278,12 +1424,16 @@ Returns the selected options of a select element.
 This method returns an array, regardless of the multiple attribute of the select element.
 If the select is single, it will return an array with only one item.
 
+-------------------------
 
+-------------------------
 
 Element Method: getProperty {#Element:getProperty}
 --------------------------------------------------
 
 Returns a single element attribute.
+
+-------------------------
 
 ### Syntax:
 
@@ -1307,12 +1457,16 @@ Returns a single element attribute.
 
 	var imgProps = $('myImage').getProperty('src'); // returns: 'mootools.png'.
 
+-------------------------
 
+-------------------------
 
 Element Method: getProperties {#Element:getProperties}
 ------------------------------------------------------
 
 Gets multiple element attributes.
+
+-------------------------
 
 ### Syntax:
 
@@ -1337,13 +1491,16 @@ Gets multiple element attributes.
 	var imgProps = $('myImage').getProperties('id', 'src', 'title', 'alt');
 	// returns: { id: 'myImage', src: 'mootools.png', title: 'MooTools, the compact JavaScript framework', alt: '' }
 
+-------------------------
 
+-------------------------
 
 Element Method: setProperty {#Element:setProperty}
 --------------------------------------------------
 
 Sets an attribute or special property for this Element.
 
+-------------------------
 
 ### Arguments:
 
@@ -1376,12 +1533,16 @@ Sets an attribute or special property for this Element.
 	- use 'frameborder', not 'frameBorder'
 	- etc.
 
+-------------------------
+
+-------------------------
 
 Element Method: setProperties {#Element:setProperties}
 ------------------------------------------------------
 
 Sets numerous attributes for the Element.
 
+-------------------------
 
 ### Arguments:
 
@@ -1408,13 +1569,16 @@ Sets numerous attributes for the Element.
 
 	<img id="myImage" src="whatever.gif" alt="whatever dude" />
 
+-------------------------
 
+-------------------------
 
 Element Method: removeProperty {#Element:removeProperty}
 --------------------------------------------------------
 
 Removes an attribute from the Element.
 
+-------------------------
 
 ### Syntax:
 
@@ -1443,13 +1607,16 @@ Removes an attribute from the Element.
 
 	<a id="myAnchor" href="#"></a>
 
+-------------------------
 
+-------------------------
 
 Element Method: removeProperties {#Element:removeProperties}
 ------------------------------------------------------------
 
 Removes numerous attributes from the Element.
 
+-------------------------
 
 ### Syntax:
 
@@ -1477,12 +1644,16 @@ Removes numerous attributes from the Element.
 
 	<a></a>
 
+-------------------------
+
+-------------------------
 
 Element Method: store {#Element:store}
 --------------------------------------
 
 Stores an item in the Elements Storage, linked to this Element.
 
+-------------------------
 
 ### Syntax:
 
@@ -1501,12 +1672,16 @@ Stores an item in the Elements Storage, linked to this Element.
 
 	$('element').store('someProperty', someValue);
 
+-------------------------
+
+-------------------------
 
 Element Method: retrieve {#Element:retrieve}
 --------------------------------------------
 
 Retrieves a value from the Elements storage.
 
+-------------------------
 
 ### Syntax:
 
@@ -1525,12 +1700,16 @@ Retrieves a value from the Elements storage.
 
 	$('element').retrieve('someProperty'); // returns someValue (see example above)
 
+-------------------------
+
+-------------------------
 
 Element Method: eliminate {#Element:eliminate}
 --------------------------------------------
 
 Eliminates a key from the Elements storage.
 
+-------------------------
 
 ### Syntax:
 
@@ -1548,9 +1727,9 @@ Eliminates a key from the Elements storage.
 
 	$('element').eliminate('someProperty');
 
+-------------------------
 
-
-
+-------------------------
 
 Object: Element.Properties {#Element-Properties}
 ==============================================
@@ -1598,10 +1777,14 @@ Additionally, you can access these custom getters and setters using an object as
 - Automatically returns the element for setters.
 - Since MooTools 1.3 this is a native JavaScript Object and not an instance of the deprecated Hash
 
+-------------------------
 
+-------------------------
 
 Element Property: html {#Element-Properties:html}
 -------------------------------------------------
+
+-------------------------
 
 ### Setter:
 
@@ -1648,10 +1831,14 @@ Returns the inner HTML of the Element.
 
 * (*text*) This Element's innerHTML.
 
+-------------------------
 
+-------------------------
 
 Element Property: text {#Element-Properties:text}
 -------------------------------------------------
+
+-------------------------
 
 ### Setter:
 
@@ -1706,10 +1893,14 @@ Gets the inner text of the Element.
 
 	var myText = $('myElement').get('text'); // myText = 'my text'.
 
+-------------------------
 
+-------------------------
 
 Element Property: tag {#Element-Properties:tag}
 -----------------------------------------------
+
+-------------------------
 
 ### Getter:
 
@@ -1733,20 +1924,25 @@ Returns the tag name of the Element in lower case.
 
 	var myTag = $('myImage').get('tag'); // myTag = 'img'
 
+-------------------------
 
+-------------------------
 
 Type: IFrame {#IFrame}
 ========================
 
 Custom Type to create and easily work with IFrames.
 
+-------------------------
 
+-------------------------
 
 IFrame Method: constructor {#IFrame:constructor}
 ------------------------------------------------
 
 Creates an IFrame HTML Element and extends its window and document with MooTools.
 
+-------------------------
 
 ### Syntax:
 
@@ -1797,18 +1993,23 @@ Creates an IFrame HTML Element and extends its window and document with MooTools
 - If the IFrame already exists and has a different name than id, the name will be made the same as the id.
 - An IFrame's window and document will not be extended with MooTools methods.
 
+-------------------------
 
+-------------------------
 
 Type: Elements {#Elements}
 ============================
 
 The Elements class allows [Element][] methods to work on an [Elements][] array, as well as [Array][] Methods.
 
+-------------------------
 
+-------------------------
 
 Elements Method: constructor {#Elements:constructor}
 ----------------------------------------------------
 
+-------------------------
 
 ### Syntax:
 
@@ -1850,7 +2051,9 @@ Elements Method: constructor {#Elements:constructor}
 
 - [$$][], [$][], [Element][], [Elements][], [Array][]
 
+-------------------------
 
+-------------------------
 
 Elements Method: filter {#Elements:filter}
 ----------------------------------------------
@@ -1858,6 +2061,7 @@ Elements Method: filter {#Elements:filter}
 Filters a collection of elements by a given tag name.  This method will be able to filter by any selector.
 It also works like [Array:filter][], by filtering collection of elements with a function.
 
+-------------------------
 
 ### Syntax:
 
@@ -1871,27 +2075,9 @@ It also works like [Array:filter][], by filtering collection of elements with a 
 
 * (*array*) A subset of this [Elements][] instance.
 
+-------------------------
 
-Deprecated Functions {#Deprecated-Functions}
-============================================
-
-Element Method: hasChild {#Deprecated-Functions:hasChild}
----------------------------------------------------------
-
-This method has been deprecated. Use [Element:contains][] instead.
-
-### Example:
-
-	var myElement = document.id('element1');
-	var myElement2 = document.id('element2');
-	myElement !== myElement2 && myElement.contains(element2);
-
-	// could be implemented as:
-	Element.implement('hasChild', function(element){
-		return this !== element && this.contains(element);
-	});
-
-
+-------------------------
 
 [document:id]: #Window:document-id
 [$]: #Window:dollar

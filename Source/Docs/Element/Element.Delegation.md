@@ -37,10 +37,16 @@ An example of how delegation is usually applied. Delegation is extra useful when
 * Be wary of the cost of delegation; for example, mouseover/mouseout delegation on an entire document can cause your page to run the selector constantly as the user moves his or her mouse around the page. Delegation is not always the best solution.
 * In general it is always better to delegate to the closest parent to your elements as possible; delegate to an element in the page rather than the document body for example.
 
+-------------------------
+
+-------------------------
+
 Element method: addEvent {#Element:addEvent}
 --------------------------------------------
 
 Delegates the methods of an element's children to the parent element for greater efficiency when a selector is provided. Otherwise it will work like [addEvent][].
+
+-------------------------
 
 ### Syntax:
 
@@ -72,10 +78,16 @@ Delegates the methods of an element's children to the parent element for greater
 
 * *element* - This element.
 
+-------------------------
+
+-------------------------
+
 Element method: addEvents {#Element:addEvents}
 ----------------------------------------------
 
 Delegates the events to the parent just as with addEvent above. Works like [addEvents][].
+
+-------------------------
 
 ### Example:
 
@@ -86,11 +98,16 @@ Delegates the events to the parent just as with addEvent above. Works like [addE
 		'click:relay(a)': fn2
 	});
 
+-------------------------
+
+-------------------------
 
 Element method: removeEvent {#Element:removeEvent}
 --------------------------------------------------
 
 Removes a method from an element like [removeEvent][].
+
+-------------------------
 
 ### Example:
 
@@ -104,11 +121,16 @@ Removes a method from an element like [removeEvent][].
 	// remove delegation:
 	$('myElement').removeEvent('click:relay(a)', monitor);
 
+-------------------------
+
+-------------------------
 
 Element method: removeEvents {#Element:removeEvents}
 ----------------------------------------------------
 
 Removes a series of methods from delegation if the functions were used for delegation or else works like [removeEvents][].
+
+-------------------------
 
 ### Example:
 
@@ -131,7 +153,9 @@ Removes a series of methods from delegation if the functions were used for deleg
 	// remove all click:relay(a) events
 	$('myElement').removeEvents('click:relay(a)');
 
+-------------------------
 
+-------------------------
 
 [Element]: /core/Element/Element
 [addEvent]: /core/Element/Element.Event#Element:addEvent

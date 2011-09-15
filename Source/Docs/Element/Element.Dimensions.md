@@ -13,13 +13,17 @@ Custom Type to allow all of its methods to be used with any DOM element via the 
 - Element positioning based on the [qooxdoo](http://qooxdoo.org/) code and smart browser fixes, [LGPL License](http://www.gnu.org/licenses/lgpl.html).
 - Viewport dimensions based on [YUI](http://developer.yahoo.com/yui/) code, [BSD License](http://developer.yahoo.com/yui/license.html).
 
+-------------------------
 
+-------------------------
 
 Element Method: scrollTo {#Element:scrollTo}
 --------------------------------------------
 
 Scrolls the element to the specified coordinated (if the element has an overflow).
 The following method is also available on the Window object.
+
+-------------------------
 
 ### Syntax:
 
@@ -38,13 +42,17 @@ The following method is also available on the Window object.
 
 - [MDC Element:scrollLeft][], [MDC Element:scrollTop][]
 
+-------------------------
 
+-------------------------
 
 Element Method: getSize {#Element:getSize}
 ------------------------------------------
 
 Returns the height and width of the Element, taking into account borders and padding.
 The following method is also available on the Window object.
+
+-------------------------
 
 ### Syntax:
 
@@ -63,12 +71,17 @@ The following method is also available on the Window object.
 
 If you need to measure the properties of elements that are not displayed (either their display style is none or one of their parents display style is none), you will need to use [Element.measure][] to expose it.
 
+-------------------------
+
+-------------------------
 
 Element Method: getScrollSize {#Element:getScrollSize}
 ------------------------------------------------------
 
 Returns an Object representing the size of the target Element, including scrollable area.
 The following method is also available on the Window object.
+
+-------------------------
 
 ### Syntax:
 
@@ -91,12 +104,17 @@ The following method is also available on the Window object.
 
 If you need to measure the properties of elements that are not displayed (either their display style is none or one of their parents display style is none), you will need to use [Element.measure][] to expose it.
 
+-------------------------
+
+-------------------------
 
 Element Method: getScroll {#Element:getScroll}
 ----------------------------------------------
 
 Returns an Object representing how far the target Element is scrolled in either direction.
 The following method is also available on the Window object.
+
+-------------------------
 
 ### Syntax:
 
@@ -115,11 +133,16 @@ The following method is also available on the Window object.
 
 If you need to measure the properties of elements that are not displayed (either their display style is none or one of their parents display style is none), you will need to use [Element.measure][] to expose it.
 
+-------------------------
+
+-------------------------
 
 Element Method: getPosition {#Element:getPosition}
 --------------------------------------------------
 
 Returns the real offsets of the element.
+
+-------------------------
 
 ### Syntax:
 
@@ -145,11 +168,16 @@ relative - (Element, defaults to the document) If set, the position will be rela
 
 If you need to measure the properties of elements that are not displayed (either their display style is none or one of their parents display style is none), you will need to use [Element.measure][] to expose it.
 
+-------------------------
+
+-------------------------
 
 Element Method: setPosition {#Element:setPosition}
 --------------------------------------------------
 
 Sets the position of the element's *left* and *top* values to the x/y positions you specify.
+
+-------------------------
 
 ### Syntax
 
@@ -167,12 +195,16 @@ Sets the position of the element's *left* and *top* values to the x/y positions 
 
 	myElement.setPosition({x: 10, y: 100});
 
+-------------------------
 
+-------------------------
 
 Element Method: getCoordinates {#Element:getCoordinates}
 --------------------------------------------------------
 
 Returns an object with width, height, left, right, top, and bottom coordinate values of the Element.
+
+-------------------------
 
 ### Syntax:
 
@@ -209,11 +241,16 @@ relative - (*element*, optional) if set, the position will be relative to this e
 
 If you need to measure the properties of elements that are not displayed (either their display style is none or one of their parents display style is none), you will need to use [Element.measure][] to expose it.
 
+-------------------------
+
+-------------------------
 
 Element Method: getOffsetParent {#Element:getOffsetParent}
 ----------------------------------------------------------
 
 Returns the parent of the element that is positioned, if there is one.
+
+-------------------------
 
 ### Syntax
 
@@ -223,7 +260,9 @@ Returns the parent of the element that is positioned, if there is one.
 
 * (*mixed*) If the element has a parent that is positioned, it returns that element, otherwise it returns *null*.
 
+-------------------------
 
+-------------------------
 
 [$]: /core/Element/Element#Window:dollar
 [MDC Element:scrollLeft]: https://developer.mozilla.org/en/DOM/element.scrollLeft

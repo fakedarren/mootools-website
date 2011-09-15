@@ -7,11 +7,16 @@ Type: Element {#Element}
 ### Notes:
 - Internet Explorer fires element events in random order if they are not fired by [Element:fireEvent](#Element:fireEvent).
 
+-------------------------
+
+-------------------------
 
 Element Method: addEvent {#Element:addEvent}
 --------------------------------------------
 
 Attaches an event listener to a DOM element.
+
+-------------------------
 
 ### Syntax:
 
@@ -47,12 +52,16 @@ Attaches an event listener to a DOM element.
 
 - [w3schools Event Attributes](http://www.w3schools.com/html/html_eventattributes.asp)
 
+-------------------------
 
+-------------------------
 
 Element Method: removeEvent {#Element:removeEvent}
 --------------------------------------------------
 
 Works as Element.addEvent, but instead removes the specified event listener.
+
+-------------------------
 
 ### Syntax:
 
@@ -94,12 +103,16 @@ Works as Element.addEvent, but instead removes the specified event listener.
 - When the function is added using [Function:bind][] or [Function:pass][], etc, a new reference is created.  For removeEvent to work, you must pass a reference to the exact function to be removed.
 - This method is also attached to Document and Window.
 
+-------------------------
 
+-------------------------
 
 Element Method: addEvents {#Element:addEvents}
 ----------------------------------------------
 
 The same as [Element:addEvent](#Element:addEvent), but accepts an object to add multiple events at once.
+
+-------------------------
 
 ### Syntax:
 
@@ -132,12 +145,16 @@ The same as [Element:addEvent](#Element:addEvent), but accepts an object to add 
 
 - [Element:addEvent](#Element:addEvent)
 
+-------------------------
 
+-------------------------
 
 Element Method: removeEvents {#Element:removeEvents}
 ----------------------------------------------------
 
 Removes all events of a certain type from an Element. If no argument is passed, removes all events of all types.
+
+-------------------------
 
 ### Syntax:
 
@@ -179,10 +196,16 @@ Removes all events of a certain type from an Element. If no argument is passed, 
 
 - [Element:removeEvent](#Element:removeEvent)
 
+-------------------------
+
+-------------------------
+
 Element Method: fireEvent {#Element:fireEvent}
 ----------------------------------------------
 
 Executes all events of the specified type present in the Element.
+
+-------------------------
 
 ### Syntax:
 
@@ -207,10 +230,16 @@ Executes all events of the specified type present in the Element.
 - This will not fire the DOM Event (this concerns all inline events ie. onmousedown="..").
 - This method is also attached to Document and Window.
 
+-------------------------
+
+-------------------------
+
 Element Method: cloneEvents {#Element:cloneEvents}
 --------------------------------------------------
 
 Clones all events from an Element to this Element.
+
+-------------------------
 
 ### Syntax:
 
@@ -234,10 +263,16 @@ Clones all events from an Element to this Element.
 
 - This method is also attached to Document and Window.
 
+-------------------------
+
+-------------------------
+
 Object: Element.Events {#Element-Events}
 ========================================
 
 You can add additional custom events by adding properties (objects) to the Element.Events Object
+
+-------------------------
 
 ### Arguments:
 
@@ -274,11 +309,14 @@ The Element.Events.yourProperty (object) can have:
 If you use the condition option you NEED to specify a base type, unless you plan to overwrite a native event.
 (highly unrecommended: use only when you know exactly what you're doing).
 
+-------------------------
 
+-------------------------
 
 Built-in Custom Events
 ----------------------
 
+-------------------------
 
 ### Event: mouseenter {#Element-Events:mouseenter}
 
@@ -320,7 +358,9 @@ This event fires when the mouse wheel is rotated;
 
 - [Element:addEvent](#Element:addEvent)
 
+-------------------------
 
+-------------------------
 
 [$]: /core/Element/Element#Window:dollar
 [Event:stop]: /core/Types/Event#Event:stop
