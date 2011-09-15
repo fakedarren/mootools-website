@@ -19,3 +19,8 @@
 	.main UL LI {
 		list-style: disc;
 	}
+
+.main LI PRE, .main P PRE {
+	display: inline;
+	padding: 0;
+}
