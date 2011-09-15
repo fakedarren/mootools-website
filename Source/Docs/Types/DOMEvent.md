@@ -3,8 +3,14 @@ Type: DOMEvent {#Event}
 
 MooTools DOMEvent Methods.
 
+-------------------------
+
+-------------------------
+
 DOMEvent Method: constructor {#DOMEvent:constructor}
 ----------------------------------------------------
+
+-------------------------
 
 ### Syntax:
 
@@ -46,11 +52,16 @@ DOMEvent Method: constructor {#DOMEvent:constructor}
 - Accessing event.page / event.client requires the page to be in [Standards Mode](http://hsivonen.iki.fi/doctype/).
 - Every event added with addEvent gets the MooTools method automatically, without the need to manually instance it.
 
+-------------------------
+
+-------------------------
 
 DOMEvent Method: stop {#DOMEvent:stop}
 --------------------------------------
 
 Stop an event from propagating and also executes preventDefault.
+
+-------------------------
 
 ### Syntax:
 
@@ -84,11 +95,16 @@ Stop an event from propagating and also executes preventDefault.
 
 - [Element.addEvent](#Element:addEvent), [DOMEvent.stopPropagation](#DOMEvent:stopPropagation), [DOMEvent.preventDefault](#DOMEvent:preventDefault), [Function:delay][]
 
+-------------------------
+
+-------------------------
 
 DOMEvent Method: stopPropagation {#DOMEvent:stopPropagation}
 ------------------------------------------------------------
 
 Cross browser method to stop the propagation of an event (this stops the event from bubbling up through the DOM).
+
+-------------------------
 
 ### Syntax:
 
@@ -123,11 +139,16 @@ Cross browser method to stop the propagation of an event (this stops the event f
 - [Element:addEvent][]
 - [MDC event.stopPropagation][]
 
+-------------------------
+
+-------------------------
 
 DOMEvent Method: preventDefault {#DOMEvent:preventDefault}
 --------------------------------------------
 
 Cross browser method to prevent the default action of the event.
+
+-------------------------
 
 ### Syntax:
 
@@ -156,11 +177,16 @@ Cross browser method to prevent the default action of the event.
 - [Element:addEvent][]
 - [MDC event.preventDefault][]
 
+-------------------------
+
+-------------------------
 
 Function: DOMEvent.defineKey {#DOMEvent:DOMEvent-defineKey}
 -----------------------------------------------------------
 
 This function allows to add an additional event key code.
+
+-------------------------
 
 #### Example:
 
@@ -186,11 +212,16 @@ This function allows to add an additional event key code.
 
 - [MooTools More Keyboard][]
 
+-------------------------
+
+-------------------------
 
 Function: DOMEvent.defineKeys {#DOMEvent:DOMEvent-defineKey}
 -----------------------------------------------------------
 
 This function allows to add additional event key codes.
+
+-------------------------
 
 #### Example:
 
@@ -202,13 +233,15 @@ This function allows to add additional event key codes.
 	    if (event.key == 'control') alert('You pressed control.');
     });
 
+-------------------------
 
-[Element:addEvent]: /core/Element/Element.Event#Element:addEvent
+-------------------------
+
+Element:addEvent]: /core/Element/Element.Event#Element:addEvent
 [Function]: /core/Types/Function
 [Function:bind]: /core/Types/Function/#Function:bind
 [Function:pass]: /core/Types/Function/#Function:pass
 [Function:delay]: /core/Types/Function/#Function:delay
 [MooTools More Keyboard]: /more/Interface/Keyboard
-
 [MDC event.stopPropagation]: https://developer.mozilla.org/en/DOM/event.stopPropagation
 [MDC event.preventDefault]: https://developer.mozilla.org/en/DOM/event.preventDefault

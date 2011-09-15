@@ -7,11 +7,16 @@ A collection of Array methods and functions.
 
 - [MDC Array][]
 
+-------------------------
+
+-------------------------
 
 Function: Array.each {#Array:Array-each}
 ----------------------------------
 
 Used to iterate through arrays, or iterables that are not regular arrays, such as built in getElementsByTagName calls or arguments of a function.
+
+-------------------------
 
 ### Syntax:
 
@@ -49,12 +54,16 @@ Used to iterate through arrays, or iterables that are not regular arrays, such a
 
 This is an array-specific equivalent of *$each* from MooTools 1.2.
 
+-------------------------
 
+-------------------------
 
 Function: Array.clone {#Array:Array-clone}
 ------------------------------------
 
 Returns a copy of the passed array.
+
+-------------------------
 
 ### Syntax:
 
@@ -82,12 +91,16 @@ Returns a copy of the passed array.
 
 This is an array-specific equivalent of *$unlink* from MooTools 1.2.
 
+-------------------------
 
+-------------------------
 
 Function: Array.from {#Array:Array-from}
 ----------------------------------
 
 Converts the argument passed in to an array if it is defined and not already an array.
+
+-------------------------
 
 ### Syntax:
 
@@ -111,12 +124,16 @@ Converts the argument passed in to an array if it is defined and not already an 
 This is equivalent to *$splat* from MooTools 1.2, with the exception of Array-like Objects such as NodeList or FileList which `Array.from` does transform in
 Arrays and `$splat` not.
 
+-------------------------
 
+-------------------------
 
 Array method: each {#Array:each}
 ---------------------------------
 
 Calls a function for each element in the array.
+
+-------------------------
 
 ### Syntax:
 
@@ -156,15 +173,16 @@ Calls a function for each element in the array.
 
 - This method is only available for browsers without native [MDC Array:forEach][] support.
 
+-------------------------
 
-
-
-
+-------------------------
 
 Array method: invoke {#Array:invoke}
 --------------------------
 
 Returns an array with the named method applied to the array's contents.
+
+-------------------------
 
 ### Syntax:
 
@@ -191,11 +209,17 @@ If the method does not exist, then an error will be thrown. For example:
 
 	[0, false, 'string'].invoke('limit', 0, 10); // throws an error!
 
+-------------------------
+
+-------------------------
+
 Array method: every {#Array:every}
 ----------------------------
 
 Returns true if every element in the array satisfies the provided testing function.
 This method is provided only for browsers without native [Array:every][] support.
+
+-------------------------
 
 ### Syntax:
 
@@ -228,18 +252,21 @@ This method is provided only for browsers without native [Array:every][] support
 		return item > 20;
 	}); // areAllBigEnough = false
 
-
 ### See Also:
 
 - [MDC Array:every][]
 
+-------------------------
 
+-------------------------
 
 Array method: filter {#Array:filter}
 ------------------------------
 
 Creates a new array with all of the elements of the array for which the provided filtering function returns true.
 This method is provided only for browsers without native [Array:filter][] support.
+
+-------------------------
 
 ### Syntax:
 
@@ -276,12 +303,16 @@ This method is provided only for browsers without native [Array:filter][] suppor
 
 - [MDC Array:filter][]
 
+-------------------------
 
+-------------------------
 
 Array method: clean {#Array:clean}
 ----------------------------
 
 Creates a new array with all of the elements of the array which are defined (i.e. not null or undefined).
+
+-------------------------
 
 ### Syntax:
 
@@ -296,13 +327,17 @@ Creates a new array with all of the elements of the array which are defined (i.e
 	var myArray = [null, 1, 0, true, false, 'foo', undefined, ''];
 	myArray.clean() // returns [1, 0, true, false, 'foo', '']
 
+-------------------------
 
+-------------------------
 
 Array method: indexOf {#Array:indexOf}
 --------------------------------
 
 Returns the index of the first element within the array equal to the specified value, or -1 if the value is not found.
 This method is provided only for browsers without native [Array:indexOf][] support.
+
+-------------------------
 
 ### Syntax:
 
@@ -326,13 +361,17 @@ This method is provided only for browsers without native [Array:indexOf][] suppo
 
 - [MDC Array:indexOf][]
 
+-------------------------
 
+-------------------------
 
 Array method: map {#Array:map}
 ------------------------
 
 Creates a new array with the results of calling a provided function on every element in the array.
 This method is provided only for browsers without native [Array:map][] support.
+
+-------------------------
 
 ### Syntax:
 
@@ -369,13 +408,17 @@ This method is provided only for browsers without native [Array:map][] support.
 
 - [MDC Array:map][]
 
+-------------------------
 
+-------------------------
 
 Array method: some {#Array:some}
 --------------------------
 
 Returns true if at least one element in the array satisfies the provided testing function.
 This method is provided only for browsers without native [Array:some][] support.
+
+-------------------------
 
 ### Syntax:
 
@@ -412,12 +455,16 @@ This method is provided only for browsers without native [Array:some][] support.
 
 - [MDC Array:some][]
 
+-------------------------
 
+-------------------------
 
 Array method: associate {#Array:associate}
 ------------------------------------
 
 Creates an object with key-value pairs based on the array of keywords passed in and the current content of the array.
+
+-------------------------
 
 ### Syntax:
 
@@ -438,12 +485,16 @@ Creates an object with key-value pairs based on the array of keywords passed in 
 	sounds.associate(animals);
 	// returns {'Cow': 'Moo', 'Pig': 'Oink', 'Dog': 'Woof', 'Cat': 'Miao'}
 
+-------------------------
 
+-------------------------
 
 Array method: link {#Array:link}
 --------------------------
 
 Accepts an object of key / function pairs to assign values.
+
+-------------------------
 
 ### Syntax:
 
@@ -470,11 +521,16 @@ Accepts an object of key / function pairs to assign values.
 	});
 	// returns {myNumber: 100, myElement: el, myObject: {foo: 'bar'}, myString: 'Hello', myBoolean: false}
 
+-------------------------
+
+-------------------------
 
 Array method: contains {#Array:contains}
 ----------------------------------
 
 Tests an array for the presence of an item.
+
+-------------------------
 
 ### Syntax:
 
@@ -498,12 +554,16 @@ Tests an array for the presence of an item.
 
 - [MDC Array:indexOf][]
 
+-------------------------
 
+-------------------------
 
 Array method: append {#Array:append}
 ------------------------------
 
 Appends the passed array to the end of the current array.
+
+-------------------------
 
 ### Syntax:
 
@@ -529,12 +589,16 @@ Appends the passed array to the end of the current array.
 
 This is an array-specific equivalent of *$extend* from MooTools 1.2.
 
+-------------------------
 
+-------------------------
 
 Array method: getLast {#Array:getLast}
 --------------------------------
 
 Returns the last item from the array.
+
+-------------------------
 
 ### Syntax:
 
@@ -549,12 +613,16 @@ Returns the last item from the array.
 
 	['Cow', 'Pig', 'Dog', 'Cat'].getLast(); // returns 'Cat'
 
+-------------------------
 
+-------------------------
 
 Array method: getRandom {#Array:getRandom}
 ------------------------------------
 
 Returns a random item from the array.
+
+-------------------------
 
 ### Syntax:
 
@@ -568,12 +636,16 @@ Returns a random item from the array.
 
 	['Cow', 'Pig', 'Dog', 'Cat'].getRandom(); // returns one of the items
 
+-------------------------
 
+-------------------------
 
 Array method: include {#Array:include}
 --------------------------------
 
 Pushes the passed element into the array if it's not already present (case and type sensitive).
+
+-------------------------
 
 ### Syntax:
 
@@ -599,10 +671,16 @@ the vanilla javascript:
 
 	myArray.push(item);
 
+-------------------------
+
+-------------------------
+
 Array method: combine {#Array:combine}
 --------------------------------
 
 Combines an array with all the items of another. Does not allow duplicates and is case and type sensitive.
+
+-------------------------
 
 ### Syntax:
 
@@ -621,12 +699,16 @@ Combines an array with all the items of another. Does not allow duplicates and i
 	var animals = ['Cow', 'Pig', 'Dog'];
 	animals.combine(['Cat', 'Dog']); //animals = ['Cow', 'Pig', 'Dog', 'Cat'];
 
+-------------------------
 
+-------------------------
 
 Array method: erase {#Array:erase}
 ----------------------------
 
 Removes all occurrences of an item from the array.
+
+-------------------------
 
 ### Syntax:
 
@@ -645,12 +727,16 @@ Removes all occurrences of an item from the array.
 	['Cow', 'Pig', 'Dog', 'Cat', 'Dog'].erase('Dog') // returns ['Cow', 'Pig', 'Cat']
 	['Cow', 'Pig', 'Dog'].erase('Cat') // returns ['Cow', 'Pig', 'Dog']
 
+-------------------------
 
+-------------------------
 
 Array method: empty {#Array:empty}
 ----------------------------
 
 Empties an array.
+
+-------------------------
 
 ### Syntax:
 
@@ -665,11 +751,16 @@ Empties an array.
 	var myArray = ['old', 'data'];
 	myArray.empty(); //myArray is now []
 
+-------------------------
+
+-------------------------
 
 Array method: flatten {#Array:flatten}
 --------------------------------
 
 Flattens a multidimensional array into a single array.
+
+-------------------------
 
 ### Syntax:
 
@@ -684,11 +775,15 @@ Flattens a multidimensional array into a single array.
 	var myArray = [1,2,3,[4,5, [6,7]], [[[8]]]];
 	var newArray = myArray.flatten(); //newArray is [1,2,3,4,5,6,7,8]
 
+-------------------------
 
+-------------------------
 
 Array method: pick {#Array:pick}
 --------------------------
 Returns the first defined value of the array passed in, or null.
+
+-------------------------
 
 ### Syntax:
 
@@ -717,13 +812,17 @@ Returns the first defined value of the array passed in, or null.
 
 This is equivalent to *$pick* from MooTools 1.2.
 
+-------------------------
 
+-------------------------
 
 Array method: hexToRgb {#Array:hexToRgb}
 ----------------------------------
 
 Converts an hexadecimal color value to RGB. Input array must be the following hexadecimal color format.
 \['FF', 'FF', 'FF'\]
+
+-------------------------
 
 ### Syntax:
 
@@ -778,7 +877,9 @@ Converts an RGB color value to hexadecimal. Input array must be in one of the fo
 
 - [String:rgbToHex][]
 
+-------------------------
 
+-------------------------
 
 [Function:bind]: /core/Types/Function/#Function:bind
 [String:hexToRgb]: /core/Types/String/#String:hexToRgb

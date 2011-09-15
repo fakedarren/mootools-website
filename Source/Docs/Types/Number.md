@@ -11,12 +11,16 @@ A collection of the Number Object methods and functions.
 
 Every Math method is mirrored in the Number object, both as prototype and generic.
 
+-------------------------
 
+-------------------------
 
 Function: Number.from {#Number:Number-from}
 ------------------------------------
 
 Returns the passed parameter as a Number, or null if not a number.
+
+-------------------------
 
 ### Syntax:
 
@@ -36,12 +40,16 @@ Returns the passed parameter as a Number, or null if not a number.
 	Number.from('12')		// returns 12
 	Number.from('hello')	// returns null
 
+-------------------------
 
+-------------------------
 
 Function: Number.random {#Number:Number-random}
 ----------------------------------------
 
 Returns a random integer between the two passed in values.
+
+-------------------------
 
 ### Syntax:
 
@@ -60,12 +68,16 @@ Returns a random integer between the two passed in values.
 
 	Number.random(5, 20); // returns a random number between 5 and 20.
 
+-------------------------
 
+-------------------------
 
 Number method: limit {#Number:limit}
 -----------------------------
 
 Limits this number between two bounds.
+
+-------------------------
 
 ### Syntax:
 
@@ -86,12 +98,16 @@ Limits this number between two bounds.
 	(-4).limit(2, 6.5);  // returns 2
 	(4.3).limit(2, 6.5); // returns 4.3
 
+-------------------------
 
+-------------------------
 
 Number method: round {#Number:round}
 -----------------------------
 
 Returns this number rounded to the specified precision.
+
+-------------------------
 
 ### Syntax:
 
@@ -115,12 +131,16 @@ Returns this number rounded to the specified precision.
 	(12.45).round(1)  // returns 12.5
 	(12.45).round(-1) // returns 10
 
+-------------------------
 
+-------------------------
 
 Number method: times {#Number:times}
 -----------------------------
 
 Executes the function passed in the specified number of times.
+
+-------------------------
 
 ### Syntax:
 
@@ -135,12 +155,16 @@ Executes the function passed in the specified number of times.
 
 	(4).times(alert); // alerts "0", then "1", then "2", then "3".
 
+-------------------------
 
+-------------------------
 
 Number method: toFloat {#Number:toFloat}
 ---------------------------------
 
 Returns this number as a float. Useful because toFloat must work on both Strings and Numbers.
+
+-------------------------
 
 ### Syntax:
 
@@ -155,12 +179,16 @@ Returns this number as a float. Useful because toFloat must work on both Strings
 	(111).toFloat(); // returns 111
 	(111.1).toFloat(); // returns 111.1
 
+-------------------------
 
+-------------------------
 
 Number method: toInt {#Number:toInt}
 -----------------------------
 
 Returns this number as another number with the passed in base. Useful because toInt must work on both Strings and Numbers.
+
+-------------------------
 
 ### Syntax:
 
@@ -180,6 +208,9 @@ Returns this number as another number with the passed in base. Useful because to
 	(111.1).toInt(); // returns 111
 	(111).toInt(2); // returns 7
 
+-------------------------
+
+-------------------------
 
 Math Methods {#Number-Math}
 --------------------

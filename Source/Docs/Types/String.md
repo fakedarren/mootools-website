@@ -7,12 +7,16 @@ A collection of the String Object methods and functions.
 
 - [MDC String][]
 
+-------------------------
 
+-------------------------
 
 Function: String.from {#String:String-from}
 ------------------------------------
 
 Returns the passed parameter as a String.
+
+-------------------------
 
 ### Syntax:
 
@@ -31,12 +35,16 @@ Returns the passed parameter as a String.
 	String.from(2); // returns '2'
 	String.from(true); // returns 'true'
 
+-------------------------
 
+-------------------------
 
 Function: String.uniqueID {#String:String-uniqueID}
 ---------------------------------------------------
 
 Generates a unique ID
+
+-------------------------
 
 ### Syntax:
 
@@ -50,12 +58,17 @@ Generates a unique ID
 
 	String.uniqueID();
 
+-------------------------
+
+-------------------------
 
 String method: test {#String:test}
 ---------------------------
 
 Searches for a match between the string and a regular expression.
 For more information see [MDC Regexp:test][].
+
+-------------------------
 
 ### Syntax:
 
@@ -81,13 +94,17 @@ For more information see [MDC Regexp:test][].
 
 - [MDC Regular Expressions][]
 
+-------------------------
 
+-------------------------
 
 String method: contains {#String:contains}
 -----------------------------------
 
 Checks to see if the string passed in is contained in this string.
 If the separator parameter is passed, will check to see if the string is contained in the list of values separated by that parameter.
+
+-------------------------
 
 ### Syntax:
 
@@ -109,12 +126,16 @@ If the separator parameter is passed, will check to see if the string is contain
 	'a b c'.contains('c', ' '); // returns true
 	'a bc'.contains('b', ' '); // returns false
 
+-------------------------
 
+-------------------------
 
 String method: trim {#String:trim}
 ---------------------------
 
 Trims the leading and trailing spaces off a string.
+
+-------------------------
 
 ### Syntax:
 
@@ -128,12 +149,16 @@ Trims the leading and trailing spaces off a string.
 
 	'    i like cookies     '.trim(); // returns 'i like cookies'
 
+-------------------------
 
+-------------------------
 
 String method: clean {#String:clean}
 -----------------------------
 
 Removes all extraneous whitespace from a string and trims it ([String:trim][]).
+
+-------------------------
 
 ### Syntax:
 
@@ -147,12 +172,16 @@ Removes all extraneous whitespace from a string and trims it ([String:trim][]).
 
 	' i      like     cookies      \n\n'.clean(); // returns 'i like cookies'
 
+-------------------------
 
+-------------------------
 
 String method: camelCase {#String:camelCase}
 -------------------------------------
 
 Converts a hyphenated string to a camelcased string.
+
+-------------------------
 
 ### Syntax:
 
@@ -166,12 +195,16 @@ Converts a hyphenated string to a camelcased string.
 
 	'I-like-cookies'.camelCase(); // returns 'ILikeCookies'
 
+-------------------------
 
+-------------------------
 
 String method: hyphenate {#String:hyphenate}
 -------------------------------------
 
 Converts a camelcased string to a hyphenated string.
+
+-------------------------
 
 ### Syntax:
 
@@ -185,12 +218,16 @@ Converts a camelcased string to a hyphenated string.
 
 	'ILikeCookies'.hyphenate(); // returns '-i-like-cookies'
 
+-------------------------
 
+-------------------------
 
 String method: capitalize {#String:capitalize}
 ---------------------------------------
 
 Converts the first letter of each word in a string to uppercase.
+
+-------------------------
 
 ### Syntax:
 
@@ -204,12 +241,16 @@ Converts the first letter of each word in a string to uppercase.
 
 	'i like cookies'.capitalize(); // returns 'I Like Cookies'
 
+-------------------------
 
+-------------------------
 
 String method: escapeRegExp {#String:escapeRegExp}
 -------------------------------------------
 
 Escapes all regular expression characters from the string.
+
+-------------------------
 
 ### Syntax:
 
@@ -223,12 +264,16 @@ Escapes all regular expression characters from the string.
 
 	'animals.sheep[1]'.escapeRegExp(); // returns 'animals\.sheep\[1\]'
 
+-------------------------
 
+-------------------------
 
 String method: toInt {#String:toInt}
 -----------------------------
 
 Parses this string and returns a number of the specified radix or base.
+
+-------------------------
 
 ### Syntax:
 
@@ -252,12 +297,16 @@ Parses this string and returns a number of the specified radix or base.
 
 - [MDC parseInt][]
 
+-------------------------
 
+-------------------------
 
 String method: toFloat {#String:toFloat}
 ---------------------------------
 
 Parses this string and returns a floating point number.
+
+-------------------------
 
 ### Syntax:
 
@@ -277,13 +326,17 @@ Parses this string and returns a floating point number.
 
 - [MDC parseFloat][]
 
+-------------------------
 
+-------------------------
 
 String method: hexToRgb {#String:hexToRgb}
 -----------------------------------
 
 Converts a hexadecimal color value to RGB. Input string must be in one of the following hexadecimal color formats (with or without the hash).
 '#ffffff', #fff', 'ffffff', or 'fff'
+
+-------------------------
 
 ### Syntax:
 
@@ -304,13 +357,17 @@ Converts a hexadecimal color value to RGB. Input string must be in one of the fo
 	'112233'.hexToRgb(); // returns 'rgb(17, 34, 51)'
 	'#112233'.hexToRgb(true); // returns [17, 34, 51]
 
+-------------------------
 
+-------------------------
 
 String method: rgbToHex {#String:rgbToHex}
 -----------------------------------
 
 Converts an RGB color value to hexadecimal. Input string must be in one of the following RGB color formats.
 "rgb(255, 255, 255)", or "rgba(255, 255, 255, 1)"
+
+-------------------------
 
 ### Syntax:
 
@@ -335,13 +392,17 @@ Converts an RGB color value to hexadecimal. Input string must be in one of the f
 
 - [Array:rgbToHex][]
 
+-------------------------
 
+-------------------------
 
 String method: substitute {#String:substitute}
 ---------------------------------------
 
 Substitutes keywords in a string using an object/array.
 Removes undefined keywords and ignores escaped keywords.
+
+-------------------------
 
 ### Syntax:
 
@@ -362,12 +423,16 @@ Removes undefined keywords and ignores escaped keywords.
 	var myObject = {subject: 'Jack Bauer', property_1: 'our lord', property_2: 'saviour'};
 	myString.substitute(myObject); // returns Jack Bauer is our lord and saviour
 
+-------------------------
 
+-------------------------
 
 String method: stripScripts {#String:stripScripts}
 ----------------------------------------------------
 
-Strips the String of its *<script>* tags and anything in between them.
+Strips the String of its `<script>` tags and anything in between them.
+
+-------------------------
 
 ### Syntax:
 
@@ -387,7 +452,9 @@ Strips the String of its *<script>* tags and anything in between them.
 	myString.stripScripts(); // returns 'Hello, World.'
 	myString.stripScripts(true); // alerts 'Hello', then returns 'Hello, World.'
 
+-------------------------
 
+-------------------------
 
 [MDC String]: https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/String
 [MDC Regexp:test]: https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/RegExp/test
