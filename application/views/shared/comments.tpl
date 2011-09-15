@@ -3,6 +3,7 @@
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 <script>
 var disqus_shortname = 'mootools-website';
+var disqus_url = 'http://mootools.net<?php echo $_SERVER['REQUEST_URI']; ?>';
 (function() {
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
