@@ -31,28 +31,25 @@ class Docs extends Control {
 	}
 	
 	protected function createDemos($source){
-		function matchedDemo($matches){
+		return preg_replace_callback('/<h3[^>]*>Demo: ([\s\S]*?)<hr \/>/', function($matches){
 			$demo = new Demo($matches[1]);
 			return $demo->output;
-		};
-		return preg_replace_callback('/<h3[^>]*>Demo: ([\s\S]*?)<hr \/>/', "matchedDemo", $source);
+		}, $source);
 	}
 	
 	protected function createExamples($source){
-		function matchedExample($matches){
+		return preg_replace_callback('/<h3[^>]*>Example: ([\s\S]*?)<hr \/>/', function($matches){
 			$demo = new Demo($matches[1]);
 			return $demo->output;
-		};
-		return preg_replace_callback('/<h3[^>]*>Example: ([\s\S]*?)<hr \/>/', "matchedExample", $source);
+		}, $source);
 	}
 	
 	protected function formatCodeBlocks($source){
-		function matched($matches){
+		return preg_replace_callback('/<code>([\s\S]*?)<\/code>/', function($matches){
 			$geshi = new GeSHi($matches[1], 'javascript');
 			$geshi->enable_classes();
 			return $geshi->parse_code();
-		};
-		return preg_replace_callback('/<code>([\s\S]*?)<\/code>/', "matched", $source);
+		}, $source);
 	}
 	
 }

@@ -7,12 +7,16 @@ Function Methods.
 
 - [MDC Function][]
 
+-------------------------
 
+-------------------------
 
 Function: Function.from {#Function:Function-from}
 -------------------------------------------------
 
 If the passed argument is a function, it will return itself. Otherwise, it will return a function that returns the passed argument.
+
+-------------------------
 
 ### Syntax:
 
@@ -41,11 +45,16 @@ This function is equivalent to the following deprecated MooTools 1.2 methods:
 	var fn1 = Function.from();		// equivalent to var fn1 = function(){};
 	var fn2 = Function.from(foo);	// equivalent to var fn2 = function(){ return foo; };
 
+-------------------------
+
+-------------------------
 
 Function: Function.attempt {#Function:Function-attempt}
 -------------------------------------------------------
 
 Tries to execute a number of functions. Returns immediately the return value of the first non-failed function without executing successive functions, or null.
+
+-------------------------
 
 ### Syntax:
 
@@ -87,12 +96,16 @@ Tries to execute a number of functions. Returns immediately the return value of 
 
 This method is an equivalent of *$try* from MooTools 1.2.
 
+-------------------------
 
+-------------------------
 
 Function method: extend {#Function:extend}
 ------------------------------------------
 
 Extends a function with a new method or property.
+
+-------------------------
 
 ### Syntax:
 
@@ -130,10 +143,16 @@ Or
 		}
 	});
 
+-------------------------
+
+-------------------------
+
 Function method: implement {#Function:implement}
 ------------------------------------------------
 
 Implements a method to the prototype of the function.
+
+-------------------------
 
 ### Syntax:
 
@@ -178,11 +197,16 @@ The difference between *implement* and *extend*, is that implement adds the valu
 So with *implement* each instance of the function will have this method or property while with *extend*
 the method or property is added to a single instance.
 
+-------------------------
+
+-------------------------
 
 Function method: attempt {#Function:attempt}
 --------------------------------------------
 
 Tries to execute a single function. Returns immediately the return value of the function if it does not fail, or null.
+
+-------------------------
 
 ### Syntax:
 
@@ -215,11 +239,16 @@ Tries to execute a single function. Returns immediately the return value of the 
 
 - See [Function.attempt](#Function:Function-attempt) for using more than one functions.
 
+-------------------------
+
+-------------------------
 
 Function method: pass {#Function:pass}
 --------------------------------------
 
 Returns a closure with arguments and bind.
+
+-------------------------
 
 ### Syntax:
 
@@ -255,11 +284,16 @@ Returns a closure with arguments and bind.
 
 [Function:bind][]
 
+-------------------------
+
+-------------------------
 
 Function method: bind {#Function:bind}
 --------------------------------------
 
 Changes the scope of `this` within the target function to refer to the bind parameter.
+
+-------------------------
 
 ### Syntax:
 
@@ -295,10 +329,16 @@ Changes the scope of `this` within the target function to refer to the bind para
 
 [Function:pass][]
 
+-------------------------
+
+-------------------------
+
 Function method: delay {#Function:delay}
 ----------------------------------------
 
 Delays the execution of a function by a specified duration.
+
+-------------------------
 
 ### Syntax:
 
@@ -328,17 +368,20 @@ Delays the execution of a function by a specified duration.
 	var timer = myFunction.delay(50);
 	clearTimeout(timer);
 
-
 ### See Also:
 
 - [MDC setTimeout][], [MDC clearTimeout][]
 
+-------------------------
 
+-------------------------
 
 Function method: periodical {#Function:periodical}
 --------------------------------------------------
 
 Executes a function in the specified intervals of time. Periodic execution can be stopped using the *clearInterval* function.
+
+-------------------------
 
 ### Syntax:
 
@@ -368,35 +411,9 @@ Executes a function in the specified intervals of time. Periodic execution can b
 
 - [MDC setInterval][], [MDC clearInterval][]
 
+-------------------------
 
-Deprecated Functions {#Deprecated-Functions}
-============================================
-
-Function method: create {#Deprecated-Functions:create}
-------------------------------------------------------
-
-This function has been deprecated.
-
-Function method: bindWithEvent {#Deprecated-Functions:bindWithEvent}
---------------------------------------------------------------------
-
-This function has been deprecated.
-
-### Example how you could replace this method:
-
-	myElement.addEvent('click', function(e){
-		myFunction.call(bind, e);
-	});
-
-Function method: run {#Deprecated-Functions:run}
-------------------------------------------------
-
-This function has been deprecated.
-
-### Replacement example
-
-	fn.apply(thisArg, arguments); // Old API: fn.run(arguments, thisArg);
-
+-------------------------
 
 [Function:bind]: /core/Types/Function/#Function:bind
 [Function:pass]: /core/Types/Function/#Function:pass
