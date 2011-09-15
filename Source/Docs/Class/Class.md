@@ -3,8 +3,14 @@ Class {#Class}
 
 The base Class of the [MooTools](http://mootools.net/) framework.
 
+-------------------------
+
+-------------------------
+
 Class Method: constructor {#Class:constructor}
 ----------------------------------------------
+
+-------------------------
 
 ### Syntax:
 
@@ -97,14 +103,17 @@ Useful when implementing a default set of properties in multiple Classes. The Im
 	myAnimal.setName('Micia');
 	alert(myAnimal.name); // alerts 'Micia'.
 
+-------------------------
 
-
+-------------------------
 
 Class Method: implement {#Class:implement}
 ------------------------------------------
 
 Implements the passed in properties into the base Class prototypes, altering the base Class.
 The same as creating a [new Class](#Class:constructor) with the Implements property, but handy when you need to modify existing classes.
+
+-------------------------
 
 ### Syntax:
 
@@ -129,5 +138,9 @@ The same as creating a [new Class](#Class:constructor) with the Implements prope
 	var myAnimal = new Animal(20);
 	myAnimal.setName('Micia');
 	alert(myAnimal.name); // alerts 'Micia'
+
+-------------------------
+
+-------------------------
 
 [document.id]: /core/Element/Element#Window:document-id

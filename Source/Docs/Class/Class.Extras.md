@@ -5,11 +5,14 @@ A Utility Class which executes functions one after another, with each function f
 Its methods can be implemented with [Class:implement][] into any [Class][], and it is currently implemented in [Fx][] and [Request][].
 In [Fx][], for example, it is used to create custom, complex animations.
 
+-------------------------
 
+-------------------------
 
 Chain Method: constructor {#Chain:constructor}
 ----------------------------------------------
 
+-------------------------
 
 ### Syntax:
 
@@ -45,12 +48,16 @@ Chain Method: constructor {#Chain:constructor}
 
 - [Class][]
 
+-------------------------
 
+-------------------------
 
 Chain Method: chain {#Chain:chain}
 ----------------------------------
 
 Adds functions to the end of the call stack of the Chain instance.
+
+-------------------------
 
 ### Syntax:
 
@@ -79,12 +86,16 @@ Adds functions to the end of the call stack of the Chain instance.
 
 - [Fx][], [Fx.Tween][]
 
+-------------------------
 
+-------------------------
 
 Chain Method: callChain {#Chain:callChain}
 ------------------------------------------
 
 Removes the first function of the Chain instance stack and executes it. The next function will then become first in the array.
+
+-------------------------
 
 ### Syntax:
 
@@ -108,12 +119,16 @@ Removes the first function of the Chain instance stack and executes it. The next
 	myChain.callChain(); // alerts 'do dishes'.
 	myChain.callChain(); // alerts 'put away clean dishes'.
 
+-------------------------
 
+-------------------------
 
 Chain Method: clearChain {#Chain:clearChain}
 --------------------------------------------
 
 Clears the stack of a Chain instance.
+
+-------------------------
 
 ### Syntax:
 
@@ -133,7 +148,9 @@ Clears the stack of a Chain instance.
 
 - [Fx][], [Fx.Tween][]
 
+-------------------------
 
+-------------------------
 
 Class: Events {#Events}
 =======================
@@ -141,6 +158,8 @@ Class: Events {#Events}
 A Utility Class. Its methods can be implemented with [Class:implement][] into any [Class][].
 In [Fx][], for example, this Class is used to allow any number of functions to be added to the Fx events, like 'complete', 'start', and 'cancel'.
 Events in a Class that implements [Events][] must be either added as an option or with addEvent, not directly through .options.onEventName.
+
+-------------------------
 
 ### Syntax:
 
@@ -181,12 +200,16 @@ Events in a Class that implements [Events][] must be either added as an option o
 
 - [Class][], [Options][]
 
+-------------------------
 
+-------------------------
 
 Events Method: addEvent {#Events:addEvent}
 ------------------------------------------
 
 Adds an event to the Class instance's event stack.
+
+-------------------------
 
 ### Syntax:
 
@@ -207,11 +230,16 @@ Adds an event to the Class instance's event stack.
 	var myFx = new Fx.Tween('element', 'opacity');
 	myFx.addEvent('start', myStartFunction);
 
+-------------------------
+
+-------------------------
 
 Events Method: addEvents {#Events:addEvents}
 ------------------------------------------
 
 The same as [addEvent][], but accepts an object to add multiple events at once.
+
+-------------------------
 
 ### Syntax:
 
@@ -235,12 +263,16 @@ The same as [addEvent][], but accepts an object to add multiple events at once.
 		}
 	});
 
+-------------------------
 
+-------------------------
 
 Events Method: fireEvent {#Events:fireEvent}
 --------------------------------------------
 
 Fires all events of the specified type in the Class instance.
+
+-------------------------
 
 ### Syntax:
 
@@ -266,12 +298,16 @@ Fires all events of the specified type in the Class instance.
 		}
 	});
 
+-------------------------
 
+-------------------------
 
 Events Method: removeEvent {#Events:removeEvent}
 ------------------------------------------------
 
 Removes an event from the stack of events of the Class instance.
+
+-------------------------
 
 ### Syntax:
 
@@ -290,11 +326,16 @@ Removes an event from the stack of events of the Class instance.
 
 - If the function has the property internal and is set to true, then the event will not be removed.
 
+-------------------------
+
+-------------------------
 
 Events Method: removeEvents {#Events:removeEvents}
 --------------------------------------------------
 
 Removes all events of the given type from the stack of events of a Class instance. If no type is specified, removes all events of all types.
+
+-------------------------
 
 ### Syntax:
 
@@ -320,7 +361,9 @@ Removes all events of the given type from the stack of events of a Class instanc
 
 - removeEvents will not remove internal events. See [Events:removeEvent][].
 
+-------------------------
 
+-------------------------
 
 Class: Options {#Options}
 =========================
@@ -328,6 +371,8 @@ Class: Options {#Options}
 A Utility Class. Its methods can be implemented with [Class:implement][] into any [Class][].
 Used to automate the setting of a Class instance's options.
 Will also add Class [Events][] when the option property begins with 'on' and is followed by a capital letter (e.g. 'onComplete' adds a 'complete' event). You will need to call this.setOptions() for this to have an effect, however.
+
+-------------------------
 
 ### Syntax:
 
@@ -339,12 +384,16 @@ Will also add Class [Events][] when the option property begins with 'on' and is 
 
 	MyClass.implement(Options);
 
+-------------------------
 
+-------------------------
 
 Options Method: setOptions {#Options:setOptions}
 ------------------------------------------------
 
 Merges the default options of the Class with the options passed in. Every value passed in to this method will be deep copied. Therefore other class instances or objects that are not intended for copying must be passed to a class in other ways.
+
+-------------------------
 
 ### Syntax:
 
@@ -399,11 +448,16 @@ Merges the default options of the Class with the options passed in. Every value 
 
 - Relies on the default options of a Class defined in its options property.
 
+-------------------------
+
+-------------------------
 
 Options in combination with Events
 -----------------------------------
 
 If a Class has [Events][] as well as [Options][] implemented, every option beginning with 'on' and followed by a capital letter (e.g. 'onComplete') becomes a Class instance event, assuming the value of the option is a function.
+
+-------------------------
 
 ### Example:
 
@@ -439,6 +493,9 @@ If a Class has [Events][] as well as [Options][] implemented, every option begin
 
 	myWidget.show(); // fires the event and alerts 'Lets show it!'
 
+-------------------------
+
+-------------------------
 
 [Class]: /core/Class/Class
 [Class:implement]: /core/Class/Class/#Class:implement
