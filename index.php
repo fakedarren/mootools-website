@@ -13,6 +13,7 @@ Control::config("controllers_folder", "application/controllers");
 Control::config("views_folder", "application/views");
 
 Control::route("/^learn/", "learn");
+Control::route("/^api/", "docs");
 Control::route("/^docs/", "docs");
 Control::route("/^demos/", "demos");
 Control::route("/^people/", "developers");

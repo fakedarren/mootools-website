@@ -4,12 +4,12 @@ class Docs extends Control {
 	protected function index(){
 
 		$url = explode("/", $_SERVER["REQUEST_URI"]);
+		$api = ($url[1] == 'api');
 		$path = array_slice($url, 2);
 		
-		$packagemenu = new PackageMenu('Source/Docs/api-ref.json', '/docs');
+		$menu = $api ? 'Source/Docs/api-ref.json' : 'Source/Docs/docs-ref.json';
+		$packagemenu = new PackageMenu($menu, '/docs');
 		$this->menu = $packagemenu->html;
-
-		
 
 		$this->currentnav = 'docs';
 
@@ -22,15 +22,14 @@ class Docs extends Control {
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
 			$parser = new DocsParser('Source/Docs/' . $stub . '.md', '/docs/' . $stub);
 			
-			// API STYLE
-			//$this->html = $parser->html;
-
-			// 'New' Style
-			$this->html = $parser->description;
-			foreach ($parser->titles as $title){
-				$this->html .= '<div class="section">' . $title . '</div>';
+			if ($api === true){
+				$this->html = $parser->html;
+			} else {
+				$this->html = $parser->description;
+				foreach ($parser->titles as $title){
+					$this->html .= '<div class="section">' . $title . '</div>';
+				}
 			}
-			
 			$this->render();
 		} else {
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);

@@ -1,0 +1,138 @@
+[
+	{
+		"url": "/core",
+		"title": "Core"
+	},
+	{
+		"url": "/types",
+		"title": "Types",
+		"submenu": [
+			{
+				"url": "/types/array",
+				"title": "Array"
+			},
+			{
+				"url": "/types/domevent",
+				"title": "DOMEvent"
+			},
+			{
+				"url": "/types/function",
+				"title": "Function"
+			},
+			{
+				"url": "/types/number",
+				"title": "Number"
+			},
+			{
+				"url": "/types/string",
+				"title": "String"
+			}
+		]
+	},
+	{
+		"url": "/browser",
+		"title": "Browser"
+	},
+	{
+		"url": "/class",
+		"title": "Class",
+		"submenu": [
+			{
+				"url": "/class/class",
+				"title": "Class"
+			},
+			{
+				"url": "/class/class.extras",
+				"title": "Class.Extras"
+			}
+		]
+	},
+	{
+		"url": "/slick",
+		"title": "Slick"
+	},
+	{
+		"url": "/element",
+		"title": "Element",
+		"submenu": [
+			{
+				"url": "/element/element",
+				"title": "Element"
+			},
+			{
+				"url": "/element/element.style",
+				"title": "Element.Style"
+			},
+			{
+				"url": "/element/element.event",
+				"title": "Element.Event"
+			},
+			{
+				"url": "/element/element.delegation",
+				"title": "Element.Delegation"
+			},
+			{
+				"url": "/element/element.dimensions",
+				"title": "Element.Dimensions"
+			}
+		]
+	},
+	{
+		"url": "/fx/fx",
+		"title": "Fx",
+		"submenu": [
+			{
+				"url": "/fx/fx",
+				"title": "Fx"
+			},
+			{
+				"url": "/fx/fx.tween",
+				"title": "Fx.Tween"
+			},
+			{
+				"url": "/fx/fx.morph",
+				"title": "Fx.Morph"
+			},
+			{
+				"url": "/fx/fx.transitions",
+				"title": "Fx.Transitions"
+			}
+		]
+	},
+	{
+		"url": "/request",
+		"title": "Request",
+		"submenu": [
+			{
+				"url": "/request",
+				"title": "Request"
+			},
+			{
+				"url": "/request/request.json",
+				"title": "Request.JSON"
+			},
+			{
+				"url": "/request/request.html",
+				"title": "Request.HTML"
+			}
+		]
+	},
+	{
+		"url": "/utilities",
+		"title": "Utilities",
+		"submenu": [
+			{
+				"url": "/utilities/cookie",
+				"title": "Cookie"
+			},
+			{
+				"url": "/utilities/json",
+				"title": "JSON"
+			},
+			{
+				"url": "/utilities/swiff",
+				"title": "Swiff"
+			}
+		]
+	}
+]
