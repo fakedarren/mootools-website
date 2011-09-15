@@ -20,7 +20,7 @@ class Docs extends Control {
 			$this->render('docsindex');
 		} else if (isset($path[2]) === false){
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
-			$parser = new DocsParser('Source/Docs/' . $stub . '.md', '/docs/' . $path[0] . '/' . $path[1]);
+			$parser = new DocsParser('Source/Docs/' . $stub . '.md', '/docs/' . $stub);
 			
 			// API STYLE
 			//$this->html = $parser->html;
