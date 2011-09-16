@@ -1,136 +1,136 @@
 [
 	{
-		"url": "/core",
+		"url": "/Core",
 		"title": "Core"
 	},
 	{
-		"url": "/types",
+		"url": "/Types",
 		"title": "Types",
 		"submenu": [
 			{
-				"url": "/types/array",
+				"url": "/Types/Array",
 				"title": "Array"
 			},
 			{
-				"url": "/types/domevent",
+				"url": "/Types/DOMEvent",
 				"title": "DOMEvent"
 			},
 			{
-				"url": "/types/function",
+				"url": "/Types/Function",
 				"title": "Function"
 			},
 			{
-				"url": "/types/number",
+				"url": "/Types/Number",
 				"title": "Number"
 			},
 			{
-				"url": "/types/string",
+				"url": "/Types/String",
 				"title": "String"
 			}
 		]
 	},
 	{
-		"url": "/browser",
+		"url": "/Browser",
 		"title": "Browser"
 	},
 	{
-		"url": "/class",
+		"url": "/Class",
 		"title": "Class",
 		"submenu": [
 			{
-				"url": "/class/class",
+				"url": "/Class/Class",
 				"title": "Class"
 			},
 			{
-				"url": "/class/class.extras",
+				"url": "/Class/Class.Extras",
 				"title": "Class.Extras"
 			}
 		]
 	},
 	{
-		"url": "/slick",
+		"url": "/Slick",
 		"title": "Slick"
 	},
 	{
-		"url": "/element",
+		"url": "/Element",
 		"title": "Element",
 		"submenu": [
 			{
-				"url": "/element/element",
+				"url": "/Element/Element",
 				"title": "Element"
 			},
 			{
-				"url": "/element/element.style",
+				"url": "/Element/Element.Style",
 				"title": "Element.Style"
 			},
 			{
-				"url": "/element/element.event",
+				"url": "/Element/Element.Event",
 				"title": "Element.Event"
 			},
 			{
-				"url": "/element/element.delegation",
+				"url": "/Element/Element.Delegation",
 				"title": "Element.Delegation"
 			},
 			{
-				"url": "/element/element.dimensions",
+				"url": "/Element/Element.Dimensions",
 				"title": "Element.Dimensions"
 			}
 		]
 	},
 	{
-		"url": "/fx/fx",
+		"url": "/Fx/Fx",
 		"title": "Fx",
 		"submenu": [
 			{
-				"url": "/fx/fx",
+				"url": "/Fx/Fx",
 				"title": "Fx"
 			},
 			{
-				"url": "/fx/fx.tween",
+				"url": "/Fx/Fx.Tween",
 				"title": "Fx.Tween"
 			},
 			{
-				"url": "/fx/fx.morph",
+				"url": "/Fx/Fx.Morph",
 				"title": "Fx.Morph"
 			},
 			{
-				"url": "/fx/fx.transitions",
+				"url": "/Fx/Fx.Transitions",
 				"title": "Fx.Transitions"
 			}
 		]
 	},
 	{
-		"url": "/request",
+		"url": "/Request",
 		"title": "Request",
 		"submenu": [
 			{
-				"url": "/request",
+				"url": "/Request",
 				"title": "Request"
 			},
 			{
-				"url": "/request/request.json",
+				"url": "/Request/Request.JSON",
 				"title": "Request.JSON"
 			},
 			{
-				"url": "/request/request.html",
+				"url": "/Request/Request.HTML",
 				"title": "Request.HTML"
 			}
 		]
 	},
 	{
-		"url": "/utilities",
+		"url": "/Utilities",
 		"title": "Utilities",
 		"submenu": [
 			{
-				"url": "/utilities/cookie",
+				"url": "/Utilities/Cookie",
 				"title": "Cookie"
 			},
 			{
-				"url": "/utilities/json",
+				"url": "/Utilities/JSON",
 				"title": "JSON"
 			},
 			{
-				"url": "/utilities/swiff",
+				"url": "/Utilities/Swiff",
 				"title": "Swiff"
 			}
 		]
