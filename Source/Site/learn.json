@@ -2,69 +2,75 @@
 	{
 		"url": "/demos",
 		"title": "Demos",
-		"subtitle": "Lorem ipsum dolor blah",
+		"class": "demo",
+		"subtitle": "MooTools Awesomeness",
+		"submenutitle": "Popular Demos",
 		"submenu": [
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/demos/accordion",
+				"title": "Accordion!"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/demos/chaining",
+				"title": "Chaining"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/demos/slick.finder",
+				"title": "Slick.Finder"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/demo/effects",
+				"title": "Effects"
 			}
 		]
 	},
 	{
 		"url": "/tutorials",
-		"title": "Tutorials",
-		"subtitle": "Lorem ipsum dolor blah",
+		"title": "Guides",
+		"class": "guides",
+		"subtitle": "Documentation and Examples",
+		"submenutitle": "Featured Guides",
 		"submenu": [
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "#",
+				"title": "Hello MooTools - Getting Started"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "#",
+				"title": "MooTools DOM Methods"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "#",
+				"title": "Chaining for concise code"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "#",
+				"title": "Ajax with MooTools"
 			}
 		]
 	},
 	{
 		"url": "/docs",
-		"title": "Docs",
-		"subtitle": "Lorem ipsum dolor blah",
+		"title": "API Reference",
+		"class": "api",
+		"subtitle": "Dig Deeper",
+		"submenutitle": "Most Viewed",
 		"submenu": [
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/docs/Types/Array",
+				"title": "Array"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/docs/Browser",
+				"title": "Browser"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/docs/Element/Element.Event",
+				"title": "Element.Event"
 			},
 			{
-				"url": "/test/whatever",
-				"title": "Test Whatever"
+				"url": "/docs/Request",
+				"title": "Request"
 			}
 		]
 	}

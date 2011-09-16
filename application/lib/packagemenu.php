@@ -19,7 +19,12 @@ class PackageMenu {
 	}
 	
 	function menuitem($urlroot, $obj){
-		$html = '<li>';
+		if (isset($obj->class)){
+			$html = '<li class="' . $obj->class . '">';
+		} else {
+			$html = '<li>';
+		}
+		
 		if (isset($obj->description)){
 			$html .= '<h2><a href="' . $urlroot . $obj->url . '">' . $obj->title . '</a></h2>';
 			$html .= '<p>' . $obj->description . '</p>';
@@ -32,6 +37,9 @@ class PackageMenu {
 			$html .= '</a>';
 		}
 		if (isset($obj->submenu)){
+			if (isset($obj->submenutitle)){
+				$html .= '<h3>' . $obj->submenutitle . '</h3>';
+			}
 			$html .= '<ul class="submenu">';
 			foreach($obj->submenu as $subitem){
 				$html .= $this->menuitem($urlroot, $subitem);

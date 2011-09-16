@@ -1,3 +1,6 @@
+.menu {
+	padding: 20px 0 0;
+}
 .menu > LI {
 	float: left;
 	width: 298px;
@@ -6,7 +9,6 @@
 	margin: 0 33px;
 }
 	.menu > LI > A {
-		background: url(graphics/promote.bg.png);
 		color: #10426F;
 		display: block;
 		font: 3.2em CartoGothic;
@@ -14,7 +16,26 @@
 		padding: 30px;
 		width: 238px;
 	}
+	.menu .demo {
+		background: url(graphics/promote.bg.1.png) no-repeat;		
+	}
+	.menu .guides {
+		background: url(graphics/promote.bg.2.png) no-repeat;		
+	}
+	.menu .api {
+		background: url(graphics/promote.bg.3.png) no-repeat;		
+	}
 	.menu > LI > A SPAN {
 		display: block;
 		font-size: 0.5em;
+	}
+	.menu > LI > H3 {
+		font-size: 1.5em;
+		font-weight: bold;
+		padding: 20px 0 0 5px;
+	}
+	.menu LI LI {
+		font-size: 1.3em;
+		line-height: 18px;
+		padding: 0 0 0 20px;
 	}
