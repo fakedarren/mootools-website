@@ -59,7 +59,7 @@ class Tutorials extends Control {
 	
 	protected function formatCodeBlocks($source){
 		return preg_replace_callback('/<code>([\s\S]*?)<\/code>/', function($matches){
-			$geshi = new GeSHi($matches[1], 'javascript');
+			$geshi = new GeSHi(html_entity_decode($matches[1]), 'xml');
 			$geshi->enable_classes();
 			return $geshi->parse_code();
 		}, $source);

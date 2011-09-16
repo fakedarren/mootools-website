@@ -12,19 +12,19 @@
 
 <div class="content">
 	<?php if ($this->previouspage){ ?>
-		<a href="/tutorials/<?php echo $this->route; ?>/<?php echo $this->previouspage; ?>">Previous</a>
+		<a href="/tutorials/<?php echo str_replace(' ', '-', $this->route); ?>/<?php echo $this->previouspage; ?>">Previous</a>
 	<?php } ?>
 	<?php if ($this->nextpage){ ?>
-		<a href="/tutorials/<?php echo $this->route; ?>/<?php echo $this->nextpage; ?>">Next</a>
+		<a href="/tutorials/<?php echo str_replace(' ', '-', $this->route); ?>/<?php echo $this->nextpage; ?>">Next</a>
 	<?php } ?>
 	
 	<?php echo $this->html; ?>
 	
 	<?php if ($this->previouspage){ ?>
-		<a href="/tutorials/<?php echo $this->route; ?>/<?php echo $this->previouspage; ?>">Previous</a>
+		<a href="/tutorials/<?php echo str_replace(' ', '-', $this->route); ?>/<?php echo $this->previouspage; ?>">Previous</a>
 	<?php } ?>
 	<?php if ($this->nextpage){ ?>
-		<a href="/tutorials/<?php echo $this->route; ?>/<?php echo $this->nextpage; ?>">Next</a>
+		<a href="/tutorials/<?php echo str_replace(' ', '-', $this->route); ?>/<?php echo $this->nextpage; ?>">Next</a>
 	<?php } ?>
 </div>
 

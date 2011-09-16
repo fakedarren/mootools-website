@@ -75,6 +75,12 @@ PRE {
 	padding: 4px;
 }
 
+BLOCKQUOTE {
+	background: #DDD;
+	margin: 0 20px 20px;
+	padding: 10px;
+}
+
 HEADER {
 	height: 80px;
 	margin: 0 auto;
