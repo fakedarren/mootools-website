@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>MooTools</title>
+	<title>Download MooTools</title>
+	<meta name="description" content="" />
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 	<link href="/assets/css/download.css" rel="stylesheet" type="text/css" />
 </head>

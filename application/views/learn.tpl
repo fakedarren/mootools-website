@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>MooTools Documentation</title>
+	<meta name="description" content="" />
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 	<link href="/assets/css/learn.css" rel="stylesheet" type="text/css" />
 </head>
