@@ -5,6 +5,7 @@
 	<title>MooTools</title>
 	<meta name="description" content="" />
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
+	<?php require($this->config('views_folder') . '/shared/meta.tpl');?>
 </head>
 <body>
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
