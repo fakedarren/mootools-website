@@ -17,7 +17,7 @@ BODY {
 	src: url('fonts/CartoGothicStd-Book.otf');
 }
 
-.content {
+.content, FOOTER {
 	margin: 0 auto;
 	width: 960px;
 }
@@ -140,6 +140,19 @@ HEADER {
 		
 FOOTER {
 	clear: both;
+	border-top: 1px solid #D9D9D9;
+	font-size: .85em;
+	text-align: center;
+	padding: 4px 0 10px 0;
+}
+
+FOOTER a {
+	color: #10426F;
+}
+
+FOOTER a.footerDevs {
+	display: inline;
+	float: right;
 }
 
 
@@ -178,3 +191,9 @@ FOOTER {
 	top: 1px; 
 	color:#fccaca;
 }
+
+
+
+
+/* dw */
+.todo { background:#fffea1; border:1px dotted #fc0; padding:5px; border-radius:6px; }
