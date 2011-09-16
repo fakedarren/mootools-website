@@ -1,0 +1,17 @@
+[
+	{
+		"url": "/test",
+		"title": "Test",
+		"description": "Lorem ipsum dolor blah"
+	},
+	{
+		"url": "/starting-with-mootools",
+		"title": "Starting with MooTools",
+		"description": "A basic guide to starting out with MooTools"
+	},
+	{
+		"url": "/creating-classes-with-mootools",
+		"title": "Creating Classes with MooTools",
+		"description": "A basic guide to Class creation with MooTools"
+	}
+]
