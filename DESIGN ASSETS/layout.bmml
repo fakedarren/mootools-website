@@ -1,0 +1,150 @@
+<mockup version="1.0" skin="sketch" measuredW="1044" measuredH="768" mockupW="1024" mockupH="768">
+  <controls>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="42" y="124" w="133" h="32" measuredW="184" measuredH="46" zOrder="4" locked="true" isInGroup="-1">
+      <controlProperties>
+        <filter>true</filter>
+        <src>http%3A//mootools.net/assets/images/mootools.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::Arrow" x="42" y="108" w="133" h="10" measuredW="150" measuredH="100" zOrder="5" locked="true" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>false</rightArrow>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Arrow" x="210" y="108" w="133" h="10" measuredW="150" measuredH="100" zOrder="6" locked="true" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>false</rightArrow>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Arrow" x="380" y="108" w="133" h="10" measuredW="150" measuredH="100" zOrder="7" locked="true" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>false</rightArrow>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::Arrow" x="552" y="108" w="133" h="10" measuredW="150" measuredH="100" zOrder="8" locked="true" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>false</rightArrow>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Arrow" x="724" y="108" w="133" h="10" measuredW="150" measuredH="100" zOrder="9" locked="true" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>false</rightArrow>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Arrow" x="888" y="108" w="133" h="10" measuredW="150" measuredH="100" zOrder="10" locked="true" isInGroup="-1">
+      <controlProperties>
+        <color>14540253</color>
+        <curvature>0</curvature>
+        <direction>bottom</direction>
+        <leftArrow>false</leftArrow>
+        <rightArrow>false</rightArrow>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Icon" x="210" y="119" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="11" locked="true" isInGroup="-1">
+      <controlProperties>
+        <icon>DownArrowIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Icon" x="380" y="119" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="12" locked="true" isInGroup="-1">
+      <controlProperties>
+        <icon>DocEmptyIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Icon" x="552" y="119" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="13" locked="true" isInGroup="-1">
+      <controlProperties>
+        <icon>PencilIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="16" controlTypeID="com.balsamiq.mockups::Icon" x="724" y="119" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="14" locked="true" isInGroup="-1">
+      <controlProperties>
+        <icon>ContactIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="17" controlTypeID="com.balsamiq.mockups::Icon" x="888" y="119" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="15" locked="true" isInGroup="-1">
+      <controlProperties>
+        <icon>PushPinIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="19" controlTypeID="com.balsamiq.mockups::Link" x="210" y="143" w="-1" h="-1" measuredW="68" measuredH="17" zOrder="16" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>DOWNLOAD</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="20" controlTypeID="com.balsamiq.mockups::Link" x="378" y="144" w="-1" h="-1" measuredW="101" measuredH="17" zOrder="17" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>DOCUMENTATION</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::Link" x="552" y="142" w="-1" h="-1" measuredW="35" measuredH="17" zOrder="18" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>BLOG</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="23" controlTypeID="com.balsamiq.mockups::Link" x="724" y="142" w="-1" h="-1" measuredW="72" measuredH="17" zOrder="19" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>COMMUNITY</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::Link" x="888" y="142" w="-1" h="-1" measuredW="52" measuredH="17" zOrder="20" locked="true" isInGroup="-1">
+      <controlProperties>
+        <size>10</size>
+        <text>PLUGINS</text>
+        <underline>false</underline>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="20" y="0" w="1024" h="768" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="-1">
+      <controlProperties>
+        <text>MooTools%20-%20a%20modular%20JavaScript%20framework%0Ahttp%3A//mootools.net/</text>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Canvas" x="20" y="80" w="1024" h="662" measuredW="100" measuredH="70" zOrder="1" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Canvas" x="20" y="71" w="1024" h="10" measuredW="100" measuredH="70" zOrder="2" locked="true" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+        <color>545684</color>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Canvas" x="42" y="80" w="980" h="662" measuredW="100" measuredH="70" zOrder="3" locked="true" isInGroup="-1">
+      <controlProperties>
+        <backgroundAlpha>0.25</backgroundAlpha>
+        <borderColor>16777215</borderColor>
+        <borderStyle>roundedDotted</borderStyle>
+        <color>15658734</color>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
