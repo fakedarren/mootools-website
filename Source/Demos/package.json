@@ -1,66 +1,66 @@
 [
 	{
-		"url": "/accordion",
+		"url": "/Accordion",
 		"title": "Accordion"
 	},	
 	{
-		"url": "/art",
+		"url": "/ART",
 		"title": "ART"
 	},	
 	{
-		"url": "/chaining",
+		"url": "/Chaining",
 		"title": "Chaining"
 	},
 	{
-		"url": "/drag.cart",
+		"url": "/Drag.Cart",
 		"title": "Drag.Cart"
 	},
 	{
-		"url": "/drag.drop",
+		"url": "/Drag.Drop",
 		"title": "Drag.Drop"
 	},
 	{
-		"url": "/drag.move",
+		"url": "/Drag.Move",
 		"title": "Drag.Move"
 	},
 	{
-		"url": "/effects",
+		"url": "/Effects",
 		"title": "Effects"
 	},
 	{
-		"url": "/element.delegation",
+		"url": "/Element.Delegation",
 		"title": "Element.Delegation"
 	},
 	{
-		"url": "/element.event",
+		"url": "/Element.Event",
 		"title": "Element.Event"
 	},
 	{
-		"url": "/element.event.pseudos",
+		"url": "/Element.Event.Pseudos",
 		"title": "Element.Event.Pseudos"
 	},
 	{
-		"url": "/enhanced.form",
+		"url": "/Enhanced.Form",
 		"title": "Enhanced.Form"
 	},
 	{
-		"url": "/fx.morph",
+		"url": "/Fx.Morph",
 		"title": "Fx.Morph"
 	},
 	{
-		"url": "/fx.slide",
+		"url": "/Fx.Slide",
 		"title": "Fx.Slide"
 	},
 	{
-		"url": "/fx.sort",
+		"url": "/Fx.Sort",
 		"title": "Fx.Sort"
 	},
 	{
-		"url": "/mouseenter",
+		"url": "/Mouseenter",
 		"title": "MouseEnter"
 	},
 	{
-		"url": "/mousewheel",
+		"url": "/Mousewheel",
 		"title": "MouseWheel"
 	}
 ]
