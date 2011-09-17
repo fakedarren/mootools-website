@@ -2,28 +2,28 @@
 	float: left;
 	width: 150px;
 }
-.menu UL {
+.menu ul {
 	padding: 0 0 0 20px;
 }
 .main {
 	float: left;
 	width: 800px;
 }	
-	.main OL, .main UL {
+	.main ol, .main ul {
 		font-size: 1.3em;
 		padding: 0 0 10px 20px;
 	}
-	.main OL LI {
+	.main ol li {
 		list-style: decimal;
 	}
-	.main UL LI {
+	.main ul li {
 		list-style: disc;
 	}
-	.main HR {
+	.main hr {
 		display: none;
 	}
 
-.main LI PRE, .main P PRE {
+.main li pre, .main p pre {
 	display: inline;
 	padding: 0;
 }

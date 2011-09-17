@@ -1,14 +1,14 @@
-HTML, BODY	{
+html, body	{
 	height: 100%;
 	margin: 0;
 	padding: 0;
 }
-HTML {
+html {
 	font-size: 100%;
 }
-BODY {
+body {
 	background: url(graphics/bg.png) repeat-x 50% 0;
-	border-top: 4px solid #3F639B;
+	border-top: 4px solid #3f639b;
 	font: 62.5% "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
 }
 
@@ -17,145 +17,145 @@ BODY {
 	src: url('fonts/CartoGothicStd-Book.otf');
 }
 
-.content, FOOTER {
+.content, footer {
 	margin: 0 auto;
 	width: 960px;
 }
 
-HEADER, FOOTER {
+header, footer {
 	display: block;
 }
 
-H1, H2, H3, H4, H5, H6, P, IMG, A, UL, OL, LI, FORM, FIELDSET, BUTTON {
+h1, h2, h3, h4, h5, h6, p, img, a, ul, ol, li, form, fieldset, button {
 	border: none;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-H1, H2, H3, H4, H5, H6 {
-	color: #10426F;
+h1, h2, h3, h4, h5, h6 {
+	color: #10426f;
 	font-family: CartoGothic;
 }
-H1 {
+h1 {
 	font-size: 3.2em;
 	padding: 0 0 10px;
 }
-H2 {
+h2 {
 	font-size: 2.8em;
 	padding: 0 0 10px;
 }
-H3 {
+h3 {
 	font-size: 2.2em;
 	padding: 0 0 10px;
 }
-H4 {
+h4 {
 	font-sixe: 1.8em;
 	padding: 0 0 10px;
 }
 
-P {
+p {
 	font-size: 1.3em;
 	line-height: 20px;
 	padding: 0 0 10px;
 }
 
-A {
-	color: #BD2121;
+a {
+	color: #bd2121;
 	text-decoration: none;
 }
-	A:FOCUS, A:HOVER {
+	a:focus, a:hover {
 		text-decoration: underline;
 	}
 	
-PRE {
-	background: #FFF;
+pre {
+	background: #fff;
 	font-size: 1.2em;
 	overflow: auto;
 	padding: 4px;
 }
 
-BLOCKQUOTE {
-	background: #DDD;
+blockquote {
+	background: #ddd;
 	margin: 0 20px 20px;
 	padding: 10px;
 }
 
-HEADER {
+header {
 	height: 80px;
 	margin: 0 auto;
 	padding: 15px 0 0;
 	width: 960px;
 }
-	HEADER .logo {
-		border-top: 1px solid #D9D9D9;
+	header .logo {
+		border-top: 1px solid #d9d9d9;
 		float: left;
 		padding: 14px 0;
 		width: 131px;
 	}
-		HEADER .logo A {
+		header .logo a {
 			background: url(graphics/logo.png);
 			display: block;
 			height: 24px;
 			text-indent: -9999px;
 		}
-	HEADER .subtitle {
+	header .subtitle {
 		left: -9999px;
 		position: absolute;
 	}
-	HEADER NAV {
+	header nav {
 		float: right;
 	}
-		HEADER NAV LI {
+		header nav li {
 			background: url(graphics/nav-icons.png) no-repeat;
-			border-top: 1px solid #D9D9D9;
+			border-top: 1px solid #d9d9d9;
 			display: inline-block;
 			margin: 0 0 0 20px;
 			text-transform: uppercase;
 			width: 130px;
 		}
-			HEADER NAV LI A {
+			header nav li a {
 				color: #000;
 				display: block;
 				padding: 28px 0 0;
 			}
-		HEADER NAV LI.downloads {
+		header nav li.downloads {
 			background-position: 0 -38px;
 		}
-		HEADER NAV LI.docs {
+		header nav li.docs {
 			background-position: 0 -78px;
 		}
-		HEADER NAV LI.blog {
+		header nav li.blog {
 			background-position: 0 -118px;
 		}
-		HEADER NAV LI.community {
+		header nav li.community {
 			background-position: 0 -118px;
 		}
-		HEADER NAV LI.forge {
+		header nav li.forge {
 			background-position: 0 -158px;
 		}
-		HEADER NAV LI.selected {
-			border-top-color: #3F639B;
+		header nav li.selected {
+			border-top-color: #3f639B;
 		}
 		
-FOOTER {
+footer {
 	clear: both;
-	border-top: 1px solid #D9D9D9;
+	border-top: 1px solid #d9d9d9;
 	font-size: .85em;
 	text-align: center;
 	padding: 4px 0 10px 0;
 }
 
-FOOTER a {
-	color: #10426F;
+footer a {
+	color: #10426f;
 }
 
-FOOTER a.footerDevs {
+footer a.footerDevs {
 	display: inline;
 	float: right;
 }
 
-FOOTER span.footerCopy {
+footer span.footerCopy {
 	background: url(/favicon.png) 0 2px no-repeat;
 	padding: 0 0 0 20px;
 	display: inline-block;

@@ -1,16 +1,16 @@
 .inline-demo {
-    background: #EEE;
+    background: #eee;
 	border: 10px solid red;
     padding: 5px;
     width: 940px;
 }
-	.inline-demo BUTTON {
+	.inline-demo button {
 	}
 	.inline-demo .demo.results {
 		min-height: 100px;
 	}
-	.inline-demo H2 {
-	    background: #CCC;
+	.inline-demo h2 {
+	    background: #ccc;
 	    color: #666;
 	    cursor: pointer;
 	    float: left;
@@ -21,26 +21,26 @@
 	    margin: 0 5px 0 0;
 	    padding: 0 5px;
 	}
-	.inline-demo H2.selected {
-	    background: #FFF;
+	.inline-demo h2.selected {
+	    background: #fff;
 	    color: #222;
 	    font-size: 1.3em;
 	    line-height: 25px;
 	}
 	.inline-demo .content {
-	    background: #FFF;
+	    background: #fff;
 	    float: right;
 	    left: -9999px;
 	    position: absolute;
 	    margin: 25px 0 0 -940px;
 	    width: 940px;
 	}
-	.inline-demo .content UL {
-	    border-top: 1px solid #CCC;
+	.inline-demo .content ul {
+	    border-top: 1px solid #ccc;
 	    margin: 10px;
 	}
-	.inline-demo .content LI {
-	    border-bottom: 1px solid #CCC;
+	.inline-demo .content li {
+	    border-bottom: 1px solid #ccc;
 	    font-size: 1.2em;
 	    line-height: 18px;
 	    padding: 2px 0;
@@ -49,7 +49,7 @@
 	    left: auto;
 	    position: relative;
 	}
-.inline-demo:AFTER {
+.inline-demo:after {
     clear: both;
     content: ".";
     display: block;
