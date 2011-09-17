@@ -9,6 +9,10 @@
 	clear: both;
 }
 
+.developers h3 {
+	padding-bottom: 0;
+}
+
 .developers li code {
 	color: #777;
 	font-size: .8em;
