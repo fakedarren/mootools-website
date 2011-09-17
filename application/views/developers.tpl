@@ -18,10 +18,10 @@
 
 		<ul class="developers">
 			<li>
-				<img src="<?php echo $super['avatar']; ?>" height="65" width="65" class="icon" />
+				<img src="<?php echo $this->data['super-dev']['avatar']; ?>" height="65" width="65" class="icon" />
 				<h3 class="dev"><?php echo $this->data['super-dev']['name']; ?> <code>(<?php echo $this->data['super-dev']['nick']; ?>)</code></h3>
 				<p>
-					<em>web</em>: <?php echo $this->data['super-dev']['web']; ?>, follow on <a href="http://twitter.com/<?php echo $super['twitter']; ?>" rel="nofollow">twitter</a>, fork on <a href="http://github.com/<?php echo $super['github']; ?>" rel="nofollow">github</a>
+					<em>web</em>: <?php echo $this->data['super-dev']['web']; ?>, follow on <a href="http://twitter.com/<?php echo $this->data['super-dev']['twitter']; ?>" rel="nofollow">twitter</a>, fork on <a href="http://github.com/<?php echo $this->data['super-dev']['github']; ?>" rel="nofollow">github</a>
 					<br />
 					<em>location</em>: <?php echo $this->data['super-dev']['location']; ?>
 				</p>

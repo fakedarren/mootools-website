@@ -43,7 +43,7 @@ class Developers extends Control {
 				'github'   => 'fakedarren',
 			),
 			array(
-				'name'     => 'Sebastian MarkbŒge',
+				'name'     => 'Sebastian MarkbÃ¥ge',
 				'nick'     => 'sebmarkbage',
 				'web'      => '<a href="http://calyptus.eu" rel="nofollow">calyptus.eu</a>',
 				'location' => 'Sweden',
@@ -88,7 +88,7 @@ class Developers extends Control {
 				'github'   => 'w00fz'
 			),
 			array(
-				'name'     => 'F‡bio Miranda Costa',
+				'name'     => 'FÃ¡bio Miranda Costa',
 				'nick'     => 'fabiomcosta',
 				'web'      => '<a href="http://meiocodigo.com" rel="nofollow">meiocodigo.com</a>, <a href="http://solucione.info" rel="nofollow">solucione.info</a>',
 				'location' => 'Natal/RN, Brazil',
@@ -141,8 +141,7 @@ class Developers extends Control {
 				'twitter'  => 'appden',
 				'github'   => 'appden',
 			)
-		)
-;
+		);
 		
 		$past = array(
 			array(
