@@ -1,14 +1,14 @@
 .menu {
 	padding: 20px 0 0;
 }
-.menu > LI {
+.menu > li {
 	float: left;
 	width: 298px;
 }
-.menu > LI:nth-child(2n){
+.menu > li:nth-child(2n){
 	margin: 0 33px;
 }
-	.menu > LI > A {
+	.menu > li > a {
 		color: #10426F;
 		display: block;
 		font: 3.2em CartoGothic;
@@ -25,16 +25,16 @@
 	.menu .api {
 		background: url(graphics/promote.bg.3.png) no-repeat;		
 	}
-	.menu > LI > A SPAN {
+	.menu > li > a span {
 		display: block;
 		font-size: 0.5em;
 	}
-	.menu > LI > H3 {
+	.menu > li > h3 {
 		font-size: 1.5em;
 		font-weight: bold;
 		padding: 20px 0 0 5px;
 	}
-	.menu LI LI {
+	.menu li li {
 		font-size: 1.3em;
 		line-height: 18px;
 		padding: 0 0 0 20px;

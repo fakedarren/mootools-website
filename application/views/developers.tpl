@@ -20,14 +20,14 @@
 			<li>
 				<img src="<?php echo $super['avatar']; ?>" height="65" width="65" class="icon" />
 				<h3 class="dev"><?php echo $this->data['super-dev']['name']; ?> <code>(<?php echo $this->data['super-dev']['nick']; ?>)</code></h3>
-				<p><em>web</em>: <?php echo $this->data['super-dev']['web']; ?>, follow on <a href="http://twitter.com/<?php echo $super['twitter']; ?>">twitter</a>, fork on <a href="http://github.com/<?php echo $super['github']; ?>">github</a> </p>
+				<p><em>web</em>: <?php echo $this->data['super-dev']['web']; ?>, follow on <a href="http://twitter.com/<?php echo $super['twitter']; ?>" rel="nofollow">twitter</a>, fork on <a href="http://github.com/<?php echo $super['github']; ?>" rel="nofollow">github</a> </p>
 				<p><em>location</em>: <?php echo $this->data['super-dev']['location']; ?></p>
 			</li>
 			<?php foreach ($this->data['devs'] as $dev){?>
 			<li>
 				<img src="<?php echo $dev['avatar']; ?>" height="65" width="65" class="icon" />
 				<h3 class="dev"><?php echo $dev['name']; ?> <code>(<?php echo $dev['nick']; ?>)</code></h3>
-				<p><em>web</em>: <?php echo $dev['web']; ?><?php if (!empty($dev['twitter'])) echo ', follow on <a href="http://twitter.com/'.$dev['twitter'].'">twitter</a>'; if (!empty($dev['github'])) echo ', fork on <a href="http://github.com/'.$dev['github'].'">github</a>';?></p>
+				<p><em>web</em>: <?php echo $dev['web']; ?><?php if (!empty($dev['twitter'])) echo ', follow on <a href="http://twitter.com/'.$dev['twitter'].'" rel="nofollow">twitter</a>'; if (!empty($dev['github'])) echo ', fork on <a href="http://github.com/'.$dev['github'].'" rel="nofollow">github</a>';?></p>
 				<p><em>location</em>: <?php echo $dev['location']; ?></p>			
 			</li>
 			<?php }?>

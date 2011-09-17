@@ -10,13 +10,15 @@ class Docs extends Control {
 		$menu = $api ? 'Source/Docs/api-ref.json' : 'Source/Docs/docs-ref.json';
 		$root = $api ? '/api' : '/docs';
 		
+		$this->api = $api;
+		
 		$packagemenu = new PackageMenu($menu, $root);
 		$this->menu = $packagemenu->html;
 
 		$this->currentnav = 'docs';
 
 		if (isset($path[0]) === false){
-			$parser = new DocsParser('Source/Docs/intro.md');
+			$parser = new DocsParser('Source/Docs/Intro.md');
 			$this->html = $parser->html;
 			
 			$this->render('docsindex');
@@ -26,6 +28,9 @@ class Docs extends Control {
 			
 			if ($api === true){
 				$this->html = $parser->html;
+				foreach ($parser->titles as $id => $title){
+					$this->submenu[] = $id;
+				}
 			} else {
 				$this->html = $parser->description;
 				foreach ($parser->titles as $title){

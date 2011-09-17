@@ -9,7 +9,7 @@ class DocsParser {
 	public $titles;
 	public $texts;
 	
-	public function __construct($path, $rooturl){
+	public function __construct($path, $rooturl = ''){
 		$content = file_get_contents($path);
 		$html = Markdown($content);
 		$html = $this->createDemos($html);
@@ -20,7 +20,7 @@ class DocsParser {
 		$this->html = $html;
 		
 		foreach ($this->parts as $index => $part){
-			if ($index = 0){
+			if ($index == 0){
 				$this->description = $part;
 			} else {
 				$bits = preg_split('/<hr \/>/', $part);
