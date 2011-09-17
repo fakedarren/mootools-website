@@ -16,7 +16,7 @@ class Docs extends Control {
 		$this->currentnav = 'docs';
 
 		if (isset($path[0]) === false){
-			$parser = new DocsParser('Source/Docs/intro.md');
+			$parser = new DocsParser('Source/Docs/Intro.md');
 			$this->html = $parser->html;
 			
 			$this->render('docsindex');
