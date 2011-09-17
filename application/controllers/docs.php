@@ -33,8 +33,10 @@ class Docs extends Control {
 				}
 			} else {
 				$this->html = $parser->description;
-				foreach ($parser->titles as $title){
-					$this->html .= '<div class="section">' . $title . '</div>';
+				if(is_array($parser->titles)) {
+					foreach ($parser->titles as $title){
+						$this->html .= '<div class="section">' . $title . '</div>';
+					}
 				}
 			}
 			$this->render();

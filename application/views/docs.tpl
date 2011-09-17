@@ -11,18 +11,18 @@
 <body>
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="content">
-	<?php echo $this->menu ?>
+	<?php echo $this->menu; ?>
 	<?php
 	if ($this->api === true){
 		?><ul class="sidemenu"><?
 		foreach ($this->submenu as $item){
 			echo "<li>$item</li>";
 		}
-		?></ul><?
+		?></ul><?php
 	}
 	?>
 	<div class="main <?php if ($this->api === true) echo 'api'; ?>">
-		<?php echo $this->html ?>
+		<?php echo $this->html; ?>
 	</div>
 </div>
 <?php require($this->config('views_folder') . '/shared/footer.tpl');?>
