@@ -10,6 +10,8 @@ class Docs extends Control {
 		$menu = $api ? 'Source/Docs/api-ref.json' : 'Source/Docs/docs-ref.json';
 		$root = $api ? '/api' : '/docs';
 		
+		$this->api = $api;
+		
 		$packagemenu = new PackageMenu($menu, $root);
 		$this->menu = $packagemenu->html;
 
@@ -26,6 +28,9 @@ class Docs extends Control {
 			
 			if ($api === true){
 				$this->html = $parser->html;
+				foreach ($parser->titles as $id => $title){
+					$this->submenu[] = $id;
+				}
 			} else {
 				$this->html = $parser->description;
 				foreach ($parser->titles as $title){

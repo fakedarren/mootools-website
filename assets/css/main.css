@@ -21,6 +21,11 @@ body {
 	margin: 0 auto;
 	width: 960px;
 }
+.content:after {
+	clear: both;
+	content: "";
+	display: table;
+}
 
 header, footer {
 	display: block;
@@ -142,7 +147,7 @@ footer {
 	clear: both;
 	border-top: 1px solid #d9d9d9;
 	font-size: .85em;
-	text-align: center;
+	margin: 40px auto 0;
 	padding: 4px 0 10px 0;
 }
 

@@ -12,7 +12,16 @@
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="content">
 	<?php echo $this->menu ?>
-	<div class="main">
+	<?php
+	if ($this->api === true){
+		?><ul class="sidemenu"><?
+		foreach ($this->submenu as $item){
+			echo "<li>$item</li>";
+		}
+		?></ul><?
+	}
+	?>
+	<div class="main <?php if ($this->api === true) echo 'api'; ?>">
 		<?php echo $this->html ?>
 	</div>
 </div>

@@ -1,13 +1,25 @@
 .menu {
 	float: left;
-	width: 150px;
+	margin: 20px 0 0;
+	width: 200px;
 }
-.menu ul {
-	padding: 0 0 0 20px;
+.menu li {
+	font-size: 14px;
 }
+	.menu ul li {
+		padding: 0 0 0 20px;
+	}
+	.menu li a {
+		cursor: pointer;
+		display: block;
+	}
+	.menu li a:hover {
+		background: #ddd;
+	}
 .main {
-	float: left;
-	width: 800px;
+	float: right;
+	margin: 20px 0 0;
+	width: 745px;
 }	
 	.main ol, .main ul {
 		font-size: 1.3em;
@@ -15,9 +27,11 @@
 	}
 	.main ol li {
 		list-style: decimal;
+		margin: 0 0 5px;
 	}
 	.main ul li {
 		list-style: disc;
+		margin: 0 0 5px;
 	}
 	.main hr {
 		display: none;
@@ -26,4 +40,13 @@
 .main li pre, .main p pre {
 	display: inline;
 	padding: 0;
+}
+
+.api {
+	width: 600px;
+}
+.sidemenu {
+	float: right;
+	padding: 20px 0 0 10px;
+	width: 130px;
 }
