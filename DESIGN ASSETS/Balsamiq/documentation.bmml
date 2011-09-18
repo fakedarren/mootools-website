@@ -1,10 +1,10 @@
-<mockup version="1.0" skin="sketch" measuredW="1044" measuredH="956" mockupW="1024" mockupH="956">
+<mockup version="1.0" skin="sketch" measuredW="1362" measuredH="956" mockupW="1342" mockupH="956">
   <controls>
     <control controlID="0" controlTypeID="__group__" x="20" y="0" w="1024" h="956" measuredW="1024" measuredH="956" zOrder="0" locked="true" isInGroup="-1">
       <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1024" h="956" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="0">
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1024" h="956" measuredW="450" measuredH="400" zOrder="0" locked="true" isInGroup="0">
           <controlProperties>
-            <text>MooTools%20Documentation%0Ahttp%3A//mootools.net/learn</text>
+            <text>MooTools%20Documentation%0Ahttp%3A//mootools.net/en/current/docs</text>
           </controlProperties>
         </control>
         <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="64" w="1024" h="872" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="0">
@@ -222,18 +222,6 @@
       <controlProperties>
         <text>Home%2C%20Documentation</text>
         <underline>false</underline>
-      </controlProperties>
-    </control>
-    <control controlID="23" controlTypeID="com.balsamiq.mockups::Link" x="770" y="242" w="-1" h="-1" measuredW="108" measuredH="22" zOrder="5" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>14</size>
-        <text>Getting%20Started</text>
-        <underline>false</underline>
-      </controlProperties>
-    </control>
-    <control controlID="24" controlTypeID="com.balsamiq.mockups::Link" x="387" y="0" w="-1" h="-1" measuredW="101" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
-      <controlProperties>
-        <text>Getting%20Started</text>
       </controlProperties>
     </control>
     <control controlID="30" controlTypeID="__group__" x="63" y="238" w="620" h="565" measuredW="620" measuredH="565" zOrder="4" locked="false" isInGroup="-1">
@@ -499,196 +487,232 @@
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="31" controlTypeID="com.balsamiq.mockups::SearchBox" x="770" y="202" w="251" h="-1" measuredW="68" measuredH="25" zOrder="6" locked="false" isInGroup="-1"/>
-    <control controlID="32" controlTypeID="com.balsamiq.mockups::Link" x="770" y="269" w="-1" h="-1" measuredW="41" measuredH="22" zOrder="8" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>14</size>
-        <text>Book</text>
-        <underline>false</underline>
-      </controlProperties>
-    </control>
-    <control controlID="33" controlTypeID="com.balsamiq.mockups::Link" x="770" y="296" w="-1" h="-1" measuredW="72" measuredH="22" zOrder="9" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>14</size>
-        <text>Cookbook</text>
-        <underline>false</underline>
-      </controlProperties>
-    </control>
-    <control controlID="34" controlTypeID="com.balsamiq.mockups::Link" x="770" y="322" w="-1" h="-1" measuredW="79" measuredH="22" zOrder="10" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>14</size>
-        <text>Reference</text>
-        <underline>false</underline>
-      </controlProperties>
-    </control>
-    <control controlID="35" controlTypeID="com.balsamiq.mockups::Link" x="770" y="350" w="-1" h="-1" measuredW="86" measuredH="22" zOrder="11" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>14</size>
-        <text>Contributing</text>
-        <underline>false</underline>
-      </controlProperties>
-    </control>
-    <control controlID="36" controlTypeID="com.balsamiq.mockups::Link" x="770" y="377" w="-1" h="-1" measuredW="176" measuredH="22" zOrder="12" locked="false" isInGroup="-1">
-      <controlProperties>
-        <size>14</size>
-        <text>Videos%20and%20Presentations</text>
-        <underline>false</underline>
-      </controlProperties>
-    </control>
-    <control controlID="39" controlTypeID="com.balsamiq.mockups::HRule" x="770" y="264" w="251" h="-1" measuredW="100" measuredH="5" zOrder="13" locked="false" isInGroup="-1">
-      <controlProperties>
-        <color>10066329</color>
-      </controlProperties>
-    </control>
-    <control controlID="40" controlTypeID="com.balsamiq.mockups::HRule" x="770" y="291" w="251" h="-1" measuredW="100" measuredH="5" zOrder="14" locked="false" isInGroup="-1">
-      <controlProperties>
-        <color>10066329</color>
-      </controlProperties>
-    </control>
-    <control controlID="41" controlTypeID="com.balsamiq.mockups::HRule" x="770" y="318" w="251" h="-1" measuredW="100" measuredH="5" zOrder="15" locked="false" isInGroup="-1">
-      <controlProperties>
-        <color>10066329</color>
-      </controlProperties>
-    </control>
-    <control controlID="42" controlTypeID="com.balsamiq.mockups::HRule" x="770" y="344" w="251" h="-1" measuredW="100" measuredH="5" zOrder="16" locked="false" isInGroup="-1">
-      <controlProperties>
-        <color>10066329</color>
-      </controlProperties>
-    </control>
-    <control controlID="43" controlTypeID="com.balsamiq.mockups::HRule" x="770" y="372" w="251" h="-1" measuredW="100" measuredH="5" zOrder="17" locked="false" isInGroup="-1">
-      <controlProperties>
-        <color>10066329</color>
-      </controlProperties>
-    </control>
-    <control controlID="44" controlTypeID="com.balsamiq.mockups::HRule" x="770" y="420" w="251" h="-1" measuredW="100" measuredH="5" zOrder="18" locked="false" isInGroup="-1">
+    <control controlID="44" controlTypeID="com.balsamiq.mockups::HRule" x="770" y="456" w="251" h="-1" measuredW="100" measuredH="5" zOrder="6" locked="false" isInGroup="-1">
       <controlProperties>
         <color>6710886</color>
       </controlProperties>
     </control>
-    <control controlID="46" controlTypeID="com.balsamiq.mockups::Label" x="770" y="440" w="202" h="24" measuredW="83" measuredH="24" zOrder="19" locked="false" isInGroup="-1">
+    <control controlID="63" controlTypeID="com.balsamiq.mockups::CallOut" x="307" y="21" w="-1" h="-1" measuredW="37" measuredH="40" zOrder="8" locked="false" isInGroup="-1">
       <controlProperties>
-        <color>472931</color>
-        <size>16</size>
-        <text>Bookshelf</text>
+        <text>1</text>
       </controlProperties>
     </control>
-    <control controlID="60" controlTypeID="__group__" x="770" y="468" w="251" h="102" measuredW="251" measuredH="102" zOrder="20" locked="false" isInGroup="-1">
+    <control controlID="64" controlTypeID="com.balsamiq.mockups::StickyNote" x="1056" y="21" w="306" h="123" measuredW="109" measuredH="123" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>*Callout%201*%0APattern%3A%20/%3Aculture/%3Aversion/docs%0Aculture%20%3D%20%28*en*%2C%20es%2C%20it%2C%20jp%2C%20...%29%0Aversion%20%3D%20%28*current*%2C%20nightly%2C%201.4.1%2C%201.3.2%2C%201.2%2C%20..%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="65" controlTypeID="__group__" x="770" y="238" w="251" h="197" measuredW="251" measuredH="197" zOrder="5" locked="false" isInGroup="-1">
       <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="0" y="2" w="80" h="100" measuredW="130" measuredH="160" zOrder="0" locked="false" isInGroup="60">
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Link" x="0" y="40" w="-1" h="-1" measuredW="108" measuredH="22" zOrder="0" locked="false" isInGroup="65">
           <controlProperties>
-            <src>http%3A//mootools.net/assets/images/promoo.png</src>
+            <size>14</size>
+            <text>Getting%20Started</text>
+            <underline>false</underline>
           </controlProperties>
         </control>
-        <control controlID="1" controlTypeID="__group__" x="86" y="0" w="165" h="91" measuredW="165" measuredH="91" zOrder="1" locked="false" isInGroup="60">
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::SearchBox" x="0" y="0" w="251" h="-1" measuredW="68" measuredH="25" zOrder="1" locked="false" isInGroup="65"/>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Link" x="0" y="67" w="-1" h="-1" measuredW="41" measuredH="22" zOrder="2" locked="false" isInGroup="65">
+          <controlProperties>
+            <size>14</size>
+            <text>Book</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Link" x="0" y="94" w="-1" h="-1" measuredW="72" measuredH="22" zOrder="3" locked="false" isInGroup="65">
+          <controlProperties>
+            <size>14</size>
+            <text>Cookbook</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Link" x="0" y="120" w="-1" h="-1" measuredW="79" measuredH="22" zOrder="4" locked="false" isInGroup="65">
+          <controlProperties>
+            <size>14</size>
+            <text>Reference</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="0" y="148" w="-1" h="-1" measuredW="86" measuredH="22" zOrder="5" locked="false" isInGroup="65">
+          <controlProperties>
+            <size>14</size>
+            <text>Contributing</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Link" x="0" y="175" w="-1" h="-1" measuredW="176" measuredH="22" zOrder="6" locked="false" isInGroup="65">
+          <controlProperties>
+            <size>14</size>
+            <text>Videos%20and%20Presentations</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="62" w="251" h="-1" measuredW="100" measuredH="5" zOrder="7" locked="false" isInGroup="65">
+          <controlProperties>
+            <color>10066329</color>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="89" w="251" h="-1" measuredW="100" measuredH="5" zOrder="8" locked="false" isInGroup="65">
+          <controlProperties>
+            <color>10066329</color>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="116" w="251" h="-1" measuredW="100" measuredH="5" zOrder="9" locked="false" isInGroup="65">
+          <controlProperties>
+            <color>10066329</color>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="142" w="251" h="-1" measuredW="100" measuredH="5" zOrder="10" locked="false" isInGroup="65">
+          <controlProperties>
+            <color>10066329</color>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="170" w="251" h="-1" measuredW="100" measuredH="5" zOrder="11" locked="false" isInGroup="65">
+          <controlProperties>
+            <color>10066329</color>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="66" controlTypeID="__group__" x="770" y="476" w="251" h="363" measuredW="251" measuredH="363" zOrder="7" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="202" h="24" measuredW="83" measuredH="24" zOrder="0" locked="false" isInGroup="66">
+          <controlProperties>
+            <color>472931</color>
+            <size>16</size>
+            <text>Bookshelf</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="0" y="28" w="251" h="102" measuredW="251" measuredH="102" zOrder="1" locked="false" isInGroup="66">
           <groupChildrenDescriptors>
-            <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="165" h="39" measuredW="193" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="0" y="2" w="80" h="100" measuredW="130" measuredH="160" zOrder="0" locked="false" isInGroup="1">
               <controlProperties>
-                <color>545684</color>
-                <size>13</size>
-                <text>Pro%20JavaScript%20with%20MooTools</text>
+                <src>http%3A//mootools.net/assets/images/promoo.png</src>
               </controlProperties>
             </control>
-            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="33" w="-1" h="-1" measuredW="87" measuredH="21" zOrder="1" locked="false" isInGroup="1">
+            <control controlID="1" controlTypeID="__group__" x="86" y="0" w="165" h="91" measuredW="165" measuredH="91" zOrder="1" locked="false" isInGroup="1">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="165" h="39" measuredW="193" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>545684</color>
+                    <size>13</size>
+                    <text>Pro%20JavaScript%20with%20MooTools</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="33" w="-1" h="-1" measuredW="87" measuredH="21" zOrder="1" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <text>Mark%20Obcena</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="52" w="-1" h="-1" measuredW="127" measuredH="21" zOrder="2" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>6710886</color>
+                    <text>December%2022%2C%202010</text>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="0" y="73" w="-1" h="-1" measuredW="74" measuredH="18" zOrder="3" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>0</color>
+                    <italic>true</italic>
+                    <size>11</size>
+                    <text>MooTools%201.3</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="__group__" x="0" y="143" w="245" h="105" measuredW="245" measuredH="105" zOrder="2" locked="false" isInGroup="66">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="165" y="0" w="80" h="100" measuredW="486" measuredH="600" zOrder="0" locked="false" isInGroup="2">
               <controlProperties>
-                <text>Mark%20Obcena</text>
+                <borderStyle>none</borderStyle>
+                <src>http%3A//dnhome.us/wp-content/uploads/2010/08/MooTools_12_Beginners_Guide_.jpeg</src>
               </controlProperties>
             </control>
-            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="52" w="-1" h="-1" measuredW="127" measuredH="21" zOrder="2" locked="false" isInGroup="1">
+            <control controlID="1" controlTypeID="__group__" x="0" y="0" w="165" h="105" measuredW="165" measuredH="105" zOrder="1" locked="false" isInGroup="2">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="165" h="39" measuredW="197" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>545684</color>
+                    <size>13</size>
+                    <text>MooTools%201.2%20Beginner%27s%20Guide</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="33" w="165" h="40" measuredW="184" measuredH="21" zOrder="1" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <text>Jacob%20Gube%2C%20Garrick%20Cheung</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="66" w="-1" h="-1" measuredW="108" measuredH="21" zOrder="2" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>6710886</color>
+                    <text>January%2015%2C%202010</text>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="0" y="87" w="-1" h="-1" measuredW="74" measuredH="18" zOrder="3" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>0</color>
+                    <italic>true</italic>
+                    <size>11</size>
+                    <text>MooTools%201.2</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="3" controlTypeID="__group__" x="0" y="261" w="251" h="102" measuredW="251" measuredH="102" zOrder="3" locked="false" isInGroup="66">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="0" y="2" w="80" h="100" measuredW="130" measuredH="160" zOrder="0" locked="false" isInGroup="3">
               <controlProperties>
-                <color>6710886</color>
-                <text>December%2022%2C%202010</text>
+                <src>http%3A//mootools.net/assets/images/promoo.png</src>
               </controlProperties>
             </control>
-            <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="0" y="73" w="-1" h="-1" measuredW="74" measuredH="18" zOrder="3" locked="false" isInGroup="1">
-              <controlProperties>
-                <color>0</color>
-                <italic>true</italic>
-                <size>11</size>
-                <text>MooTools%201.3</text>
-              </controlProperties>
+            <control controlID="1" controlTypeID="__group__" x="86" y="0" w="165" h="78" measuredW="165" measuredH="78" zOrder="1" locked="false" isInGroup="3">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="165" h="39" measuredW="134" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>545684</color>
+                    <size>13</size>
+                    <text>MooTools%20Essentials</text>
+                  </controlProperties>
+                </control>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="18" w="-1" h="-1" measuredW="92" measuredH="21" zOrder="1" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <text>Aaron%20Newton</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="39" w="-1" h="-1" measuredW="104" measuredH="21" zOrder="2" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>6710886</color>
+                    <text>August%2018%2C%202008</text>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="0" y="60" w="-1" h="-1" measuredW="74" measuredH="18" zOrder="3" locked="false" isInGroup="1">
+                  <controlProperties>
+                    <color>0</color>
+                    <italic>true</italic>
+                    <size>11</size>
+                    <text>MooTools%201.2</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
             </control>
           </groupChildrenDescriptors>
         </control>
       </groupChildrenDescriptors>
     </control>
-    <control controlID="61" controlTypeID="__group__" x="770" y="701" w="251" h="102" measuredW="251" measuredH="102" zOrder="22" locked="false" isInGroup="-1">
-      <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="0" y="2" w="80" h="100" measuredW="130" measuredH="160" zOrder="0" locked="false" isInGroup="61">
-          <controlProperties>
-            <src>http%3A//mootools.net/assets/images/promoo.png</src>
-          </controlProperties>
-        </control>
-        <control controlID="1" controlTypeID="__group__" x="86" y="0" w="165" h="78" measuredW="165" measuredH="78" zOrder="1" locked="false" isInGroup="61">
-          <groupChildrenDescriptors>
-            <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="165" h="39" measuredW="134" measuredH="21" zOrder="0" locked="false" isInGroup="1">
-              <controlProperties>
-                <color>545684</color>
-                <size>13</size>
-                <text>MooTools%20Essentials</text>
-              </controlProperties>
-            </control>
-            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="18" w="-1" h="-1" measuredW="92" measuredH="21" zOrder="1" locked="false" isInGroup="1">
-              <controlProperties>
-                <text>Aaron%20Newton</text>
-              </controlProperties>
-            </control>
-            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="39" w="-1" h="-1" measuredW="104" measuredH="21" zOrder="2" locked="false" isInGroup="1">
-              <controlProperties>
-                <color>6710886</color>
-                <text>August%2018%2C%202008</text>
-              </controlProperties>
-            </control>
-            <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="0" y="60" w="-1" h="-1" measuredW="74" measuredH="18" zOrder="3" locked="false" isInGroup="1">
-              <controlProperties>
-                <color>0</color>
-                <italic>true</italic>
-                <size>11</size>
-                <text>MooTools%201.2</text>
-              </controlProperties>
-            </control>
-          </groupChildrenDescriptors>
-        </control>
-      </groupChildrenDescriptors>
+    <control controlID="68" controlTypeID="com.balsamiq.mockups::Label" x="770" y="201" w="-1" h="-1" measuredW="147" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Read%20in%20your%20language%3A</text>
+      </controlProperties>
     </control>
-    <control controlID="62" controlTypeID="__group__" x="770" y="583" w="245" h="105" measuredW="245" measuredH="105" zOrder="21" locked="false" isInGroup="-1">
-      <groupChildrenDescriptors>
-        <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="165" y="0" w="80" h="100" measuredW="486" measuredH="600" zOrder="0" locked="false" isInGroup="62">
-          <controlProperties>
-            <borderStyle>none</borderStyle>
-            <src>http%3A//dnhome.us/wp-content/uploads/2010/08/MooTools_12_Beginners_Guide_.jpeg</src>
-          </controlProperties>
-        </control>
-        <control controlID="1" controlTypeID="__group__" x="0" y="0" w="165" h="105" measuredW="165" measuredH="105" zOrder="1" locked="false" isInGroup="62">
-          <groupChildrenDescriptors>
-            <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="165" h="39" measuredW="197" measuredH="21" zOrder="0" locked="false" isInGroup="1">
-              <controlProperties>
-                <color>545684</color>
-                <size>13</size>
-                <text>MooTools%201.2%20Beginner%27s%20Guide</text>
-              </controlProperties>
-            </control>
-            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="33" w="165" h="40" measuredW="184" measuredH="21" zOrder="1" locked="false" isInGroup="1">
-              <controlProperties>
-                <text>Jacob%20Gube%2C%20Garrick%20Cheung</text>
-              </controlProperties>
-            </control>
-            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="0" y="66" w="-1" h="-1" measuredW="108" measuredH="21" zOrder="2" locked="false" isInGroup="1">
-              <controlProperties>
-                <color>6710886</color>
-                <text>January%2015%2C%202010</text>
-              </controlProperties>
-            </control>
-            <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="0" y="87" w="-1" h="-1" measuredW="74" measuredH="18" zOrder="3" locked="false" isInGroup="1">
-              <controlProperties>
-                <color>0</color>
-                <italic>true</italic>
-                <size>11</size>
-                <text>MooTools%201.2</text>
-              </controlProperties>
-            </control>
-          </groupChildrenDescriptors>
-        </control>
-      </groupChildrenDescriptors>
+    <control controlID="69" controlTypeID="com.balsamiq.mockups::ComboBox" x="917" y="199" w="104" h="-1" measuredW="75" measuredH="110" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>up</state>
+        <text>English%0ASpanish%0AItalian%0ADeutsch%0A-------------------%0AAdd%20translation</text>
+      </controlProperties>
     </control>
   </controls>
 </mockup>
