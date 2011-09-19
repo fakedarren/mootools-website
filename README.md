@@ -12,7 +12,7 @@ Currently the requirements to get running locally are:
 A quick peek
 ------------
 
-[Here's a nice screenshot of the direction we're taking](http://d.pr/uxWg).
+[Here's a nice screenshot of the 'learning' section's homepage](http://d.pr/uxWg).
 
 Design 'Assets'
 ---------------
