@@ -1,6 +1,114 @@
 [
 	{
 		"url": "/Core",
-		"title": "Core"
+		"title": "Core",
+		"submenu": [
+			{
+				"url": "/Core/Accessor",
+				"title": "Array"
+			},
+			{
+				"url": "/Core/Class",
+				"title": "Class"
+			},
+			{
+				"url": "/Core/Host",
+				"title": "Host"
+			},
+			{
+				"url": "/Core/Sandbox",
+				"title": "Sandbox"
+			}
+		]
+	},
+	{
+		"url": "/Class",
+		"title": "Class",
+		"submenu": [
+			{
+				"url": "/Class/Chain",
+				"title": "Chain"
+			},
+			{
+				"url": "/Class/Events",
+				"title": "Events"
+			},
+			{
+				"url": "/Class/Options",
+				"title": "Options"
+			},
+			{
+				"url": "/Class/Store",
+				"title": "Store"
+			}
+		]
+	},
+	{
+		"url": "/Host",
+		"title": "Host",
+		"submenu": [
+			{
+				"url": "/Host/Array",
+				"title": "Array"
+			},
+			{
+				"url": "/Host/Date",
+				"title": "Date"
+			},
+			{
+				"url": "/Host/Function",
+				"title": "Function"
+			},
+			{
+				"url": "/Host/Number",
+				"title": "Number"
+			},
+			{
+				"url": "/Host/Object",
+				"title": "Object"
+			},
+			{
+				"url": "/Host/RegExp",
+				"title": "RegExp"
+			},
+			{
+				"url": "/Host/String",
+				"title": "String"
+			}
+		]
+	},
+	{
+		"url": "/Utility",
+		"title": "Utility",
+		"submenu": [
+			{
+				"url": "/Utility/Array",
+				"title": "Array"
+			},
+			{
+				"url": "/Utility/Function",
+				"title": "Function"
+			},
+			{
+				"url": "/Utility/Number",
+				"title": "Number"
+			},
+			{
+				"url": "/Utility/Object",
+				"title": "Object"
+			},
+			{
+				"url": "/Utility/RegExp",
+				"title": "RegExp"
+			},
+			{
+				"url": "/Utility/String",
+				"title": "String"
+			},
+			{
+				"url": "/Utility/typeOf",
+				"title": "typeOf"
+			}
+		]
 	}
 ]
