@@ -3,6 +3,7 @@ class Tutorials extends Control {
 
 	protected function index(){
 
+		global $version;
 		$url = explode("/", $_SERVER["REQUEST_URI"]);
 		$path = str_replace("-", " ", array_slice($url, 2));
 		
@@ -12,7 +13,7 @@ class Tutorials extends Control {
 			$this->tutorial($path);
 		} else {
 			$index = (isset($path[0]) ? $path[0] : 1);
-			$packagemenu = new PackageMenu($_SERVER["DOCUMENT_ROOT"] . '/Source/Tutorials', '/tutorials', $index);
+			$packagemenu = new PackageMenu($_SERVER["DOCUMENT_ROOT"] . '/releases/' . $version . '/Tutorials', '/tutorials', $index);
 			$this->tutoriallist = $packagemenu->html;
 			$this->quantity = $packagemenu->length;
 			$this->render('tutorialsindex');
@@ -20,7 +21,8 @@ class Tutorials extends Control {
 	}
 	
 	protected function tutorial($path){
-		$content = file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/Source/Tutorials/' . $path[0] . '/'. $path[0] . '.md');
+		global $version;
+		$content = file_get_contents($_SERVER["DOCUMENT_ROOT"] . '/releases/' . $version . '/Tutorials/' . $path[0] . '/'. $path[0] . '.md');
 		$html = Markdown($content);
 
 		$html = $this->createDemos($html);
@@ -38,7 +40,7 @@ class Tutorials extends Control {
 		$this->previouspage = $index;
 		$this->nextpage = (isset($parts[$index + 1]) ? $index + 2 : false);
 		
-		$this->html = str_replace('###path###', 'Source/Tutorials/' . $path[0], $this->html);
+		$this->html = str_replace('###path###', 'releases/' . $version . '/Tutorials/' . $path[0], $this->html);
 		
 		$this->render();		
 	}

@@ -2,12 +2,13 @@
 class Docs extends Control {
 
 	protected function index(){
-
+		
+		global $version;
 		$url = explode("/", $_SERVER["REQUEST_URI"]);
 		$api = ($url[1] == 'api');
 		$path = array_slice($url, 2);
 		
-		$menu = $api ? 'Source/Docs/api-ref.json' : 'Source/Docs/docs-ref.json';
+		$menu = $api ? 'releases/' . $version . '/Docs/api-ref.json' : 'releases/' . $version . '/Docs/docs-ref.json';
 		$root = $api ? '/api' : '/docs';
 		
 		$this->api = $api;
@@ -18,13 +19,13 @@ class Docs extends Control {
 		$this->currentnav = 'docs';
 
 		if (isset($path[0]) === false){
-			$parser = new DocsParser('Source/Docs/Intro.md');
+			$parser = new DocsParser('releases/' . $version . '/Docs/Intro.md');
 			$this->html = $parser->html;
 			
 			$this->render('docsindex');
 		} else if (isset($path[2]) === false){
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
-			$parser = new DocsParser('Source/Docs/' . $stub . '.md', '/docs/' . $stub);
+			$parser = new DocsParser('releases/' . $version . '/Docs/' . $stub . '.md', '/docs/' . $stub);
 			
 			if ($api === true){
 				$this->html = $parser->html;
@@ -42,7 +43,7 @@ class Docs extends Control {
 			$this->render();
 		} else {
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
-			$parser = new DocsParser('Source/Docs/' . $stub . '.md', '/docs/' . $path[0] . '/' . $path[1]);
+			$parser = new DocsParser('releases/' . $version . '/Docs/' . $stub . '.md', '/docs/' . $path[0] . '/' . $path[1]);
 			$this->html = $parser->titles[$path[2]] . $parser->texts[$path[2]];
 			$this->render('docsdetails');
 		}
