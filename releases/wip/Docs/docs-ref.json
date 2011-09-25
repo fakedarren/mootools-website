@@ -5,7 +5,7 @@
 		"submenu": [
 			{
 				"url": "/Core/Accessor",
-				"title": "Array"
+				"title": "Accessor"
 			},
 			{
 				"url": "/Core/Class",
