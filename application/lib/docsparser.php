@@ -47,7 +47,7 @@ class DocsParser {
 	}
 	
 	protected function formatCodeBlocks($source){
-		return preg_replace_callback('/<code>([\s\S]*?)<\/code>/', function($matches){
+		return preg_replace_callback('/<pre><code>([\s\S]*?)<\/code><\/pre>/', function($matches){
 			$geshi = new GeSHi($matches[1], 'javascript');
 			$geshi->enable_classes();
 			return $geshi->parse_code();

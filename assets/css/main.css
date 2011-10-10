@@ -75,16 +75,12 @@ a {
 	
 pre {
 	background: #fff;
-	border: none;
-	font: 1.2em/24px 'Andale Mono', 'Lucida Console', Courier, monospace;
+	border: 1px dashed #aeaeae;
+	font: 1.4em/24px 'Andale Mono', 'Lucida Console', Courier, monospace;
 	overflow: auto;
-	padding: 0;
+	margin: 0 0 10px;
+	padding: 20px 20px 0;
 }
-	pre pre {
-		border: 1px dashed #aeaeae;
-		margin: 0;
-		padding: 20px;
-	}
 
 blockquote {
 	background: #ddd;
