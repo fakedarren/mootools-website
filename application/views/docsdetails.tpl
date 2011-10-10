@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>MooTools Documentation</title>
+	<title><?php echo $this->title;?></title>
 	<meta name="description" content="" />
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 	<?php require($this->config('views_folder') . '/shared/meta.tpl');?>

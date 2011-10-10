@@ -18,13 +18,17 @@ class Docs extends Control {
 
 		$this->currentnav = 'docs';
 
+
 		if (isset($path[0]) === false){
+			$this->title = 'MooTools Docs: Welcome!';
 			$parser = new DocsParser('releases/' . $version . '/Docs/Intro.md');
 			$this->html = $parser->html;
-			
 			$this->render('docsindex');
 		} else if (isset($path[2]) === false){
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
+			
+			$this->title = str_replace('/', ' &raquo; ', 'MooTools Docs: ' . $stub);
+			
 			$parser = new DocsParser('releases/' . $version . '/Docs/' . $stub . '.md', '/docs/' . $stub);
 			
 			if ($api === true){
@@ -42,7 +46,11 @@ class Docs extends Control {
 			}
 			$this->render();
 		} else {
+
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
+
+			$this->title = str_replace('/', ' &raquo; ', 'MooTools Docs: ' . $stub);
+
 			$parser = new DocsParser('releases/' . $version . '/Docs/' . $stub . '.md', '/docs/' . $path[0] . '/' . $path[1]);
 			$this->html = $parser->titles[$path[2]] . $parser->texts[$path[2]];
 			$this->render('docsdetails');
