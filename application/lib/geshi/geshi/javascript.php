@@ -64,7 +64,7 @@ $language_data = array (
       'alert', 'back', 'blur', 'close', 'confirm', 'focus', 'forward', 'home',
       'name', 'navigate', 'onblur', 'onerror', 'onfocus', 'onload', 'onmove',
       'onresize', 'onunload', 'open', 'print', 'prompt', 'scroll', 'status',
-      'stop',
+      'stop', 'onsuccess', 'oncomplete',
       )
     ),
   'SYMBOLS' => array(
