@@ -26,7 +26,7 @@ class DocsParser {
 				$bits = preg_split('/<hr \/>/', $part);
 				$name = trim(strtolower(preg_replace('/<h2[^>]*>[\s\S]*?: ([\s\S]*?)<\/h2>[\s\S]*/', "$1", $bits[0])));
 				$url = $rooturl . '/' . $name;
-				$this->titles[$name] = preg_replace('/<h2[^>]*>[\s\S]*?: ([\s\S]*?)<\/h2>([\s\S]*)/', "<h2><a href='$url'>$1</a></h2>$2", $bits[0]);
+				$this->titles[$name] = preg_replace('/<h2[^>]*>([\s\S]*?): ([\s\S]*?)<\/h2>([\s\S]*)/', "<h2><a href='$url'><span>$1: </span>$2</a></h2>$3", $bits[0]);
 				@$this->texts[$name] = $bits[1];
 			}
 		}

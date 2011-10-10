@@ -50,7 +50,7 @@ class Docs extends Control {
 			$stub = (isset($path[1]) ? $path[0] . '/' . $path[1] : $path[0] . '/' . $path[0]);
 
 			$this->title = str_replace('/', ' &raquo; ', 'MooTools Docs: ' . $stub);
-
+			
 			$parser = new DocsParser('releases/' . $version . '/Docs/' . $stub . '.md', '/docs/' . $path[0] . '/' . $path[1]);
 			$this->html = $parser->titles[$path[2]] . $parser->texts[$path[2]];
 			$this->render('docsdetails');

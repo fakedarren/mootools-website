@@ -52,6 +52,9 @@
 		padding-bottom: 0;
 		padding-top:10px;
 	}
+		.main .section h2 span {
+			display: none;
+		}
 
 .main li pre, .main p pre {
 	display: inline;
