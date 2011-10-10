@@ -5,13 +5,19 @@
 }
 .menu li {
 	font-size: 14px;
+	line-height: 19px;
+	padding: 0 0 4px;
 }
 	.menu ul li {
-		padding: 0 0 0 20px;
+		padding: 2px 0 2px 20px;
 	}
 	.menu li a {
+		color: #3F639B;
 		cursor: pointer;
 		display: block;
+	}
+	.menu li li a {
+		color: #222;
 	}
 	.menu li a:hover {
 		background: #ddd;
