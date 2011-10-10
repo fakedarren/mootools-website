@@ -50,7 +50,7 @@ class DocsParser {
 		return preg_replace_callback('/<pre><code>([\s\S]*?)<\/code><\/pre>/', function($matches){
 			$geshi = new GeSHi($matches[1], 'javascript');
 			$geshi->enable_classes();
-			return $geshi->parse_code();
+			return str_replace('&amp;', '&', $geshi->parse_code());
 		}, $source);
 	}
 }
