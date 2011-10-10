@@ -1,12 +1,12 @@
 /* Geshi */
 .kw1 {
-	color: #1b609a;
+	color: #006ad7;
 }
 .kw2 {
-	color: #9a6f1b;
+	color: #006ad7;
 }
 .me1 {
-	color: #666;
+	color: #148485;
 }
 .kw3, .re0, .sc1 {
 	color: #784e0c;
@@ -15,10 +15,11 @@
 	color: #444;
 }
 .st0 {
-	color: #489a1b;
+	background-color: #fdf8ee;
+	color: #aa6c00;
 }
 .co1, .coMULTI {
-	color: #888;
+	color: #999;
 }
 .nu0 {
 	color: #70483d;

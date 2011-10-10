@@ -75,10 +75,16 @@ a {
 	
 pre {
 	background: #fff;
-	font-size: 1.2em;
+	border: none;
+	font: 1.2em/24px 'Andale Mono', 'Lucida Console', Courier, monospace;
 	overflow: auto;
-	padding: 4px;
+	padding: 0;
 }
+	pre pre {
+		border: 1px dashed #aeaeae;
+		margin: 0;
+		padding: 20px;
+	}
 
 blockquote {
 	background: #ddd;
