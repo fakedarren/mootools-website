@@ -11,6 +11,11 @@
 	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 
+<div class="todo underconstruction">
+	<h3>Under Construction</h3>
+	<p>We're still building this bit of the new site, and if you want to know what's left to do and help out, take a look <a href="https://github.com/fakedarren/mootools-website/issues?milestone=9">here</a>.</p>
+</div>
+
 <div class="content">
 	
 	<h1>MooTools Community</h1>

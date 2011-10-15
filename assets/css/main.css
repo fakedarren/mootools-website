@@ -27,6 +27,15 @@ body {
 	display: table;
 }
 
+.todo.underconstruction {
+	margin: 20px auto 60px;
+	padding: 20px 20px 10px;
+	width: 918px;
+}
+	.todo.underconstruction a {
+		color: red;
+	}
+
 header, footer {
 	display: block;
 }
