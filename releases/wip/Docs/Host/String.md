@@ -1,4 +1,0 @@
-Host/String methods
-===================
-
-###trim
