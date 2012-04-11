@@ -22,6 +22,7 @@
         var string = require("8");
         var number = require("a");
         var ghost = require("c");
+        var array = require("4");
         prime.type = type;
         prime.map = map;
         prime.list = list;
@@ -31,6 +32,7 @@
         var mootools = {};
         mootools._ = ghost;
         mootools.prime = prime;
+        mootools.array = array;
         var slick = require("d");
         var nodes = require("g");
         nodes.use(slick);
