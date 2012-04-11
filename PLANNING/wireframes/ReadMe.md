@@ -21,8 +21,10 @@ Wireframes are wholly intended to be simple to both guide the designer and the d
 * Community Developers
 * Community IRC
 * Docs Main
-* Docs Class
-* Docs Method
+* Docs Section Main
+* Docs Section Child (complex class)
+* Docs Section Child (TypeOfs)
+* Docs Section Child (DOM visual)
 * API Main
 * API Class _the traditional docs api style layout_
 * Plugins/Forge Main

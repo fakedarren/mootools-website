@@ -160,8 +160,8 @@
 			<integer>100</integer>
 			<key>Points</key>
 			<array>
-				<string>{538.18018, 353.13916}</string>
-				<string>{625.68085, 208.26299}</string>
+				<string>{538.172, 353.13858}</string>
+				<string>{625.64661, 208.26047}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -669,8 +669,8 @@ Home}</string>
 			<integer>85</integer>
 			<key>Points</key>
 			<array>
-				<string>{703.53711, 455.68527}</string>
-				<string>{665.38135, 325.23126}</string>
+				<string>{703.53711, 455.68524}</string>
+				<string>{665.38129, 325.23126}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -702,8 +702,8 @@ Home}</string>
 			<integer>81</integer>
 			<key>Points</key>
 			<array>
-				<string>{441.60461, 438.85294}</string>
-				<string>{393.52805, 466.80316}</string>
+				<string>{441.60205, 438.85239}</string>
+				<string>{393.52805, 466.79974}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -966,8 +966,8 @@ Home}</string>
 			<integer>73</integer>
 			<key>Points</key>
 			<array>
-				<string>{237.46184, 458.37549}</string>
-				<string>{191.45467, 517.90179}</string>
+				<string>{237.46111, 458.37543}</string>
+				<string>{191.45241, 517.90173}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1032,8 +1032,8 @@ Home}</string>
 			<integer>71</integer>
 			<key>Points</key>
 			<array>
-				<string>{179.91193, 443.18594}</string>
-				<string>{157.49695, 447.37305}</string>
+				<string>{179.71735, 443.06738}</string>
+				<string>{157.25839, 447.21982}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1098,8 +1098,8 @@ Home}</string>
 			<integer>66</integer>
 			<key>Points</key>
 			<array>
-				<string>{386.54218, 302.41553}</string>
-				<string>{600.75543, 299.43384}</string>
+				<string>{386.54218, 302.41574}</string>
+				<string>{600.75543, 299.43454}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1131,8 +1131,8 @@ Home}</string>
 			<integer>67</integer>
 			<key>Points</key>
 			<array>
-				<string>{746.11194, 335.71323}</string>
-				<string>{707.21289, 319.41119}</string>
+				<string>{746.10345, 335.71561}</string>
+				<string>{707.18469, 319.40918}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1164,8 +1164,8 @@ Home}</string>
 			<integer>65</integer>
 			<key>Points</key>
 			<array>
-				<string>{571.70831, 357.09842}</string>
-				<string>{610.51648, 330.64859}</string>
+				<string>{571.737, 357.10321}</string>
+				<string>{610.56158, 330.65762}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1232,8 +1232,8 @@ Solr (Sitewide)}</string>
 			<integer>63</integer>
 			<key>Points</key>
 			<array>
-				<string>{200.94618, 404.2771}</string>
-				<string>{152.57703, 385.08853}</string>
+				<string>{200.95219, 404.27536}</string>
+				<string>{152.58789, 385.08539}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1298,8 +1298,8 @@ Solr (Sitewide)}</string>
 			<integer>61</integer>
 			<key>Points</key>
 			<array>
-				<string>{989.46783, 319.30237}</string>
-				<string>{997.24951, 342.57349}</string>
+				<string>{989.46332, 319.30255}</string>
+				<string>{997.24121, 342.57355}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1364,8 +1364,8 @@ Solr (Sitewide)}</string>
 			<integer>59</integer>
 			<key>Points</key>
 			<array>
-				<string>{1041.641, 311.25238}</string>
-				<string>{1085.9092, 325.90518}</string>
+				<string>{1041.6434, 311.25165}</string>
+				<string>{1085.9093, 325.90256}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1430,8 +1430,8 @@ Solr (Sitewide)}</string>
 			<integer>57</integer>
 			<key>Points</key>
 			<array>
-				<string>{398.28998, 247.38533}</string>
-				<string>{244.57594, 242.68852}</string>
+				<string>{398.28934, 247.38774}</string>
+				<string>{244.57422, 242.69495}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1463,8 +1463,8 @@ Solr (Sitewide)}</string>
 			<integer>56</integer>
 			<key>Points</key>
 			<array>
-				<string>{443.02557, 223.37946}</string>
-				<string>{413.8801, 206.91467}</string>
+				<string>{443.01639, 223.38132}</string>
+				<string>{413.86533, 206.91771}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1496,8 +1496,8 @@ Solr (Sitewide)}</string>
 			<integer>55</integer>
 			<key>Points</key>
 			<array>
-				<string>{418.53458, 269.82166}</string>
-				<string>{366.08176, 284.11923}</string>
+				<string>{418.51434, 269.81323}</string>
+				<string>{366.04694, 284.10468}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1529,8 +1529,8 @@ Solr (Sitewide)}</string>
 			<integer>54</integer>
 			<key>Points</key>
 			<array>
-				<string>{504.34909, 352.20621}</string>
-				<string>{494.76514, 281.57303}</string>
+				<string>{504.34891, 352.20621}</string>
+				<string>{494.76468, 281.57303}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1590,7 +1590,7 @@ Solr (Sitewide)}</string>
 \f0\b\fs24 \cf0 API\
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\b0 \cf0 (alternate access to docs)}</string>
+\b0 \cf0 (traditional access to docs)}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -1739,8 +1739,8 @@ Solr (Sitewide)}</string>
 			<integer>47</integer>
 			<key>Points</key>
 			<array>
-				<string>{753.11328, 515.05359}</string>
-				<string>{793.55035, 543.18127}</string>
+				<string>{753.11328, 515.05365}</string>
+				<string>{793.55042, 543.18134}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1881,8 +1881,8 @@ Solr (Sitewide)}</string>
 			<integer>42</integer>
 			<key>Points</key>
 			<array>
-				<string>{380.96176, 414.32019}</string>
-				<string>{348.74936, 418.198}</string>
+				<string>{380.8168, 414.18304}</string>
+				<string>{348.57739, 418.0257}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -1954,8 +1954,8 @@ Solr (Sitewide)}</string>
 			<integer>39</integer>
 			<key>Points</key>
 			<array>
-				<string>{383.26523, 158.84622}</string>
-				<string>{396.2778, 120.37036}</string>
+				<string>{383.26492, 158.84622}</string>
+				<string>{396.27704, 120.37032}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2005,7 +2005,7 @@ Solr (Sitewide)}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Method}</string>
+\f0\fs24 \cf0 Section Child}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -2152,8 +2152,8 @@ Solr (Sitewide)}</string>
 			<integer>29</integer>
 			<key>Points</key>
 			<array>
-				<string>{314.69571, 273.14575}</string>
-				<string>{357.38443, 210.03754}</string>
+				<string>{314.69568, 273.14575}</string>
+				<string>{357.38431, 210.03752}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2203,7 +2203,7 @@ Solr (Sitewide)}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Class}</string>
+\f0\fs24 \cf0 Section}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -2249,8 +2249,8 @@ Solr (Sitewide)}</string>
 			<integer>25</integer>
 			<key>Points</key>
 			<array>
-				<string>{638.92645, 381.80963}</string>
-				<string>{717.91034, 371.40466}</string>
+				<string>{638.9231, 381.8067}</string>
+				<string>{717.90479, 371.39993}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2344,8 +2344,8 @@ Solr (Sitewide)}</string>
 			<integer>20</integer>
 			<key>Points</key>
 			<array>
-				<string>{864.37189, 336.33328}</string>
-				<string>{923.95251, 312.88828}</string>
+				<string>{864.3634, 336.33081}</string>
+				<string>{923.93481, 312.8837}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2375,8 +2375,8 @@ Solr (Sitewide)}</string>
 			<integer>19</integer>
 			<key>Points</key>
 			<array>
-				<string>{881.18549, 264.97684}</string>
-				<string>{911.22357, 272.87149}</string>
+				<string>{881.21851, 264.96396}</string>
+				<string>{911.27087, 272.85294}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2406,8 +2406,8 @@ Solr (Sitewide)}</string>
 			<integer>18</integer>
 			<key>Points</key>
 			<array>
-				<string>{806.49774, 328.63818}</string>
-				<string>{810.47559, 275.60065}</string>
+				<string>{806.49603, 328.63815}</string>
+				<string>{810.47107, 275.60062}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2622,8 +2622,8 @@ Solr (Sitewide)}</string>
 			<integer>11</integer>
 			<key>Points</key>
 			<array>
-				<string>{242.63618, 277.72321}</string>
-				<string>{211.14827, 261.80435}</string>
+				<string>{242.54776, 277.74338}</string>
+				<string>{211.0062, 261.83713}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2653,8 +2653,8 @@ Solr (Sitewide)}</string>
 			<integer>10</integer>
 			<key>Points</key>
 			<array>
-				<string>{426.79309, 361.92953}</string>
-				<string>{350.45343, 328.45233}</string>
+				<string>{426.79474, 361.92914}</string>
+				<string>{350.45642, 328.45151}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2704,7 +2704,7 @@ Solr (Sitewide)}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Method}</string>
+\f0\fs24 \cf0 Section Child}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -2739,7 +2739,7 @@ Solr (Sitewide)}</string>
 {\colortbl;\red255\green255\blue255;}
 \pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\qc
 
-\f0\fs24 \cf0 Class}</string>
+\f0\fs24 \cf0 Section}</string>
 			</dict>
 		</dict>
 		<dict>
@@ -2863,7 +2863,7 @@ Solr (Sitewide)}</string>
 			<key>Points</key>
 			<array>
 				<string>{1300.5486, 227.86847}</string>
-				<string>{1051.1163, 194.28741}</string>
+				<string>{1051.1163, 194.2874}</string>
 			</array>
 			<key>Style</key>
 			<dict>
@@ -2974,7 +2974,7 @@ Solr (Sitewide)}</string>
 	<key>MasterSheets</key>
 	<array/>
 	<key>ModificationDate</key>
-	<string>2012-04-11 16:48:38 +0000</string>
+	<string>2012-04-11 21:01:39 +0000</string>
 	<key>Modifier</key>
 	<string>ardeay</string>
 	<key>NotesVisible</key>
