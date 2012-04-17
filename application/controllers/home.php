@@ -3,8 +3,8 @@
 class Home extends Control {
 
 	protected function index(){
-		global $config;
-		$config['title'] = 'foo';
+		$this->data('page', 'Home');
+		$this->data('title', 'MooTools');
 		$this->render();
 	}
 
