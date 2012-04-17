@@ -1,4 +1,0 @@
-Host/Function Methods
-=====================
-
-###bind
