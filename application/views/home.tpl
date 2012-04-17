@@ -1,40 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8" />
+	<meta charset="utf-8">
 	<title>MooTools</title>
-	<meta name="description" content="" />
-	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 	<?php require($this->config('views_folder') . '/shared/meta.tpl');?>
+	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 </head>
-<body>
-	
+<body>	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
-
-<div class="todo underconstruction">
-	<h3>Under Construction</h3>
-	<p>We're still building this bit of the new site, and if you want to know what's left to do and help out, take a look <a href="https://github.com/fakedarren/mootools-website/issues">here</a>.</p>
+<div class="container">
+	<div class="row">
+	  	<div class="span9">
+	  		TEST
+		</div>
+	</div>
+	<?php require($this->config('views_folder') . '/shared/footer.tpl');?>
 </div>
-
-<div class="content">
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-</div>
-
-<?php require($this->config('views_folder') . '/shared/footer.tpl');?>
-	
 <?php require($this->config('views_folder') . '/shared/javascript.tpl');?>
-
 </body>
 </html>
