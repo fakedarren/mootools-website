@@ -1,7 +1,7 @@
 
 
-.expand > span,
-.collapsed > span {
+.expand-this > span,
+.collapse-this > span {
 	background: #FAFAFA;
 	cursor: pointer;
 	display: block;
@@ -11,15 +11,15 @@
 	text-align: center;
 	width: 22px;
 }
-.expand > span:hover,
-.collapsed > span:hover {
+.expand-this > span:hover,
+.collapse-this > span:hover {
 	background: #EEE;
 }
 
-.expand > ul {
+.expand-this > ul {
 	display: none;
 }
 
-.collapsed > ul {
+.collapse-this > ul {
 	display: block;
 }
