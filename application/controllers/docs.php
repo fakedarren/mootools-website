@@ -23,8 +23,8 @@ class Docs extends Control {
 	
 	private function getMenu(){
 		$html = file_get_contents($this->assetsFolder . 'menu.html');		
-		$path = $this->isLatest ? '/docs' : '/' . $this->majorVersion . '/docs';		
-		return str_replace('[BASEURL]', $path, $html);
+		$baseurl = $this->isLatest ? '/docs' : '/' . $this->majorVersion . '/docs';		
+		return str_replace('[BASEURL]', $baseurl, $html);
 	}
 	
 	private function getBreadcrumb(){
@@ -53,7 +53,8 @@ class Docs extends Control {
 		} else {
 			$html = $this->notFound();
 		}
-		return $html;
+		$baseurl = $this->isLatest ? '/docs' : '/' . $this->majorVersion . '/docs';		
+		return str_replace('[BASEURL]', $baseurl, $html);
 	}
 	
 	private function getLegacyContent($path){
