@@ -2,7 +2,7 @@
 
 class Docs extends Control {
 	
-	protected function index($type){
+	protected function index($path, $type){
 		$this->isLatest = Control::config("is_latest");
 		$this->majorVersion = Control::config("major_version");
 		$this->assetsFolder = 'releases/' . $this->majorVersion . '/docs/';
@@ -10,10 +10,10 @@ class Docs extends Control {
 		$urlparts = explode($type . '/', $_SERVER['REQUEST_URI']);
 		$this->path = $urlparts[1];
 		
+		$this->data('type', $type);
 		$this->data('menu', $this->getMenu());
 		$this->data('breadcrumb', $this->getBreadcrumb());
 		$this->data('content', $this->getContent());
-		$this->data('type', $type);
 		
 		$this->data('page', 'Docs');
 		$this->data('title', 'MooTools - Documentation');
@@ -40,16 +40,26 @@ class Docs extends Control {
 			$html .= '</li>';
 		}
 		$html .= '</ul>';
+		
 		return $html;
 	}
 	
 	private function getContent(){
-		$path = $this->assetsFolder . '/' . $this->path . '.html';
-		if (file_exists($path)){
-			$html = file_get_contents($path);
+		$path = $this->assetsFolder . $this->path;
+		if (file_exists($path . '.md')){
+			$html = $this->getLegacyContent($path);
+		} else if (file_exists($path . '.html')){
+			$html = file_get_contents($path . '.html');
 		} else {
 			$html = $this->notFound();
 		}
+		return $html;
+	}
+	
+	private function getLegacyContent($path){
+		$this->data('type', $this->data('type') . ' legacy');
+		$content = file_get_contents($path . '.md');
+		$html = markdown($content);
 		return $html;
 	}
 	

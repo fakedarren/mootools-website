@@ -6,7 +6,7 @@
 	<?php require($this->config('views_folder') . '/shared/meta.tpl');?>
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 </head>
-<body>	
+<body class="<?=$type?>">	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="container">
 	<div class="row">
