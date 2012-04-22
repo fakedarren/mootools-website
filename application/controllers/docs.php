@@ -1,6 +1,6 @@
 <?php
 
-class Docs extends Control {
+class DocsBase extends Control {
 	
 	protected function index($arg1, $arg2 = ''){
 		$this->isLatest = Control::config("is_latest");
