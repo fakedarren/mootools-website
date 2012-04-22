@@ -8,7 +8,7 @@
 	<link href="/assets/css/docs.css" rel="stylesheet"/>
 	<link href="/assets/css/demos.css" rel="stylesheet"/>
 </head>
-<body class="<?=$mode?>">	
+<body class="<?=$mode?>" onload="prettyPrint()">
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="container">
 	<div class="row">
