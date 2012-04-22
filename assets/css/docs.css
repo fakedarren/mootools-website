@@ -1,4 +1,14 @@
 
+.method-list > li {
+	border-bottom: 1px solid #EEE;
+	margin-bottom: 5px;
+}
+.method-list > :last-child {
+	border-bottom: 0;
+}
+.method-list + .method-list {
+	margin-top: 40px;
+}
 
 .expand-this > span,
 .collapse-this > span {
@@ -19,7 +29,6 @@
 .expand-this > ul {
 	display: none;
 }
-
 .collapse-this > ul {
 	display: block;
 }
