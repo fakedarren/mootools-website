@@ -1,55 +1,58 @@
 <div class="page-header">
-	<h1>each <small>Loop through a collection of Elements</small></h1>
+	<h1>Array.forEach <small>Loop through an array and perform a function on each item</small></h1>
 </div>
-<h3>Example:</h3>
-<pre class="prettyprint">
-<span class="tag">&lt;ul</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"list"</span><span class="tag">&gt;</span><span class="pln">
-</span><span class="tag">&lt;li&gt;</span><span class="pln">One</span><span class="tag">&lt;/li&gt;</span><span class="pln">
-</span><span class="tag">&lt;li&gt;</span><span class="pln">Two</span><span class="tag">&lt;/li&gt;</span><span class="pln">
-</span><span class="tag">&lt;li&gt;</span><span class="pln">Three</span><span class="tag">&lt;/li&gt;</span><span class="pln">
-</span><span class="tag">&lt;/ul&gt;</span><span class="pln">
 
-$$('.list li').each(function(element, index){
-// Alerts 'Item 1: One', 'Item 2: Two', 'Item 3: Three'
-alert('Item ' + index + ': ' + element.get('text'));
-});</span>
+<h3>Example:</h3>
+<pre class="prettyprint lang-javascript">
+_([1, 2, 3]).forEach(function(item){
+	console.log(item);
+});
+
+
+// Namespaced method
+(function(array){
+	array.forEach([1, 2, 3], function(item){
+		console.log(item);
+	});	
+})(MooTools.array);
+
+
+// Or if you can extend the native prototype
+MooTools.array.install();
+
+[1, 2, 3].forEach(function(item){
+	console.log(item);
+});
 </pre>
-<hr>
+<hr />
+
 <h3>Syntax:</h3>
 <pre class="prettyprint">
-<span class="pln">$$</span><span class="pun">(</span><em><span class="pln">selector</span></em><span class="pun">).</span><span class="pln">each</span><span class="pun">(</span><span class="pln">fn</span><span class="pun">,</span><span class="pln"> bind</span><span class="pun">);</span>
+_(myArray).forEach(fn, bind);
 </pre>
 <dl class="dl-horizontal">
 	<dt>fn <span class="label label-important">Required</span></dt>
 	<dd>
-		<em>(function)</em> the function to run on each element.
+		<em>(function)</em> the function to run on each item.
 		<hr />
 		<pre class="prettyprint">
-<span class="pln">$$</span><span class="pun">(</span><em><span class="pln">selector</span></em><span class="pun">).</span><span class="pln">each</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">element</span><span class="pun">,</span><span class="pln"> index</span><span class="pun">,</span><span class="pln"> collection</span><span class="pun">){</span><span class="pln">
-</span><span class="com">// your code</span><span class="pln">
-</span><span class="pun">});</span>
-</pre>
+_(myArray).forEach(function(item, index, array{
+	// Your code here
+})</pre>
 		<p>This function gets passed:</p>
 		<dl class="dl-horizontal">
-			<dt>element</dt>
-			<dd><em>(element)</em> the current element.</dd>
+			<dt>item</dt>
+			<dd><em>(mixed)</em> the current item.</dd>
 			<dt>index</dt>
-			<dd><em>(number)</em> the index in the collection.</dd>
-			<dt>collection</dt>
-			<dd><em>(elements)</em> the original collection of elements.</dd>
+			<dd><em>(number)</em> the index in the array.</dd>
+			<dt>array</dt>
+			<dd><em>(array)</em> the original array.</dd>
 		</dl>
 	</dd>
 	<dt>bind <span class="label">Optional</span></dt>
 	<dd><em>(object)</em> The object to use as 'this' within the function.</dd>
 </dl>
 <hr />
-<h5>Find out more</h5>
-<p>Find out more about Element.each</p>
-<ul>
-	<li><a href="#">View the source code</a></li>
-	<li><a href="../search/?query=typeOf">Search for <em>Element.each</em> on mootools.net</a></li>
-</ul>
-<hr>
 <div class="well">
 	(comments)<br />
 	<br />
