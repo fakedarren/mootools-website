@@ -9,7 +9,7 @@ include("application/lib/markdown.php");
 versioning
 */
 $currentversion = '2.0';
-$isLatest = empty($_GET['version']);
+$isLatest = empty($_GET['version']) || $_GET['version'] == $currentversion;
 $thisVersion = $isLatest ? $currentversion : $_GET['version'];
 
 Control::config("is_latest", $isLatest);
