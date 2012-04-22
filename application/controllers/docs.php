@@ -6,6 +6,7 @@ class Docs extends Control {
 		$this->isLatest = Control::config("is_latest");
 		$this->majorVersion = Control::config("major_version");
 		$this->assetsFolder = 'releases/' . $this->majorVersion . '/docs/';
+		$this->baseurl = $this->isLatest ? '/docs' : '/' . $this->majorVersion . '/docs';	
 		
 		$mode = (is_numeric($arg1) ? $arg2 : $arg1);
 		
@@ -28,13 +29,13 @@ class Docs extends Control {
 	}
 	
 	private function getMenu(){
-		$html = file_get_contents($this->assetsFolder . 'menu.html');		
-		$baseurl = $this->isLatest ? '/docs' : '/' . $this->majorVersion . '/docs';		
-		return str_replace('[BASEURL]', $baseurl, $html);
+		$html = file_get_contents($this->assetsFolder . 'menu.html');			
+		return str_replace('[BASEURL]', $this->baseurl, $html);
 	}
 	
 	private function getBreadcrumb(){
 		$parts = explode('/', $this->path);
+		$totalurl = $this->baseurl;
 		
 		$html = '';
 		$html .= '<ul class="breadcrumb">';
@@ -45,9 +46,10 @@ class Docs extends Control {
 		}
 		
 		foreach ($parts as $part){
+			$totalurl .= '/' . $part;
 			$html .= '<li>';
 			$html .= '<span class="divider">/</span>';
-			$html .= '<a href="#">' . str_replace('-', ' ', $part) . '</a>';
+			$html .= '<a href="' . $totalurl . '">' . str_replace('-', ' ', $part) . '</a>';
 			$html .= '</li>';
 		}
 		
