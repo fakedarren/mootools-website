@@ -9,23 +9,9 @@
 <body>	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="container">
-	<div class="row">
+	<div class="row">:<?=$version?>:
 	    <div class="span3">
 			<?=$menu?>
-	    	<ul class="nav nav-list">
-			  	<li class="nav-header">Documentation</li>
-			  	<li class="active"><a href="../docs/">Home</a></li>
-				<li class="divider"></li>
-			  	<li><a href="../docs/typeOf.html">typeOf</a></li>
-				<li class="divider"></li>
-				<li><a href="../docs/element.html">Element</a></li>
-				<li class="divider"></li>
-				<li><a href="../docs/each.html">each</a></li>
-				<li class="divider"></li>
-				<li><a href="../docs/setStyle.html">setStyle</a></li>
-				<li class="divider"></li>
-				<li><a href="../docs/request.html">Request</a></li>
-			</ul>
 	    </div>
 	    <div class="span9">
 	    	<ul class="breadcrumb">
