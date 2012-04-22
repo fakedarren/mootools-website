@@ -9,19 +9,13 @@
 <body>	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="container">
-	<div class="row">:<?=$version?>:
+	<div class="row">
 	    <div class="span3">
 			<?=$menu?>
 	    </div>
 	    <div class="span9">
-	    	<ul class="breadcrumb">
-			  	<li class="active">Docs</li>
-			</ul>
-			<div class="alert alert-info">
-				<h4>What is this?</h4>
-				Some rough ideas for documentation 'styles'. I think that different components of MooTools needs different styles
-				specific to what it is. These are just ideas!
-			</div>
+			<?=$breadcrumb?>
+			<?=$content?>
 	    </div>
 	  </div>
 	<?php require($this->config('views_folder') . '/shared/footer.tpl');?>

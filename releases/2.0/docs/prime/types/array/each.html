@@ -1,0 +1,62 @@
+<div class="page-header">
+	<h1>each <small>Loop through a collection of Elements</small></h1>
+</div>
+<h3>Example:</h3>
+<pre class="prettyprint">
+<span class="tag">&lt;ul</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"list"</span><span class="tag">&gt;</span><span class="pln">
+</span><span class="tag">&lt;li&gt;</span><span class="pln">One</span><span class="tag">&lt;/li&gt;</span><span class="pln">
+</span><span class="tag">&lt;li&gt;</span><span class="pln">Two</span><span class="tag">&lt;/li&gt;</span><span class="pln">
+</span><span class="tag">&lt;li&gt;</span><span class="pln">Three</span><span class="tag">&lt;/li&gt;</span><span class="pln">
+</span><span class="tag">&lt;/ul&gt;</span><span class="pln">
+
+$$('.list li').each(function(element, index){
+// Alerts 'Item 1: One', 'Item 2: Two', 'Item 3: Three'
+alert('Item ' + index + ': ' + element.get('text'));
+});</span>
+</pre>
+<hr>
+<h3>Syntax:</h3>
+<pre class="prettyprint">
+<span class="pln">$$</span><span class="pun">(</span><em><span class="pln">selector</span></em><span class="pun">).</span><span class="pln">each</span><span class="pun">(</span><span class="pln">fn</span><span class="pun">,</span><span class="pln"> bind</span><span class="pun">);</span>
+</pre>
+<dl class="dl-horizontal">
+	<dt>fn <span class="label label-important">Required</span></dt>
+	<dd>
+		<em>(function)</em> the function to run on each element.
+		<hr />
+		<pre class="prettyprint">
+<span class="pln">$$</span><span class="pun">(</span><em><span class="pln">selector</span></em><span class="pun">).</span><span class="pln">each</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="pln">element</span><span class="pun">,</span><span class="pln"> index</span><span class="pun">,</span><span class="pln"> collection</span><span class="pun">){</span><span class="pln">
+</span><span class="com">// your code</span><span class="pln">
+</span><span class="pun">});</span>
+</pre>
+		<p>This function gets passed:</p>
+		<dl class="dl-horizontal">
+			<dt>element</dt>
+			<dd><em>(element)</em> the current element.</dd>
+			<dt>index</dt>
+			<dd><em>(number)</em> the index in the collection.</dd>
+			<dt>collection</dt>
+			<dd><em>(elements)</em> the original collection of elements.</dd>
+		</dl>
+	</dd>
+	<dt>bind <span class="label">Optional</span></dt>
+	<dd><em>(object)</em> The object to use as 'this' within the function.</dd>
+</dl>
+<hr />
+<h5>Find out more</h5>
+<p>Find out more about Element.each</p>
+<ul>
+	<li><a href="#">View the source code</a></li>
+	<li><a href="../search/?query=typeOf">Search for <em>Element.each</em> on mootools.net</a></li>
+</ul>
+<hr>
+<div class="well">
+	(comments)<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+</div>

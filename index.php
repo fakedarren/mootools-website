@@ -10,9 +10,11 @@ versioning
 */
 $currentversion = '2.0';
 $isLatest = empty($_GET['version']);
+$thisVersion = $isLatest ? $currentversion : $_GET['version'];
 
-Control::config("isLatest", $isLatest);
-Control::config("version", $isLatest ? $currentversion : $_GET['version']);
+Control::config("is_latest", $isLatest);
+Control::config("version", $thisVersion);
+Control::config("major_version", substr($thisVersion, 0, 3));
 
 /*
 configuration
@@ -20,7 +22,11 @@ configuration
 Control::config("controllers_folder", "application/controllers");
 Control::config("views_folder", "application/views");
 
+Control::route("/^docs/", "docs");
 Control::route("/^[0-9.]+?\/?docs/", "docs");
+Control::route("/^api/", "docs");
+Control::route("/^[0-9.]+?\/?api/", "docs");
+
 Control::route("/^[0-9.]+?\/?learn/", "learn");
 Control::route("/^[0-9.]+?\/?download/", "download");
 Control::route("/^[0-9.]+?\/?plugins/", "plugins");
