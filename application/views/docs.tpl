@@ -11,6 +11,7 @@
 <div class="container">
 	<div class="row">
 	    <div class="span3">
+			<?=$menu?>
 	    	<ul class="nav nav-list">
 			  	<li class="nav-header">Documentation</li>
 			  	<li class="active"><a href="../docs/">Home</a></li>
