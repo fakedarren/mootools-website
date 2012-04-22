@@ -2,15 +2,15 @@
 
 class Docs extends Control {
 	
-	protected function index($path, $type = 'docs'){
+	protected function index($path, $mode = 'docs'){
 		$this->isLatest = Control::config("is_latest");
 		$this->majorVersion = Control::config("major_version");
 		$this->assetsFolder = 'releases/' . $this->majorVersion . '/docs/';
 		
-		$urlparts = explode($type . '/', $_SERVER['REQUEST_URI']);
+		$urlparts = explode($mode . '/', $_SERVER['REQUEST_URI']);
 		@$this->path = $urlparts[1];
 		
-		$this->data('type', $type);
+		$this->data('mode', $mode);
 		$this->data('menu', $this->getMenu());
 		$this->data('breadcrumb', $this->getBreadcrumb());
 		$this->data('content', $this->getContent());
@@ -57,7 +57,7 @@ class Docs extends Control {
 	}
 	
 	private function getLegacyContent($path){
-		$this->data('type', $this->data('type') . ' legacy');
+		$this->data('mode', $this->data('mode') . ' legacy');
 		$content = file_get_contents($path . '.md');
 		$html = markdown($content);
 		return $html;

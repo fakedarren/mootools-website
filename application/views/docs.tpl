@@ -7,7 +7,7 @@
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 	<link href="/assets/css/demos.css" rel="stylesheet"/>
 </head>
-<body class="<?=$type?>">	
+<body class="<?=$mode?>">	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="container">
 	<div class="row">
