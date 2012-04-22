@@ -36,7 +36,7 @@ class Docs extends Control {
 		foreach ($parts as $part){
 			$html .= '<li>';
 			$html .= '<span class="divider">/</span>';
-			$html .= '<a href="#">' . $part . '</a>';
+			$html .= '<a href="#">' . str_replace('-', ' ', $part) . '</a>';
 			$html .= '</li>';
 		}
 		$html .= '</ul>';
