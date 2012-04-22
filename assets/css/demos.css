@@ -1,0 +1,6 @@
+.demo .demo-content {
+	display: none;
+}
+.demo .demo-content.active {
+	display: block;
+}

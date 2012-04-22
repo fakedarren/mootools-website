@@ -5,6 +5,7 @@
 	<title><?=$title;?></title>
 	<?php require($this->config('views_folder') . '/shared/meta.tpl');?>
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
+	<link href="/assets/css/demos.css" rel="stylesheet"/>
 </head>
 <body class="<?=$type?>">	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
@@ -21,5 +22,6 @@
 	<?php require($this->config('views_folder') . '/shared/footer.tpl');?>
 </div>
 <?php require($this->config('views_folder') . '/shared/javascript.tpl');?>
+<script src="/assets/mootools/demos.js"></script>
 </body>
 </html>

@@ -2,13 +2,13 @@
 
 class Docs extends Control {
 	
-	protected function index($path, $type){
+	protected function index($path, $type = 'docs'){
 		$this->isLatest = Control::config("is_latest");
 		$this->majorVersion = Control::config("major_version");
 		$this->assetsFolder = 'releases/' . $this->majorVersion . '/docs/';
 		
 		$urlparts = explode($type . '/', $_SERVER['REQUEST_URI']);
-		$this->path = $urlparts[1];
+		@$this->path = $urlparts[1];
 		
 		$this->data('type', $type);
 		$this->data('menu', $this->getMenu());
