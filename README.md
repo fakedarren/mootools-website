@@ -1,7 +1,11 @@
-Design Principles:
+All this work is currently unofficial and to be treated as such. Just ideas.
 
-* Simple documentation encourages user engagement
-* Encouraging interaction is key to growth
-* Never forget your core users
+For the nosy:
 
-All this work is unofficial and to be treated as such. Just ideas.
+* [The test site](http://mootools.fakedarren.com/)
+* [An example of a docs page](http://mootools.fakedarren.com/docs/Prime/Types/Array/forEach)
+* [An example of versioning through URL, with support for legacy markdown docs](http://mootools.fakedarren.com/1.4/docs/Element/Element)
+* [A microsite running off the same codebase, but with different structure / CSS etc](http://mootoolsmore.fakedarren.com/example-plugin/) (and the [microsite code](https://github.com/fakedarren/mootools-website/tree/master/more/example-plugin))
+
+
+
