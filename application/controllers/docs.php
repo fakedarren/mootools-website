@@ -5,7 +5,7 @@ class Docs extends Control {
 	protected function index($arg1, $arg2 = ''){
 		$this->isLatest = Control::config("is_latest");
 		$this->majorVersion = Control::config("major_version");
-		$this->assetsFolder = 'releases/' . $this->majorVersion . '/docs/';
+		$this->assetsFolder = $_SERVER['DOCUMENT_ROOT'] . '/releases/' . $this->majorVersion . '/docs/';
 		$this->baseurl = $this->isLatest ? '/docs' : '/' . $this->majorVersion . '/docs';	
 		
 		$mode = (is_numeric($arg1) ? $arg2 : $arg1);
