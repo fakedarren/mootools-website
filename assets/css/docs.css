@@ -1,0 +1,25 @@
+
+
+.expand > span,
+.collapsed > span {
+	background: #FAFAFA;
+	cursor: pointer;
+	display: block;
+	float: right;
+	font-size: 18px;
+	height: 22px;
+	text-align: center;
+	width: 22px;
+}
+.expand > span:hover,
+.collapsed > span:hover {
+	background: #EEE;
+}
+
+.expand > ul {
+	display: none;
+}
+
+.collapsed > ul {
+	display: block;
+}
