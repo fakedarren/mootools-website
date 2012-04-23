@@ -28,6 +28,8 @@ Control::route("/^api/", "docs");
 Control::route("/^[0-9.]+?\/?api/", "docs");
 
 Control::route("/^[0-9.]+?\/?learn/", "learn");
+Control::route("/^demo/", "demo");
+
 Control::route("/^[0-9.]+?\/?download/", "download");
 Control::route("/^[0-9.]+?\/?plugins/", "plugins");
 Control::route("/^[0-9.]+?\/?blog/", "blog");

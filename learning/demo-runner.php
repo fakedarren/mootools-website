@@ -19,5 +19,6 @@ $demo = $_GET['demo'];
 <?=file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/learning/demos/' . $demo . '/demo.html')?>
 
 </body>
+<script src="/assets/mootools/mootools-2-alpha.js"></script>
 <script src="/learning/demos/<?=$demo?>/demo.js"></script>
 </html>

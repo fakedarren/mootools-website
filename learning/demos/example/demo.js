@@ -1,1 +1,5 @@
-alert('demo');
+(function($){
+	
+	$('div').addClass('demo');
+	
+})(mootools.$);
