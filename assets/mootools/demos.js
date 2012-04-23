@@ -1,22 +1,21 @@
-mootools.$(window).on('load', function domready(){
+(function($){
 	
-	var demos = mootools.$('.demo');
+	$(window).on('load', function(){
 	
-	if (demos){
-		demos.forEach(function(demo){
-		
-			var tabs = mootools.$('.demo-tabs li', demo);
-			var content = mootools.$('.demo-content', demo);
-		
+		$('.demo').handle(function(demo){
+			var tabs = $('.demo-tabs li', demo);
+			var content = $('.demo-content', demo);
+
 			tabs.forEach(function(tab, index){
 				mootools.$(tab).on('click', function(){
 					tabs.removeClass('active');
 					content.removeClass('active');
-					mootools.$(this).addClass('active');
-					mootools.$(content[index]).addClass('active');
+					$(this).addClass('active');
+					$(content[index]).addClass('active');
 				});
 			});
 		});
-	}
-
-});
+	
+	});
+	
+})(mootools.$);
