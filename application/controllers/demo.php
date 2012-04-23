@@ -36,8 +36,12 @@ class Demo extends Control {
 			$content = str_replace('[JSCONTENT]', '<pre class="prettyprint">' . $js . '</pre>', $content);
 		}
 		
-		$demo = '<iframe src="/learning/demo-runner.php?demo=' . $demo . '"></iframe>';
-		$content = str_replace('[DEMOCONTENT]', $demo, $content);
+		preg_match( '/\[DEMOCONTENT:?(\d*)\]/', $content, $placeholder);
+		$demosize = '200';
+		if ($placeholder[1]) $demosize = $placeholder[1];
+		
+		$demo = '<iframe src="/learning/demo-runner.php?demo=' . $demo . '" style="height: ' . $demosize . 'px"></iframe>';
+		$content = preg_replace('/\[DEMOCONTENT:?\d*\]/', $demo, $content);
 		
 		return $content;
 	}

@@ -19,3 +19,8 @@ body {
 .demo .demo-content.active {
 	display: block;
 }
+.demo iframe {
+	border: 0;
+	border-bottom: 1px solid #DDD;
+	width: 100%;
+}

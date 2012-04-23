@@ -5,7 +5,7 @@
 	  	<li><a href="#">HTML</a></li>
 		<li><a href="#">CSS</a></li>
 	</ul>
-	<div class="active demo-content">[DEMOCONTENT]</div>
+	<div class="active demo-content">[DEMOCONTENT:300]</div>
 	<div class="demo-content">[JSCONTENT]</div>
 	<div class="demo-content">[HTMLCONTENT]</div>
 	<div class="demo-content">[CSSCONTENT]</div>
