@@ -1,0 +1,21 @@
+<div class="page-header">
+	<h1>Example Demo</h1>
+</div>
+
+<p>You can put any HTML in here you want.</p>
+<hr />
+
+<div class="demo">
+	<ul class="nav nav-tabs demo-tabs">
+		<li class="active"><a href="#">Demo</a></li>
+	  	<li><a href="#">JavaScript</a></li>
+	  	<li><a href="#">HTML</a></li>
+		<li><a href="#">CSS</a></li>
+	</ul>
+	<div class="active demo-content">
+		<div class="well">[DEMOCONTENT:300]</div>
+	</div>
+	<div class="demo-content">[JSCONTENT]</div>
+	<div class="demo-content">[HTMLCONTENT]</div>
+	<div class="demo-content">[CSSCONTENT]</div>
+</div>
