@@ -6,19 +6,14 @@
 	<?php require($this->config('views_folder') . '/shared/meta.tpl');?>
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
 </head>
-<body>	
+<body onload="prettyPrint()">	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="container">
-	<div class="row">
-	    <div class="span9">
-			<h1>Learn MooTools</h1>
-			<p>Welcome to the Learning Section</p>
-			<div class="alert alert-info">
-	  			<h4>What is this?</h4>
-	  			It would be nice to have a 'learning' section - demos, tutorials, approved blog posts, books.
-	  		</div>
-			<p><a href="/demo/example">An Example Demo</a></p>
-			<p><a href="/tutorial/example">An Example Tutorial</a></p>
+    <div class="row">
+	  	<div class="span9">
+			<?=$pagination?>
+			<?=$tutorial?>
+			<?=$pagination?>
 		</div>
 	  	<div class="span3">
 	  		<?php require($this->config('views_folder') . '/shared/quick-download.tpl');?>

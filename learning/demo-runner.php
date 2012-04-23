@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <?php
-$demo = $_GET['demo'];
+if (isset($_GET['tutorial'])){
+	$path = '/learning/tutorials/' . $_GET['tutorial'] . '/demos/' . $_GET['demo'];
+} else {
+	$path = '/learning/demos/' . $_GET['demo'];
+}
 ?>
 <html lang="en">
 <head>
@@ -13,12 +17,12 @@ $demo = $_GET['demo'];
 			padding: 0;
 		}
 	</style>
-	<link href="/learning/demos/<?=$demo?>/demo.css" rel="stylesheet"/>
+	<link href="<?=$path?>/demo.css" rel="stylesheet"/>
 </head>
 <body>
-<?=file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/learning/demos/' . $demo . '/demo.html')?>
+<?=file_get_contents($_SERVER['DOCUMENT_ROOT'] . $path . '/demo.html')?>
 
 </body>
 <script src="/assets/mootools/mootools-2-alpha.js"></script>
-<script src="/learning/demos/<?=$demo?>/demo.js"></script>
+<script src="<?=$path?>/demo.js"></script>
 </html>

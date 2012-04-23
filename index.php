@@ -3,6 +3,7 @@ error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 include("application/lib/control.php");
+include("application/lib/demo-parser.php");
 include("application/lib/markdown.php");
 
 /*
@@ -29,6 +30,7 @@ Control::route("/^[0-9.]+?\/?api/", "docs");
 
 Control::route("/^[0-9.]+?\/?learn/", "learn");
 Control::route("/^demo/", "demo");
+Control::route("/^tutorial/", "tutorial");
 
 Control::route("/^[0-9.]+?\/?download/", "download");
 Control::route("/^[0-9.]+?\/?plugins/", "plugins");
