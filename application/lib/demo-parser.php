@@ -7,7 +7,7 @@ class DemoParser extends Control {
 		$cssContent = $path . '/demo.css';
 		$jsContent = $path . '/demo.js';
 		
-		if (!file_exists($path) . '/demo.tpl')
+		if (!file_exists($path . '/demo.tpl'))
 			return '[DEMO:' . $demo . ']';
 		
 		$content = file_get_contents($path . '/demo.tpl');
