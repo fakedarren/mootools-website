@@ -37,7 +37,7 @@
         var nodes = require("g");
         nodes.use(slick);
         mootools.$ = nodes;
-        global.exports = mootools;
+        global.mootools = mootools;
     },
     "1": function(require, module, exports, global) {
         "use strict";
