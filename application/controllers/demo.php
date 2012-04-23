@@ -3,7 +3,7 @@
 class Demo extends Control {
 
 	protected function index($name, $demo = ''){
-		$this->data('page', 'Demo');
+		$this->data('page', 'Learn');
 		$this->data('title', 'MooTools - Demo');
 		
 		$content = $this->getContent($demo);

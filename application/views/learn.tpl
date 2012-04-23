@@ -17,6 +17,7 @@
 	  			<h4>What is this?</h4>
 	  			It would be nice to have a 'learning' section - demos, tutorials, approved blog posts, books.
 	  		</div>
+			<p><a href="/demo/example">An Example Demo</a></p>
 		</div>
 	  	<div class="span3">
 	  		<?php require($this->config('views_folder') . '/shared/quick-download.tpl');?>
