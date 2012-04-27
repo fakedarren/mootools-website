@@ -5,6 +5,7 @@ ini_set("display_errors", 1);
 include("application/lib/control.php");
 include("application/lib/demo-parser.php");
 include("application/lib/markdown.php");
+include('application/lib/Solarium/Autoloader.php');
 
 /*
 versioning
