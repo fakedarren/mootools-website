@@ -6,6 +6,7 @@ include("application/lib/control.php");
 include("application/lib/demo-parser.php");
 include("application/lib/markdown.php");
 include('application/lib/Solarium/Autoloader.php');
+include('application/lib/search.php');
 
 /*
 versioning

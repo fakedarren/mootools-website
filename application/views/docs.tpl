@@ -17,6 +17,7 @@
 	    <div class="span9">
 			<?=$breadcrumb?>
 			<?=$content?>
+			<?=$related?>
 	    </div>
 	  </div>
 	<?php require($this->config('views_folder') . '/shared/footer.tpl');?>
