@@ -22,8 +22,8 @@
 	  		<?php require($this->config('views_folder') . '/shared/quick-download.tpl');?>
 		</div>
 	</div>
-	<?php require($this->config('views_folder') . '/shared/footer.tpl');?>
 </div>
+<?php require($this->config('views_folder') . '/shared/footer.tpl');?>
 <?php require($this->config('views_folder') . '/shared/javascript.tpl');?>
 </body>
 </html>

@@ -19,9 +19,8 @@
   min-height: @navbarHeight;
   padding-left:  20px;
   padding-right: 20px;
-  #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+  background-color: @navbarBackground;
   .border-radius(4px);
-  .box-shadow(~"0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1)");
 }
 
 // Set width to auto for default container
@@ -45,16 +44,13 @@
   }
   // Website or project name
   .brand {
+	background: url(graphics/header-logo.png) no-repeat 50% (@navbarHeight - 50);
     float: left;
     display: block;
-    // Vertically center the text given @navbarHeight
-    @elementHeight: 20px;
-    padding: ((@navbarHeight - @elementHeight) / 2 - 2) 20px ((@navbarHeight - @elementHeight) / 2 + 2);
-    margin-left: -20px; // negative indent to left-align the text down the page
-    font-size: 20px;
-    font-weight: 200;
-    line-height: 1;
-    color: @navbarBrandColor;
+	height: @navbarHeight;
+	margin-right: 20px;
+	text-indent: -9999px;
+	width: 192px;
   }
   // Plain text in topbar
   .navbar-text {
@@ -279,6 +275,31 @@
 }
 .btn-navbar .icon-bar + .icon-bar {
   margin-top: 3px;
+}
+
+
+// 'Tabbed' menu items
+// -------------------
+.navbar li.tabbed,
+.navbar li.active.tabbed {
+  height: 30px;
+  margin-top: (@navbarHeight - 30);
+  > a {
+    line-height: 30px;
+    height: 30px;
+    padding: 0 10px;
+    text-transform: uppercase;
+  }
+}
+.navbar li.active.tabbed {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.navbar li.active.tabbed a,
+.navbar li.active.tabbed a:hover {
+  background: @navbarLinkColorActive;
+  color: @navbarBackground;
+  .border-radius-top(6px);
 }
 
 

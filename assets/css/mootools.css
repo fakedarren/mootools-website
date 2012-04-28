@@ -1,10 +1,14 @@
 body {
   position: relative;
-  padding-top: 90px;
-  background-color: #fff;
-  background-image: url(../img/grid-18px-masked.png);
-  background-repeat: repeat-x;
-  background-position: 0 40px;
+  padding-top: 115px;
+  background: #FFF url(graphics/background-logo.png) no-repeat 0 100%;
+}
+
+footer {
+	background: #00293F url(graphics/footer-logo.png) no-repeat 98% 50%;
+	color: #FFF;
+	height: 140px;
+	margin: 100px 0 0;
 }
 
 /* Homepage */

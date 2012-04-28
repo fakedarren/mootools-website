@@ -4,12 +4,10 @@
 			<a class="brand" href="/">MooTools</a>
 			<div class="nav-collapse">
 				<ul class="nav">
-					<li class="<?php if ($page == 'Home') echo 'active'?>"><a href="/">Home</a></li>
-					<li class="divider-vertical"></li>
-					<li class="<?php if ($page == 'Docs') echo 'active'?>"><a href="/docs/">Documentation</a></li>
-					<li class="<?php if ($page == 'Learn') echo 'active'?>"><a href="/learn/">Learn More</a></li>
-					<li class="divider-vertical"></li>
-					<li class="<?php if ($page == 'Download') echo 'active'?>"><a href="/download/">Download</a></li>
+					<li class="<?php if ($page == 'Home') echo 'active '?>tabbed"><a href="/">Home</a></li>
+					<li class="<?php if ($page == 'Docs') echo 'active '?>tabbed"><a href="/docs/">Documentation</a></li>
+					<li class="<?php if ($page == 'Learn') echo 'active '?>tabbed"><a href="/learn/">Learn More</a></li>
+					<li class="<?php if ($page == 'Download') echo 'active '?>tabbed"><a href="/download/">Download</a></li>
 				</ul>
 			</div>
 			<form class="navbar-search pull-right" action="search/">

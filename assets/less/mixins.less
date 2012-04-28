@@ -197,6 +197,17 @@
           border-radius: @radius;
 }
 
+// Border Radius (top corners)
+.border-radius-top(@radius) {
+  -webkit-border-top-left-radius: @radius;
+      -moz-border-radius-topleft: @radius;
+          border-top-left-radius: @radius;
+
+  -webkit-border-top-right-radius: @radius;
+      -moz-border-radius-topright: @radius;
+          border-top-right-radius: @radius;
+}
+
 // Drop shadows
 .box-shadow(@shadow) {
   -webkit-box-shadow: @shadow;
