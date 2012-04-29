@@ -55,4 +55,26 @@ class Search {
 	
 }
 
+
+class SearchDocs extends Search {
+	
+	public function query($searchterm, $url = ''){
+		$this->connect();
+		if ($this->connected){
+			$client = new Solarium_Client();
+			$query = $client->createSelect();
+			$query->setQuery($searchterm);
+			if ($url != ''){
+				$query->createFilterQuery('url')->setQuery('-url:' . $url);
+			}
+			$resultsset = $client->select($query);
+			
+			return $this->getResultsHTML($resultsset);
+		} else {
+			return $this->getErrorMessage($searchterm);
+		}
+	}
+	
+}
+
 ?>
