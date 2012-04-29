@@ -1,6 +1,6 @@
 <?php
 
-class SearchCore {
+class SearchResults {
 	
 	public function __construct(){	
 		Solarium_Autoloader::register();
@@ -16,6 +16,24 @@ class SearchCore {
 		    $this->connected = 0;
 		}	
 	}
+	
+	public function query($searchterm){
+		$this->connect();
+		
+		if (!$this->connected) return false;
+
+		$client = new Solarium_Client();
+		$query = $client->createSelect();
+		$query->setQuery($searchterm);
+		$resultsset = $client->select($query);
+		
+		return $resultsset;
+	}
+
+}
+
+
+class SearchResultsDocs extends SearchResults {
 	
 	public function query($searchterm, $url = ''){
 		$this->connect();
@@ -51,28 +69,6 @@ class SearchCore {
 					'<h4 class="alert-heading">Oh no! Our Search Engine is down!</h4>' .
 					'<p>Sorry! We\'ll look into that right away. In the mean time, why not try a <a href="#">Google Search</a>?</p>' .
 				'</div>';
-	}
-	
-}
-
-
-class SearchDocs extends SearchCore {
-	
-	public function query($searchterm, $url = ''){
-		$this->connect();
-		if ($this->connected){
-			$client = new Solarium_Client();
-			$query = $client->createSelect();
-			$query->setQuery($searchterm);
-			if ($url != ''){
-				$query->createFilterQuery('url')->setQuery('-url:' . $url);
-			}
-			$resultsset = $client->select($query);
-			
-			return $this->getResultsHTML($resultsset);
-		} else {
-			return $this->getErrorMessage($searchterm);
-		}
 	}
 	
 }

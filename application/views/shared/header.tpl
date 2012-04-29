@@ -10,8 +10,8 @@
 					<li class="<?php if ($page == 'Download') echo 'active '?>tabbed"><a href="/download/">Download</a></li>
 				</ul>
 			</div>
-			<form class="navbar-search pull-right" action="/search">
-				<input type="text" class="search-query span2" placeholder="Search" />
+			<form class="navbar-search pull-right" action="/search/">
+				<input type="text" class="search-query span2" placeholder="Search" name="q" />
 			</form>
 			<ul class="nav pull-right">
 				<li class="<?php if ($page == 'Plugins') echo 'active'?>"><a href="/plugins/">Plugins</a></li>

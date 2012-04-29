@@ -14,48 +14,21 @@
 			<div class="page-header">
 				<h1>Search Results</h1>
 			</div>
+			<?php if (count($results) == 0):?>
+			<div class="alert alert-error">
+				<h4>No results found</h4>
+			</div>
+			<?php else:?>
 			<ul class="search-results">
-				<li>
-					<h3><a href="#">Search Result 1</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 2</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 3</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 4</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 5</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 6</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 7</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 8</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 9</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-				<li>
-					<h3><a href="#">Search Result 10</a></h3>
-					<p>This is the description. This is the description.</p>
-				</li>
-			</ul>
+				<?php
+				foreach ($results as $document):
+				echo '<li>' .
+						'<h3><a href="' . $document['url'] . '">' . $document['name'] . '</a></h3>' .
+					'</li>';
+				endforeach
+				?>
+			</ul>			
+			<?php endif?>
 			<ul class="pagination">
 				<li class="active"><a href="#">1</a></li>
 				<li><a href="#">2</a></li>
