@@ -39,6 +39,8 @@ Control::route("/^[0-9.]+?\/?plugins/", "plugins");
 Control::route("/^[0-9.]+?\/?blog/", "blog");
 Control::route("/^[0-9.]+?\/?community/", "community");
 
+Control::route("/^search/", "search");
+
 /*
 go
 */

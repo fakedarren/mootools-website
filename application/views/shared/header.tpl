@@ -10,7 +10,7 @@
 					<li class="<?php if ($page == 'Download') echo 'active '?>tabbed"><a href="/download/">Download</a></li>
 				</ul>
 			</div>
-			<form class="navbar-search pull-right" action="search/">
+			<form class="navbar-search pull-right" action="/search">
 				<input type="text" class="search-query span2" placeholder="Search" />
 			</form>
 			<ul class="nav pull-right">

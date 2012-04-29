@@ -1,6 +1,6 @@
 <?php
 
-class Search {
+class SearchCore {
 	
 	public function __construct(){	
 		Solarium_Autoloader::register();
@@ -56,7 +56,7 @@ class Search {
 }
 
 
-class SearchDocs extends Search {
+class SearchDocs extends SearchCore {
 	
 	public function query($searchterm, $url = ''){
 		$this->connect();
