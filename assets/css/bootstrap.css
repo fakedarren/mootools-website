@@ -2955,6 +2955,7 @@ input[type="submit"].btn.btn-mini {
 .navbar {
   *position: relative;
   *z-index: 2;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
   overflow: visible;
   margin-bottom: 18px;
 }
@@ -3086,7 +3087,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-fixed-top,
 .navbar-fixed-bottom {
-  position: fixed;
+  position: absolute;
   right: 0;
   left: 0;
   z-index: 1030;
