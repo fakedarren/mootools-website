@@ -31,13 +31,15 @@ class Search {
 	}
 	
 	public function getResultsHTML($resultsset){
-		$html = '';
+		$html = '<h3>Related Content</h3>';
+		$html.= '<ul>';
 		foreach ($resultsset as $document){
 			$html .= '<li>' .
-					'<h4>' . $document['name'] . '</h4>' .
+					'<h4><a href="' . $document['url'] . '">' . $document['name'] . '</a></h4>' .
 				'</li>';
 		}
-		return '<ul>' . $html . '</ul>';
+		$html.= '</ul>';
+		return $html;
 	}
 	
 	public function getErrorMessage($searchterm){

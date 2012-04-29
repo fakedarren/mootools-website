@@ -45,6 +45,7 @@ foreach (getAllFilesIn('../../releases/2.0') as $page){
 	$doc->id = md5($page);
 	$doc->name = $headings->item(0)->nodeValue;
 	$doc->content = $content;
+	$doc->url = str_replace('.html', '', str_replace('../../releases/2.0', '', $page));
 	
 	$results[] = $doc;
 }

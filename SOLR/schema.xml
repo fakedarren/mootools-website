@@ -497,24 +497,9 @@
    -->
 
    <field name="id" type="string" indexed="true" stored="true" required="true" /> 
-   <field name="sku" type="text_en_splitting_tight" indexed="true" stored="true" omitNorms="true"/>
    <field name="name" type="text_general" indexed="true" stored="true"/>
-   <field name="alphaNameSort" type="alphaOnlySort" indexed="true" stored="false"/>
-   <field name="manu" type="text_general" indexed="true" stored="true" omitNorms="true"/>
-   <field name="cat" type="string" indexed="true" stored="true" multiValued="true"/>
-   <field name="features" type="text_general" indexed="true" stored="true" multiValued="true"/>
-   <field name="includes" type="text_general" indexed="true" stored="true" termVectors="true" termPositions="true" termOffsets="true" />
-
-   <field name="weight" type="float" indexed="true" stored="true"/>
-   <field name="price"  type="float" indexed="true" stored="true"/>
-   <field name="popularity" type="int" indexed="true" stored="true" />
-   <field name="inStock" type="boolean" indexed="true" stored="true" />
-
-   <!--
-   The following store examples are used to demonstrate the various ways one might _CHOOSE_ to
-    implement spatial.  It is highly unlikely that you would ever have ALL of these fields defined.
-    -->
-   <field name="store" type="location" indexed="true" stored="true"/>
+   <field name="url" type="string" indexed="true" stored="true"/>
+   <field name="content" type="text_general" indexed="true" stored="true" multiValued="true"/>
 
    <!-- Common metadata fields, named specifically to match up with
      SolrCell metadata when parsing rich documents such as Word, PDF.
@@ -522,7 +507,6 @@
      multiple values for them.
    -->
    <field name="title" type="text_general" indexed="true" stored="true" multiValued="true"/>
-   <field name="subject" type="text_general" indexed="true" stored="true"/>
    <field name="description" type="text_general" indexed="true" stored="true"/>
    <field name="comments" type="text_general" indexed="true" stored="true"/>
    <field name="author" type="text_general" indexed="true" stored="true"/>
@@ -613,12 +597,9 @@
         is added to the index.  It's used either to index the same field differently,
         or to add multiple fields to the same field for easier/faster searching.  -->
 
-   <copyField source="cat" dest="text"/>
+   <copyField source="category" dest="text"/>
    <copyField source="name" dest="text"/>
-   <copyField source="manu" dest="text"/>
-   <copyField source="features" dest="text"/>
-   <copyField source="includes" dest="text"/>
-   <copyField source="manu" dest="manu_exact"/>
+   <copyField source="content" dest="text"/>
 	
    <!-- Above, multiple source fields are copied to the [text] field. 
 	  Another way to map multiple source fields to the same 
