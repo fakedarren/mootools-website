@@ -26,7 +26,7 @@ class Docs extends Control {
 		$this->data('title', 'MooTools - Documentation');
 
 		$search = new Search();
-		$this->data('related', $search->query($this->path));
+		$this->data('related', $search->query($this->path, $_SERVER['REQUEST_URI']));
 		
 		$this->render();
 	}
