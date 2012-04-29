@@ -27,6 +27,15 @@ function getAllFilesIn($directory){
 	return array_flatten($results);
 }
 
+function innerHTML($node){ 
+    $html = '';
+    $children = $node->childNodes;
+    foreach ($children as $child){
+        $html .= $child->ownerDocument->saveXML($child);
+    }
+    return $html;
+}
+
 
 /*
 get content
@@ -43,7 +52,7 @@ foreach (getAllFilesIn('../../releases/2.0') as $page){
 	
 	$doc = new Solarium_Document_ReadWrite();
 	$doc->id = md5($page);
-	$doc->name = $headings->item(0)->nodeValue;
+	$doc->name = preg_replace('/<small>[^<]*<\/small>/', '', innerHTML($headings->item(0)));
 	$doc->content = $content;
 	$doc->url = str_replace('.html', '', str_replace('../../releases/2.0', '', $page));
 	
