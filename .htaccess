@@ -1,5 +1,6 @@
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^([0-9.]+)?/?(.*) index.php/$2?version=$1 [L]
-#RewriteRule ^([^\/]+)\/(.*) more.php/$2?plugin=$1
+RewriteRule ^([0-9.]+)?/?(.*) index.php/$2?version=$1
+#RewriteRule ^([^\/]+)\/?(.*) more.php/$2?plugin=$1 [L]
+#RewriteRule ^.* http://mootools-website.local/plugins [L]

@@ -22,16 +22,20 @@
 		  		<ul class="thumbnails">
 				  	<li class="span3">
 				    	<div class="thumbnail">
-				    		<img src="http://placehold.it/260x180" />
-				    		<h1>Official Plugins</h1>
-				    		<p>Official plugins by the MooTools Dev Team</p>
+							<a href="<?=$moreURL?>/official">
+				    			<img src="http://placehold.it/260x180" />
+				    			<h1>Official Plugins</h1>
+				    			<p>Official plugins by the MooTools Dev Team</p>
+							</a>
 				      	</div>
 				  	</li>
 				  	<li class="span3">
 				    	<div class="thumbnail">
-				    		<img src="http://placehold.it/260x180" />
-				    		<h1>The Forge</h1>
-				    		<p>User-submitted plugins repository</p>
+							<a href="/forge">
+					    		<img src="http://placehold.it/260x180" />
+					    		<h1>The Forge</h1>
+					    		<p>User-submitted plugins repository</p>
+							</a>
 				    	</div>
 				  	</li>
 				  	<li class="span3">

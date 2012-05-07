@@ -7,6 +7,7 @@ include("application/lib/markdown.php");
 
 include("application/lib/plugins/plugin-base.php");
 include("application/lib/plugins/docs-base.php");
+
 /*
 plugin
 */
