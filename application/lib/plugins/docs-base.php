@@ -36,7 +36,20 @@ class DocsBase extends Control {
 	}
 	
 	private function getBreadcrumb(){
-		return '<ul class="breadcrumb"></ul>';
+		$parts = explode('/', $this->path);
+		$totalurl = $this->microsite . '/docs';
+		
+		$html = '<ul class="breadcrumb">';
+		$html.= '<li><a href="' . $totalurl . '">Docs</a></li>';
+		foreach ($parts as $part){
+			$totalurl .= '/' . $part;
+			$html .= '<li>';
+			$html .= '<span class="divider">/</span>';
+			$html .= '<a href="' . $totalurl . '">' . str_replace('-', ' ', $part) . '</a>';
+			$html .= '</li>';
+		}
+		$html.= '</ul>';
+		return $html;
 	}
 	
 	private function getContent(){
