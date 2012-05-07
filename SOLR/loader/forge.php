@@ -17,7 +17,7 @@ if ($result = $mysqli->query('SELECT * FROM plugin')){
 		$doc->id = md5('Forge:' . $row->title);
 		$doc->name = $row->title;
 		$doc->content = $row->description_clean;
-		$doc->url = 'forge/' . $row->slug; 
+		$doc->url = '/forge/p/' . $row->slug; 
 
 		$results[] = $doc;
 	}
