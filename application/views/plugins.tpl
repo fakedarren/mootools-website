@@ -23,27 +23,27 @@
 				  	<li class="span3">
 				    	<div class="thumbnail">
 							<a href="<?=$moreURL?>/official">
-				    			<img src="http://placehold.it/260x180" />
-				    			<h1>Official Plugins</h1>
-				    			<p>Official plugins by the MooTools Dev Team</p>
+								<img src="http://placehold.it/260x180" />
+								<h1>Official Plugins</h1>
+								<p>Official plugins by the MooTools Dev Team</p>
 							</a>
 				      	</div>
 				  	</li>
 				  	<li class="span3">
 				    	<div class="thumbnail">
 							<a href="/forge">
-					    		<img src="http://placehold.it/260x180" />
-					    		<h1>The Forge</h1>
-					    		<p>User-submitted plugins repository</p>
+								<img src="http://placehold.it/260x180" />
+								<h1>The Forge</h1>
+								<p>User-submitted plugins repository</p>
 							</a>
 				    	</div>
 				  	</li>
 				  	<li class="span3">
 				    	<div class="thumbnail">
 							<a href="<?=$featured[0]->url?>">
-				    			<img src="http://placehold.it/260x180&text=random" />
-				    			<h1><?=$featured[0]->name?></h1>
-				    			<p>(this would be a random extension)</p>
+								<img src="http://placehold.it/260x180&amp;text=random" />
+								<h1><?=$featured[0]->name?></h1>
+								<p>(this would be a random extension)</p>
 							</a>
 				    	</div>
 				  	</li>
