@@ -18,6 +18,7 @@
 			<?=$breadcrumb?>
 			<?=$content?>
 			<?=$related?>
+			<?php require($this->config('views_folder') . '/shared/comments.tpl');?>
 	    </div>
 	  </div>
 </div>

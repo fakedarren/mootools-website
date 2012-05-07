@@ -53,7 +53,8 @@ class SearchResultsDocs extends SearchResults {
 	}
 	
 	public function getResultsHTML($resultsset){
-		$html = '<h3>Related Content</h3>';
+		$html = '<hr />';
+		$html.= '<h3>Related Content</h3>';
 		$html.= '<ul>';
 		foreach ($resultsset as $document){
 			$html .= '<li>' .
