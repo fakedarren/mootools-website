@@ -75,4 +75,27 @@ class SearchResultsDocs extends SearchResults {
 	
 }
 
+class SearchResultsPlugins extends SearchResults {
+	
+	public function random($rows = 1){
+		
+		$client = new Solarium_Client();
+		$query = $client->createSelect();
+		
+		$query->setQuery('*');
+		$query->setRows($rows);
+		$query->addSort('random_' . time(), Solarium_Query_Select::SORT_DESC);
+		$query->createFilterQuery('plugin')->setQuery('plugin:true');
+		
+		$resultsset = $client->select($query);
+		
+		foreach($resultsset as $document){
+			$results[] = $document;
+		}
+		
+		return $results;
+	}
+	
+}
+
 ?>

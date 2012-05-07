@@ -40,9 +40,11 @@
 				  	</li>
 				  	<li class="span3">
 				    	<div class="thumbnail">
-				    		<img src="http://placehold.it/260x180&text=random" />
-				    		<h1>Something</h1>
-				    		<p>(this would be a random extension)</p>
+							<a href="<?=$featured[0]->url?>">
+				    			<img src="http://placehold.it/260x180&text=random" />
+				    			<h1><?=$featured[0]->name?></h1>
+				    			<p>(this would be a random extension)</p>
+							</a>
 				    	</div>
 				  	</li>
 				</ul>
