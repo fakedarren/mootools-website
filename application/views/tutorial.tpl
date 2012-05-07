@@ -14,6 +14,7 @@
 			<?=$pagination?>
 			<?=$tutorial?>
 			<?=$pagination?>
+			<?php require($this->config('views_folder') . '/shared/comments.tpl');?>
 		</div>
 	  	<div class="span3">
 	  		<?php require($this->config('views_folder') . '/shared/quick-download.tpl');?>
