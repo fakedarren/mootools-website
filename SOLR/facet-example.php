@@ -35,6 +35,8 @@ echo '</ul>';
 echo '<hr />';
 echo '<ol>';
 foreach ($resultset as $document){
-    echo '<li><a href="' . $document->url . '">' . $document->name . '</a></li>';
+	echo '<li>';
+	echo '<a href="' . $document->url . '">' . $document->name . '</a>';
+	echo '</li>';
 }
 echo '</ol>';
