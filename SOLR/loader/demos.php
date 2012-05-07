@@ -13,6 +13,16 @@ function array_flatten($array){
 	return call_user_func_array('array_merge', $array);
 }
 
+function getAllFoldersIn($directory){
+	$dirs = scandir($directory);
+	foreach($dirs as $file){
+		if ($file[0] != '.'){
+			$results[] = $directory . '/' . $file;
+		}
+	}
+	return array_flatten($results);
+}
+
 function getAllFilesIn($directory){
 	$dirs = scandir($directory);
 	foreach($dirs as $file){
@@ -40,27 +50,30 @@ function innerHTML($node){
 /*
 get content
 */
-foreach (getAllFilesIn('../../releases/2.0') as $page){
-	$content = file_get_contents($page);
+$demos = getAllFoldersIn('../../learning/demos');
+
+foreach ($demos as $demo){
+	
+	$content = file_get_contents($demo . '/demo.tpl');
 	
 	$dom = new DOMDocument();
 	$dom->loadHTML($content);
-	
+
 	$xpath = new DOMXpath($dom);
-	
+
 	$headings = $dom->getElementsByTagName('h1');
-	
+
 	$doc = new Solarium_Document_ReadWrite();
-	$doc->id = md5($page);
-	$doc->name = preg_replace('/<small>[^<]*<\/small>/', '', innerHTML($headings->item(0)));
+	$doc->id = md5($demo);
+	$doc->name = innerHTML($headings->item(0));
 	$doc->content = $content;
-	$doc->url = str_replace('.html', '', str_replace('../../releases/2.0', '', $page));
-	
-	$doc->documentation = true;
+	$doc->url = str_replace('../../learning', '', str_replace('/demos/', '/demo/', $demo));
+
+	$doc->documentation = false;
 	$doc->plugin = false;
 	$doc->tutorial = false;
-	$doc->demo = false;
-	
+	$doc->demo = true;
+
 	$results[] = $doc;
 }
 
@@ -81,11 +94,11 @@ display records
 */
 $client = new Solarium_Client();
 $query = $client->createSelect();
-$query->setRows(1000);
-$query->createFilterQuery('documentation')->setQuery('documentation:true');
+$query->setRows(10000);
+$query->createFilterQuery('demos')->setQuery('demo:true');
 $resultset = $client->select($query);
 
-echo 'Found ' . $resultset->getNumFound() . ' documentation pages';
+echo 'Found ' . $resultset->getNumFound() . ' demos';
 
 foreach ($resultset as $document){
     echo '<hr/><table>';
@@ -95,3 +108,4 @@ foreach ($resultset as $document){
     }
     echo '</table>';
 }
+?>
