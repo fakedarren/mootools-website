@@ -6,7 +6,7 @@
 	<?=$baseCSS?>
 	<?php require($serverroot . 'application/views/shared/css.tpl');?>
 </head>
-<body class="<?=$mode?>" onload="prettyPrint()">
+<body onload="prettyPrint()">
 <?php require($serverroot . 'application/views/shared/header.tpl');?>
 <div class="container">
 	<div class="row">
