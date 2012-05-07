@@ -17,7 +17,7 @@ configuration
 */
 $serverRoot = $_SERVER['DOCUMENT_ROOT'] . "/more/" . Control::config("plugin") . "/";
 
-Control::config("webroot", "/more/" . Control::config("plugin") . "/");
+Control::config("webroot", Control::config("plugin"));
 Control::config("serverroot", $serverRoot);
 
 Control::config("controllers_folder", $serverRoot . "application/controllers");

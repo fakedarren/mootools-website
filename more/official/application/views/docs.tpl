@@ -17,12 +17,11 @@
 			<?=$breadcrumb?>
 			<?=$content?>
 			<?=$related?>
-			<?php require($this->config('views_folder') . '/shared/comments.tpl');?>
+			<?php require($serverroot . 'application/views/shared/comments.tpl');?>
 	    </div>
 	  </div>
 </div>
-<?php require($this->config('views_folder') . '/shared/footer.tpl');?>
-<?php require($this->config('views_folder') . '/shared/javascript.tpl');?>
-<script src="/assets/mootools/docs.js"></script>
+<?php require($serverroot . 'application/views/shared/footer.tpl');?>
+<?=$baseJS?>
 </body>
 </html>
