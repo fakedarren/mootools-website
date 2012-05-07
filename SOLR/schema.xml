@@ -501,6 +501,12 @@
    <field name="url" type="string" indexed="true" stored="true"/>
    <field name="content" type="text_general" indexed="true" stored="true" multiValued="true"/>
 
+   <field name="documentation" type="boolean" indexed="true" stored="true"/>
+   <field name="tutorial" type="boolean" indexed="true" stored="true"/>
+   <field name="plugin" type="boolean" indexed="true" stored="true"/>
+   <field name="demo" type="boolean" indexed="true" stored="true"/>
+
+
    <!-- Common metadata fields, named specifically to match up with
      SolrCell metadata when parsing rich documents such as Word, PDF.
      Some fields are multiValued only because Tika currently may return
