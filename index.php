@@ -22,6 +22,8 @@ Control::config("major_version", substr($thisVersion, 0, 3));
 /*
 configuration
 */
+Control::config("more_url", 'http://mootools-website-more.local');
+
 Control::config("controllers_folder", "application/controllers");
 Control::config("views_folder", "application/views");
 
