@@ -16,7 +16,6 @@
 	    <div class="span9">
 			<?=$breadcrumb?>
 			<?=$content?>
-			<?=$related?>
 			<?php require($serverroot . 'application/views/shared/comments.tpl');?>
 	    </div>
 	  </div>
