@@ -19,6 +19,7 @@
 				<h4>No results found</h4>
 			</div>
 			<?php else:?>
+			<p>Searching for '<?=$searchterm?>', showing results <?=$start?>-<?=$end?> of <?=$count?>.</p>
 			<ul class="search-results">
 				<?php
 				foreach ($results as $document):
@@ -29,14 +30,7 @@
 				?>
 			</ul>			
 			<?php endif?>
-			<ul class="pagination">
-				<li class="active"><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">5</a></li>
-				<li><a href="#">6</a></li>
-			</ul>
+			<?=$pagination?>
 		</div>
 	  	<div class="span3">
 	  		<?php require($this->config('views_folder') . '/shared/quick-download.tpl');?>

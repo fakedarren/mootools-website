@@ -17,13 +17,14 @@ class SearchResults {
 		}	
 	}
 	
-	public function query($searchterm){
+	public function query($searchterm, $start){
 		$this->connect();
 		
 		if (!$this->connected) return false;
 
 		$client = new Solarium_Client();
 		$query = $client->createSelect();
+		$query->setStart($start);
 		$query->setQuery($searchterm);
 		$resultsset = $client->select($query);
 		
