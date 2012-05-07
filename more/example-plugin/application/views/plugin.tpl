@@ -3,10 +3,12 @@
 <head>
 	<meta charset="utf-8">
 	<title>My Awesome Plugin Microsite</title>
+	<?=$baseCSS?>
 	<link href="<?=$root?>assets/css/main.css" rel="stylesheet" />
 </head>
 <body>
 	<h1>My Awesome Plugin Microsite - Homepage</h1>
 	<p><a href="docs">Docs</a></p>
 </body>
+<?=$baseJS?>
 </html>
