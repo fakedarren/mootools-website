@@ -7,7 +7,8 @@ class DocsBase extends Control {
 		$this->assetsFolder = Control::config("serverroot") . '/docs/';
 		$this->baseurl = '/plugin/docs/';
 		
-		$this->data('root', Control::config('webroot'));
+		$this->data('webroot', Control::config('webroot'));
+		$this->data('serverroot', Control::config("serverroot"));
 		
 		$this->data('baseCSS', file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/application/views/shared/css.tpl'));
 		$this->data('baseJS', file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/application/views/shared/javascript.tpl'));
