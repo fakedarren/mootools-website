@@ -13,7 +13,7 @@
 				<input type="text" class="search-query span2" placeholder="Search" name="q" />
 			</form>
 			<ul class="nav pull-right">
-				<li><a href="http://mootools-website.local">Back to main site</a></li>
+				<li><a href="<?=$mainURL?>/plugins">Back to main site</a></li>
 				<li class="divider-vertical"></li>
 			</ul>
 		</div>

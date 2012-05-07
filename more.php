@@ -18,6 +18,8 @@ configuration
 */
 $serverRoot = $_SERVER['DOCUMENT_ROOT'] . '/more/' . Control::config("plugin") . "/";
 
+Control::config("main_url", "http://mootools-website.local");
+
 Control::config("webroot", '/more/' . Control::config("plugin"));
 Control::config("serverroot", $serverRoot);
 
