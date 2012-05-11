@@ -1,0 +1,22 @@
+.book span {
+	display: block;
+	float: left;
+	padding: 0 14px 0 0;
+	text-indent: -9999px;
+}
+
+#book1 span {
+	background: url(../images/learn/books/book1.png) no-repeat;
+	height: 160px;
+	width: 130px;
+}
+#book2 span {
+	background: url(../images/learn/books/book2.png) no-repeat;
+	height: 113px;
+	width: 90px;
+}
+#book3 span {
+	background: url(../images/learn/books/book3.png) no-repeat;
+	height: 113px;
+	width: 90px;
+}
