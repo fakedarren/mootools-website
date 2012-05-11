@@ -14,6 +14,12 @@ class Learn extends Control {
 		$this->render('learn/books');
 	}
 
+	public function sites(){
+		$this->data('page', 'Learn');
+		$this->data('title', 'MooTools - Great Sites');
+		$this->render('learn/sites');
+	}
+
 }
 
 ?>

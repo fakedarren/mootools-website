@@ -12,6 +12,10 @@
 <div class="container">
 	<div class="row">
 	    <div class="span9">
+			<ul class="breadcrumb">
+				<li><a href="/learn">Learn</a></li>
+				<li><span class="divider">/</span>Books</li>
+			</ul>
 			<div class="page-header">
 				<h1>MooTools Books</h1>
 			</div>

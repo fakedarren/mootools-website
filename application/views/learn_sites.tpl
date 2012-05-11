@@ -5,28 +5,31 @@
 	<title><?=$title;?></title>
 	<?php require($this->config('views_folder') . '/shared/meta.tpl');?>
 	<?php require($this->config('views_folder') . '/shared/css.tpl');?>
+	<link href="/assets/css/learn_books.css" rel="stylesheet" />
 </head>
 <body>	
 <?php require($this->config('views_folder') . '/shared/header.tpl');?>
 <div class="container">
 	<div class="row">
 	    <div class="span9">
-			<h1>Learn MooTools</h1>
-			<p>Welcome to the Learning Section</p>
-			<div class="row">
-				<div class="span3">Demos</div>
-				<div class="span3">Tutorials</div>
-				<div class="span3">
-					<h3>Other ways to learn</h3>
-					<ul>
-						<li><a href="/learn/sites">Sites</a></li>
-						<li><a href="/learn/books">Books</a></li>
-					</ul>
-				</div>
+			<ul class="breadcrumb">
+				<li><a href="/learn">Learn</a></li>
+				<li><span class="divider">/</span>Other Sites</li>
+			</ul>
+			<div class="page-header">
+				<h1>Other great sites to learn MooTools and JavaScript</h1>
+				<p>Here are some great websites, with lots of tips and information on how to use MooTools, JavaScript and other frameworks<p>
 			</div>
-			<hr />
-			<p><a href="/demo/example">An Example Demo</a></p>
-			<p><a href="/tutorial/example">An Example Tutorial</a></p>
+			<ul>
+				<li>
+					<h2><a href="#">David Walsh's Blog</a></h2>
+					<p>MooTools, jQuery and Dojo tips and tricks</p>
+				</li>
+				<li>
+					<h2><a href="#">Mark Obcena's Blog</a></h2>
+					<p>Advanced MooTools tips &amp; tricks</p>
+				</li>
+			</ul>
 		</div>
 	  	<div class="span3">
 	  		<?php require($this->config('views_folder') . '/shared/quick-download.tpl');?>
