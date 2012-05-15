@@ -1,0 +1,103 @@
+<div class="page-header">
+	<h1>Request <small>Our Ajax wrapper</small></h1>
+</div>
+<p>The MooTools Ajax base class. If you only need to do something simple, then you may be able to use some of the <a href="#alternatives">simpler methods available</a>.</p>
+<hr />
+<h3>Syntax</h3>
+<pre class="prettyprint">
+var myRequest = new Request(<em>options</em>);   // create the Request object
+myRequest.send();                       // send the request			
+</pre>
+<div class="btn-group pull-right">
+	<p class="pull-left" style="line-height: 28px; padding-right: 10px;">Show Options:</p>
+	<button class="btn btn-primary">Basics</button>
+	<button class="btn">Properties</button>
+	<button class="btn">Events</button>
+	<button class="btn">All</button>
+</div>
+<hr style="clear: both" />
+<dl class="dl-horizontal">
+	<dt>url</dt>
+	<dd><em>(string)</em> the url to request</dd>
+	<dt>method</dt>
+	<dd><em>(string)</em> The HTTP method for the request, can be either 'post' or 'get'. The default is 'post'.</dd>
+	<dt>data</dt>
+	<dd>
+		<em>(element, object or string)</em> the data to send as part of the request.
+		<hr />
+		<p>You can send a (single) element:</p>
+		<pre class="prettyprint">
+data: $('myForm')
+// If using a CSS selector, you need to select a single element, like so:
+data: document.getElement('#myForm')
+// You can't use $$ as that returns an *array* of elements
+data: $$('#myForm') // doesn't work
+</pre>
+		<p>You can use an object:</p>
+		<pre class="prettyprint">
+data: {
+value1: 'foo',
+value2: 'bar'
+}
+</pre>
+		<p>Or you can pass a string.</p>
+		<pre class="prettyprint">
+data: 'value1=foo&amp;value2=bar'						
+</pre>
+	</dd>
+	<dt>onSuccess</dt>
+	<dd>
+		<em>(function)</em> An event that fires when the request is successful.
+		<hr />
+		<pre class="prettyprint">
+onSuccess: function(responseText, responseXML){
+// code goes here
+}						
+</pre>
+	</dd>
+</dl>
+<hr />
+<h3>Example:</h3>
+<pre class="prettyprint">
+new Request({
+url: 'submit.php',
+data: $('myForm'),
+onSuccess: function(response){
+alert(response);
+}
+}).send();
+</pre>
+<hr />
+<h5 id="alternatives">Alternatives to Request</h5>
+<ul>
+	<li>
+		<p>If you want to load HTML into an element easily, check out <a href="#">Element.load</a>.</p>
+		<pre class="prettyprint">
+&lt;div id="foo"&gt;&lt;/div&gt;
+
+$('foo').load('/content.php');
+</pre>
+	</li>
+	<li>
+		<p>If you want to send a form easily, check out <a href="#">Element.send</a>.</p>
+		<pre class="prettyprint">
+&lt;form id="foo" method="post" action="submit.php"&gt;
+&lt;input type="text" name="bar" value="1" /&gt;
+&lt;/form&gt;
+
+$('foo').send();
+</pre>
+
+	</li>
+</ul>
+<hr />
+<h5>Find out more</h5>
+<p>Find out more about Request</p>
+<ul>
+	<li><a href="#">View the source code</a></li>
+	<li><a href="../search/?query=Request">Search for <em>Request</em> on mootools.net</a></li>
+</ul>
+<hr />
+<div class="well">
+	(comments)<br /><br /><br /><br /><br /><br /><br /><br /><br />
+</div>
