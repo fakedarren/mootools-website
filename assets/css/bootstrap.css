@@ -3225,9 +3225,9 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar li.tabbed > a,
 .navbar li.active.tabbed > a {
-  line-height: 30px;
+  line-height: 32px;
   height: 30px;
-  padding: 0 10px;
+  padding: 0 15px;
   text-transform: uppercase;
 }
 .navbar li.active.tabbed {
@@ -3238,6 +3238,8 @@ input[type="submit"].btn.btn-mini {
 .navbar li.active.tabbed a:hover {
   background: #ffffff;
   color: #00293f;
+  letter-spacing: 1px; 
+  padding: inherit 30px;
   -webkit-border-top-left-radius: 6px;
   -moz-border-radius-topleft: 6px;
   border-top-left-radius: 6px;

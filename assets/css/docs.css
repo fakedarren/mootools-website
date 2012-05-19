@@ -35,3 +35,10 @@ hr + .method-list {
 .collapse-this > ul {
 	display: block;
 }
+
+.nav > li > a.current {
+	background-color: #ddd;
+}
+.nav > li > a.current:hover {
+	background-color: #ccc;
+}

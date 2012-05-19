@@ -1,0 +1,289 @@
+/*
+
+	<link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
+
+	Color Pallete
+
+	MooDark: #00293F
+	MooLight: #91A2AA
+	MooBlu: #5598B5
+
+	MooPurp: #A666AC
+	MooBlue: #3A5F9E
+		MooBGBlu: #E5F4F9
+	MooBrick: #B15F5E;
+	MooGrrr: #3C9E66
+
+*/
+
+html,body{
+	min-height: 100%
+}
+
+
+/** header **/
+
+
+div.navbar-inner{
+	
+}
+
+.navbar .nav{
+	height: 60px;
+}
+
+
+
+/** NAV TABS **/
+
+.navbar .nav li a{
+	color: #A6B4BC;
+	line-height: 26px;
+	font-size: 13px;
+	font-family: 'Varela', 'Gills Sans', 'Arial', sans-serif;
+	letter-spacing: 1px;
+
+	}	
+
+	.navbar .nav li.active a{
+		font-weight: bold
+		
+			
+		}	
+
+	.navbar li.tabbed,
+	.navbar li.active.tabbed {
+	  height: 30px;
+	  margin-top: 46px;
+	}
+	.navbar li.tabbed > a,
+	.navbar li.active.tabbed > a {
+	  line-height: 32px;
+	  height: 40px;
+	 
+	  text-transform: uppercase;
+	}
+	.navbar li.active.tabbed {
+	  margin-left: 10px;
+	  margin-right: 10px;
+	}
+	.navbar li.active.tabbed a,
+	.navbar li.active.tabbed a:hover {
+	  background: #ffffff;
+	  color: #00293f;
+	  letter-spacing: 1px; 
+	  padding: inherit 30px;
+	  -webkit-border-radius: 6px 6px 0px 0px;
+	  -moz-border-radius: 6px 6px 0px 0px;
+	  border-radius: 6px 6px 0px 0px;
+	}
+	
+
+	/** NAV LEFT PULL BAR **/
+
+	
+	div.navbar-inner div.container{
+		position: relative;
+	}
+	
+	
+	.nav.pull-right{
+		position: absolute;
+		top:2px;
+		right:0px;
+		left:auto;
+		width: 330px;
+		height: auto
+		
+		
+		}
+		.nav.pull-right li{
+			float: right;
+			}
+		.nav.pull-right li a{
+				font-weight: normal;
+				font-family: Arial;
+				margin: 0px;
+				
+				padding: 0px;
+				font-size: 11px;
+				color: #f2f2f2;
+				opacity: .80
+			}
+			.nav.pull-right li a.active,
+			.nav.pull-right li a:hover{
+					opacity: 1
+				}
+	
+		.nav.pull-right li.divider-vertical{
+				background: #A6B4BC;
+				width: 1px;
+				opacity: .3;
+				height: 15px;
+				margin-top: 6px;
+			}
+	
+	/** NAV LEFT SEARCH **/
+	
+	.navbar-search input.search-query{
+		background-color: #BAC8CE;
+		color: #f2f2f2;
+		width: 300px;
+		margin-top: 10px;
+		border-radius: 5px;
+		font-size: 14px;
+		height: 22px;
+		box-shadow: none;
+		border:none;
+		}
+		.navbar-search input.search-query:hover{		
+			background-color: #C7D1D6
+		}
+		.navbar-search input.search-query:focus{
+			background-color:#E6ECEF
+			}
+		.navbar-search input.search-query:-moz-placeholder{
+			color: #fff;
+			}
+		
+		
+
+
+
+/** LEFT NAV **/
+
+.nav-list {
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-bottom: 0;
+	background: #F7F7F9; 
+	border:1px #DFE2E5 solid;
+	padding:10px 15px;
+	border-radius: 4px 4px 4px 4px;
+	}
+	.nav-list ul{
+		border: none;
+		}
+		
+	ul.nav .nav-list{ padding-top: 0px;}
+	
+		ul.nav .nav-list li a{
+			color: #5598B5;
+		
+		}
+
+
+
+
+
+/** BREADCRUMB **/
+
+ul.breadcrumb{ 
+	background: #F7F7F9; 
+	border:1px #DFE2E5 solid;
+	box-shadow: none;
+	border-radius: 5px;
+	}
+	
+	ul.breadcrumb li {	
+		font-weight: bold;
+		letter-spacing: 1px;
+		}
+
+		ul.breadcrumb li a{
+			font-weight: normal;
+			color: #00293F;
+			}	
+			
+			ul.breadcrumb li a:hover{
+					color: #5598B5
+				}
+			ul.breadcrumb li:last-child a,
+			ul.breadcrumb li:last-child a:hover{
+				color:#91A2AA
+				}
+		
+		
+		ul.breadcrumb span.divider{
+			margin: 0px 5px;
+			color: #5598B5 /* mooblu */
+			}
+			
+/** TITLES **/
+
+
+
+h1,h2,h3,h4,h5,h6{
+
+
+	}
+	
+.page-header{
+	border: none;
+	margin: 25px 0px 18px;
+	}
+
+	.page-header h1{
+		color: #00293F;
+		letter-spacing: 1px;
+		font-size: 200%;
+		font-weight: bold
+		
+		}			
+		.page-header h1 small{
+			color: #91A2AA;
+			display: block;
+			margin-top: 8px;
+			font-size: 48%;
+			}			
+
+	h3 { 
+		font-weight: normal; 
+		font-size: 125%;
+		margin-bottom: 4px;
+		}
+	
+	
+/** CODE SNIPPETS **/
+
+pre.prettyprint.lang-javascript{
+	background-color: #E5F4F9;
+	padding: 8px 15px;
+	}
+	
+	pre.prettyprint span.pln{
+		color: #636F75;
+		}
+	pre.prettyprint span.kwd{
+		color: #B15F5E;
+		
+		}
+
+	pre.prettyprint span.lit{
+		color: #3C9E66;
+		
+		}
+	pre.prettyprint span.pun{
+		color: #00293F;
+		font-weight: bold;
+		}
+	pre.prettyprint span.typ{
+		color: #5598B5;
+		}				
+		
+		
+
+/** labels **/
+
+span.label{
+	display: inline-table;
+	background: #91A2AA;
+}
+
+	span.label.label-important{
+		background-color: #B15F5E;
+	}
+
+	
+
+			
