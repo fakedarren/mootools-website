@@ -51,7 +51,7 @@ class Docs extends Control {
 		foreach ($parts as $part){
 			$totalurl .= '/' . $part;
 			$html .= '<li>';
-			$html .= '<span class="divider">/</span>';
+			$html .= '<span class="divider">&gt;</span>';
 			$html .= '<a href="' . $totalurl . '">' . str_replace('-', ' ', $part) . '</a>';
 			$html .= '</li>';
 		}
