@@ -32,8 +32,28 @@ class Docs extends Control {
 	}
 	
 	private function getMenu(){
-		$html = file_get_contents($this->assetsFolder . 'menu.html');			
-		return str_replace('[BASEURL]', $this->baseurl, $html);
+		$html = file_get_contents($this->assetsFolder . 'menu.html');
+		$html = str_replace('[BASEURL]', $this->baseurl, $html);
+
+		$menu = new DOMDocument;
+		// Load as XML to avoid the <html> / <body> wrapper
+		$menu->loadXML($html);
+
+		$links = $menu->getElementsByTagName('a');
+		foreach ($links as $link){
+			if ($link->getAttribute('href') == $_SERVER['REQUEST_URI']){
+				$link->setAttribute('class', 'current');
+				$element = $link;
+				while ($element = $element->parentNode){
+					if ($element->nodeName == 'li'){
+						if ($class = $element->getAttribute('class')){
+							$element->setAttribute('class', 'collapse-this');
+						}
+					}
+				}
+			}
+		}
+		return $menu->saveHTML();
 	}
 	
 	private function getBreadcrumb(){
